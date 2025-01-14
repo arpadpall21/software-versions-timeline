@@ -1,7 +1,7 @@
-import { redirect } from 'next/navigation';
+import { permanentRedirect } from 'next/navigation';
 
 const NotFound = () => {
-  redirect('/version-map');
+  permanentRedirect('/version-map');
 };
 
 export default NotFound;
