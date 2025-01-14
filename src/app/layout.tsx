@@ -13,9 +13,7 @@ const redHatText = Red_Hat_Text({ subsets: ['latin'] });
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const locale = await getLocale();
-  
-  console.log(locale)
-  
+
   const messages = await getMessages();
 
   return (

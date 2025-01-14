@@ -1,12 +1,15 @@
-import {getRequestConfig} from 'next-intl/server';
+import { getRequestConfig } from 'next-intl/server';
+import { getUserLocale } from '@/i18n/locale';
 
-export default getRequestConfig(async (req) => {
+
+export default getRequestConfig(async () => {
   // Provide a static locale, fetch a user setting,
   // read from `cookies()`, `headers()`, etc.
   
-  console.log(req)
+  console.log('-----------------')
+  console.log( await getUserLocale() )
   
-  const locale = 'fr';
+  const locale = 'en';
 
   return {
     locale,
