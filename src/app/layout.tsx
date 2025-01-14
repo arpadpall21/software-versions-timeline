@@ -4,7 +4,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Software Version History',
-  description: 'softwrae version history timeline',
+  description: 'software version history timeline',
 };
 
 const redHatText = Red_Hat_Text({ subsets: ['latin'] });
