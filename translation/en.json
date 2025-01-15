@@ -1,5 +1,4 @@
 {
-  "HomePage": {
-    "title": "Hello World!"
-  }
+  "mainTitle": "Software Version Map Timeline",
+  "VersionMapPage": { }
 }

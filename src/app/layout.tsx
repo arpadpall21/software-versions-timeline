@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Red_Hat_Text } from 'next/font/google';
 import './globals.css';
 import { NextIntlClientProvider } from 'next-intl';
-import { getLocale, getMessages } from 'next-intl/server';
+import { getMessages } from 'next-intl/server';
 
 export const metadata: Metadata = {
   title: 'Software Version History Timeline',
@@ -11,9 +11,7 @@ export const metadata: Metadata = {
 
 const redHatText = Red_Hat_Text({ subsets: ['latin'] });
 
-export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const locale = await getLocale();
-
+async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const messages = await getMessages();
 
   return (
@@ -24,3 +22,5 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     </html>
   );
 }
+
+export default RootLayout;

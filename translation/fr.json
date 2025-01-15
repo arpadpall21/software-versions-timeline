@@ -1,5 +1,4 @@
 {
-  "HomePage": {
-    "title": "Bonjour Monde!"
-  }
+  "mainTitle": "Carte Chronologique des Versions du Logiciel",
+  "VersionMapPage": { }
 }
