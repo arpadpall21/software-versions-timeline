@@ -6,12 +6,12 @@ import Cookies from 'js-cookie';
 import { type Lang } from '@/misc/types';
 import appSettings from '@/misc/appSettings';
 import { useTranslations } from 'next-intl';
+
 const supportedLanguages = appSettings.lang.supportedLanguages;
 
 const LangSelector: React.FC = () => {
   const router = useRouter();
   const t = useTranslations('components.languageSelector');
-
   const lang: Lang = validLang(Cookies.get('lang'));
 
   function dropdownHandler(e: React.ChangeEvent<HTMLSelectElement>) {
