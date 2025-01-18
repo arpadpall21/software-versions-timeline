@@ -1,0 +1,11 @@
+{
+  "mainTitle": "Zeitleiste der Softwareversionen",
+  "components": {
+    "languageSelector": {
+      "language": "Sprache"
+    }
+  },
+  "pages": {
+    "versionMap": { }
+  }
+}

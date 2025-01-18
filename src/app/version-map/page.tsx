@@ -1,7 +1,16 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
+import LangSelector from '@/Componets/LangSelector';
+
 const Home = () => {
+  const t = useTranslations('pages.versionMap');
+
   return (
     <>
-      <p className="text-black"> Hello World! </p>
+      <p> Hello World! </p>
+      <br /><br /><br /><br /><br /><br /><br /> 
+      <LangSelector />
     </>
   );
 };

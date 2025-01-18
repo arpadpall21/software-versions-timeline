@@ -1,18 +1,28 @@
-import type { Metadata } from 'next';
 import { Red_Hat_Text } from 'next/font/google';
 import './globals.css';
-
-export const metadata: Metadata = {
-  title: 'Software Version History',
-  description: 'software version history timeline',
-};
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages, getTranslations } from 'next-intl/server';
 
 const redHatText = Red_Hat_Text({ subsets: ['latin'] });
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const messages = await getMessages();
+  const t = await getTranslations();
+
   return (
     <html lang="en">
-      <body className={`${redHatText.className} antialiased`}>{children}</body>
+      <head>
+        <title>{t('mainTitle')}</title>
+        <meta
+          name="description"
+          content="Software version history timeline to compare key updates and milestones across different software releases."
+        />
+      </head>
+      <NextIntlClientProvider messages={messages}>
+        <body className={`${redHatText.className} antialiased`}>{children}</body>
+      </NextIntlClientProvider>
     </html>
   );
 }
+
+export default RootLayout;

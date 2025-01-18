@@ -1,0 +1,11 @@
+{
+  "mainTitle": "Softwares Version Timeline",
+  "components": {
+    "languageSelector": {
+      "language": "Language"
+    }
+  },
+  "pages": {
+    "versionMap": { }
+  }
+}

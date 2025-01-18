@@ -1,0 +1,11 @@
+{
+  "mainTitle": "Chronologie des Versions du Logiciels",
+  "components": {
+    "languageSelector": {
+      "language": "Langue"
+    }
+  },
+  "pages": {
+    "versionMap": { }
+  }
+}
