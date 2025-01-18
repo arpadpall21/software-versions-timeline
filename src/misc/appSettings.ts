@@ -10,6 +10,7 @@ interface AppSettings {
 const supportedLanguages: { [langCode: string]: Lang } = {
   en: { langCode: 'en', lang: 'English' },
   fr: { langCode: 'fr', lang: 'Français' },
+  de: { langCode: 'de', lang: 'Deutsch' },
 };
 const defaultLanguage: Lang = supportedLanguages.en;
 

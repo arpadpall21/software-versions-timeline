@@ -15,7 +15,7 @@ async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
         <title>{t('mainTitle')}</title>
         <meta
           name="description"
-          content="Explore the Software Version History Timeline to compare key updates and milestones across different software releases."
+          content="Software version history timeline to compare key updates and milestones across different software releases."
         />
       </head>
       <NextIntlClientProvider messages={messages}>

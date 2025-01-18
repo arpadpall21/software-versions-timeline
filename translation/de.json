@@ -1,8 +1,8 @@
 {
-  "mainTitle": "Softwares Version Timeline",
+  "mainTitle": "Zeitleiste der Softwareversionen",
   "components": {
     "languageSelector": {
-      "language": "Language"
+      "language": "Sprache"
     }
   },
   "pages": {

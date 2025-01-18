@@ -4,6 +4,6 @@ node_modules
 .vscode
 .env
 .DS_Store
-notes*
-specification*
 dist
+
+tempFolder
