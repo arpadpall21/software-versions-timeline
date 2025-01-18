@@ -1,15 +1,18 @@
 'use client';
 
 import Cookies from 'js-cookie';
-import { getLang } from '@/misc/helpers';
+import { validLang } from '@/misc/helpers';
 
 const LangSelector: React.FC = () => {
-  const lang = getLang(Cookies.get('lang'));
+  const lang = validLang(Cookies.get('lang'));
 
-  console.log(lang);
 
   return (
-    <p> test </p>
+    <select value='x'>
+      <option value='x'> X </option>
+      <option value='y'> Y </option>
+      <option value='z'> Z </option>
+    </select>
   )
 }
 
