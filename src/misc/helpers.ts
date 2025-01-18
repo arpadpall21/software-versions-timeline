@@ -1,6 +1,8 @@
 import { type Lang } from '@/misc/types';
-import { defaultLanguage, supportedLanguages } from '@/misc/constants';
+import appSettings from '@/misc/appSettings';
 
 export function validLang(langCode: string = ''): Lang {
-  return supportedLanguages[langCode] ? supportedLanguages[langCode] : defaultLanguage;
+  return appSettings.lang.supportedLanguages[langCode]
+    ? appSettings.lang.supportedLanguages[langCode]
+    : appSettings.lang.defaultLanguage;
 }
