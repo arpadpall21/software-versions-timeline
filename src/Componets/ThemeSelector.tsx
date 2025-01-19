@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { useTranslations } from 'next-intl';
 import { validTheme } from '@/misc/helpers';
+import Dropdown from '@/Componets/Dropdown';
 
 const ThemeSelector: React.FC = () => {
   const [themeState, setThemeState] = useState<string>('auto');
@@ -38,18 +39,16 @@ const ThemeSelector: React.FC = () => {
   }, [themeState]);
 
   return (
-    <div>
-      <p>{t('theme')}</p>
-      <select
-        className={'bg-bg-lt text-fg-lt-pop dark:bg-bg-dk dark:text-bg-dk-pop'}
-        value={themeState}
-        onChange={(e) => setThemeState(e.target.value)}
-      >
-        <option value={'light'}>{t('lightMode')}</option>
-        <option value={'dark'}>{t('darkMode')}</option>
-        <option value={'auto'}>{t('auto')}</option>
-      </select>
-    </div>
+    <Dropdown
+      selectedItem={themeState}
+      optionItems={[
+        ['light', t('lightMode')],
+        ['dark', t('darkMode')],
+        ['auto', t('auto')],
+      ]}
+      dropdownHandler={(e) => setThemeState(e.target.value)}
+      title={t('theme')}
+    />
   );
 };
 
