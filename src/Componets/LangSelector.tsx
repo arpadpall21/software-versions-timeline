@@ -30,8 +30,13 @@ const LangSelector: React.FC = () => {
 
   return (
     <div>
+      <p className={'text-red-500'}> TEST </p>
       <p>{t('language')}</p>
-      <select className={'bg-bg-lt dark:bg-bg-dk'} value={langState} onChange={dropdownHandler}>
+      <select
+        className={'text-red-600'}
+        value={langState}
+        onChange={dropdownHandler}
+      >
         {Object.keys(supportedLanguages).map((lang) => (
           <option value={supportedLanguages[lang].langCode} key={lang}>
             {supportedLanguages[lang].lang}

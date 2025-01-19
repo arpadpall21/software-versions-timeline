@@ -40,7 +40,11 @@ const ThemeSelector: React.FC = () => {
   return (
     <div>
       <p>{t('theme')}</p>
-      <select className={'bg-bg-lt dark:bg-bg-dk'} value={themeState} onChange={(e) => setThemeState(e.target.value)}>
+      <select
+        className={'bg-bg-lt text-fg-lt-pop dark:bg-bg-dk dark:text-bg-dk-pop'}
+        value={themeState}
+        onChange={(e) => setThemeState(e.target.value)}
+      >
         <option value={'light'}>{t('lightMode')}</option>
         <option value={'dark'}>{t('darkMode')}</option>
         <option value={'auto'}>{t('auto')}</option>

@@ -3,21 +3,23 @@ import type { Config } from 'tailwindcss';
 export default {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/Components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
         // light
-        'bg-lt': 'white',
-        'fg-lt-pr': 'darkgray',
-        'fg-lt-sec': 'lightgray',
+        '+lt-bg': '#FAFAFF',
+        '+lt-fg-pri': '#23272f',
+        '+lt-fg-sec': '#434958',
+        '+lt-fg-pop': '#4c44bc',
 
         // dark
-        'bg-dk': 'black',
-        'fg-dk-pr': 'green',
-        'fg-dk-sec': 'forestgreen',
+        '+dk-bg': '#0e0e25',
+        '+dk-fg-pri': '#f6f7f9',
+        '+dk-fg-sec': '#6d7b8f',
+        '+dk-fg-pop': '#4c44bc',
       },
     },
   },
