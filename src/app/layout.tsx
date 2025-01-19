@@ -10,7 +10,7 @@ async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
   const t = await getTranslations();
 
   return (
-    <html lang="en">
+    <html>
       <head>
         <title>{t('mainTitle')}</title>
         <meta
