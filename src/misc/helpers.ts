@@ -6,3 +6,7 @@ export function validLang(langCode: string = ''): Lang {
     ? appSettings.lang.supportedLanguages[langCode]
     : appSettings.lang.defaultLanguage;
 }
+
+export function validTheme(theme: string = ''): string {
+  return appSettings.theme.supportedThemes.includes(theme) ? theme : 'auto';
+}

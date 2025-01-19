@@ -5,6 +5,9 @@ interface AppSettings {
     defaultLanguage: Lang;
     supportedLanguages: { [langCode: string]: Lang };
   };
+  theme: {
+    supportedThemes: string[];
+  };
 }
 
 const supportedLanguages: { [langCode: string]: Lang } = {
@@ -18,6 +21,9 @@ const appSettings: AppSettings = {
   lang: {
     defaultLanguage,
     supportedLanguages,
+  },
+  theme: {
+    supportedThemes: ['light', 'dark', 'auto'],
   },
 };
 
