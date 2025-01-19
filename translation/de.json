@@ -3,6 +3,12 @@
   "components": {
     "languageSelector": {
       "language": "Sprache"
+    },
+    "themeSelector": {
+      "theme": "Thema",
+      "lightMode": "Lichtmodus",
+      "darkMode": "Dunkelmodus",
+      "auto": "Auto"
     }
   },
   "pages": {
