@@ -2,8 +2,8 @@
 
 import '@/app/globals.css';
 import { useTranslations } from 'next-intl';
-import LangSelector from '@/Componets/LangSelector';
-import ThemeSelector from '@/Componets/ThemeSelector';
+import LangSelector from '@/Components/LangSelector';
+import ThemeSelector from '@/Components/ThemeSelector';
 
 const Home = () => {
   const t = useTranslations('pages.versionMap');
@@ -30,6 +30,8 @@ const Home = () => {
       <LangSelector />
       <br /><br /><br /><br /><br /><br /><br /> 
       <ThemeSelector />
+      <br /><br /><br /><br /><br /><br /><br /> 
+      <br /><br /><br /><br /><br /><br /><br /> 
       
       
     </>

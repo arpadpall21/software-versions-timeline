@@ -1,3 +1,5 @@
+import '@/app/globals.css';
+
 interface Props {
   selectedItem: string;
   optionItems: [string, string][]; // [attrValue, value]
@@ -7,9 +9,15 @@ interface Props {
 
 const Dropdown: React.FC<Props> = ({ selectedItem, optionItems, dropdownHandler, title }) => {
   return (
-    <div>
-      {title && <p>{title}</p>}
-      <select value={selectedItem} onChange={dropdownHandler}>
+    <div className={'border w-36 rounded-sm border-+lt-b-pri dark:border-+dk-b-pri'}>
+      {title && (
+        <p className={'text-center text-+lt-fg-sec bg-+lt-bg-sec dark:text-+dk-fg-sec dark:bg-+dk-bg-sec'}>{title}</p>
+      )}
+      <select
+        className={'text-center w-full bg-+lt-bg-pri text-+lt-fg-pop dark:bg-+dk-bg-pri dark:text-+dk-fg-pop'}
+        value={selectedItem}
+        onChange={dropdownHandler}
+      >
         {optionItems.map(([attrValue, value]) => {
           return (
             <option value={attrValue} key={attrValue}>

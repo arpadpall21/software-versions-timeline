@@ -10,16 +10,20 @@ export default {
     extend: {
       colors: {
         // light
-        '+lt-bg': '#FAFAFF',
+        '+lt-bg-pri': '#fafaff',
+        '+lt-bg-sec': 'lightgray',
         '+lt-fg-pri': '#23272f',
         '+lt-fg-sec': '#434958',
         '+lt-fg-pop': '#4444bc',
+        '+lt-b-pri': 'lightgray',
 
         // dark
-        '+dk-bg': '#0e0e25',
+        '+dk-bg-pri': '#0e0e25',
+        '+dk-bg-sec': 'black',
         '+dk-fg-pri': '#f6f7f9',
         '+dk-fg-sec': '#6d7b8f',
         '+dk-fg-pop': '#4c44bc',
+        '+dk-b-pri': 'black',
       },
     },
   },

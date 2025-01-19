@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { useTranslations } from 'next-intl';
 import { validTheme } from '@/misc/helpers';
-import Dropdown from '@/Componets/Dropdown';
+import Dropdown from '@/Components/Dropdown';
 
 const ThemeSelector: React.FC = () => {
   const [themeState, setThemeState] = useState<string>('auto');

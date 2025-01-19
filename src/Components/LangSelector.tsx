@@ -7,7 +7,7 @@ import Cookies from 'js-cookie';
 import { type Lang } from '@/misc/types';
 import appSettings from '@/misc/appSettings';
 import { useTranslations } from 'next-intl';
-import Dropdown from '@/Componets/Dropdown';
+import Dropdown from '@/Components/Dropdown';
 
 const supportedLanguages: { [langCode: string]: Lang } = appSettings.lang.supportedLanguages;
 const defaultLanguage: Lang = appSettings.lang.defaultLanguage;
