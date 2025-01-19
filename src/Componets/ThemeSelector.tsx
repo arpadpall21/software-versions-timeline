@@ -6,16 +6,38 @@ import { useTranslations } from 'next-intl';
 import { validTheme } from '@/misc/helpers';
 
 const ThemeSelector: React.FC = () => {
-  const [themeState, setThemeState] = useState<string>('light');
+  const [themeState, setThemeState] = useState<string>('auto');
   const t = useTranslations('components.themeSelector');
 
   useEffect(() => {
     setThemeState(validTheme(Cookies.get('theme')));
   }, []);
 
+  useEffect(() => {
+    switch (themeState) {
+      case 'light': {
+        Cookies.set('theme', 'light');
+        document.documentElement.classList.remove('dark');
+        break;
+      }
+      case 'dark': {
+        Cookies.set('theme', 'dark');
+        document.documentElement.classList.add('dark');
+        break;
+      }
+      default: {
+        Cookies.set('theme', 'auto');
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      }
+    }
+  }, [themeState]);
+
   function dropdownHandler(e: React.ChangeEvent<HTMLSelectElement>) {
     setThemeState(e.target.value);
-    Cookies.set('theme', e.target.value);
   }
 
   return (

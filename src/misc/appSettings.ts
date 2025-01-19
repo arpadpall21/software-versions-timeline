@@ -7,7 +7,7 @@ interface AppSettings {
   };
   theme: {
     supportedThemes: string[];
-  }
+  };
 }
 
 const supportedLanguages: { [langCode: string]: Lang } = {
@@ -24,7 +24,7 @@ const appSettings: AppSettings = {
   },
   theme: {
     supportedThemes: ['light', 'dark', 'auto'],
-  }
+  },
 };
 
 export default appSettings;

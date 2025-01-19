@@ -19,7 +19,9 @@ async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
         />
       </head>
       <NextIntlClientProvider messages={messages}>
-        <body className={`${redHatText.className} antialiased`}>{children}</body>
+        <body className={`${redHatText.className} antialiased bg-white text-black dark:bg-black dark:text-white`}>
+          {children}
+        </body>
       </NextIntlClientProvider>
     </html>
   );
