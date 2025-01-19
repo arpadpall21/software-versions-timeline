@@ -1,5 +1,6 @@
 'use client';
 
+import '@/app/globals.css';
 import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { useTranslations } from 'next-intl';
@@ -39,7 +40,7 @@ const ThemeSelector: React.FC = () => {
   return (
     <div>
       <p>{t('theme')}</p>
-      <select value={themeState} onChange={(e) => setThemeState(e.target.value)}>
+      <select className={'bg-bg-lt dark:bg-bg-dk'} value={themeState} onChange={(e) => setThemeState(e.target.value)}>
         <option value={'light'}>{t('lightMode')}</option>
         <option value={'dark'}>{t('darkMode')}</option>
         <option value={'auto'}>{t('auto')}</option>

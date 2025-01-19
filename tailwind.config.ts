@@ -6,7 +6,21 @@ export default {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  theme: {},
+  theme: {
+    extend: {
+      colors: {
+        // light
+        'bg-lt': 'white',
+        'fg-lt-pr': 'darkgray',
+        'fg-lt-sec': 'lightgray',
+
+        // dark
+        'bg-dk': 'black',
+        'fg-dk-pr': 'green',
+        'fg-dk-sec': 'forestgreen',
+      },
+    },
+  },
   plugins: [],
   darkMode: 'selector',
 } satisfies Config;
