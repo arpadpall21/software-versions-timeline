@@ -36,14 +36,10 @@ const ThemeSelector: React.FC = () => {
     }
   }, [themeState]);
 
-  function dropdownHandler(e: React.ChangeEvent<HTMLSelectElement>) {
-    setThemeState(e.target.value);
-  }
-
   return (
     <div>
       <p>{t('theme')}</p>
-      <select value={themeState} onChange={dropdownHandler}>
+      <select value={themeState} onChange={(e) => setThemeState(e.target.value)}>
         <option value={'light'}>{t('lightMode')}</option>
         <option value={'dark'}>{t('darkMode')}</option>
         <option value={'auto'}>{t('auto')}</option>

@@ -8,5 +8,5 @@ export function validLang(langCode: string = ''): Lang {
 }
 
 export function validTheme(theme: string = ''): string {
-  return appSettings.theme.supportedThemes.includes(theme) ? theme : 'light';
+  return appSettings.theme.supportedThemes.includes(theme) ? theme : 'auto';
 }
