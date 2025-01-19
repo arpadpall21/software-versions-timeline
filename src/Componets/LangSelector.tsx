@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { validLang } from '@/misc/helpers';
 import Cookies from 'js-cookie';
@@ -7,14 +8,21 @@ import { type Lang } from '@/misc/types';
 import appSettings from '@/misc/appSettings';
 import { useTranslations } from 'next-intl';
 
-const supportedLanguages = appSettings.lang.supportedLanguages;
+const supportedLanguages: { [langCode: string]: Lang } = appSettings.lang.supportedLanguages;
+const defaultLanguage: Lang = appSettings.lang.defaultLanguage;
 
 const LangSelector: React.FC = () => {
+  const [langState, setLangState] = useState<string>(defaultLanguage.langCode);
   const router = useRouter();
   const t = useTranslations('components.languageSelector');
-  const lang: Lang = validLang(Cookies.get('lang'));
+
+  useEffect(() => {
+    const lang: Lang = validLang(Cookies.get('lang'));
+    setLangState(lang.langCode);
+  }, []);
 
   function dropdownHandler(e: React.ChangeEvent<HTMLSelectElement>) {
+    setLangState(e.target.value);
     Cookies.set('lang', e.target.value);
     router.refresh();
   }
@@ -22,7 +30,7 @@ const LangSelector: React.FC = () => {
   return (
     <div>
       <p>{t('language')}</p>
-      <select value={lang.langCode} onChange={dropdownHandler}>
+      <select value={langState} onChange={dropdownHandler}>
         {Object.keys(supportedLanguages).map((lang) => (
           <option value={supportedLanguages[lang].langCode} key={lang}>
             {supportedLanguages[lang].lang}
