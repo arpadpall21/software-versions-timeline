@@ -13,7 +13,7 @@ export default {
         '+lt-bg': '#FAFAFF',
         '+lt-fg-pri': '#23272f',
         '+lt-fg-sec': '#434958',
-        '+lt-fg-pop': '#4c44bc',
+        '+lt-fg-pop': '#4444bc',
 
         // dark
         '+dk-bg': '#0e0e25',
