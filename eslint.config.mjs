@@ -33,12 +33,8 @@ const eslintConfig = [
           jsxBracketSameLine: false,
         },
       ],
-      'no-console': [
-        'error',
-        {
-          allow: ['error'],
-        },
-      ],
+      'no-console': ['error', { allow: ['error'] }],
+      'max-len': ['error', { code: 120 }],
     },
   }),
 ];
