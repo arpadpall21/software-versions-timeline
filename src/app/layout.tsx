@@ -15,13 +15,12 @@ async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
         <title>{t('mainTitle')}</title>
         <meta
           name="description"
-          content="Software version history timeline to compare key updates and milestones across different software releases."
+          content={`Software version history timeline to compare key updates and milestones
+            across different software releases.`}
         />
       </head>
       <NextIntlClientProvider messages={messages}>
-        <body
-          className={`${redHatText.className} antialiased bg-+lt-bg-pri text-+lt-fg-pri dark:bg-+dk-bg-pri dark:text-+dk-fg-pri`}
-        >
+        <body className={`${redHatText.className} antialiased bg-bgPri text-fgPri dark:bg-bgPriD dark:text-fgPriD`}>
           {children}
         </body>
       </NextIntlClientProvider>

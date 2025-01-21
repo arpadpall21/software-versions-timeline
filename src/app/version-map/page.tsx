@@ -10,20 +10,20 @@ const Home = () => {
 
   return (
     <>
-      <p className={'text-+lt-fg-pri dark:text-+dk-fg-pri'}> Hello World! </p>
-      <p className={'text-+lt-fg-pri dark:text-+dk-fg-pri text-lg font-bold'}> Hello World! </p>
-      <p className={'text-+lt-fg-pri dark:text-+dk-fg-pri text-xl'}> Hello World! </p>
-      <p className={'text-+lt-fg-pri dark:text-+dk-fg-pri text-2xl font-bold'}> Hello World! </p>
+      <p className={'text-fgPri dark:text-fgPriD'}> Hello World! </p>
+      <p className={'text-fgPri dark:text-fgPriD text-lg font-bold'}> Hello World! </p>
+      <p className={'text-fgPri dark:text-fgPriD text-xl'}> Hello World! </p>
+      <p className={'text-fgPri dark:text-fgPriD text-2xl font-bold'}> Hello World! </p>
       
-      <p className={'text-+lt-fg-sec dark:text-+dk-fg-sec'}> Hello World! </p>
-      <p className={'text-+lt-fg-sec dark:text-+dk-fg-sec text-lg font-bold'}> Hello World! </p>
-      <p className={'text-+lt-fg-sec dark:text-+dk-fg-sec text-xl'}> Hello World! </p>
-      <p className={'text-+lt-fg-sec dark:text-+dk-fg-sec text-2xl font-bold'}> Hello World! </p>
+      <p className={'text-fgSec dark:text-fgSecD'}> Hello World! </p>
+      <p className={'text-fgSec dark:text-fgSecD text-lg font-bold'}> Hello World! </p>
+      <p className={'text-fgSec dark:text-fgSecD text-xl'}> Hello World! </p>
+      <p className={'text-fgSec dark:text-fgSecD text-2xl font-bold'}> Hello World! </p>
       
-      <p className={'text-+lt-fg-pop dark:text-+dk-fg-pop'}> Pop color </p>
-      <p className={'text-+lt-fg-pop dark:text-+dk-fg-pop text-lg font-bold'}> Pop color </p>
-      <p className={'text-+lt-fg-pop dark:text-+dk-fg-pop text-xl'}> Pop color </p>
-      <p className={'text-+lt-fg-pop dark:text-+dk-fg-pop text-2xl font-bold'}> Pop color </p>
+      <p className={'text-fgPop dark:text-fgPopD'}> Pop color </p>
+      <p className={'text-fgPop dark:text-fgPopD text-lg font-bold'}> Pop color </p>
+      <p className={'text-fgPop dark:text-fgPopD text-xl'}> Pop color </p>
+      <p className={'text-fgPop dark:text-fgPopD text-2xl font-bold'}> Pop color </p>
       
       
       <br /><br /><br /><br /><br /><br /><br /> 
