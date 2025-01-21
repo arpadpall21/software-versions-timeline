@@ -1,0 +1,20 @@
+{
+  "mainTitle": "Szoftververziók Idővonala",
+  "components": {
+    "languageSelector": {
+      "language": "Nyelv"
+    },
+    "themeSelector": {
+      "theme": "Téma",
+      "lightMode": "Világos Mód",
+      "darkMode": "Sötét Mód",
+      "auto": "Automatikus"
+    },
+    "footer": {
+      "copyright": "Szerzői jog © 2025 {name}. Minden jog fenntartva."
+    }
+  },
+  "pages": {
+    "versionMap": { }
+  }
+}
