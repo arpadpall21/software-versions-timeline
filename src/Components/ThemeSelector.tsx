@@ -1,6 +1,5 @@
 'use client';
 
-import '@/app/globals.css';
 import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { useTranslations } from 'next-intl';
