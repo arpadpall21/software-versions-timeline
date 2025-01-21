@@ -14,6 +14,7 @@ const supportedLanguages: { [langCode: string]: Lang } = {
   en: { langCode: 'en', lang: 'English' },
   fr: { langCode: 'fr', lang: 'Français' },
   de: { langCode: 'de', lang: 'Deutsch' },
+  hu: { langCode: 'hu', lang: 'Magyar' },
 };
 const defaultLanguage: Lang = supportedLanguages.en;
 
