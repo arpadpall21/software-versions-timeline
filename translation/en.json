@@ -9,6 +9,9 @@
       "lightMode": "Light Mode",
       "darkMode": "Dark Mode",
       "auto": "Auto"
+    },
+    "footer": {
+      "copyright": "Copyright © 2025 {name}. All rights reserved."
     }
   },
   "pages": {

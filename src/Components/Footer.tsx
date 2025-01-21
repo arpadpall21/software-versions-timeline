@@ -1,19 +1,22 @@
 import '@/app/globals.css';
+import { getTranslations } from 'next-intl/server';
 import ThemeSelector from './ThemeSelector';
 import LangSelector from './LangSelector';
 
-const Footer: React.FC = () => {
+const Footer: React.FC = async () => {
+  const t = await getTranslations('components.footer');
+
   return (
     <footer className={'flex justify-between p-7 mb-4 border-t-2 border-borPri dark:border-borPriD'}>
       <div>
-        <p className={'text-fgSec dark:text-fgSecD'}> Copyright © 2025 Arpad Pall. All rights reserved. </p>
+        <p className={'text-fgSec dark:text-fgSecD'}>{t('copyright', { name: 'Arpad Pall' })}</p>
         <p className={'pt-3 text-fgSec dark:text-fgSecD'}> Email: a.pall21@yahoo.fr </p>
       </div>
-      <div>
-        <div className={'inline-block'}>
+      <div className={'flex'}>
+        <div className={'inline-block mr-4'}>
           <ThemeSelector />
         </div>
-        <div className={'inline-block ml-4'}>
+        <div className={'inline-block'}>
           <LangSelector />
         </div>
       </div>
