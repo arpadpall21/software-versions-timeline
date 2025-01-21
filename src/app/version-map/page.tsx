@@ -1,13 +1,7 @@
-'use client';
-
 import '@/app/globals.css';
-import { useTranslations } from 'next-intl';
-import LangSelector from '@/Components/LangSelector';
-import ThemeSelector from '@/Components/ThemeSelector';
+import Footer from '@/Components/Footer';
 
 const Home = () => {
-  const t = useTranslations('pages.versionMap');
-
   return (
     <>
       <p className={'text-fgPri dark:text-fgPriD'}> Hello World! </p>
@@ -27,12 +21,9 @@ const Home = () => {
       
       
       <br /><br /><br /><br /><br /><br /><br /> 
-      <LangSelector />
-      <br /><br /><br /><br /><br /><br /><br /> 
-      <ThemeSelector />
       <br /><br /><br /><br /><br /><br /><br /> 
       <br /><br /><br /><br /><br /><br /><br /> 
-      
+      <Footer />
       
     </>
   );

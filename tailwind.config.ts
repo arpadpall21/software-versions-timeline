@@ -16,6 +16,7 @@ export default {
         fgSec: '#434958',
         fgPop: '#4444bc',
         borPri: 'lightgray',
+        foc: '#4444bc',
 
         // dark
         bgPriD: '#0e0e25',
@@ -24,6 +25,7 @@ export default {
         fgSecD: '#6d7b8f',
         fgPopD: '#4c44bc',
         borPriD: 'black',
+        focD: 'white',
       },
     },
   },

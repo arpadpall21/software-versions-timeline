@@ -41,9 +41,9 @@ const ThemeSelector: React.FC = () => {
     <Dropdown
       selectedItem={themeState}
       optionItems={[
+        ['auto', t('auto')],
         ['light', t('lightMode')],
         ['dark', t('darkMode')],
-        ['auto', t('auto')],
       ]}
       dropdownHandler={(e) => setThemeState(e.target.value)}
       title={t('theme')}
