@@ -25,7 +25,7 @@ export default {
         fgSecD: '#6d7b8f',
         fgPopD: '#4c44bc',
         borPriD: 'black',
-        focD: '#4c44bc',
+        focD: 'white',
       },
     },
   },
