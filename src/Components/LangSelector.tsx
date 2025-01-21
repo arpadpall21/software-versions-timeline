@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 import { type Lang } from '@/misc/types';
 import appSettings from '@/misc/appSettings';
 import { useTranslations } from 'next-intl';
+import Dropdown from '@/Components/Dropdown';
 
 const supportedLanguages: { [langCode: string]: Lang } = appSettings.lang.supportedLanguages;
 const defaultLanguage: Lang = appSettings.lang.defaultLanguage;
@@ -28,16 +29,15 @@ const LangSelector: React.FC = () => {
   }
 
   return (
-    <div>
-      <p>{t('language')}</p>
-      <select value={langState} onChange={dropdownHandler}>
-        {Object.keys(supportedLanguages).map((lang) => (
-          <option value={supportedLanguages[lang].langCode} key={lang}>
-            {supportedLanguages[lang].lang}
-          </option>
-        ))}
-      </select>
-    </div>
+    <Dropdown
+      selectedItem={langState}
+      optionItems={Object.keys(supportedLanguages).map((lang) => [
+        supportedLanguages[lang].langCode,
+        supportedLanguages[lang].lang,
+      ])}
+      dropdownHandler={dropdownHandler}
+      title={t('language')}
+    />
   );
 };
 
