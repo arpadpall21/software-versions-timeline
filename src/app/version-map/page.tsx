@@ -1,5 +1,4 @@
 import '@/app/globals.css';
-import Footer from '@/Components/Footer';
 
 const Home = () => {
   return (
@@ -23,7 +22,6 @@ const Home = () => {
       <br /><br /><br /><br /><br /><br /><br /> 
       <br /><br /><br /><br /><br /><br /><br /> 
       <br /><br /><br /><br /><br /><br /><br /> 
-      <Footer />
       
     </>
   );
