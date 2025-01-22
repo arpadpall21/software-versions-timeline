@@ -27,6 +27,10 @@ export default {
         borPriD: 'black',
         focD: 'white',
       },
+      spacing: {
+        mobPad: '12px',
+        desckPad: '18px',
+      }
     },
   },
   plugins: [],

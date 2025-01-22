@@ -8,7 +8,7 @@ const Footer: React.FC = async () => {
 
   return (
     <footer
-      className={`flex flex-col sm:flex-row justify-between py-7 sm:px-7 mb-4
+      className={`flex flex-col sm:flex-row justify-between py-7 mx-mobPad sm:mx-desckPad sm:px-7 mb-4
         border-t-2 border-borPri dark:border-borPriD`}
     >
       <div>
