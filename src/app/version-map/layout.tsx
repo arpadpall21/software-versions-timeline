@@ -5,7 +5,7 @@ function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <>
       <Header />
-      <main className={'mx-5'}>{children}</main>
+      <main className={'mx-mobPad sm:mx-desckPad'}>{children}</main>
       <Footer />
     </>
   );
