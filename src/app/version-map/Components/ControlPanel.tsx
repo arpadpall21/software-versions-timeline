@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 interface Props {
   zoomLevel: number;
+  scrollLock: boolean;
+  setScrollLock: (scrollLock: boolean) => void;
 }
 
-const ControlPanel: React.FC<Props> = ({ zoomLevel }) => {
-  const [scrollLock, setScrollLock] = useState<boolean>(false);
-
-  console.log(scrollLock)
+const ControlPanel: React.FC<Props> = ({ zoomLevel, scrollLock, setScrollLock }) => {
 
   useEffect(() => {
     if (scrollLock) {

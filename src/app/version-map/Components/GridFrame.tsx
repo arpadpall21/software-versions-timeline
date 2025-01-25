@@ -8,8 +8,8 @@ const GridFrame: React.FC = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState<number>(1);
+  const [scrollLock, setScrollLock] = useState<boolean>(false);
 
-  console.log(zoomLevel)
 
   function handleMouseMove(e: React.MouseEvent) {
     if (isDragging) {
@@ -28,11 +28,10 @@ const GridFrame: React.FC = () => {
   }
 
   function wheelHandler(e: React.WheelEvent) {
-    // window.onscroll = function () { window.scrollTo(0, 0); };
-    if (e.deltaY > 0 && zoomLevel > 1) {
+    if (scrollLock && e.deltaY > 0 && zoomLevel > 1) {
       setZoomLevel(zoomLevel - 0.02);
       return;
-    } else if (zoomLevel < 3) {
+    } else if (scrollLock && zoomLevel < 3) {
       setZoomLevel(zoomLevel + 0.02);
     }
   }
@@ -48,7 +47,7 @@ const GridFrame: React.FC = () => {
       // onTouchStart={mouseDownHandler}
       // onTouchEnd={mouseUpHandler}
     >
-      <ControlPanel zoomLevel={zoomLevel} />
+      <ControlPanel zoomLevel={zoomLevel} scrollLock={scrollLock} setScrollLock={setScrollLock} />
       <div
         className={'border border-green-500 h-[300px] w-[300px]'}
         style={{
