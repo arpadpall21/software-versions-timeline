@@ -30,7 +30,7 @@ export default {
       spacing: {
         mobPad: '12px',
         desckPad: '18px',
-      }
+      },
     },
   },
   plugins: [],
