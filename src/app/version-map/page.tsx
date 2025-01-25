@@ -47,30 +47,14 @@ const Home = () => {
         // onTouchEnd={mouseUpHandler}
       >
         <div className={'border border-green-500 h-[300px] w-[300px]'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
+          <p> Hello World! </p>
+          <p> Hello World! </p>
+          <p> Hello World! </p>
+          <p> Hello World! </p>
         </div>
       </div>
       
-{/* <Draggable
-        axis="x"
-        handle=".handle"
-        defaultPosition={{x: 0, y: 0}}
-        grid={[25, 25]}
-        scale={1}
-      >
-        <div>
-          <div className="handle">Drag from here</div>
-          <div>This readme is really dragging on...</div>
-        </div>
-      </Draggable>       */}
       <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      {/* <Draggable /> */}
       <br />
       <br />
       <br />
