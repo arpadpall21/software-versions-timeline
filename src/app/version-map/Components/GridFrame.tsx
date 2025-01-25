@@ -55,24 +55,26 @@ const GridFrame: React.FC = () => {
       // onTouchEnd={mouseUpHandler}
     >
       <div>
-        <p>{timelineZoomLevel.toPrecision(2)}</p>
+        <p> Zoom level: x{timelineZoomLevel.toPrecision(2)}</p>
         <button style={{ backgroundColor: scrollZoomEnabled ? 'red' : '' }} onClick={() => setScrollZoomEnabled(!scrollZoomEnabled)}> Scroll Zoom Enabled </button>
-        <button className={'w-10 h-6 border-2 border-red-400'} onClick={() => setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel))}> + </button>
-        <button className={'w-10 h-6 border-2 border-red-400'} onClick={() => setTimelineZoomLevel(calcTimelineZoom('zoomIn', timelineZoomLevel))}> - </button>
+        <button className={'w-10 h-6 border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel))}> + </button>
+        <button className={'w-10 h-6 border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomIn', timelineZoomLevel))}> - </button>
       </div>
     
     
       <div
         className={'border border-green-500 h-[300px] w-[300px]'}
         style={{
-          transform: `translate(${position.x}px, ${position.y}px) scale(${timelineZoomLevel})`,
+          transform: `translate(${position.x}px, ${position.y}px)`,
           cursor: isDragging ? 'grabbing' : 'grab',
         }}
       >
-        <p> Hello World! </p>
-        <p> Hello World! </p>
-        <p> Hello World! </p>
-        <p> Hello World! </p>
+        <div className={'border border-blue-500 transition-transform ease-linear'} style={{ transform: `scale(${timelineZoomLevel})` }}>
+          <p> Hello World! </p>
+          <p> Hello World! </p>
+          <p> Hello World! </p>
+          <p> Hello World! </p>
+        </div>
       </div>
     </div>
   )
