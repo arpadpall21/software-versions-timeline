@@ -11,6 +11,7 @@ interface AppSettings {
   timelineZoom: {
     minLevel: number;
     maxLevel: number;
+    defaultLevel: number;
     sensitivity: number;
   }
 }
@@ -32,8 +33,9 @@ const appSettings: AppSettings = {
     supportedThemes: ['light', 'dark', 'auto'],
   },
   timelineZoom: {
-    minLevel: 1,
+    minLevel: 0.5,
     maxLevel: 3,
+    defaultLevel: 1,
     sensitivity: 0.1,
   },
 };

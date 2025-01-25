@@ -2,12 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import { calcTimelineZoom } from '@/misc/helpers';
+import appSettings from '@/misc/appSettings';
+
+const defaultTimelineZoomLevel = appSettings.timelineZoom.defaultLevel;
 
 const GridFrame: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const [timelineZoomLevel, setTimelineZoomLevel] = useState<number>(1);
+  const [timelineZoomLevel, setTimelineZoomLevel] = useState<number>(defaultTimelineZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
 
   useEffect(() => {
@@ -43,9 +46,14 @@ const GridFrame: React.FC = () => {
     }
   }
 
+  function handleResetClick() {
+    setPosition({ x: 0, y: 0 });
+    setTimelineZoomLevel(1);
+  }
+
   return (
     <div
-      className={'border-2 border-black h-[700px]'}
+      className={'border-2 border-black h-[700px] overflow-hidden'}
       onMouseMove={handleMouseMove}
       onMouseDown={mouseDownHandler}
       onMouseUp={mouseUpHandler}
@@ -55,21 +63,26 @@ const GridFrame: React.FC = () => {
       // onTouchEnd={mouseUpHandler}
     >
       <div>
-        <p> Zoom level: x{timelineZoomLevel.toPrecision(2)}</p>
+        <p> Zoom level: x{timelineZoomLevel.toFixed(1)}</p>
         <button style={{ backgroundColor: scrollZoomEnabled ? 'red' : '' }} onClick={() => setScrollZoomEnabled(!scrollZoomEnabled)}> Scroll Zoom Enabled </button>
         <button className={'w-10 h-6 border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel))}> + </button>
         <button className={'w-10 h-6 border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomIn', timelineZoomLevel))}> - </button>
+        <br />
+        <button className={'w-30 h-6 border-2 border-orange-400'} onClick={handleResetClick}> Reset Position </button>
       </div>
     
     
       <div
-        className={'border border-green-500 h-[300px] w-[300px]'}
+        className={'border border-green-500 h-[300px] w-[300px] float-end'}
         style={{
           transform: `translate(${position.x}px, ${position.y}px)`,
           cursor: isDragging ? 'grabbing' : 'grab',
         }}
       >
-        <div className={'border border-blue-500 transition-transform ease-linear'} style={{ transform: `scale(${timelineZoomLevel})` }}>
+        <div
+          className={'border border-blue-500 transition-transform duration-200'}
+          style={{ transform: `scale(${timelineZoomLevel})` }}
+        >
           <p> Hello World! </p>
           <p> Hello World! </p>
           <p> Hello World! </p>
