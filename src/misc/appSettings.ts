@@ -34,7 +34,7 @@ const appSettings: AppSettings = {
   timelineZoom: {
     minLevel: 1,
     maxLevel: 3,
-    sensitivity: 0.07,
+    sensitivity: 0.1,
   },
 };
 

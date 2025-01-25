@@ -7,16 +7,16 @@ const GridFrame: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const [zoomLevel, setZoomLevel] = useState<number>(1);
-  const [scrollZoom, setScrollZoom] = useState<boolean>(false);
+  const [timelineZoomLevel, setTimelineZoomLevel] = useState<number>(1);
+  const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
 
   useEffect(() => {
-    if (scrollZoom) {
+    if (scrollZoomEnabled) {
       document.body.style.overflow = 'hidden';
       return;
     }
     document.body.style.overflow = 'auto';
-  }, [scrollZoom]);
+  }, [scrollZoomEnabled]);
 
   function handleMouseMove(e: React.MouseEvent) {
     if (isDragging) {
@@ -35,11 +35,11 @@ const GridFrame: React.FC = () => {
   }
 
   function handleMouseWheel(e: React.WheelEvent) {
-    if (scrollZoom && e.deltaY > 0) {
-      setZoomLevel(calcTimelineZoom('zoomIn', zoomLevel));
+    if (scrollZoomEnabled && e.deltaY > 0) {
+      setTimelineZoomLevel(calcTimelineZoom('zoomIn', timelineZoomLevel));
       return;
-    } else if (scrollZoom && e.deltaY < 0) {
-      setZoomLevel(calcTimelineZoom('zoomOut', zoomLevel));
+    } else if (scrollZoomEnabled && e.deltaY < 0) {
+      setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel));
     }
   }
 
@@ -55,17 +55,17 @@ const GridFrame: React.FC = () => {
       // onTouchEnd={mouseUpHandler}
     >
       <div>
-        <p>{zoomLevel.toPrecision(3)}</p>
-        <button style={{ backgroundColor: scrollZoom ? 'red' : '' }} onClick={() => setScrollZoom(!scrollZoom)}> Scroll Zoom Enabled </button>
-        <button className={'w-10 h-6 border-2 border-red-400'}> + </button>
-        <button className={'w-10 h-6 border-2 border-red-400'}> - </button>
+        <p>{timelineZoomLevel.toPrecision(2)}</p>
+        <button style={{ backgroundColor: scrollZoomEnabled ? 'red' : '' }} onClick={() => setScrollZoomEnabled(!scrollZoomEnabled)}> Scroll Zoom Enabled </button>
+        <button className={'w-10 h-6 border-2 border-red-400'} onClick={() => setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel))}> + </button>
+        <button className={'w-10 h-6 border-2 border-red-400'} onClick={() => setTimelineZoomLevel(calcTimelineZoom('zoomIn', timelineZoomLevel))}> - </button>
       </div>
     
     
       <div
         className={'border border-green-500 h-[300px] w-[300px]'}
         style={{
-          transform: `translate(${position.x}px, ${position.y}px) scale(${zoomLevel})`,
+          transform: `translate(${position.x}px, ${position.y}px) scale(${timelineZoomLevel})`,
           cursor: isDragging ? 'grabbing' : 'grab',
         }}
       >
