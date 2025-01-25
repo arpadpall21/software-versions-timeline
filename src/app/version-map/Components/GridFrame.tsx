@@ -1,15 +1,25 @@
 'use client';
 
-import { useState } from 'react';
-import ControlPanel from '@/app/version-map/Components/ControlPanel';
+import { useState, useEffect } from 'react';
+
+const minZoomLevel = 1;
+const maxZoomLevel = 3;
+const zoomSensitivity = 0.07;
 
 const GridFrame: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState<number>(1);
-  const [scrollLock, setScrollLock] = useState<boolean>(false);
+  const [scrollZoom, setScrollZoom] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (scrollZoom) {
+      document.body.style.overflow = 'hidden';
+      return;
+    }
+    document.body.style.overflow = 'auto';
+  }, [scrollZoom]);
 
   function handleMouseMove(e: React.MouseEvent) {
     if (isDragging) {
@@ -28,11 +38,12 @@ const GridFrame: React.FC = () => {
   }
 
   function wheelHandler(e: React.WheelEvent) {
-    if (scrollLock && e.deltaY > 0 && zoomLevel > 1) {
-      setZoomLevel(zoomLevel - 0.02);
+    if (scrollZoom && e.deltaY > 0 && zoomLevel > minZoomLevel) {
+      setZoomLevel(Math.max(zoomLevel - zoomSensitivity, minZoomLevel));
       return;
-    } else if (scrollLock && zoomLevel < 3) {
-      setZoomLevel(zoomLevel + 0.02);
+    }
+    if (scrollZoom && e.deltaY < 0 && zoomLevel < maxZoomLevel) {
+      setZoomLevel(Math.min(zoomLevel + zoomSensitivity, maxZoomLevel));
     }
   }
 
@@ -47,7 +58,14 @@ const GridFrame: React.FC = () => {
       // onTouchStart={mouseDownHandler}
       // onTouchEnd={mouseUpHandler}
     >
-      <ControlPanel zoomLevel={zoomLevel} scrollLock={scrollLock} setScrollLock={setScrollLock} />
+      <div>
+        <p>{zoomLevel.toPrecision(3)}</p>
+        <button style={{ backgroundColor: scrollZoom ? 'red' : '' }} onClick={() => setScrollZoom(!scrollZoom)}> Scroll Zoom Enabled </button>
+        <button className={'w-10 h-6 border-2 border-red-400'}> + </button>
+        <button className={'w-10 h-6 border-2 border-red-400'}> - </button>
+      </div>
+    
+    
       <div
         className={'border border-green-500 h-[300px] w-[300px]'}
         style={{
