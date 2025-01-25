@@ -1,10 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-
-const minZoomLevel = 1;
-const maxZoomLevel = 3;
-const zoomSensitivity = 0.07;
+import { calcTimelineZoom } from '@/misc/helpers';
 
 const GridFrame: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -37,13 +34,12 @@ const GridFrame: React.FC = () => {
     setIsDragging(false);
   }
 
-  function wheelHandler(e: React.WheelEvent) {
-    if (scrollZoom && e.deltaY > 0 && zoomLevel > minZoomLevel) {
-      setZoomLevel(Math.max(zoomLevel - zoomSensitivity, minZoomLevel));
+  function handleMouseWheel(e: React.WheelEvent) {
+    if (scrollZoom && e.deltaY > 0) {
+      setZoomLevel(calcTimelineZoom('zoomIn', zoomLevel));
       return;
-    }
-    if (scrollZoom && e.deltaY < 0 && zoomLevel < maxZoomLevel) {
-      setZoomLevel(Math.min(zoomLevel + zoomSensitivity, maxZoomLevel));
+    } else if (scrollZoom && e.deltaY < 0) {
+      setZoomLevel(calcTimelineZoom('zoomOut', zoomLevel));
     }
   }
 
@@ -54,7 +50,7 @@ const GridFrame: React.FC = () => {
       onMouseDown={mouseDownHandler}
       onMouseUp={mouseUpHandler}
       onMouseLeave={mouseUpHandler}
-      onWheel={wheelHandler}
+      onWheel={handleMouseWheel}
       // onTouchStart={mouseDownHandler}
       // onTouchEnd={mouseUpHandler}
     >

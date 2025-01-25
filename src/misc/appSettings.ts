@@ -8,6 +8,11 @@ interface AppSettings {
   theme: {
     supportedThemes: string[];
   };
+  timelineZoom: {
+    minLevel: number;
+    maxLevel: number;
+    sensitivity: number;
+  }
 }
 
 const supportedLanguages: { [langCode: string]: Lang } = {
@@ -25,6 +30,11 @@ const appSettings: AppSettings = {
   },
   theme: {
     supportedThemes: ['light', 'dark', 'auto'],
+  },
+  timelineZoom: {
+    minLevel: 1,
+    maxLevel: 3,
+    sensitivity: 0.07,
   },
 };
 
