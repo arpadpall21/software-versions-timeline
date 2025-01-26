@@ -31,6 +31,15 @@ export default {
         mobPad: '12px',
         desckPad: '18px',
       },
+      animation: {
+        'fast-pop': 'fast-pop 200ms',
+      },
+      keyframes: {
+        'fast-pop': {
+          from: { 'font-weight': 'bold' },
+          to: { 'font-weight': 'normal' },
+        },
+      },
     },
   },
   plugins: [],

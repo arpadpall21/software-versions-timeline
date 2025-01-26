@@ -64,7 +64,7 @@ const GridFrame: React.FC = () => {
       // onTouchEnd={mouseUpHandler}
     >
       <div>
-        <p> Zoom level: <span key={timelineZoomLevel.toFixed(1)} style={{ animationDuration: '200ms', animationName: 'fast-pop' }}>x{timelineZoomLevel.toFixed(1)}</span></p>
+        <p> Zoom level: <span className={'animate-fast-pop'} key={timelineZoomLevel.toFixed(1)}>x{timelineZoomLevel.toFixed(1)}</span></p>
         <button style={{ backgroundColor: scrollZoomEnabled ? 'red' : '' }} onClick={() => setScrollZoomEnabled(!scrollZoomEnabled)}> Scroll Zoom Enabled </button>
         <button className={'w-10 h-6 border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel))}> + </button>
         <button className={'w-10 h-6 border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomIn', timelineZoomLevel))}> - </button>
