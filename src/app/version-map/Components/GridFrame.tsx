@@ -84,8 +84,8 @@ const GridFrame: React.FC = () => {
           className={'border border-blue-500 transition-transform duration-200'}
           style={{ transform: `scale(${timelineZoomLevel})` }}
         >
-          <p style={{ animationDuration: '200ms', animationName: 'animColor' }}> Hello World! </p>
-          <p className={'animPop'}> Hello World! </p>
+          <p> Hello World! </p>
+          <p> Hello World! </p>
           <p> Hello World! </p>
           <p> Hello World! </p>
         </div>
