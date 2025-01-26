@@ -1,5 +1,6 @@
 'use client';
 
+import '@/app/globals.css';
 import { useState, useEffect } from 'react';
 import { calcTimelineZoom } from '@/misc/helpers';
 import appSettings from '@/misc/appSettings';
@@ -63,7 +64,7 @@ const GridFrame: React.FC = () => {
       // onTouchEnd={mouseUpHandler}
     >
       <div>
-        <p> Zoom level: x{timelineZoomLevel.toFixed(1)}</p>
+        <p> Zoom level: <span key={timelineZoomLevel.toFixed(1)} style={{ animationDuration: '200ms', animationName: 'fast-pop' }}>x{timelineZoomLevel.toFixed(1)}</span></p>
         <button style={{ backgroundColor: scrollZoomEnabled ? 'red' : '' }} onClick={() => setScrollZoomEnabled(!scrollZoomEnabled)}> Scroll Zoom Enabled </button>
         <button className={'w-10 h-6 border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel))}> + </button>
         <button className={'w-10 h-6 border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomIn', timelineZoomLevel))}> - </button>
@@ -83,8 +84,8 @@ const GridFrame: React.FC = () => {
           className={'border border-blue-500 transition-transform duration-200'}
           style={{ transform: `scale(${timelineZoomLevel})` }}
         >
-          <p> Hello World! </p>
-          <p> Hello World! </p>
+          <p style={{ animationDuration: '200ms', animationName: 'animColor' }}> Hello World! </p>
+          <p className={'animPop'}> Hello World! </p>
           <p> Hello World! </p>
           <p> Hello World! </p>
         </div>
