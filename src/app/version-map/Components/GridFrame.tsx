@@ -56,8 +56,13 @@ const GridFrame: React.FC = () => {
     <div
       className={'relative select-none border-2 border-black'}
       onWheel={handleMouseWheel}
+      onMouseLeave={mouseUpHandler}
+      onMouseMove={handleMouseMove}
+      onMouseUp={mouseUpHandler}
     >
-      <div className={'absolute z-10 bottom-0 right-0 border-2 border-violet-400 bg-blue-400'}>
+      <div
+        className={'absolute z-10 bottom-0 right-0 border-2 border-violet-400 bg-blue-400'}
+      >
         <p> Zoom level: <span className={'animate-fast-pop'} key={timelineZoomLevel.toFixed(1)}>x{timelineZoomLevel.toFixed(1)}</span></p>
         <button style={{ backgroundColor: scrollZoomEnabled ? 'red' : '' }} onClick={() => setScrollZoomEnabled(!scrollZoomEnabled)}> Scroll Zoom Enabled </button>
         <button className={'w-10 h-6 border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel))}> + </button>
@@ -65,7 +70,11 @@ const GridFrame: React.FC = () => {
         <br />
         <button className={'w-30 h-6 border-2 border-orange-400'} onClick={handleResetClick}> Reset Position </button>
       </div>
-      <div className={'grid grid-cols-[60px_auto] grid-rows-[60px_auto]'}>
+      <div
+        className={'grid grid-cols-[60px_auto] grid-rows-[60px_auto]'}
+        // onTouchStart={mouseDownHandler}
+        // onTouchEnd={mouseUpHandler}
+      >
         <div className={'col-span-2 overflow-hidden border-2 border-violet-400'}>
           <div className={'float-right border border-green-500'} style={{ transform: `translateX(${position.x}px) scaleX(${timelineZoomLevel})` }}>
             Hello World!
@@ -79,12 +88,7 @@ const GridFrame: React.FC = () => {
         <div
           className={'border-2 border-violet-400 overflow-hidden h-[600px]'}
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
-          onMouseMove={handleMouseMove}
           onMouseDown={mouseDownHandler}
-          onMouseUp={mouseUpHandler}
-          onMouseLeave={mouseUpHandler}
-          // onTouchStart={mouseDownHandler}
-          // onTouchEnd={mouseUpHandler}
         >
           <div
             className={'float-right border border-green-500'}
