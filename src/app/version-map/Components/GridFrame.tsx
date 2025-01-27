@@ -54,21 +54,27 @@ const GridFrame: React.FC = () => {
 
   return (
     <div
-      className={'relative select-none my-10 shadow-[0_0_6px_2px] shadow-borPri dark:shadow-borPriD'}
+      className={'relative select-none my-7 shadow-[0_0_4px_1px] shadow-borPri dark:shadow-borPriD h-[600px]'}
       onWheel={handleMouseWheel}
       onMouseLeave={mouseUpHandler}
       onMouseMove={handleMouseMove}
       onMouseUp={mouseUpHandler}
     >
       <div
-        className={'absolute z-10 bottom-0 right-0 bg-white'}
+        className={'absolute z-10 bottom-0 right-0 bg-red-100'}
       >
-        <p> Zoom level: <span className={'animate-fast-pop'} key={timelineZoomLevel.toFixed(1)}>x{timelineZoomLevel.toFixed(1)}</span></p>
-        <button style={{ backgroundColor: scrollZoomEnabled ? 'red' : '' }} onClick={() => setScrollZoomEnabled(!scrollZoomEnabled)}> Scroll Zoom Enabled </button>
-        <button className={'w-10 h-6 border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel))}> + </button>
-        <button className={'w-10 h-6 border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomIn', timelineZoomLevel))}> - </button>
+        <div className={'flex flex-col'}>
+          <button className={'border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel))}> + </button>
+        <button className={'border-2 border-orange-400'} onClick={handleResetClick}> Reset Position </button>
+          <button className={'border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomIn', timelineZoomLevel))}> - </button>
+        
+        </div>
         <br />
-        <button className={'w-30 h-6 border-2 border-orange-400'} onClick={handleResetClick}> Reset Position </button>
+        <br />
+        <br />
+        <br />
+        <p> Zoom level: <span className={'animate-fast-pop'} key={timelineZoomLevel.toFixed(1)}>x{timelineZoomLevel.toFixed(1)}</span></p>
+        <br />
       </div>
       <div
         className={'grid grid-cols-[60px_auto] grid-rows-[60px_auto]'}
@@ -76,31 +82,35 @@ const GridFrame: React.FC = () => {
         // onTouchEnd={mouseUpHandler}
       >
         <div className={'col-span-2 overflow-hidden'}>
-          <div className={'float-right border border-green-500'} style={{ transform: `translateX(${position.x}px) scaleX(${timelineZoomLevel})` }}>
-            Hello World!
+          <div className={'float-right'} style={{ transform: `translateX(${position.x}px) scaleX(${timelineZoomLevel})` }}>
+            
           </div>
         </div>
-        <div className={'overflow-hidden'}>
-          <div className={'border border-green-500'} style={{ transform: `translateY(${position.y}px) scaleY(${timelineZoomLevel})` }}>
-            Side Slider
+        <div className={'overflow-hidden duration-200'}>
+          <div className={''} style={{ transform: `translateY(${position.y}px) scaleY(${timelineZoomLevel})` }}>
+            
           </div>
         </div>
         <div
-          className={'overflow-hidden h-[600px]'}
+          className={'overflow-hidden duration-200'}
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
           onMouseDown={mouseDownHandler}
         >
+          <button
+            className={'absolute z-10'}
+            style={{ backgroundColor: scrollZoomEnabled ? 'red' : '' }}
+            onClick={() => setScrollZoomEnabled(!scrollZoomEnabled)}
+          >
+            Scroll Zoom Enabled
+          </button>
           <div
-            className={'float-right border border-green-500'}
+            className={'float-right'}
             style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
           >
             <div
-              className={'border border-blue-500 transition-transform duration-200'}
+              className={'transition-transform duration-200'}
               style={{ transform: `scale(${timelineZoomLevel})` }}
             >
-              <p> Hello World! </p>
-              <p> Hello World! </p>
-              <p> Hello World! </p>
             </div>
           </div>
         </div>
