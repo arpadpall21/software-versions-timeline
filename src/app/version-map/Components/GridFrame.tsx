@@ -54,14 +54,14 @@ const GridFrame: React.FC = () => {
 
   return (
     <div
-      className={'relative select-none border-2 border-black'}
+      className={'relative select-none my-10 shadow-[0_0_6px_2px] shadow-borPri dark:shadow-borPriD'}
       onWheel={handleMouseWheel}
       onMouseLeave={mouseUpHandler}
       onMouseMove={handleMouseMove}
       onMouseUp={mouseUpHandler}
     >
       <div
-        className={'absolute z-10 bottom-0 right-0 border-2 border-violet-400 bg-blue-400'}
+        className={'absolute z-10 bottom-0 right-0 bg-white'}
       >
         <p> Zoom level: <span className={'animate-fast-pop'} key={timelineZoomLevel.toFixed(1)}>x{timelineZoomLevel.toFixed(1)}</span></p>
         <button style={{ backgroundColor: scrollZoomEnabled ? 'red' : '' }} onClick={() => setScrollZoomEnabled(!scrollZoomEnabled)}> Scroll Zoom Enabled </button>
@@ -75,18 +75,18 @@ const GridFrame: React.FC = () => {
         // onTouchStart={mouseDownHandler}
         // onTouchEnd={mouseUpHandler}
       >
-        <div className={'col-span-2 overflow-hidden border-2 border-violet-400'}>
+        <div className={'col-span-2 overflow-hidden'}>
           <div className={'float-right border border-green-500'} style={{ transform: `translateX(${position.x}px) scaleX(${timelineZoomLevel})` }}>
             Hello World!
           </div>
         </div>
-        <div className={'overflow-hidden border-2 border-violet-400'}>
+        <div className={'overflow-hidden'}>
           <div className={'border border-green-500'} style={{ transform: `translateY(${position.y}px) scaleY(${timelineZoomLevel})` }}>
             Side Slider
           </div>
         </div>
         <div
-          className={'border-2 border-violet-400 overflow-hidden h-[600px]'}
+          className={'overflow-hidden h-[600px]'}
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
           onMouseDown={mouseDownHandler}
         >

@@ -19,7 +19,7 @@ export default {
         foc: '#4444bc',
 
         // dark
-        bgPriD: '#0e0e25',
+        bgPriD: '#191942',
         bgSecD: 'black',
         fgPriD: '#f6f7f9',
         fgSecD: '#6d7b8f',
