@@ -54,16 +54,10 @@ const GridFrame: React.FC = () => {
 
   return (
     <div
-      className={'relative border-2 border-black'}
-      onMouseMove={handleMouseMove}
-      onMouseDown={mouseDownHandler}
-      onMouseUp={mouseUpHandler}
-      onMouseLeave={mouseUpHandler}
+      className={'relative select-none border-2 border-black'}
       onWheel={handleMouseWheel}
-      // onTouchStart={mouseDownHandler}
-      // onTouchEnd={mouseUpHandler}
     >
-      <div className={'absolute bottom-0 right-0 border-2 border-violet-400'}>
+      <div className={'absolute z-10 bottom-0 right-0 border-2 border-violet-400 bg-blue-400'}>
         <p> Zoom level: <span className={'animate-fast-pop'} key={timelineZoomLevel.toFixed(1)}>x{timelineZoomLevel.toFixed(1)}</span></p>
         <button style={{ backgroundColor: scrollZoomEnabled ? 'red' : '' }} onClick={() => setScrollZoomEnabled(!scrollZoomEnabled)}> Scroll Zoom Enabled </button>
         <button className={'w-10 h-6 border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel))}> + </button>
@@ -73,24 +67,28 @@ const GridFrame: React.FC = () => {
       </div>
       <div className={'grid grid-cols-[60px_auto] grid-rows-[60px_auto]'}>
         <div className={'col-span-2 overflow-hidden border-2 border-violet-400'}>
-          <div className={'float-right border border-green-500'} style={{ transform: `translateX(${position.x}px)` }}>
-            Top slider Top sliderTop sliderTop sliderTop sliderTop sliderTop sliderTop slider
+          <div className={'float-right border border-green-500'} style={{ transform: `translateX(${position.x}px) scaleX(${timelineZoomLevel})` }}>
+            Hello World!
           </div>
         </div>
         <div className={'overflow-hidden border-2 border-violet-400'}>
-          <div className={'border border-green-500'} style={{ transform: `translateY(${position.y}px)` }}>
+          <div className={'border border-green-500'} style={{ transform: `translateY(${position.y}px) scaleY(${timelineZoomLevel})` }}>
             Side Slider
           </div>
         </div>
-        
-        
-        <div className={'border-2 border-violet-400 overflow-hidden h-[600px]'}>
+        <div
+          className={'border-2 border-violet-400 overflow-hidden h-[600px]'}
+          style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+          onMouseMove={handleMouseMove}
+          onMouseDown={mouseDownHandler}
+          onMouseUp={mouseUpHandler}
+          onMouseLeave={mouseUpHandler}
+          // onTouchStart={mouseDownHandler}
+          // onTouchEnd={mouseUpHandler}
+        >
           <div
             className={'float-right border border-green-500'}
-            style={{
-              transform: `translate(${position.x}px, ${position.y}px)`,
-              cursor: isDragging ? 'grabbing' : 'grab',
-            }}
+            style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
           >
             <div
               className={'border border-blue-500 transition-transform duration-200'}
@@ -104,7 +102,7 @@ const GridFrame: React.FC = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default GridFrame;
