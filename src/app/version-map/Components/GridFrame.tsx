@@ -54,7 +54,7 @@ const GridFrame: React.FC = () => {
 
   return (
     <div
-      className={'border-2 border-black h-[700px] overflow-hidden'}
+      className={'relative border-2 border-black'}
       onMouseMove={handleMouseMove}
       onMouseDown={mouseDownHandler}
       onMouseUp={mouseUpHandler}
@@ -63,7 +63,7 @@ const GridFrame: React.FC = () => {
       // onTouchStart={mouseDownHandler}
       // onTouchEnd={mouseUpHandler}
     >
-      <div>
+      <div className={'absolute bottom-0 right-0 border-2 border-violet-400'}>
         <p> Zoom level: <span className={'animate-fast-pop'} key={timelineZoomLevel.toFixed(1)}>x{timelineZoomLevel.toFixed(1)}</span></p>
         <button style={{ backgroundColor: scrollZoomEnabled ? 'red' : '' }} onClick={() => setScrollZoomEnabled(!scrollZoomEnabled)}> Scroll Zoom Enabled </button>
         <button className={'w-10 h-6 border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel))}> + </button>
@@ -71,23 +71,32 @@ const GridFrame: React.FC = () => {
         <br />
         <button className={'w-30 h-6 border-2 border-orange-400'} onClick={handleResetClick}> Reset Position </button>
       </div>
-    
-    
-      <div
-        className={'border border-green-500 h-[300px] w-[300px] float-end'}
-        style={{
-          transform: `translate(${position.x}px, ${position.y}px)`,
-          cursor: isDragging ? 'grabbing' : 'grab',
-        }}
-      >
-        <div
-          className={'border border-blue-500 transition-transform duration-200'}
-          style={{ transform: `scale(${timelineZoomLevel})` }}
-        >
-          <p> Hello World! </p>
-          <p> Hello World! </p>
-          <p> Hello World! </p>
-          <p> Hello World! </p>
+      <div className={'grid grid-cols-[60px_auto] grid-rows-[60px_auto]'}>
+        <div className={'col-span-2 border-2 border-violet-400'}>
+          Top slider
+        </div>
+        <div className={'border-2 border-violet-400'}>
+          Side slider
+        </div>
+        
+        
+        <div className={'border-2 border-violet-400 overflow-hidden h-[600px]'}>
+          <div
+            className={'float-right border border-green-500'}
+            style={{
+              transform: `translate(${position.x}px, ${position.y}px)`,
+              cursor: isDragging ? 'grabbing' : 'grab',
+            }}
+          >
+            <div
+              className={'border border-blue-500 transition-transform duration-200'}
+              style={{ transform: `scale(${timelineZoomLevel})` }}
+            >
+              <p> Hello World! </p>
+              <p> Hello World! </p>
+              <p> Hello World! </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
