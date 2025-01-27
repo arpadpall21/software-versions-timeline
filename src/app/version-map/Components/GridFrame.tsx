@@ -72,11 +72,15 @@ const GridFrame: React.FC = () => {
         <button className={'w-30 h-6 border-2 border-orange-400'} onClick={handleResetClick}> Reset Position </button>
       </div>
       <div className={'grid grid-cols-[60px_auto] grid-rows-[60px_auto]'}>
-        <div className={'col-span-2 border-2 border-violet-400'}>
-          Top slider
+        <div className={'col-span-2 overflow-hidden border-2 border-violet-400'}>
+          <div className={'float-right border border-green-500'} style={{ transform: `translateX(${position.x}px)` }}>
+            Top slider Top sliderTop sliderTop sliderTop sliderTop sliderTop sliderTop slider
+          </div>
         </div>
-        <div className={'border-2 border-violet-400'}>
-          Side slider
+        <div className={'overflow-hidden border-2 border-violet-400'}>
+          <div className={'border border-green-500'} style={{ transform: `translateY(${position.y}px)` }}>
+            Side Slider
+          </div>
         </div>
         
         
