@@ -1,8 +1,7 @@
 import '@/app/globals.css';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 
-const Home = () => {
-
+const VersionMapPage = () => {
   return (
     <>
       <GridFrame />
@@ -10,4 +9,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default VersionMapPage;
