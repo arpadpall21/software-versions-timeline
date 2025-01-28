@@ -4,6 +4,7 @@ import '@/app/globals.css';
 import { useState, useEffect } from 'react';
 import { calcTimelineZoom } from '@/misc/helpers';
 import appSettings from '@/misc/appSettings';
+import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 
 const defaultTimelineZoomLevel = appSettings.timelineZoom.defaultLevel;
 
@@ -47,11 +48,6 @@ const GridFrame: React.FC = () => {
     }
   }
 
-  function handleResetClick() {
-    setPosition({ x: 0, y: 0 });
-    setTimelineZoomLevel(1);
-  }
-
   return (
     <div
       className={'relative select-none my-7 shadow-[0_0_4px_1px] shadow-borPri dark:shadow-borPriD'}
@@ -60,38 +56,11 @@ const GridFrame: React.FC = () => {
       onMouseMove={handleMouseMove}
       onMouseUp={mouseUpHandler}
     >
-      <div className={'absolute z-10 bottom-4 right-4 w-9'}>
-        <div
-          className={`flex flex-col text-fgPop dark:text-fgPopD font-semibold text-xl shadow-md
-            border-2 border-borPri dark:border-borPriD rounded-md bg-bgPri dark:bg-bgPriD`}
-        >
-          <button
-            className={'hover:bg-bgSec dark:hover:bg-bgSecD'}
-            onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel))}
-            title={'Zoom In'}
-          >
-            +
-          </button>
-          <button className={'hover:bg-bgSec dark:hover:bg-bgSecD'} onClick={handleResetClick} title={'Zoom Reset'}>
-            ↺
-          </button>
-          <button
-            className={'hover:bg-bgSec dark:hover:bg-bgSecD'}
-            onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomIn', timelineZoomLevel))}
-            title={'Reset Grid'}
-          >
-            -
-          </button>
-        </div>
-        <div
-          className={`mt-3 text-fgPri dark:text-fgPriD animate-fast-pop text-center
-            border-2 border-borPri dark:border-borPriD rounded-md bg-bgSec dark:bg-bgSecD shadow-md `}
-          key={timelineZoomLevel.toFixed(1)}
-          title={'Zoom Level'}
-        >
-          x{timelineZoomLevel.toFixed(1)}
-        </div>
-      </div>
+      <ZoomPanel
+        timelineZoomLevel={timelineZoomLevel}
+        setTimelineZoomLevel={setTimelineZoomLevel}
+        setPosition={setPosition}
+      />
       <div
         className={'grid grid-cols-[60px_auto] grid-rows-[60px_auto]'}
         // onTouchStart={mouseDownHandler}
