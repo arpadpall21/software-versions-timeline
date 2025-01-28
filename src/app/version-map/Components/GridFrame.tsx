@@ -54,7 +54,7 @@ const GridFrame: React.FC = () => {
 
   return (
     <div
-      className={'relative select-none my-7 shadow-[0_0_4px_1px] shadow-borPri dark:shadow-borPriD h-[600px]'}
+      className={'relative select-none my-7 shadow-[0_0_4px_1px] shadow-borPri dark:shadow-borPriD'}
       onWheel={handleMouseWheel}
       onMouseLeave={mouseUpHandler}
       onMouseMove={handleMouseMove}
@@ -84,8 +84,8 @@ const GridFrame: React.FC = () => {
           </button>
         </div>
         <div
-          className={`mt-3 text-fgSec dark:text-fgSecD animate-fast-pop text-center
-            border-2 border-borPri dark:border-borPriD rounded-md bg-bgPri dark:bg-bgPriD shadow-md `}
+          className={`mt-3 text-fgPri dark:text-fgPriD animate-fast-pop text-center
+            border-2 border-borPri dark:border-borPriD rounded-md bg-bgSec dark:bg-bgSecD shadow-md `}
           key={timelineZoomLevel.toFixed(1)}
           title={'Zoom Level'}
         >
@@ -97,43 +97,49 @@ const GridFrame: React.FC = () => {
         // onTouchStart={mouseDownHandler}
         // onTouchEnd={mouseUpHandler}
       >
-        
-        
-        
-        
-        <div className={'col-span-2 overflow-hidden'}>
-          <div className={'float-right'} style={{ transform: `translateX(${position.x}px) scaleX(${timelineZoomLevel})` }}>
-            
+        <div className={'col-span-2 border-b border-borPri dark:border-borPriD overflow-hidden'}>
+          <div
+            className={'float-right'}
+            style={{ transform: `translateX(${position.x}px) scaleX(${timelineZoomLevel})` }}
+          >
+            <p> top slider</p>
           </div>
         </div>
-        <div className={'overflow-hidden duration-200'}>
+        <div className={'overflow-hidden duration-200 border-r border-black'}>
           <div className={''} style={{ transform: `translateY(${position.y}px) scaleY(${timelineZoomLevel})` }}>
-            
+            <p>side slider</p>
           </div>
         </div>
-        
-        
-        
         <div
-          className={'overflow-hidden duration-200'}
+          className={'relative overflow-hidden duration-200 min-h-[300px]'}
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
           onMouseDown={mouseDownHandler}
         >
           <button
-            className={'absolute z-10'}
-            style={{ backgroundColor: scrollZoomEnabled ? 'red' : '' }}
+            className={`absolute z-10 left-[50%] text-fgPop dark:text-fgPopD shadow-md px-2 font-semibold
+               w-[180px] border-b-2 border-x-2 border-borPri dark:border-borPriD rounded-b-md
+               ${scrollZoomEnabled ? 'bg-bgWarn dark:bg-bgWarnD' : 'bg-bgPri dark:bg-bgPriD'}
+              hover:bg-bgWarnHover hover:dark:bg-bgWarnHoverD`}
+            style={{ transform: 'translateX(-50%)' }}
             onClick={() => setScrollZoomEnabled(!scrollZoomEnabled)}
           >
-            Scroll Zoom Enabled
+            Scroll Zoom {scrollZoomEnabled ? 'Enabled' : 'Disabled'}
           </button>
           <div
-            className={'float-right'}
+            className={'float-right border border-green-400'}
             style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
           >
             <div
-              className={'transition-transform duration-200'}
+              className={'transition-transform duration-200 border border-red-400'}
               style={{ transform: `scale(${timelineZoomLevel})` }}
             >
+              <div className={'bg-green-200'}>
+                <p> Hello World! </p>
+                <p> Hello World! </p>
+                <p> Hello World! </p>
+                <p> Hello World! </p>
+                <p> Hello World! </p>
+              </div>
             </div>
           </div>
         </div>
