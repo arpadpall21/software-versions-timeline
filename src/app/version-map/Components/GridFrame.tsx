@@ -62,18 +62,32 @@ const GridFrame: React.FC = () => {
     >
       <div className={'absolute z-10 bottom-4 right-4 w-9'}>
         <div
-          className={`flex flex-col text-fgPop dark:text-fgPopD font-bold text-xl
-            border-2 border-borPri dark:border-borPriD rounded-md`}
+          className={`flex flex-col text-fgPop dark:text-fgPopD font-semibold text-xl shadow-md
+            border-2 border-borPri dark:border-borPriD rounded-md bg-bgPri dark:bg-bgPriD`}
         >
-          <button className={''} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel))}> + </button>
-          <button className={''} onClick={handleResetClick}> R </button>
-          <button className={''} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomIn', timelineZoomLevel))}> - </button>
-        
+          <button
+            className={'hover:bg-bgSec dark:hover:bg-bgSecD'}
+            onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel))}
+            title={'Zoom In'}
+          >
+            +
+          </button>
+          <button className={'hover:bg-bgSec dark:hover:bg-bgSecD'} onClick={handleResetClick} title={'Zoom Reset'}>
+            ↺
+          </button>
+          <button
+            className={'hover:bg-bgSec dark:hover:bg-bgSecD'}
+            onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomIn', timelineZoomLevel))}
+            title={'Reset Grid'}
+          >
+            -
+          </button>
         </div>
         <div
-          className={`mt-4 text-fgSec dark:text-fgSecD animate-fast-pop text-center
-            border-2 border-borPri dark:border-borPriD rounded-md bg-bgPri dark:bg-bgPriD`}
+          className={`mt-3 text-fgSec dark:text-fgSecD animate-fast-pop text-center
+            border-2 border-borPri dark:border-borPriD rounded-md bg-bgPri dark:bg-bgPriD shadow-md `}
           key={timelineZoomLevel.toFixed(1)}
+          title={'Zoom Level'}
         >
           x{timelineZoomLevel.toFixed(1)}
         </div>
