@@ -6,6 +6,8 @@ import { calcTimelineZoom } from '@/misc/helpers';
 import appSettings from '@/misc/appSettings';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
+import TopSlider from '@/app/version-map/Components/TopSlider';
+import SideSlider from '@/app/version-map/Components/SideSlider';
 
 const defaultTimelineZoomLevel = appSettings.timelineZoom.defaultLevel;
 
@@ -30,8 +32,8 @@ const GridFrame: React.FC = () => {
     }
   }
 
-  function mouseDownHandler(e: React.MouseEvent) {
-    e.preventDefault()
+  function handleMouseDown(e: React.MouseEvent) {
+    e.preventDefault();
     setIsDragging(true);
     setOffset({ x: e.clientX - position.x, y: e.clientY - position.y });
   }
@@ -68,22 +70,19 @@ const GridFrame: React.FC = () => {
         // onTouchEnd={mouseUpHandler}
       >
         <div className={'col-span-2 border-b border-borPri dark:border-borPriD overflow-hidden'}>
-          <div
-            className={'float-right'}
-            style={{ transform: `translateX(${position.x}px) scaleX(${timelineZoomLevel})` }}
-          >
-            <p> top slider</p>
-          </div>
+          <TopSlider timelineZoomLevel={timelineZoomLevel} position={position}>
+            <p> top slider </p>
+          </TopSlider>
         </div>
         <div className={'overflow-hidden duration-200 border-r border-black'}>
-          <div className={''} style={{ transform: `translateY(${position.y}px) scaleY(${timelineZoomLevel})` }}>
+          <SideSlider timelineZoomLevel={timelineZoomLevel} position={position}>
             <p>side slider</p>
-          </div>
+          </SideSlider>
         </div>
         <div
           className={'relative overflow-hidden duration-200 min-h-[300px]'}
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
-          onMouseDown={mouseDownHandler}
+          onMouseDown={handleMouseDown}
         >
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div
