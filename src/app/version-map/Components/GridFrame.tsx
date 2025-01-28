@@ -54,33 +54,39 @@ const GridFrame: React.FC = () => {
 
   return (
     <div
-      className={'relative select-none my-7 shadow-[0_0_4px_1px] shadow-borPri dark:shadow-borPriD h-[600px]'}
+      className={'relative select-none my-7 shadow-[0_0_4px_1px] shadow-borPri dark:shadow-borPriD h-[600px] bg-blue-500'}
       onWheel={handleMouseWheel}
       onMouseLeave={mouseUpHandler}
       onMouseMove={handleMouseMove}
       onMouseUp={mouseUpHandler}
     >
       <div
-        className={'absolute z-10 bottom-0 right-0 bg-red-100'}
+        className={'absolute z-10 bottom-4 right-4 w-9'}
       >
         <div className={'flex flex-col'}>
           <button className={'border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel))}> + </button>
-        <button className={'border-2 border-orange-400'} onClick={handleResetClick}> Reset Position </button>
+        <button className={'border-2 border-orange-400'} onClick={handleResetClick}> R </button>
           <button className={'border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomIn', timelineZoomLevel))}> - </button>
         
         </div>
         <br />
-        <br />
-        <br />
-        <br />
-        <p> Zoom level: <span className={'animate-fast-pop'} key={timelineZoomLevel.toFixed(1)}>x{timelineZoomLevel.toFixed(1)}</span></p>
-        <br />
+        <div
+          className={`text-fgSec dark:text-fgSecD animate-fast-pop text-center
+            border-2 border-borPri dark:border-borPriD rounded-md bg-bgPri dark:bg-bgPriD`}
+          key={timelineZoomLevel.toFixed(1)}
+        >
+          x{timelineZoomLevel.toFixed(1)}
+        </div>
       </div>
       <div
         className={'grid grid-cols-[60px_auto] grid-rows-[60px_auto]'}
         // onTouchStart={mouseDownHandler}
         // onTouchEnd={mouseUpHandler}
       >
+        
+        
+        
+        
         <div className={'col-span-2 overflow-hidden'}>
           <div className={'float-right'} style={{ transform: `translateX(${position.x}px) scaleX(${timelineZoomLevel})` }}>
             
@@ -91,6 +97,9 @@ const GridFrame: React.FC = () => {
             
           </div>
         </div>
+        
+        
+        
         <div
           className={'overflow-hidden duration-200'}
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
