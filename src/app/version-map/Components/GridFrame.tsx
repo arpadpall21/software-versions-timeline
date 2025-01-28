@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { calcTimelineZoom } from '@/misc/helpers';
 import appSettings from '@/misc/appSettings';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
+import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
 
 const defaultTimelineZoomLevel = appSettings.timelineZoom.defaultLevel;
 
@@ -84,16 +85,7 @@ const GridFrame: React.FC = () => {
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
           onMouseDown={mouseDownHandler}
         >
-          <button
-            className={`absolute z-10 left-[50%] text-fgPop dark:text-fgPopD shadow-md px-2 font-semibold
-               w-[180px] border-b-2 border-x-2 border-borPri dark:border-borPriD rounded-b-md
-               ${scrollZoomEnabled ? 'bg-bgWarn dark:bg-bgWarnD' : 'bg-bgPri dark:bg-bgPriD'}
-              hover:bg-bgWarnHover hover:dark:bg-bgWarnHoverD`}
-            style={{ transform: 'translateX(-50%)' }}
-            onClick={() => setScrollZoomEnabled(!scrollZoomEnabled)}
-          >
-            Scroll Zoom {scrollZoomEnabled ? 'Enabled' : 'Disabled'}
-          </button>
+          <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div
             className={'float-right border border-green-400'}
             style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
