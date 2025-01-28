@@ -54,53 +54,92 @@ const GridFrame: React.FC = () => {
 
   return (
     <div
-      className={'relative select-none border-2 border-black'}
+      className={'relative select-none my-7 shadow-[0_0_4px_1px] shadow-borPri dark:shadow-borPriD'}
       onWheel={handleMouseWheel}
       onMouseLeave={mouseUpHandler}
       onMouseMove={handleMouseMove}
       onMouseUp={mouseUpHandler}
     >
-      <div
-        className={'absolute z-10 bottom-0 right-0 border-2 border-violet-400 bg-blue-400'}
-      >
-        <p> Zoom level: <span className={'animate-fast-pop'} key={timelineZoomLevel.toFixed(1)}>x{timelineZoomLevel.toFixed(1)}</span></p>
-        <button style={{ backgroundColor: scrollZoomEnabled ? 'red' : '' }} onClick={() => setScrollZoomEnabled(!scrollZoomEnabled)}> Scroll Zoom Enabled </button>
-        <button className={'w-10 h-6 border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel))}> + </button>
-        <button className={'w-10 h-6 border-2 border-red-400'} onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomIn', timelineZoomLevel))}> - </button>
-        <br />
-        <button className={'w-30 h-6 border-2 border-orange-400'} onClick={handleResetClick}> Reset Position </button>
+      <div className={'absolute z-10 bottom-4 right-4 w-9'}>
+        <div
+          className={`flex flex-col text-fgPop dark:text-fgPopD font-semibold text-xl shadow-md
+            border-2 border-borPri dark:border-borPriD rounded-md bg-bgPri dark:bg-bgPriD`}
+        >
+          <button
+            className={'hover:bg-bgSec dark:hover:bg-bgSecD'}
+            onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel))}
+            title={'Zoom In'}
+          >
+            +
+          </button>
+          <button className={'hover:bg-bgSec dark:hover:bg-bgSecD'} onClick={handleResetClick} title={'Zoom Reset'}>
+            ↺
+          </button>
+          <button
+            className={'hover:bg-bgSec dark:hover:bg-bgSecD'}
+            onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomIn', timelineZoomLevel))}
+            title={'Reset Grid'}
+          >
+            -
+          </button>
+        </div>
+        <div
+          className={`mt-3 text-fgPri dark:text-fgPriD animate-fast-pop text-center
+            border-2 border-borPri dark:border-borPriD rounded-md bg-bgSec dark:bg-bgSecD shadow-md `}
+          key={timelineZoomLevel.toFixed(1)}
+          title={'Zoom Level'}
+        >
+          x{timelineZoomLevel.toFixed(1)}
+        </div>
       </div>
       <div
         className={'grid grid-cols-[60px_auto] grid-rows-[60px_auto]'}
         // onTouchStart={mouseDownHandler}
         // onTouchEnd={mouseUpHandler}
       >
-        <div className={'col-span-2 overflow-hidden border-2 border-violet-400'}>
-          <div className={'float-right border border-green-500'} style={{ transform: `translateX(${position.x}px) scaleX(${timelineZoomLevel})` }}>
-            Hello World!
+        <div className={'col-span-2 border-b border-borPri dark:border-borPriD overflow-hidden'}>
+          <div
+            className={'float-right'}
+            style={{ transform: `translateX(${position.x}px) scaleX(${timelineZoomLevel})` }}
+          >
+            <p> top slider</p>
           </div>
         </div>
-        <div className={'overflow-hidden border-2 border-violet-400'}>
-          <div className={'border border-green-500'} style={{ transform: `translateY(${position.y}px) scaleY(${timelineZoomLevel})` }}>
-            Side Slider
+        <div className={'overflow-hidden duration-200 border-r border-black'}>
+          <div className={''} style={{ transform: `translateY(${position.y}px) scaleY(${timelineZoomLevel})` }}>
+            <p>side slider</p>
           </div>
         </div>
         <div
-          className={'border-2 border-violet-400 overflow-hidden h-[600px]'}
+          className={'relative overflow-hidden duration-200 min-h-[300px]'}
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
           onMouseDown={mouseDownHandler}
         >
+          <button
+            className={`absolute z-10 left-[50%] text-fgPop dark:text-fgPopD shadow-md px-2 font-semibold
+               w-[180px] border-b-2 border-x-2 border-borPri dark:border-borPriD rounded-b-md
+               ${scrollZoomEnabled ? 'bg-bgWarn dark:bg-bgWarnD' : 'bg-bgPri dark:bg-bgPriD'}
+              hover:bg-bgWarnHover hover:dark:bg-bgWarnHoverD`}
+            style={{ transform: 'translateX(-50%)' }}
+            onClick={() => setScrollZoomEnabled(!scrollZoomEnabled)}
+          >
+            Scroll Zoom {scrollZoomEnabled ? 'Enabled' : 'Disabled'}
+          </button>
           <div
-            className={'float-right border border-green-500'}
+            className={'float-right border border-green-400'}
             style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
           >
             <div
-              className={'border border-blue-500 transition-transform duration-200'}
+              className={'transition-transform duration-200 border border-red-400'}
               style={{ transform: `scale(${timelineZoomLevel})` }}
             >
-              <p> Hello World! </p>
-              <p> Hello World! </p>
-              <p> Hello World! </p>
+              <div className={'bg-green-200'}>
+                <p> Hello World! </p>
+                <p> Hello World! </p>
+                <p> Hello World! </p>
+                <p> Hello World! </p>
+                <p> Hello World! </p>
+              </div>
             </div>
           </div>
         </div>
