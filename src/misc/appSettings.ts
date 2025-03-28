@@ -13,7 +13,7 @@ interface AppSettings {
     maxLevel: number;
     defaultLevel: number;
     sensitivity: number;
-  }
+  };
 }
 
 const supportedLanguages: { [langCode: string]: Lang } = {

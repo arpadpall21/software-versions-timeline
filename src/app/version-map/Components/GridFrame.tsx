@@ -94,6 +94,8 @@ const GridFrame: React.FC = () => {
               <TimelineGrid />
               <TimelineGrid />
               <TimelineGrid />
+              <TimelineGrid />
+              <TimelineGrid />
             </div>
           </div>
         </div>
