@@ -1,18 +1,18 @@
 import { type Lang } from '@/misc/types';
-import appSettings from '@/misc/appSettings';
+import appConfig from '../../config/appConfig';
 
-const minZoomLevel = appSettings.timelineZoom.minLevel;
-const maxZoomLevel = appSettings.timelineZoom.maxLevel;
-const zoomSensitivity = appSettings.timelineZoom.sensitivity;
+const minZoomLevel = appConfig.timelineZoom.minLevel;
+const maxZoomLevel = appConfig.timelineZoom.maxLevel;
+const zoomSensitivity = appConfig.timelineZoom.sensitivity;
 
 export function validLang(langCode: string = ''): Lang {
-  return appSettings.lang.supportedLanguages[langCode]
-    ? appSettings.lang.supportedLanguages[langCode]
-    : appSettings.lang.defaultLanguage;
+  return appConfig.lang.supportedLanguages[langCode]
+    ? appConfig.lang.supportedLanguages[langCode]
+    : appConfig.lang.defaultLanguage;
 }
 
 export function validTheme(theme: string = ''): string {
-  return appSettings.theme.supportedThemes.includes(theme) ? theme : 'auto';
+  return appConfig.theme.supportedThemes.includes(theme) ? theme : 'auto';
 }
 
 export function calcTimelineZoom(direction: 'zoomIn' | 'zoomOut', currentZoomLevel: number): number {

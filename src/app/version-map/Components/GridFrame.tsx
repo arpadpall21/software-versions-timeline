@@ -3,14 +3,14 @@
 import '@/app/globals.css';
 import { useState, useEffect } from 'react';
 import { calcTimelineZoom } from '@/misc/helpers';
-import appSettings from '@/misc/appSettings';
+import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
 import TopSlider from '@/app/version-map/Components/TopSlider';
 import SideSlider from '@/app/version-map/Components/SideSlider';
 import TimelineGrid from '@/app/version-map/Components/TimelineGrid';
 
-const defaultTimelineZoomLevel = appSettings.timelineZoom.defaultLevel;
+const defaultTimelineZoomLevel = appConfig.timelineZoom.defaultLevel;
 
 const GridFrame: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });

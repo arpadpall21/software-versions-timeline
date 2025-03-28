@@ -1,6 +1,6 @@
-import { type Lang } from '@/misc/types';
+import { type Lang } from '../src/misc/types';
 
-interface AppSettings {
+interface AppConfig {
   lang: {
     defaultLanguage: Lang;
     supportedLanguages: { [langCode: string]: Lang };
@@ -24,7 +24,7 @@ const supportedLanguages: { [langCode: string]: Lang } = {
 };
 const defaultLanguage: Lang = supportedLanguages.en;
 
-const appSettings: AppSettings = {
+const appConfig: AppConfig = {
   lang: {
     defaultLanguage,
     supportedLanguages,
@@ -40,4 +40,4 @@ const appSettings: AppSettings = {
   },
 };
 
-export default appSettings;
+export default appConfig;
