@@ -1,6 +1,13 @@
 import { type Lang } from '../src/misc/types';
 
+interface SupportedSoftware {
+  name: string;
+  logoPath: string;
+  dataPath: string;
+}
+
 interface AppConfig {
+  supportedSoftwares: SupportedSoftware[];
   lang: {
     defaultLanguage: Lang;
     supportedLanguages: { [langCode: string]: Lang };
@@ -25,6 +32,10 @@ const supportedLanguages: { [langCode: string]: Lang } = {
 const defaultLanguage: Lang = supportedLanguages.en;
 
 const appConfig: AppConfig = {
+  supportedSoftwares: [
+    { name: 'Chrome', logoPath: 'softwareLogos/chrome.png', dataPath: 'data/chrome.json' },
+    { name: 'Firefox', logoPath: 'softwareLogos/firefox.png', dataPath: 'data/firefox.json' },
+  ],
   lang: {
     defaultLanguage,
     supportedLanguages,
