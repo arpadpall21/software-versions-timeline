@@ -8,6 +8,7 @@ import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
 import TopSlider from '@/app/version-map/Components/TopSlider';
 import SideSlider from '@/app/version-map/Components/SideSlider';
+import TimelineGrid from '@/app/version-map/Components/TimelineGrid';
 
 const defaultTimelineZoomLevel = appSettings.timelineZoom.defaultLevel;
 
@@ -53,7 +54,8 @@ const GridFrame: React.FC = () => {
 
   return (
     <div
-      className={'relative select-none my-7 shadow-[0_0_4px_1px] shadow-borPri dark:shadow-borPriD'}
+      className={`relative select-none my-7 shadow-[0_0_4px_1px] shadow-borPri dark:shadow-borPriD
+      bg-bgSec dark:bg-bgSecD`}
       onWheel={handleMouseWheel}
       onMouseLeave={mouseUpHandler}
       onMouseMove={handleMouseMove}
@@ -65,18 +67,18 @@ const GridFrame: React.FC = () => {
         setPosition={setPosition}
       />
       <div
-        className={'grid grid-cols-[60px_auto] grid-rows-[60px_auto]'}
+        className={'grid grid-cols-[60px_auto] grid-rows-[100px_auto]'}
         // onTouchStart={mouseDownHandler}
         // onTouchEnd={mouseUpHandler}
       >
         <div className={'col-span-2 border-b border-borPri dark:border-borPriD overflow-hidden'}>
           <TopSlider timelineZoomLevel={timelineZoomLevel} position={position}>
-            <p> top slider </p>
+            <TimelineGrid />
           </TopSlider>
         </div>
         <div className={'overflow-hidden duration-200 border-r border-black'}>
           <SideSlider timelineZoomLevel={timelineZoomLevel} position={position}>
-            <p>side slider</p>
+            <p> Side slider </p>
           </SideSlider>
         </div>
         <div
@@ -85,21 +87,15 @@ const GridFrame: React.FC = () => {
           onMouseDown={handleMouseDown}
         >
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
-          <div
-            className={'float-right border border-green-400'}
-            style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
-          >
-            <div
-              className={'transition-transform duration-200 border border-red-400'}
-              style={{ transform: `scale(${timelineZoomLevel})` }}
-            >
-              <div className={'bg-green-200'}>
-                <p> Hello World! </p>
-                <p> Hello World! </p>
-                <p> Hello World! </p>
-                <p> Hello World! </p>
-                <p> Hello World! </p>
-              </div>
+          <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
+            <div className={'transition-transform duration-200'} style={{ transform: `scale(${timelineZoomLevel})` }}>
+              <TimelineGrid />
+              <TimelineGrid />
+              <TimelineGrid />
+              <TimelineGrid />
+              <TimelineGrid />
+              <TimelineGrid />
+              <TimelineGrid />
             </div>
           </div>
         </div>
