@@ -1,17 +1,15 @@
 'use server';
 
 import { readFile } from 'node:fs/promises';
-import { type VersionHistoryData } from '@/misc/types';
+import { type VersionHistoryData, Software } from '@/misc/types';
+import appConfig from '../../../config/appConfig';
 
-export async function getVersionHistory(path: string): VersionHistoryData | null {
+export async function getVersionHistory(software: Software): Promise<VersionHistoryData | null> {
   try {
-    const data = await readFile(path);
-    console.log(data);
-    
-    console.log()
-    
-    // return JSON.parse(data.toJSON());
+    const data = await readFile(appConfig.supportedSoftwares[software].dataPath);
+    return JSON.parse(data.toString());
   } catch (err) {
-    console.error(`Failed to get version history data on path: ${path}`, err);
+    console.error(`Failed to get version history data for software: ${software}`, err);
+    return null;
   }
 }
