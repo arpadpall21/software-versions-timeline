@@ -1,6 +1,11 @@
+import { type VersionHistoryData } from '@/misc/types';
 const nrOfMonths = 150;
 
-const TimelineGrid: React.FC = () => {
+interface Props {
+  versionHistoryData?: VersionHistoryData;
+}
+
+const TimelineGrid: React.FC<Props> = () => {
   return (
     <div className={'h-[75px] flex bg-blue-50'}>
       {Array.from({ length: nrOfMonths }, (_, i) => (

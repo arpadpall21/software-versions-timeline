@@ -5,12 +5,12 @@ import { useRouter } from 'next/navigation';
 import { validLang } from '@/misc/helpers';
 import Cookies from 'js-cookie';
 import { type Lang } from '@/misc/types';
-import appSettings from '@/misc/appSettings';
+import appConfig from '../../config/appConfig';
 import { useTranslations } from 'next-intl';
 import Dropdown from '@/Components/Dropdown';
 
-const supportedLanguages: { [langCode: string]: Lang } = appSettings.lang.supportedLanguages;
-const defaultLanguage: Lang = appSettings.lang.defaultLanguage;
+const supportedLanguages: { [langCode: string]: Lang } = appConfig.lang.supportedLanguages;
+const defaultLanguage: Lang = appConfig.lang.defaultLanguage;
 
 const LangSelector: React.FC = () => {
   const [langState, setLangState] = useState<string>(defaultLanguage.langCode);
