@@ -1,13 +1,13 @@
-import { type Lang } from '../src/misc/types';
+import { type Lang, Software } from '../src/misc/types';
 
 interface SupportedSoftware {
-  name: string;
+  displayName: string;
   logoPath: string;
   dataPath: string;
 }
 
 interface AppConfig {
-  supportedSoftwares: SupportedSoftware[];
+  supportedSoftwares: { [software in Software]: SupportedSoftware };
   lang: {
     defaultLanguage: Lang;
     supportedLanguages: { [langCode: string]: Lang };
@@ -23,6 +23,10 @@ interface AppConfig {
   };
 }
 
+const supportedSoftwares: { [software in Software]: SupportedSoftware } = {
+  [Software.CHROME]: { displayName: 'Chrome', logoPath: 'softwareLogos/chrome.png', dataPath: 'data/chrome.json' },
+  [Software.FIREFOX]: { displayName: 'Firefox', logoPath: 'softwareLogos/firefox.png', dataPath: 'data/firefox.json' },
+};
 const supportedLanguages: { [langCode: string]: Lang } = {
   en: { langCode: 'en', lang: 'English' },
   fr: { langCode: 'fr', lang: 'Français' },
@@ -32,10 +36,7 @@ const supportedLanguages: { [langCode: string]: Lang } = {
 const defaultLanguage: Lang = supportedLanguages.en;
 
 const appConfig: AppConfig = {
-  supportedSoftwares: [
-    { name: 'Chrome', logoPath: 'softwareLogos/chrome.png', dataPath: 'data/chrome.json' },
-    { name: 'Firefox', logoPath: 'softwareLogos/firefox.png', dataPath: 'data/firefox.json' },
-  ],
+  supportedSoftwares,
   lang: {
     defaultLanguage,
     supportedLanguages,

@@ -9,6 +9,7 @@ import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
 import TopSlider from '@/app/version-map/Components/TopSlider';
 import SideSlider from '@/app/version-map/Components/SideSlider';
 import TimelineGrid from '@/app/version-map/Components/TimelineGrid';
+import { getVersionHistory } from '@/app/version-map/action';
 
 const defaultTimelineZoomLevel = appConfig.timelineZoom.defaultLevel;
 
@@ -18,6 +19,12 @@ const GridFrame: React.FC = () => {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [timelineZoomLevel, setTimelineZoomLevel] = useState<number>(defaultTimelineZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
+
+  useEffect(() => {
+    getVersionHistory('data/chrome.json')
+      .then(console.log)
+      .catch(console.error)
+  }, [])
 
   useEffect(() => {
     if (scrollZoomEnabled) {
@@ -89,12 +96,6 @@ const GridFrame: React.FC = () => {
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
             <div className={'transition-transform duration-200'} style={{ transform: `scale(${timelineZoomLevel})` }}>
-              <TimelineGrid />
-              <TimelineGrid />
-              <TimelineGrid />
-              <TimelineGrid />
-              <TimelineGrid />
-              <TimelineGrid />
               <TimelineGrid />
             </div>
           </div>

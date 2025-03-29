@@ -33,7 +33,7 @@ export default {
       },
       spacing: {
         mobPad: '12px',
-        desckPad: '18px',
+        deskPad: '18px',
       },
       animation: {
         'fast-pop': 'fast-pop 200ms',
