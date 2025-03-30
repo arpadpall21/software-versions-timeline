@@ -8,11 +8,14 @@ interface Props {
 
 const TimelineGrid: React.FC<Props> = ({ versionHistoryData }) => {
   return (
-    <div className={'relative h-[75px] flex bg-blue-50'}>
-      <div className={'absolute bg-green-700 w-full h-2 bottom-[15px]'}> </div>
+    <div className={'h-[75px] flex bg-blue-50'}>
       {versionHistoryData &&
         versionHistoryData.map((days) => (
-          <div className={'border-l border-b border-borPri h-full w-[150px]'} key={days[0].date.substring(0, 7)}>
+          <div
+            className={'relative overflow-visible border-l border-b border-borPri h-full w-[150px]'}
+            key={days[0].date.substring(0, 7)}
+          >
+            <div className={'absolute bg-green-700 h-2 bottom-[15px] left-[-1px] w-[101%]'}> </div>
             {/* {days.map((day) => (
               <span key={day.version}>{day.version}</span>
             ))} */}
