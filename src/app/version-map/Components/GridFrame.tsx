@@ -10,7 +10,7 @@ import TopSlider from '@/app/version-map/Components/TopSlider';
 import SideSlider from '@/app/version-map/Components/SideSlider';
 import TimelineGrid from '@/app/version-map/Components/TimelineGrid';
 import { getVersionHistory } from '@/app/version-map/action';
-import { Software } from '@/misc/types';
+import { type VersionHistoryData, Software } from '@/misc/types';
 
 const defaultTimelineZoomLevel = appConfig.timelineZoom.defaultLevel;
 
@@ -20,11 +20,12 @@ const GridFrame: React.FC = () => {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [timelineZoomLevel, setTimelineZoomLevel] = useState<number>(defaultTimelineZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
+  
+  const [chromeData, setChromeData] = useState<VersionHistoryData>();    // TODO
 
-  useEffect(() => {
+  useEffect(() => {                     // TODO
     getVersionHistory(Software.CHROME)
-      .then(console.log)
-      .catch(console.error)
+      .then((data) => setChromeData(data))
   }, [])
 
   useEffect(() => {
@@ -97,7 +98,7 @@ const GridFrame: React.FC = () => {
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
             <div className={'transition-transform duration-200'} style={{ transform: `scale(${timelineZoomLevel})` }}>
-              <TimelineGrid />
+              <TimelineGrid versionHistoryData={chromeData} />
             </div>
           </div>
         </div>
