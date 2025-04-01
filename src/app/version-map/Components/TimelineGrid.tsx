@@ -13,19 +13,22 @@ const TimelineGrid: React.FC<Props> = ({ versionHistoryData }) => {
   return (
     <div className={'h-[75px] flex bg-blue-50'}>
       {versionHistoryData &&
-        versionHistoryData.map((days) => (
+        versionHistoryData.map((month, i) => (
           <div
             className={'relative border-l border-b border-borPri h-full w-[150px]'}
-            key={days[0].date.substring(0, 7)}
+            key={month[0].date.substring(0, 7)}
           >
             <div
-              className={`absolute h-2 bottom-[15px] left-[-1px] w-[101%]`}
-              style={{ backgroundColor: timelineColor }}
+              className={'absolute h-2 bottom-[15px] l-[-1px]'}
+              style={{
+                backgroundColor: timelineColor,
+                width: versionHistoryData.length === i + 1 ? `${calcPercentOf(10, 31)}%` : '101%',
+              }}
             ></div>
-            {days.map((day) => (
+            {month.map((day) => (
               <span
-                className={'absolute bottom-[15px]'}
-                style={{ backgroundColor: timelineColor, left: `${calcPercentOf(16 - 4, 31)}%` }}
+                className={'absolute bottom-[25px]'}
+                style={{ backgroundColor: timelineColor, left: `${calcPercentOf(10 - 4, 31)}%` }}
                 key={day.version}
               >
                 {day.version}
