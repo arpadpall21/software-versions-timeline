@@ -8,4 +8,7 @@ export interface Lang {
   lang: string;
 }
 
-export type VersionHistoryData = { date: string; version: string }[];
+export type VersionHistoryData = {
+  date: string;
+  version: string;
+}[][];
