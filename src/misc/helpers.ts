@@ -21,3 +21,7 @@ export function calcTimelineZoom(direction: 'zoomIn' | 'zoomOut', currentZoomLev
   }
   return Math.min(currentZoomLevel + zoomSensitivity, maxZoomLevel);
 }
+
+export function calcPercentOf(fraction: number, total: number = 100): number {
+  return Math.floor((fraction / total) * 100);
+}
