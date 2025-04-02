@@ -1,4 +1,4 @@
-import { type Lang } from '@/misc/types';
+import { type Lang, type Months } from '@/misc/types';
 import appConfig from '../../config/appConfig';
 
 const minZoomLevel = appConfig.timelineZoom.minLevel;
@@ -26,11 +26,8 @@ export function calcPercentOf(fraction: number, total: number = 100): number {
   return Math.floor((fraction / total) * 100);
 }
 
-export function calcMonthsUpToCurrent(
-  startYear: number,
-  startMonth: number,
-): { yearMonth: string; monthName: string }[] {
-  const result: { yearMonth: string; monthName: string }[] = [];
+export function calcMonthsUpToCurrent(startYear: number, startMonth: number = 1): Months {
+  const result: Months = [];
 
   const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
   const today = new Date();

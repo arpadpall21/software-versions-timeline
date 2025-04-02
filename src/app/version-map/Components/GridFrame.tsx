@@ -2,7 +2,7 @@
 
 import '@/app/globals.css';
 import { useState, useEffect } from 'react';
-import { calcTimelineZoom } from '@/misc/helpers';
+import { calcTimelineZoom, calcMonthsUpToCurrent } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
@@ -10,7 +10,7 @@ import TopSlider from '@/app/version-map/Components/TopSlider';
 import SideSlider from '@/app/version-map/Components/SideSlider';
 import TimelineGrid from '@/app/version-map/Components/TimelineGrid';
 import { getVersionHistory } from '@/app/version-map/action';
-import { type VersionHistoryData, Software } from '@/misc/types';
+import { type VersionHistoryData, type Months, Software } from '@/misc/types';
 
 const defaultTimelineZoomLevel = appConfig.timelineZoom.defaultLevel;
 
@@ -20,13 +20,23 @@ const GridFrame: React.FC = () => {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [timelineZoomLevel, setTimelineZoomLevel] = useState<number>(defaultTimelineZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
-  
+  const [months, setMonths] = useState<Months>([]);
+
+  useEffect(() => {
+    setMonths(calcMonthsUpToCurrent(2024));   // TODO (default start month handle)
+  }, []);
+
+
+
+
   const [chromeData, setChromeData] = useState<VersionHistoryData>();    // TODO
 
   useEffect(() => {                     // TODO
     getVersionHistory(Software.CHROME)
       .then((data) => setChromeData(data))
   }, [])
+
+
 
   useEffect(() => {
     if (scrollZoomEnabled) {
@@ -82,7 +92,7 @@ const GridFrame: React.FC = () => {
       >
         <div className={'col-span-2 border-b border-borPri dark:border-borPriD overflow-hidden'}>
           <TopSlider timelineZoomLevel={timelineZoomLevel} position={position}>
-            <TimelineGrid startYear={2024} />
+            <TimelineGrid months={months} />
           </TopSlider>
         </div>
         <div className={'overflow-hidden duration-200 border-r border-black'}>

@@ -12,3 +12,8 @@ export type VersionHistoryData = {    // TODO
   date: string;
   version: string;
 }[][];
+
+export type Months = {
+  yearMonth: string;
+  monthName: string;
+}[];
