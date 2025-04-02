@@ -35,7 +35,7 @@ export function calcMonthsUpToCurrent(startYear: number, startMonth: number = 1)
   const endMonth = today.getUTCMonth() + 1;
 
   for (let year = startYear; year <= endYear; year++) {
-    for (let month = startMonth; month <= (year === endYear ? endMonth : 12); month++) {
+    for (let month = year === startYear ? startMonth : 1; month <= (year === endYear ? endMonth : 12); month++) {
       result.push({ yearMonth: `${year}-${month.toString().padStart(2, '0')}`, monthName: monthMap[month - 1] });
     }
   }

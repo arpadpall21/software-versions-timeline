@@ -15,7 +15,11 @@ const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
 
   return (
     <div className={'flex bg-blue-50'} style={{ height: 50 }}>
-      
+      {months.map((month) => {
+        return (
+          <div className={'relative border-l border-b border-borPri h-full w-[50px]'} key={month.yearMonth}></div>
+        );
+      })}
     </div>
   );
 };

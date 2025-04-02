@@ -9,6 +9,7 @@ import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
 import TopSlider from '@/app/version-map/Components/TopSlider';
 import SideSlider from '@/app/version-map/Components/SideSlider';
 import TimelineGrid from '@/app/version-map/Components/TimelineGrid';
+import MonthsGrid from '@/app/version-map/Components/MonthsGrid';
 import { getVersionHistory } from '@/app/version-map/action';
 import { type VersionHistoryData, type Months, Software } from '@/misc/types';
 
@@ -23,7 +24,7 @@ const GridFrame: React.FC = () => {
   const [months, setMonths] = useState<Months>([]);
 
   useEffect(() => {
-    setMonths(calcMonthsUpToCurrent(2024));   // TODO (default start month handle)
+    setMonths(calcMonthsUpToCurrent(2022, 4));   // TODO (default start month handle)
   }, []);
 
 
@@ -92,7 +93,7 @@ const GridFrame: React.FC = () => {
       >
         <div className={'col-span-2 border-b border-borPri dark:border-borPriD overflow-hidden'}>
           <TopSlider timelineZoomLevel={timelineZoomLevel} position={position}>
-            <TimelineGrid months={months} />
+            <MonthsGrid months={months} />
           </TopSlider>
         </div>
         <div className={'overflow-hidden duration-200 border-r border-black'}>
