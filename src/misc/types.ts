@@ -8,7 +8,7 @@ export interface Lang {
   lang: string;
 }
 
-export type VersionHistoryData = {
+export type VersionHistoryData = {    // TODO
   date: string;
   version: string;
 }[][];

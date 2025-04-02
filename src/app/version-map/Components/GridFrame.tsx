@@ -82,7 +82,7 @@ const GridFrame: React.FC = () => {
       >
         <div className={'col-span-2 border-b border-borPri dark:border-borPriD overflow-hidden'}>
           <TopSlider timelineZoomLevel={timelineZoomLevel} position={position}>
-            <TimelineGrid />
+            <TimelineGrid startYear={2024} />
           </TopSlider>
         </div>
         <div className={'overflow-hidden duration-200 border-r border-black'}>
@@ -98,7 +98,7 @@ const GridFrame: React.FC = () => {
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
             <div className={'transition-transform duration-200'} style={{ transform: `scale(${timelineZoomLevel})` }}>
-              <TimelineGrid versionHistoryData={chromeData} />
+              {/* <TimelineGrid versionHistoryData={chromeData} /> */}
             </div>
           </div>
         </div>
