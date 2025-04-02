@@ -1,17 +1,35 @@
 'use client';
 
-import { type VersionHistoryData } from '@/misc/types';
+import { type VersionHistoryData, type Months } from '@/misc/types';
 import { calcPercentOf } from '@/misc/helpers';
 
 interface Props {
+  months: Months;
   versionHistoryData?: VersionHistoryData;
 }
 
-const TimelineGrid: React.FC<Props> = ({ versionHistoryData }) => {
+const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
   const timelineColor = 'lightgreen';
 
+  console.log(months)
+
   return (
-    <div className={'h-[75px] flex bg-blue-50'}>
+    <div className={'flex bg-blue-50'} style={{ height: 50 }}>
+      {months.map((month) => {
+        return (
+          <div className={'relative border-l border-b border-borPri h-full w-[50px]'} key={month.yearMonth}></div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default TimelineGrid;
+
+
+
+
+/*
       {versionHistoryData &&
         versionHistoryData.map((month, i) => (
           <div
@@ -36,8 +54,4 @@ const TimelineGrid: React.FC<Props> = ({ versionHistoryData }) => {
             ))}
           </div>
         ))}
-    </div>
-  );
-};
-
-export default TimelineGrid;
+*/
