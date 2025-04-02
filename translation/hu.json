@@ -10,6 +10,22 @@
       "darkMode": "Sötét Mód",
       "auto": "Automatikus"
     },
+    "monthsGrid": {
+      "months": {
+        "jan": "Jan",
+        "feb": "Febr",
+        "mar": "Márc",
+        "apr": "Ápr",
+        "may": "Máj",
+        "jun": "Jún",
+        "jul": "Júl",
+        "aug": "Aug",
+        "sep": "Szept",
+        "oct": "Okt",
+        "nov": "Nov",
+        "dec": "Dec"
+      }
+    },
     "footer": {
       "copyright": "Szerzői jog © 2025 {name}. Minden jog fenntartva."
     }

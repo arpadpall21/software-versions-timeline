@@ -10,6 +10,22 @@
       "darkMode": "Dark Mode",
       "auto": "Auto"
     },
+    "monthsGrid": {
+      "months": {
+        "jan": "Jan",
+        "feb": "Feb",
+        "mar": "Mar",
+        "apr": "Apr",
+        "may": "May",
+        "jun": "Jun",
+        "jul": "Jul",
+        "aug": "Aug",
+        "sep": "Sep",
+        "oct": "Oct",
+        "nov": "Nov",
+        "dec": "Dec"
+      }
+    },
     "footer": {
       "copyright": "Copyright © 2025 {name}. All rights reserved."
     }
