@@ -11,13 +11,13 @@ const MonthsGrid: React.FC<Props> = ({ months }) => {
   const t = useTranslations('components.monthsGrid.months');
 
   return (
-    <div className={'flex bg-blue-50 h-[60px]'}>
+    <div className={'flex bg-gridBg dark:bg-gridBgD h-[60px]'}>
       {months.map((month) => {
         return (
-          <div className={'border-l border-b border-borPri h-full w-[50px]'} key={month.yearMonth}>
-            <p className={'text-center text-fgSec dark:text-fgSecD'}> {t(month.monthName)} </p>
+          <div className={'border-l border-gridBor dark:border-gridBorD h-full w-[50px]'} key={month.yearMonth}>
+            <p className={'text-center text-gridFg dark:text-gridFgD'}> {t(month.monthName)} </p>
             {month.monthName === 'jan' && (
-              <p className={'text-center text-fgSec dark:text-fgSecD'}> {month.yearMonth.slice(0, 4)} </p>
+              <p className={'text-center text-gridFg dark:text-gridFgD'}> {month.yearMonth.slice(0, 4)} </p>
             )}
           </div>
         );
