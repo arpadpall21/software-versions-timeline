@@ -1,15 +1,15 @@
 import { calcTimelineZoom } from '@/misc/helpers';
 
 interface Props {
-  timelineZoomLevel: number;
-  setTimelineZoomLevel: (timelineZoomLevel: number) => void;
+  zoomLevel: number;
+  setZoomLevel: (timelineZoomLevel: number) => void;
   setPosition: (position: { x: number; y: number }) => void;
 }
 
-const ZoomPanel: React.FC<Props> = ({ timelineZoomLevel, setTimelineZoomLevel, setPosition }) => {
+const ZoomPanel: React.FC<Props> = ({ zoomLevel, setZoomLevel, setPosition }) => {
   function handleResetClick() {
     setPosition({ x: 0, y: 0 });
-    setTimelineZoomLevel(1);
+    setZoomLevel(1);
   }
 
   return (
@@ -20,7 +20,7 @@ const ZoomPanel: React.FC<Props> = ({ timelineZoomLevel, setTimelineZoomLevel, s
       >
         <button
           className={'hover:bg-bgSec dark:hover:bg-bgSecD'}
-          onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel))}
+          onMouseDown={() => setZoomLevel(calcTimelineZoom('zoomOut', zoomLevel))}
           title={'Zoom In'}
         >
           +
@@ -30,7 +30,7 @@ const ZoomPanel: React.FC<Props> = ({ timelineZoomLevel, setTimelineZoomLevel, s
         </button>
         <button
           className={'hover:bg-bgSec dark:hover:bg-bgSecD'}
-          onMouseDown={() => setTimelineZoomLevel(calcTimelineZoom('zoomIn', timelineZoomLevel))}
+          onMouseDown={() => setZoomLevel(calcTimelineZoom('zoomIn', zoomLevel))}
           title={'Reset Grid'}
         >
           -
@@ -39,10 +39,10 @@ const ZoomPanel: React.FC<Props> = ({ timelineZoomLevel, setTimelineZoomLevel, s
       <div
         className={`mt-3 text-fgPri dark:text-fgPriD animate-fast-pop text-center
           border-2 border-borPri dark:border-borPriD rounded-md bg-bgSec dark:bg-bgSecD shadow-md `}
-        key={timelineZoomLevel.toFixed(1)}
+        key={zoomLevel.toFixed(1)}
         title={'Zoom Level'}
       >
-        {timelineZoomLevel.toFixed(1)}
+        {zoomLevel.toFixed(1)}
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ interface AppConfig {
   theme: {
     supportedThemes: string[];
   };
-  timelineZoom: {
+  zoom: {
     minLevel: number;
     maxLevel: number;
     defaultLevel: number;
@@ -44,7 +44,7 @@ const appConfig: AppConfig = {
   theme: {
     supportedThemes: ['light', 'dark', 'auto'],
   },
-  timelineZoom: {
+  zoom: {
     minLevel: 0.5,
     maxLevel: 3,
     defaultLevel: 1,

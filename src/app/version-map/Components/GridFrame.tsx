@@ -13,18 +13,18 @@ import MonthsGrid from '@/app/version-map/Components/MonthsGrid';
 import { getVersionHistory } from '@/app/version-map/action';
 import { type VersionHistoryData, type Months, Software } from '@/misc/types';
 
-const defaultTimelineZoomLevel = appConfig.timelineZoom.defaultLevel;
+const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
 const GridFrame: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const [timelineZoomLevel, setTimelineZoomLevel] = useState<number>(defaultTimelineZoomLevel);
+  const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
   const [months, setMonths] = useState<Months>([]);
 
   useEffect(() => {
-    setMonths(calcMonthsUpToCurrent(2022, 4));   // TODO (default start month handle)
+    setMonths(calcMonthsUpToCurrent(2020, 12));   // TODO (default start month handle)
   }, []);
 
 
@@ -65,10 +65,10 @@ const GridFrame: React.FC = () => {
 
   function handleMouseWheel(e: React.WheelEvent) {
     if (scrollZoomEnabled && e.deltaY > 0) {
-      setTimelineZoomLevel(calcTimelineZoom('zoomIn', timelineZoomLevel));
+      setZoomLevel(calcTimelineZoom('zoomIn', zoomLevel));
       return;
     } else if (scrollZoomEnabled && e.deltaY < 0) {
-      setTimelineZoomLevel(calcTimelineZoom('zoomOut', timelineZoomLevel));
+      setZoomLevel(calcTimelineZoom('zoomOut', zoomLevel));
     }
   }
 
@@ -81,23 +81,19 @@ const GridFrame: React.FC = () => {
       onMouseMove={handleMouseMove}
       onMouseUp={mouseUpHandler}
     >
-      <ZoomPanel
-        timelineZoomLevel={timelineZoomLevel}
-        setTimelineZoomLevel={setTimelineZoomLevel}
-        setPosition={setPosition}
-      />
+      <ZoomPanel zoomLevel={zoomLevel} setZoomLevel={setZoomLevel} setPosition={setPosition} />
       <div
-        className={'grid grid-cols-[60px_auto] grid-rows-[100px_auto]'}
+        className={'grid grid-cols-[60px_auto] grid-rows-[60px_auto]'}
         // onTouchStart={mouseDownHandler}
         // onTouchEnd={mouseUpHandler}
       >
-        <div className={'col-span-2 border-b border-borPri dark:border-borPriD overflow-hidden'}>
-          <TopSlider timelineZoomLevel={timelineZoomLevel} position={position}>
-            <MonthsGrid months={months} />
+        <div className={'col-span-2 border-b border-black dark:border-white overflow-hidden'}>
+          <TopSlider zoomLevel={zoomLevel} position={position}>
+            <MonthsGrid zoomLevel={zoomLevel} months={months} />
           </TopSlider>
         </div>
-        <div className={'overflow-hidden duration-200 border-r border-black'}>
-          <SideSlider timelineZoomLevel={timelineZoomLevel} position={position}>
+        <div className={'overflow-hidden duration-200 border-r border-black dark:border-white'}>
+          <SideSlider zoomLevel={zoomLevel} position={position}>
             <p> Side slider </p>
           </SideSlider>
         </div>
@@ -108,7 +104,7 @@ const GridFrame: React.FC = () => {
         >
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
-            <div className={'transition-transform duration-200'} style={{ transform: `scale(${timelineZoomLevel})` }}>
+            <div className={'transition-transform duration-200'} style={{ transform: `scale(${zoomLevel})` }}>
               {/* <TimelineGrid versionHistoryData={chromeData} /> */}
             </div>
           </div>
