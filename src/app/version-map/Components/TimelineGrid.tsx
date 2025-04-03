@@ -12,14 +12,15 @@ const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
   const timelineColor = 'lightgreen';
 
   return (
-    <div className={'flex bg-blue-50'} style={{ height: 50 }}>
+    <div className={'flex bg-blue-50 h-[100px]'}>
       {months.map((month) => {
         return (
-          <div className={'border-l border-b border-borPri h-full w-gridW'} key={month.yearMonth}>
+          <div className={'relative border-l border-borPri h-full w-gridCellW'} key={month.yearMonth}>
             {versionHistoryData?.[month.yearMonth] && versionHistoryData[month.yearMonth].map((month) => <p>{month.version}</p>)}
           </div>
         );
       })}
+      <div className={'absolute bottom-6 left[-1px] w-full h-2 '} style={{backgroundColor: timelineColor}}></div>
     </div>
   );
 };

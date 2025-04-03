@@ -24,7 +24,7 @@ const GridFrame: React.FC = () => {
   const [months, setMonths] = useState<Months>([]);
 
   useEffect(() => {
-    setMonths(calcMonthsUpToCurrent(2020, 12));   // TODO (default start month handle)
+    setMonths(calcMonthsUpToCurrent(2024, 6));   // TODO (default start month handle)
   }, []);
 
 
@@ -83,7 +83,7 @@ const GridFrame: React.FC = () => {
     >
       <ZoomPanel zoomLevel={zoomLevel} setZoomLevel={setZoomLevel} setPosition={setPosition} />
       <div
-        className={'grid grid-cols-[60px_auto] grid-rows-[60px_auto]'}
+        className={'grid grid-cols-[70px_auto] grid-rows-[60px_auto]'}
         // onTouchStart={mouseDownHandler}
         // onTouchEnd={mouseUpHandler}
       >
@@ -105,7 +105,7 @@ const GridFrame: React.FC = () => {
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
             <div className={'transition-transform duration-200'} style={{ transform: `scale(${zoomLevel})` }}>
-              <TimelineGrid versionHistoryData={chromeData} months={months} />
+              <TimelineGrid months={months} versionHistoryData={chromeData} />
             </div>
           </div>
         </div>
