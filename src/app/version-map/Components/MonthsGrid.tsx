@@ -22,11 +22,14 @@ const MonthsGrid: React.FC<Props> = ({ zoomLevel, months }) => {
     <div className={'flex bg-gridBg dark:bg-gridBgD h-[60px]'}>
       {months.map((month) => {
         return (
-          <div className={'border-l border-gridBor dark:border-gridBorD h-full w-[50px]'} key={month.yearMonth}>
+          <div
+            className={'text-center top-0 border-l border-gridBor dark:border-gridBorD h-full w-[50px]'}
+            key={month.yearMonth}
+          >
             <div style={{ transform: `scaleX(${scaleTextX}) scaleY(${scaleTextY})` }}>
-              <p className={'text-center text-gridFg dark:text-gridFgD'}>{t(month.monthName)}</p>
+              <p className={'text-gridFg dark:text-gridFgD'}>{t(month.monthName)}</p>
               {month.monthName === 'jan' && (
-                <p className={'text-center text-gridFg dark:text-gridFgD'}>{month.yearMonth.slice(0, 4)} </p>
+                <p className={'text-gridFg dark:text-gridFgD'}>{month.yearMonth.slice(0, 4)} </p>
               )}
             </div>
           </div>
