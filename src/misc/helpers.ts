@@ -1,9 +1,9 @@
 import { type Lang, type Months } from '@/misc/types';
 import appConfig from '../../config/appConfig';
 
-const minZoomLevel = appConfig.timelineZoom.minLevel;
-const maxZoomLevel = appConfig.timelineZoom.maxLevel;
-const zoomSensitivity = appConfig.timelineZoom.sensitivity;
+const minZoomLevel = appConfig.zoom.minLevel;
+const maxZoomLevel = appConfig.zoom.maxLevel;
+const zoomSensitivity = appConfig.zoom.sensitivity;
 
 export function validLang(langCode: string = ''): Lang {
   return appConfig.lang.supportedLanguages[langCode]
