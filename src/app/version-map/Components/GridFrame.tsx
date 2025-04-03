@@ -105,7 +105,7 @@ const GridFrame: React.FC = () => {
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
             <div className={'transition-transform duration-200'} style={{ transform: `scale(${zoomLevel})` }}>
-              {/* <TimelineGrid versionHistoryData={chromeData} /> */}
+              <TimelineGrid versionHistoryData={chromeData} months={months} />
             </div>
           </div>
         </div>

@@ -40,6 +40,7 @@ export default {
       spacing: {
         mobPad: '12px',
         deskPad: '18px',
+        gridW: '100px',
       },
       animation: {
         'fast-pop': 'fast-pop 200ms',

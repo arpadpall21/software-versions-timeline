@@ -8,10 +8,9 @@ export interface Lang {
   lang: string;
 }
 
-export type VersionHistoryData = {    // TODO
-  date: string;
-  version: string;
-}[][];
+export interface VersionHistoryData {
+  [yearMonth: string]: { day: number; version: string }[];
+}
 
 export type Months = {
   yearMonth: string;

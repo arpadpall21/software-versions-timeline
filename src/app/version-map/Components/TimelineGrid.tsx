@@ -11,13 +11,13 @@ interface Props {
 const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
   const timelineColor = 'lightgreen';
 
-  console.log(months)
-
   return (
     <div className={'flex bg-blue-50'} style={{ height: 50 }}>
       {months.map((month) => {
         return (
-          <div className={'relative border-l border-b border-borPri h-full w-[50px]'} key={month.yearMonth}></div>
+          <div className={'border-l border-b border-borPri h-full w-gridW'} key={month.yearMonth}>
+            {versionHistoryData?.[month.yearMonth] && versionHistoryData[month.yearMonth].map((month) => <p>{month.version}</p>)}
+          </div>
         );
       })}
     </div>
