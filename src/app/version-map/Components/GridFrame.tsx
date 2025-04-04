@@ -11,7 +11,7 @@ import SideSlider from '@/app/version-map/Components/SideSlider';
 import TimelineGrid from '@/app/version-map/Components/TimelineGrid';
 import MonthsGrid from '@/app/version-map/Components/MonthsGrid';
 import { getVersionHistory } from '@/app/version-map/action';
-import { type VersionHistoryData, type Months, Software } from '@/misc/types';
+import { type VersionHistoryData, type Month, Software } from '@/misc/types';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
@@ -21,10 +21,10 @@ const GridFrame: React.FC = () => {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
-  const [months, setMonths] = useState<Months>([]);
+  const [months, setMonths] = useState<Month[]>([]);
 
   useEffect(() => {
-    setMonths(calcMonthsUpToCurrent(2024, 6));   // TODO (default start month handle)
+    setMonths(calcMonthsUpToCurrent(2024, 4));   // TODO (default start month handle)
   }, []);
 
 

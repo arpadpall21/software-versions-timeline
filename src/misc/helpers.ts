@@ -1,4 +1,4 @@
-import { type Lang, type Months } from '@/misc/types';
+import { type Lang, type Month, type VersionHistoryData } from '@/misc/types';
 import appConfig from '../../config/appConfig';
 
 const minZoomLevel = appConfig.zoom.minLevel;
@@ -26,8 +26,8 @@ export function calcPercentOf(fraction: number, total: number = 100): number {
   return Math.floor((fraction / total) * 100);
 }
 
-export function calcMonthsUpToCurrent(startYear: number, startMonth: number = 1): Months {
-  const result: Months = [];
+export function calcMonthsUpToCurrent(startYear: number, startMonth: number = 1): Month[] {
+  const result: Month[] = [];
 
   const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
   const today = new Date();
@@ -41,4 +41,36 @@ export function calcMonthsUpToCurrent(startYear: number, startMonth: number = 1)
   }
 
   return result;
+}
+
+/**
+ * calculate the timeline length for each month
+ */
+export function calcMonthsWithTimeline(months: Month[], versionHistoryData: VersionHistoryData): Month[] {
+  const firstMonthHavingVersionIdx: number = months.findIndex((month) => versionHistoryData?.[month.yearMonth]);
+  const lastMonthHavingVersionIdx: number = months.findLastIndex((month) => versionHistoryData?.[month.yearMonth]);
+
+  const firstYearMonth: string = months[firstMonthHavingVersionIdx].yearMonth;
+  const lastYearMonth: string = months[lastMonthHavingVersionIdx].yearMonth;
+
+  return months.map((month, i) => {
+    if (i === firstMonthHavingVersionIdx) {
+      month.timeline = {
+        from: 'right',
+        percent: 100 - calcPercentOf(versionHistoryData[firstYearMonth][0].day, 31),
+      };
+    } else if (i === lastMonthHavingVersionIdx) {
+      month.timeline = {
+        from: 'left',
+        percent: calcPercentOf(versionHistoryData[lastYearMonth][versionHistoryData[lastYearMonth].length - 1].day, 31),
+      };
+    } else if (i > firstMonthHavingVersionIdx && i < lastMonthHavingVersionIdx) {
+      month.timeline = {
+        from: 'left',
+        percent: 100,
+      };
+    }
+
+    return month;
+  });
 }
