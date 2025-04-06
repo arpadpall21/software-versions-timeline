@@ -1,23 +1,44 @@
 'use client';
 
-import { type VersionHistoryData, type Months } from '@/misc/types';
-import { calcPercentOf } from '@/misc/helpers';
+import { useMemo } from 'react';
+import { type VersionHistoryData, type Month } from '@/misc/types';
+import { calcPercentOf, calcMonthTimeline } from '@/misc/helpers';
 
 interface Props {
-  months: Months;
+  months: Month[];
   versionHistoryData?: VersionHistoryData;
 }
 
 const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
   const timelineColor = 'lightgreen';
 
-  console.log(months)
+  const monthsWithTimeline = useMemo(() => {
+    if (versionHistoryData) {
+      return calcMonthTimeline(months, versionHistoryData);
+    }
+
+    return months;
+  }, [months, versionHistoryData]);
 
   return (
-    <div className={'flex bg-blue-50'} style={{ height: 50 }}>
-      {months.map((month) => {
+    <div className={'flex bg-blue-50 h-[100px]'}>
+      {monthsWithTimeline.map((month) => {
         return (
-          <div className={'relative border-l border-b border-borPri h-full w-[50px]'} key={month.yearMonth}></div>
+          <div className={'relative border-l border-borPri h-full w-gridCellW'} key={month.yearMonth}>
+            {Array.isArray(versionHistoryData?.[month.yearMonth]) &&
+              versionHistoryData[month.yearMonth].map((month) => <p>{month.version}</p>)}
+            {month.timeline && (
+              <div
+                className={'absolute bottom-6 h-2'}
+                style={{
+                  backgroundColor: timelineColor,
+                  width: month.timeline.percent,
+                  left: month.timeline.from === 'left' ? '-1px' : undefined,
+                  right: month.timeline.from === 'right' ? '-1px' : undefined,
+                }}
+              ></div>
+            )}
+          </div>
         );
       })}
     </div>

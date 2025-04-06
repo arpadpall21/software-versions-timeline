@@ -11,7 +11,7 @@ import SideSlider from '@/app/version-map/Components/SideSlider';
 import TimelineGrid from '@/app/version-map/Components/TimelineGrid';
 import MonthsGrid from '@/app/version-map/Components/MonthsGrid';
 import { getVersionHistory } from '@/app/version-map/action';
-import { type VersionHistoryData, type Months, Software } from '@/misc/types';
+import { type VersionHistoryData, type Month, Software } from '@/misc/types';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
@@ -21,10 +21,10 @@ const GridFrame: React.FC = () => {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
-  const [months, setMonths] = useState<Months>([]);
+  const [months, setMonths] = useState<Month[]>([]);
 
   useEffect(() => {
-    setMonths(calcMonthsUpToCurrent(2020, 12));   // TODO (default start month handle)
+    setMonths(calcMonthsUpToCurrent(2024, 1));   // TODO (default start month handle)
   }, []);
 
 
@@ -83,7 +83,7 @@ const GridFrame: React.FC = () => {
     >
       <ZoomPanel zoomLevel={zoomLevel} setZoomLevel={setZoomLevel} setPosition={setPosition} />
       <div
-        className={'grid grid-cols-[60px_auto] grid-rows-[60px_auto]'}
+        className={'grid grid-cols-[70px_auto] grid-rows-[60px_auto]'}
         // onTouchStart={mouseDownHandler}
         // onTouchEnd={mouseUpHandler}
       >
@@ -105,7 +105,7 @@ const GridFrame: React.FC = () => {
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
             <div className={'transition-transform duration-200'} style={{ transform: `scale(${zoomLevel})` }}>
-              {/* <TimelineGrid versionHistoryData={chromeData} /> */}
+              <TimelineGrid months={months} versionHistoryData={chromeData} />
             </div>
           </div>
         </div>

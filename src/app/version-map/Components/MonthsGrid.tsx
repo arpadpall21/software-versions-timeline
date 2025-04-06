@@ -23,7 +23,7 @@ const MonthsGrid: React.FC<Props> = ({ zoomLevel, months }) => {
       {months.map((month) => {
         return (
           <div
-            className={'text-center top-0 border-l border-gridBor dark:border-gridBorD h-full w-[50px]'}
+            className={'text-center top-0 border-l border-gridBor dark:border-gridBorD h-full w-gridCellW'}
             key={month.yearMonth}
           >
             <div style={{ transform: `scaleX(${scaleTextX}) scaleY(${scaleTextY})` }}>
