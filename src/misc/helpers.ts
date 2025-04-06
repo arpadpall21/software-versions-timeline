@@ -43,50 +43,42 @@ export function calcMonthsUpToCurrent(startYear: number, startMonth: number = 1)
   return result;
 }
 
-function getFirstYearMonth(versionHistoryData: VersionHistoryData): string {
-  let firstYearMonth = '3000-01';
+function getDate(versionHistoryData: VersionHistoryData, which: 'first' | 'last' = 'first'): string {
+  let result: string = which === 'first' ? '2500-01' : '1970-01';
 
   for (const yearMonth in versionHistoryData) {
-    if (yearMonth < firstYearMonth) {
-      firstYearMonth = yearMonth;
+    if (which === 'first' && yearMonth < result) {
+      result = yearMonth;
+    }
+    if (which === 'last' && yearMonth > result) {
+      result = yearMonth;
     }
   }
 
-  return firstYearMonth;
+  return result;
 }
 
 /**
  * calculate the timeline length for each month
  */
-export function calcMonthsWithTimeline(months: Month[], versionHistoryData: VersionHistoryData): Month[] {
-  const _firstYearMonth: string = getFirstYearMonth(versionHistoryData);
-  
-  
-  // Math.min(...Object.keys(versionHistoryData).map(date => new Date(date)));
-  
-  console.log(_firstYearMonth)
-  
-  
-  
-  
-  const firstMonthHavingVersionIdx: number = months.findIndex((month) => versionHistoryData?.[month.yearMonth]);
-  const lastMonthHavingVersionIdx: number = months.findLastIndex((month) => versionHistoryData?.[month.yearMonth]);
+export function calcMonthTimeline(months: Month[], versionHistoryData: VersionHistoryData): Month[] {
+  const firstYearMonth: string = getDate(versionHistoryData, 'first');
+  const lastYearMonth: string = getDate(versionHistoryData, 'last');
 
-  const firstYearMonth: string = months[firstMonthHavingVersionIdx].yearMonth;
-  const lastYearMonth: string = months[lastMonthHavingVersionIdx].yearMonth;
+  const firstMonthHavingVersionIdx: number = months.findIndex((month) => month.yearMonth === firstYearMonth);
+  const lastMonthHavingVersionIdx: number = months.findLastIndex((month) => month.yearMonth === lastYearMonth);
+
+  months[firstMonthHavingVersionIdx < 0 ? 0 : firstMonthHavingVersionIdx].timeline = {
+    from: 'right',
+    percent: firstMonthHavingVersionIdx < 0 ? 100 : 100 - calcPercentOf(versionHistoryData[firstYearMonth][0].day, 31),
+  };
+  months[lastMonthHavingVersionIdx].timeline = {
+    from: 'left',
+    percent: calcPercentOf(versionHistoryData[lastYearMonth][versionHistoryData[lastYearMonth].length - 1].day, 31),
+  };
 
   return months.map((month, i) => {
-    if (i === firstMonthHavingVersionIdx) {
-      month.timeline = {
-        from: 'right',
-        percent: 100 - calcPercentOf(versionHistoryData[firstYearMonth][0].day, 31),
-      };
-    } else if (i === lastMonthHavingVersionIdx) {
-      month.timeline = {
-        from: 'left',
-        percent: calcPercentOf(versionHistoryData[lastYearMonth][versionHistoryData[lastYearMonth].length - 1].day, 31),
-      };
-    } else if (i > firstMonthHavingVersionIdx && i < lastMonthHavingVersionIdx) {
+    if (i > firstMonthHavingVersionIdx && i < lastMonthHavingVersionIdx) {
       month.timeline = {
         from: 'left',
         percent: 100,

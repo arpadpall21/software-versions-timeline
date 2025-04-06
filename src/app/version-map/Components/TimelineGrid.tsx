@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react';
 import { type VersionHistoryData, type Month } from '@/misc/types';
-import { calcPercentOf, calcMonthsWithTimeline } from '@/misc/helpers';
+import { calcPercentOf, calcMonthTimeline } from '@/misc/helpers';
 
 interface Props {
   months: Month[];
@@ -14,7 +14,7 @@ const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
 
   const monthsWithTimeline = useMemo(() => {
     if (versionHistoryData) {
-      console.log(calcMonthsWithTimeline(months, versionHistoryData));
+      console.log(calcMonthTimeline(months, versionHistoryData));
     }
     
     
