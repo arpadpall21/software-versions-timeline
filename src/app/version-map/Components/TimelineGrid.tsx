@@ -3,6 +3,7 @@
 import { useMemo } from 'react';
 import { type VersionHistoryData, type Month } from '@/misc/types';
 import { calcPercentOf, calcMonthTimeline } from '@/misc/helpers';
+import TextBallon from './TextBalloon';
 
 interface Props {
   months: Month[];
@@ -26,7 +27,9 @@ const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
         return (
           <div className={'relative border-l border-borPri h-full w-gridCellW'} key={month.yearMonth}>
             {Array.isArray(versionHistoryData?.[month.yearMonth]) &&
-              versionHistoryData[month.yearMonth].map((month) => <p>{month.version}</p>)}
+              versionHistoryData[month.yearMonth].map((month) => (
+                <TextBallon text={month.version} key={month.version} />
+              ))}
             {month.timeline && (
               <div
                 className={'absolute bottom-6 h-2'}
