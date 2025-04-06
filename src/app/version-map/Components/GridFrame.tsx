@@ -24,7 +24,7 @@ const GridFrame: React.FC = () => {
   const [months, setMonths] = useState<Month[]>([]);
 
   useEffect(() => {
-    setMonths(calcMonthsUpToCurrent(2024, 4));   // TODO (default start month handle)
+    setMonths(calcMonthsUpToCurrent(2024, 1));   // TODO (default start month handle)
   }, []);
 
 

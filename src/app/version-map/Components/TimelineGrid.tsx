@@ -14,11 +14,10 @@ const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
 
   const monthsWithTimeline = useMemo(() => {
     if (versionHistoryData) {
-      console.log(calcMonthTimeline(months, versionHistoryData));
+      return calcMonthTimeline(months, versionHistoryData);
     }
-    
-    
-    return months
+
+    return months;
   }, [months, versionHistoryData]);
 
   return (
@@ -28,10 +27,15 @@ const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
           <div className={'relative border-l border-borPri h-full w-gridCellW'} key={month.yearMonth}>
             {Array.isArray(versionHistoryData?.[month.yearMonth]) &&
               versionHistoryData[month.yearMonth].map((month) => <p>{month.version}</p>)}
-            {Array.isArray(versionHistoryData?.[month.yearMonth]) && (
+            {month.timeline && (
               <div
-                className={'absolute bottom-6 left-[-1px] w-[101%] h-2'}
-                style={{ backgroundColor: timelineColor }}
+                className={'absolute bottom-6 h-2'}
+                style={{
+                  backgroundColor: timelineColor,
+                  width: month.timeline.percent,
+                  left: month.timeline.from === 'left' ? '-1px' : undefined,
+                  right: month.timeline.from === 'right' ? '-1px' : undefined,
+                }}
               ></div>
             )}
           </div>
