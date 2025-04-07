@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { type VersionHistoryData, type Month } from '@/misc/types';
 import { calcPercentOf, calcMonthTimeline } from '@/misc/helpers';
 import TextBallon from './TextBalloon';
+import { useTranslations } from 'next-intl';
 
 interface Props {
   months: Month[];
@@ -11,6 +12,8 @@ interface Props {
 }
 
 const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
+  const t = useTranslations('components.monthsGrid.months');
+
   const timelineColor = 'lightgreen';
 
   const monthsWithTimeline = useMemo(() => {
@@ -27,8 +30,13 @@ const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
         return (
           <div className={'relative border-l border-borPri h-full w-gridCellW'} key={month.yearMonth}>
             {Array.isArray(versionHistoryData?.[month.yearMonth]) &&
-              versionHistoryData[month.yearMonth].map((month) => (
-                <TextBallon text={month.version} backgroundColor={timelineColor} key={month.version} />
+              versionHistoryData[month.yearMonth].map((monthData) => (
+                <TextBallon
+                  text={monthData.version}
+                  textSecondary={`(${t(month.monthName)}. ${monthData.day})`}
+                  backgroundColor={timelineColor}
+                  key={monthData.version}
+                />
               ))}
             {month.timeline && (
               <div
@@ -49,33 +57,3 @@ const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
 };
 
 export default TimelineGrid;
-
-
-
-
-/*
-      {versionHistoryData &&
-        versionHistoryData.map((month, i) => (
-          <div
-            className={'relative border-l border-b border-borPri h-full w-[150px]'}
-            key={month[0].date.substring(0, 7)}
-          >
-            <div
-              className={'absolute h-2 bottom-[15px] l-[-1px]'}
-              style={{
-                backgroundColor: timelineColor,
-                width: versionHistoryData.length === i + 1 ? `${calcPercentOf(10, 31)}%` : '101%',
-              }}
-            ></div>
-            {month.map((day) => (
-              <span
-                className={'absolute bottom-[25px]'}
-                style={{ backgroundColor: timelineColor, left: `${calcPercentOf(10 - 4, 31)}%` }}
-                key={day.version}
-              >
-                {day.version}
-              </span>
-            ))}
-          </div>
-        ))}
-*/

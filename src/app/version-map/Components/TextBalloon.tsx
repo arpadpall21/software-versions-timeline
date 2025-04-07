@@ -2,18 +2,20 @@
 
 interface Props {
   text: string;
+  textSecondary: string;
   backgroundColor?: string;
 }
 
-const TextBallon: React.FC<Props> = ({ text, backgroundColor = 'black' }) => {
+const TextBallon: React.FC<Props> = ({ text, textSecondary, backgroundColor = 'black' }) => {
   return (
-    <span
-      className={
-        'relative px-1 h-[50px] rounded-sm text-gridFg dark:text-gridFgD border border-gridFg dark:border-gridFgD'
-      }
+    <div
+      className={`
+        absolute z-10 px-2 rounded-sm text-gridFg dark:text-gridFgD border border-gridFg dark:border-gridFgD
+        hover:cursor-pointer hover:z-[999] group`}
       style={{ backgroundColor }}
     >
-      {text}
+      <div className={'text-center'}>{text}</div>
+      <div className={'text-center hidden group-hover:block'}>{textSecondary}</div>
       <div
         className={'border-t-gridFg dark:border-t-gridFgD'}
         style={{
@@ -28,7 +30,7 @@ const TextBallon: React.FC<Props> = ({ text, backgroundColor = 'black' }) => {
           borderTop: `8px solid`,
         }}
       />
-    </span>
+    </div>
   );
 };
 
