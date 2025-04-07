@@ -22,13 +22,13 @@ const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
   }, [months, versionHistoryData]);
 
   return (
-    <div className={'flex bg-blue-50 h-[100px]'}>
+    <div className={'flex h-[100px] bg-gridBg dark:bg-gridBgD'}>
       {monthsWithTimeline.map((month) => {
         return (
           <div className={'relative border-l border-borPri h-full w-gridCellW'} key={month.yearMonth}>
             {Array.isArray(versionHistoryData?.[month.yearMonth]) &&
               versionHistoryData[month.yearMonth].map((month) => (
-                <TextBallon text={month.version} key={month.version} />
+                <TextBallon text={month.version} backgroundColor={timelineColor} key={month.version} />
               ))}
             {month.timeline && (
               <div

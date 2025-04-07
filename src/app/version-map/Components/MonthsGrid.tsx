@@ -1,6 +1,6 @@
 'use client';
 
-import { type Months } from '@/misc/types';
+import { type Month } from '@/misc/types';
 import { useTranslations } from 'next-intl';
 import appConfig from '../../../../config/appConfig';
 import { calcPercentOf } from '@/misc/helpers';
@@ -9,7 +9,7 @@ const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
 interface Props {
   zoomLevel: number;
-  months: Months;
+  months: Month[];
 }
 
 const MonthsGrid: React.FC<Props> = ({ zoomLevel, months }) => {
