@@ -2,20 +2,24 @@
 
 interface Props {
   text: string;
-  textSecondary: string;
+  textsSecondary: string[];
   backgroundColor?: string;
 }
 
-const TextBallon: React.FC<Props> = ({ text, textSecondary, backgroundColor = 'black' }) => {
+const TextBallon: React.FC<Props> = ({ text, textsSecondary, backgroundColor = 'black' }) => {
   return (
     <div
       className={`
-        absolute z-10 px-2 rounded-sm text-gridFg dark:text-gridFgD border border-gridFg dark:border-gridFgD
-        hover:cursor-pointer hover:z-[999] group`}
+        group relative inline-block px-2 max-w-[1000%] rounded-sm hover:cursor-pointer text-center
+        text-gridFg dark:text-gridFgD border border-gridFg dark:border-gridFgD`}
       style={{ backgroundColor }}
     >
-      <div className={'text-center'}>{text}</div>
-      <div className={'text-center hidden group-hover:block'}>{textSecondary}</div>
+      <div>{text}</div>
+      <div className={'hidden group-hover:inline-block'}>
+        {textsSecondary.map((text) => (
+          <div key={text}>{text}</div>
+        ))}
+      </div>
       <div
         className={'border-t-gridFg dark:border-t-gridFgD'}
         style={{
