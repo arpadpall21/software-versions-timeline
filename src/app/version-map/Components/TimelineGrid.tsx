@@ -35,24 +35,22 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, versionHistoryData }
             {Array.isArray(versionHistoryData?.[month.yearMonth]) &&
               versionHistoryData[month.yearMonth].map((monthData) => (
                 <div
-                  className={'absolute bottom-[40px] z-10 hover:z-50'}
-                  style={{ left: calcPercentOf(monthData.day, 31) }}
+                  className={'absolute bottom-[32px] z-10 hover:z-50'}
+                  style={{ left: calcPercentOf(monthData.day, 31) - 1 }}
                   key={monthData.version}
                 >
-                  {/* <div className={'left-[50%] translate-x-[-50%] border border-red-500'}> */}
-                    {/* <div style={{ transform: `scale(${scaleTextBallon})` }}> */}
-                      <TextBallon
-                        text={monthData.version}
-                        textsSecondary={[`(${month.yearMonth.slice(0, 4)}.${t(month.monthName)}.${monthData.day})`]}
-                        backgroundColor={timelineColor}
-                      />
-                    {/* </div> */}
-                  {/* </div> */}
+                  <div style={{ transform: `scale(${scaleTextBallon})` }}>
+                    <TextBallon
+                      text={monthData.version}
+                      textsSecondary={[`(${month.yearMonth.slice(0, 4)}.${t(month.monthName)}.${monthData.day})`]}
+                      backgroundColor={timelineColor}
+                    />
+                  </div>
                 </div>
               ))}
             {month.timeline && (
               <div
-                className={'absolute bottom-[24px] h-2'}
+                className={'absolute top-[68px] h-2'}
                 style={{
                   backgroundColor: timelineColor,
                   width: month.timeline.percent,
