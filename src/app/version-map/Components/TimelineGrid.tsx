@@ -39,13 +39,15 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, versionHistoryData }
                   style={{ left: calcPercentOf(monthData.day, 31) }}
                   key={monthData.version}
                 >
-                  <div className={'left-[50%] translate-x-[-50%]'}>
-                    <TextBallon
-                      text={monthData.version}
-                      textsSecondary={[`(${month.yearMonth.slice(0, 4)}.${t(month.monthName)}.${monthData.day})`]}
-                      backgroundColor={timelineColor}
-                    />
-                  </div>
+                  {/* <div className={'left-[50%] translate-x-[-50%] border border-red-500'}> */}
+                    {/* <div style={{ transform: `scale(${scaleTextBallon})` }}> */}
+                      <TextBallon
+                        text={monthData.version}
+                        textsSecondary={[`(${month.yearMonth.slice(0, 4)}.${t(month.monthName)}.${monthData.day})`]}
+                        backgroundColor={timelineColor}
+                      />
+                    {/* </div> */}
+                  {/* </div> */}
                 </div>
               ))}
             {month.timeline && (
