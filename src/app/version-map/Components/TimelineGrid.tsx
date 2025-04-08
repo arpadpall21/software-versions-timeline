@@ -25,7 +25,8 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, versionHistoryData }
     return months;
   }, [months, versionHistoryData]);
 
-  const scaleTextBallon = useMemo(() => calcPercentOf(1, zoomLevel) / 100, [zoomLevel]);
+  const scaleTextBallon: number = useMemo(() => calcPercentOf(1, zoomLevel) / 100, [zoomLevel]);
+  const timelineHeight: number = useMemo(() => Math.round(Math.max(1, Math.min(8, 8 / zoomLevel))), [zoomLevel]);
 
   return (
     <div className={'flex h-[100px] bg-gridBg dark:bg-gridBgD'}>
@@ -50,10 +51,11 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, versionHistoryData }
               ))}
             {month.timeline && (
               <div
-                className={'absolute top-[68px] h-2'}
+                className={'absolute top-[68px]'}
                 style={{
                   backgroundColor: timelineColor,
                   width: month.timeline.percent,
+                  height: timelineHeight,
                   left: month.timeline.from === 'left' ? '-1px' : undefined,
                   right: month.timeline.from === 'right' ? '-1px' : undefined,
                 }}
