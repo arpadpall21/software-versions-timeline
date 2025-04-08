@@ -10,12 +10,12 @@ const TextBallon: React.FC<Props> = ({ text, textsSecondary, backgroundColor = '
   return (
     <div
       className={`
-        group relative inline-block px-2 max-w-[1000%] rounded-sm hover:cursor-pointer text-center
+        group relative inline-block px-2 rounded-sm hover:cursor-pointer text-center
         text-gridFg dark:text-gridFgD border border-gridFg dark:border-gridFgD`}
       style={{ backgroundColor }}
     >
       <div>{text}</div>
-      <div className={'hidden group-hover:inline-block'}>
+      <div className={'hidden text-nowrap group-hover:inline-block'}>
         {textsSecondary.map((text) => (
           <div key={text}>{text}</div>
         ))}

@@ -31,12 +31,18 @@ const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
           <div className={'relative border-l border-borPri h-full w-gridCellW'} key={month.yearMonth}>
             {Array.isArray(versionHistoryData?.[month.yearMonth]) &&
               versionHistoryData[month.yearMonth].map((monthData) => (
-                <div style={{ left: calcPercentOf(monthData.day, 31) }} key={monthData.version}>
-                  <TextBallon
-                    text={monthData.version}
-                    textsSecondary={[`(${t(month.monthName)}. ${monthData.day})`]}
-                    backgroundColor={timelineColor}
-                  />
+                <div
+                  className={'absolute bottom-[40px] z-10 hover:z-50'}
+                  style={{ left: calcPercentOf(monthData.day, 31) }}
+                  key={monthData.version}
+                >
+                  <div className={'left-[53%] translate-x-[-53%]'}>
+                    <TextBallon
+                      text={monthData.version}
+                      textsSecondary={[`(${t(month.monthName)}. ${monthData.day})`]}
+                      backgroundColor={timelineColor}
+                    />
+                  </div>
                 </div>
               ))}
             {month.timeline && (
