@@ -24,7 +24,7 @@ const GridFrame: React.FC = () => {
   const [months, setMonths] = useState<Month[]>([]);
 
   useEffect(() => {
-    setMonths(calcMonthsUpToCurrent(2024, 1));   // TODO (default start month handle)
+    setMonths(calcMonthsUpToCurrent(2023, 10));   // TODO (default start month handle)
   }, []);
 
 
@@ -105,7 +105,7 @@ const GridFrame: React.FC = () => {
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
             <div className={'transition-transform duration-200'} style={{ transform: `scale(${zoomLevel})` }}>
-              <TimelineGrid months={months} versionHistoryData={chromeData} />
+              <TimelineGrid zoomLevel={zoomLevel} months={months} versionHistoryData={chromeData} />
             </div>
           </div>
         </div>

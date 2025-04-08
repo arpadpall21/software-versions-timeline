@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import { type Month } from '@/misc/types';
 import { useTranslations } from 'next-intl';
 import appConfig from '../../../../config/appConfig';
@@ -15,8 +16,12 @@ interface Props {
 const MonthsGrid: React.FC<Props> = ({ zoomLevel, months }) => {
   const t = useTranslations('components.monthsGrid.months');
 
-  const scaleTextX = zoomLevel <= defaultZoomLevel ? 1 : calcPercentOf(1, zoomLevel) / 100;
-  const scaleTextY = zoomLevel < defaultZoomLevel ? zoomLevel : 1;
+  const { scaleTextX, scaleTextY } = useMemo(() => {
+    return {
+      scaleTextX: zoomLevel <= defaultZoomLevel ? 1 : calcPercentOf(1, zoomLevel) / 100,
+      scaleTextY: zoomLevel < defaultZoomLevel ? zoomLevel : 1,
+    };
+  }, [zoomLevel]);
 
   return (
     <div className={'flex bg-gridBg dark:bg-gridBgD h-[60px]'}>

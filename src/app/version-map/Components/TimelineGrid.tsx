@@ -7,11 +7,12 @@ import TextBallon from './TextBalloon';
 import { useTranslations } from 'next-intl';
 
 interface Props {
+  zoomLevel: number;
   months: Month[];
   versionHistoryData?: VersionHistoryData;
 }
 
-const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
+const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, versionHistoryData }) => {
   const t = useTranslations('components.monthsGrid.months');
 
   const timelineColor = 'lightgreen';
@@ -23,6 +24,8 @@ const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
 
     return months;
   }, [months, versionHistoryData]);
+
+  const scaleTextBallon = useMemo(() => calcPercentOf(1, zoomLevel) / 100, [zoomLevel]);
 
   return (
     <div className={'flex h-[100px] bg-gridBg dark:bg-gridBgD'}>
@@ -36,10 +39,10 @@ const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
                   style={{ left: calcPercentOf(monthData.day, 31) }}
                   key={monthData.version}
                 >
-                  <div className={'left-[53%] translate-x-[-53%]'}>
+                  <div className={'left-[50%] translate-x-[-50%]'}>
                     <TextBallon
                       text={monthData.version}
-                      textsSecondary={[`(${t(month.monthName)}. ${monthData.day})`]}
+                      textsSecondary={[`(${month.yearMonth.slice(0, 4)}.${t(month.monthName)}.${monthData.day})`]}
                       backgroundColor={timelineColor}
                     />
                   </div>
