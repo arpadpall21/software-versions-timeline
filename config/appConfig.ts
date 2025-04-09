@@ -46,7 +46,7 @@ const appConfig: AppConfig = {
   },
   zoom: {
     minLevel: 0.5,
-    maxLevel: 3,
+    maxLevel: 10,
     defaultLevel: 1,
     sensitivity: 0.1,
   },

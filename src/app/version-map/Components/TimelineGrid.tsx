@@ -3,13 +3,18 @@
 import { useMemo } from 'react';
 import { type VersionHistoryData, type Month } from '@/misc/types';
 import { calcPercentOf, calcMonthTimeline } from '@/misc/helpers';
+import TextBallon from './TextBalloon';
+import { useTranslations } from 'next-intl';
 
 interface Props {
+  zoomLevel: number;
   months: Month[];
   versionHistoryData?: VersionHistoryData;
 }
 
-const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
+const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, versionHistoryData }) => {
+  const t = useTranslations('components.monthsGrid.months');
+
   const timelineColor = 'lightgreen';
 
   const monthsWithTimeline = useMemo(() => {
@@ -20,19 +25,37 @@ const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
     return months;
   }, [months, versionHistoryData]);
 
+  const scaleTextBallon: number = useMemo(() => calcPercentOf(1, zoomLevel) / 100, [zoomLevel]);
+  const timelineHeight: number = useMemo(() => Math.round(Math.max(1, Math.min(8, 8 / zoomLevel))), [zoomLevel]);
+
   return (
-    <div className={'flex bg-blue-50 h-[100px]'}>
+    <div className={'flex h-[100px] bg-gridBg dark:bg-gridBgD'}>
       {monthsWithTimeline.map((month) => {
         return (
           <div className={'relative border-l border-borPri h-full w-gridCellW'} key={month.yearMonth}>
             {Array.isArray(versionHistoryData?.[month.yearMonth]) &&
-              versionHistoryData[month.yearMonth].map((month) => <p>{month.version}</p>)}
+              versionHistoryData[month.yearMonth].map((monthData) => (
+                <div
+                  className={'absolute bottom-[32px] z-10 hover:z-50'}
+                  style={{ left: calcPercentOf(monthData.day, 31) - 1 }}
+                  key={monthData.version}
+                >
+                  <div className={'smoothTransform'} style={{ transform: `scale(${scaleTextBallon})` }}>
+                    <TextBallon
+                      text={monthData.version}
+                      textsSecondary={[`(${month.yearMonth.slice(0, 4)}.${t(month.monthName)}.${monthData.day})`]}
+                      backgroundColor={timelineColor}
+                    />
+                  </div>
+                </div>
+              ))}
             {month.timeline && (
               <div
-                className={'absolute bottom-6 h-2'}
+                className={'absolute top-[68px]'}
                 style={{
                   backgroundColor: timelineColor,
                   width: month.timeline.percent,
+                  height: timelineHeight,
                   left: month.timeline.from === 'left' ? '-1px' : undefined,
                   right: month.timeline.from === 'right' ? '-1px' : undefined,
                 }}
@@ -46,33 +69,3 @@ const TimelineGrid: React.FC<Props> = ({ months, versionHistoryData }) => {
 };
 
 export default TimelineGrid;
-
-
-
-
-/*
-      {versionHistoryData &&
-        versionHistoryData.map((month, i) => (
-          <div
-            className={'relative border-l border-b border-borPri h-full w-[150px]'}
-            key={month[0].date.substring(0, 7)}
-          >
-            <div
-              className={'absolute h-2 bottom-[15px] l-[-1px]'}
-              style={{
-                backgroundColor: timelineColor,
-                width: versionHistoryData.length === i + 1 ? `${calcPercentOf(10, 31)}%` : '101%',
-              }}
-            ></div>
-            {month.map((day) => (
-              <span
-                className={'absolute bottom-[25px]'}
-                style={{ backgroundColor: timelineColor, left: `${calcPercentOf(10 - 4, 31)}%` }}
-                key={day.version}
-              >
-                {day.version}
-              </span>
-            ))}
-          </div>
-        ))}
-*/
