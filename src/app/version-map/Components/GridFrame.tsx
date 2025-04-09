@@ -6,8 +6,6 @@ import { calcTimelineZoom, calcMonthsUpToCurrent } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
-import TopSlider from '@/app/version-map/Components/TopSlider';
-import SideSlider from '@/app/version-map/Components/SideSlider';
 import TimelineGrid from '@/app/version-map/Components/TimelineGrid';
 import MonthsGrid from '@/app/version-map/Components/MonthsGrid';
 import { getVersionHistory } from '@/app/version-map/action';
@@ -88,14 +86,18 @@ const GridFrame: React.FC = () => {
         // onTouchEnd={mouseUpHandler}
       >
         <div className={'col-span-2 border-b border-black dark:border-white overflow-hidden'}>
-          <TopSlider zoomLevel={zoomLevel} position={position}>
-            <MonthsGrid zoomLevel={zoomLevel} months={months} />
-          </TopSlider>
+          <div className={'float-right'} style={{ transform: `translateX(${position.x}px)` }}>
+            <div className={'smoothTransform'} style={{ transform: `scaleX(${zoomLevel})` }}>
+              <MonthsGrid zoomLevel={zoomLevel} months={months} />
+            </div>
+          </div>
         </div>
         <div className={'overflow-hidden border-r border-black dark:border-white'}>
-          <SideSlider zoomLevel={zoomLevel} position={position}>
-            <p> Side slider </p>
-          </SideSlider>
+          <div className={'float-right'} style={{ transform: `translateY(${position.y}px)` }}>
+            <div className={'smoothTransform'} style={{ transform: `scaleY(${zoomLevel})` }}>
+              <p> Side slider </p>
+            </div>
+          </div>
         </div>
         <div
           className={'relative overflow-hidden min-h-[300px]'}
