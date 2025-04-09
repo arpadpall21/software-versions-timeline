@@ -92,19 +92,19 @@ const GridFrame: React.FC = () => {
             <MonthsGrid zoomLevel={zoomLevel} months={months} />
           </TopSlider>
         </div>
-        <div className={'overflow-hidden duration-200 border-r border-black dark:border-white'}>
+        <div className={'overflow-hidden border-r border-black dark:border-white'}>
           <SideSlider zoomLevel={zoomLevel} position={position}>
             <p> Side slider </p>
           </SideSlider>
         </div>
         <div
-          className={'relative overflow-hidden duration-200 min-h-[300px]'}
+          className={'relative overflow-hidden min-h-[300px]'}
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
           onMouseDown={handleMouseDown}
         >
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
-            <div className={'transition-transform duration-200'} style={{ transform: `scale(${zoomLevel})` }}>
+            <div className={'zoomTransform'} style={{ transform: `scale(${zoomLevel})` }}>
               <TimelineGrid zoomLevel={zoomLevel} months={months} versionHistoryData={chromeData} />
             </div>
           </div>

@@ -5,7 +5,13 @@ interface Props {
 }
 
 const SideSlider: React.FC<Props> = ({ zoomLevel, position, children }) => {
-  return <div style={{ transform: `translateY(${position.y}px) scaleY(${zoomLevel})` }}>{children}</div>;
+  return (
+    <div className={'float-right'} style={{ transform: `translateY(${position.y}px)` }}>
+      <div className={'zoomTransform'} style={{ transform: `scaleY(${zoomLevel})` }}>
+        {children}
+      </div>
+    </div>
+  )
 };
 
 export default SideSlider;
