@@ -24,8 +24,8 @@ interface AppConfig {
 }
 
 const supportedSoftwares: { [software in Software]: SupportedSoftware } = {
-  [Software.CHROME]: { displayName: 'Chrome', logoPath: 'softwareLogos/chrome.png', dataPath: 'data/test_software.json' },
-  [Software.FIREFOX]: { displayName: 'Firefox', logoPath: 'softwareLogos/firefox.png', dataPath: 'data/firefox.json' },
+  [Software.CHROME]: { displayName: 'Google Chrome', logoPath: '/softwareLogos/chrome.png', dataPath: 'data/test_software.json' },
+  [Software.FIREFOX]: { displayName: 'Firefox', logoPath: '/softwareLogos/firefox.png', dataPath: 'data/firefox.json' },
 };
 const supportedLanguages: { [langCode: string]: Lang } = {
   en: { langCode: 'en', lang: 'English' },

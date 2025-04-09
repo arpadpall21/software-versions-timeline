@@ -8,6 +8,7 @@ import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
 import TimelineGrid from '@/app/version-map/Components/TimelineGrid';
 import MonthsGrid from '@/app/version-map/Components/MonthsGrid';
+import SideLogo from './SideLogo';
 import { getVersionHistory } from '@/app/version-map/action';
 import { type VersionHistoryData, type Month, Software } from '@/misc/types';
 
@@ -95,7 +96,7 @@ const GridFrame: React.FC = () => {
         <div className={'overflow-hidden border-r border-black dark:border-white'}>
           <div className={'float-right'} style={{ transform: `translateY(${position.y}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scaleY(${zoomLevel})` }}>
-              <p> Side slider </p>
+              <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
             </div>
           </div>
         </div>

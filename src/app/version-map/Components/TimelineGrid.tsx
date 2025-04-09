@@ -5,6 +5,9 @@ import { type VersionHistoryData, type Month } from '@/misc/types';
 import { calcPercentOf, calcMonthTimeline } from '@/misc/helpers';
 import TextBallon from './TextBalloon';
 import { useTranslations } from 'next-intl';
+import appConfig from '../../../../config/appConfig';
+
+const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
 interface Props {
   zoomLevel: number;
@@ -25,7 +28,7 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, versionHistoryData }
     return months;
   }, [months, versionHistoryData]);
 
-  const scaleTextBallon: number = useMemo(() => calcPercentOf(1, zoomLevel) / 100, [zoomLevel]);
+  const scaleTextBallon: number = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel]);
   const timelineHeight: number = useMemo(() => Math.round(Math.max(1, Math.min(8, 8 / zoomLevel))), [zoomLevel]);
 
   return (
