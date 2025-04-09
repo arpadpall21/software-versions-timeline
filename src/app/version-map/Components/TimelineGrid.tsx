@@ -40,7 +40,7 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, versionHistoryData }
                   style={{ left: calcPercentOf(monthData.day, 31) - 1 }}
                   key={monthData.version}
                 >
-                  <div className={'zoomTransform'} style={{ transform: `scale(${scaleTextBallon})` }}>
+                  <div className={'smoothTransform'} style={{ transform: `scale(${scaleTextBallon})` }}>
                     <TextBallon
                       text={monthData.version}
                       textsSecondary={[`(${month.yearMonth.slice(0, 4)}.${t(month.monthName)}.${monthData.day})`]}

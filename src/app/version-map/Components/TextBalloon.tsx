@@ -5,7 +5,10 @@ interface Props {
   textsSecondary: string[];
   backgroundColor?: string;
 }
-
+/*
+ * Does not affect the layout (positioned absolute)
+ * positioned (and slaled) relative to its middle bottom point
+ */
 const TextBallon: React.FC<Props> = ({ text, textsSecondary, backgroundColor = 'black' }) => {
   return (
     <div className={'group relative'}>

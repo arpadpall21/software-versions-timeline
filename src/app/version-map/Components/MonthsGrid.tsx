@@ -31,7 +31,7 @@ const MonthsGrid: React.FC<Props> = ({ zoomLevel, months }) => {
             className={'text-center top-0 border-l border-gridBor dark:border-gridBorD h-full w-gridCellW'}
             key={month.yearMonth}
           >
-            <div className={'zoomTransform'} style={{ transform: `scaleX(${scaleTextX}) scaleY(${scaleTextY})` }}>
+            <div className={'smoothTransform'} style={{ transform: `scaleX(${scaleTextX}) scaleY(${scaleTextY})` }}>
               <p className={'text-gridFg dark:text-gridFgD'}>{t(month.monthName)}</p>
               {month.monthName === 'jan' && (
                 <p className={'text-gridFg dark:text-gridFgD'}>{month.yearMonth.slice(0, 4)} </p>
