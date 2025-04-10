@@ -3,7 +3,6 @@
 import { useMemo } from 'react';
 import Image from 'next/image';
 import { Software } from '@/misc/types';
-import { calcPercentOf } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
@@ -16,18 +15,11 @@ interface Props {
 const SideLogo: React.FC<Props> = ({ zoomLevel, software }) => {
   const { logoPath, displayName } = appConfig.supportedSoftwares[software];
 
-  const { logoScaleX, logoScaleY } = useMemo(() => {
-    return {
-      logoScaleX: zoomLevel < defaultZoomLevel ? zoomLevel : defaultZoomLevel,
-      logoScaleY: zoomLevel <= defaultZoomLevel ? defaultZoomLevel : calcPercentOf(defaultZoomLevel, zoomLevel) / 100,
-    };
-  }, [zoomLevel]);
+  const logoScale = useMemo(() => (zoomLevel < defaultZoomLevel ? zoomLevel : defaultZoomLevel), [zoomLevel]);
 
   return (
-    <div className={'flex h-[100px] bg-gridBg dark:bg-gridBgD'}>
-      <div className={'m-auto smoothTransform'} style={{ transform: `scaleX(${logoScaleX}) scaleY(${logoScaleY})` }}>
-        <Image src={logoPath} width={80} height={80} alt={displayName} title={displayName} />
-      </div>
+    <div className={'smoothTransform'} style={{ transform: `scale(${logoScale})` }}>
+      <Image src={logoPath} width={80} height={80} alt={displayName} title={displayName} />
     </div>
   );
 };

@@ -96,11 +96,10 @@ const GridFrame: React.FC = () => {
         <div className={'overflow-hidden border-r border-black dark:border-white'}>
           <div style={{ transform: `translateY(${position.y}px)` }}>
             <div
-              className={'bg-gridBg dark:bg-gridBgD smoothTransform'}
+              className={'bg-gridBg dark:bg-gridBgD smoothTransform h-[100px]'}
               style={{ transform: `scaleY(${zoomLevel})` }}
-            >
-              <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
-            </div>
+            />
+            <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
           </div>
         </div>
         <div
