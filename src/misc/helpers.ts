@@ -59,7 +59,7 @@ function getDate(versionHistoryData: VersionHistoryData, which: 'first' | 'last'
 }
 
 /**
- * calculate the timeline length for each month
+ * calculates the timeline length for each month
  */
 export function calcMonthTimeline(months: Month[], versionHistoryData: VersionHistoryData): Month[] {
   const firstYearMonth: string = getDate(versionHistoryData, 'first');
@@ -87,4 +87,14 @@ export function calcMonthTimeline(months: Month[], versionHistoryData: VersionHi
 
     return month;
   });
+}
+
+export function calcLeftSliderTopMargin(zoomLevel: number, marginStepSize: number): number {
+  const zoomLevelAsString: string = zoomLevel.toFixed(1).toString();
+  const decimalIdx: number = zoomLevelAsString.search(/\./);
+
+  const intPart = Math.trunc(zoomLevel);
+  const decPartAsInt = Number.parseInt(zoomLevelAsString.substring(decimalIdx + 1));
+
+  return -(((intPart - 1) * 10 + decPartAsInt) * marginStepSize);
 }
