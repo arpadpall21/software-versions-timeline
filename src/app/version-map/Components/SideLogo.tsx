@@ -16,11 +16,16 @@ interface Props {
 const SideLogo: React.FC<Props> = ({ zoomLevel, software }) => {
   const { logoPath, displayName } = appConfig.supportedSoftwares[software];
 
-  const imageScaleY = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel])
+  const { logoScaleX, logoScaleY } = useMemo(() => {
+    return {
+      logoScaleX: zoomLevel < defaultZoomLevel ? zoomLevel : defaultZoomLevel,
+      logoScaleY: zoomLevel <= defaultZoomLevel ? defaultZoomLevel : calcPercentOf(defaultZoomLevel, zoomLevel) / 100,
+    };
+  }, [zoomLevel]);
 
   return (
     <div className={'flex h-[100px] bg-gridBg dark:bg-gridBgD'}>
-      <div className={'m-auto smoothTransform'} style={{ transform: `scaleY(${imageScaleY})` }}>
+      <div className={'m-auto smoothTransform'} style={{ transform: `scaleX(${logoScaleX}) scaleY(${logoScaleY})` }}>
         <Image src={logoPath} width={80} height={80} alt={displayName} title={displayName} />
       </div>
     </div>
