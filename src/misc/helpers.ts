@@ -88,13 +88,3 @@ export function calcMonthTimeline(months: Month[], versionHistoryData: VersionHi
     return month;
   });
 }
-
-export function calcLeftSliderTopMargin(zoomLevel: number, marginStepSize: number): number {
-  const zoomLevelAsString: string = zoomLevel.toFixed(1).toString();
-  const decimalIdx: number = zoomLevelAsString.search(/\./);
-
-  const intPart = Math.trunc(zoomLevel);
-  const decPartAsInt = Number.parseInt(zoomLevelAsString.substring(decimalIdx + 1));
-
-  return -(((intPart - 1) * 10 + decPartAsInt) * marginStepSize);
-}

@@ -2,7 +2,7 @@
 
 import '@/app/globals.css';
 import { useState, useEffect } from 'react';
-import { calcTimelineZoom, calcMonthsUpToCurrent, calcLeftSliderTopMargin } from '@/misc/helpers';
+import { calcTimelineZoom, calcMonthsUpToCurrent } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
@@ -74,7 +74,7 @@ const GridFrame: React.FC = () => {
   return (
     <div
       className={`
-        relative overflow-hidden h-[560px] select-none my-7
+        relative overflow-hidden select-none my-7
         shadow-[0_0_4px_1px] shadow-borPri dark:shadow-borPriD bg-bgSec dark:bg-bgSecD`}
       onWheel={handleMouseWheel}
       onMouseLeave={mouseUpHandler}
@@ -96,9 +96,7 @@ const GridFrame: React.FC = () => {
         </div>
         <div className={'overflow-hidden border-r border-black dark:border-white'}>
           <div style={{ transform: `translateY(${position.y}px)` }}>
-            <div style={{ marginTop: calcLeftSliderTopMargin(zoomLevel, 25), transition: 'margin 200ms ease' }}>
-              <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
-              <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
+            <div className={'smoothTransform'} style={{ transform: `scaleY(${zoomLevel})` }}>
               <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
               <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
               <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
@@ -106,15 +104,13 @@ const GridFrame: React.FC = () => {
           </div>
         </div>
         <div
-          className={'relative overflow-hidden'}
+          className={'relative overflow-hidden min-h-[600px]'}
           style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
           onMouseDown={handleMouseDown}
         >
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scale(${zoomLevel})` }}>
-              <TimelineGrid zoomLevel={zoomLevel} months={months} versionHistoryData={chromeData} />
-              <TimelineGrid zoomLevel={zoomLevel} months={months} versionHistoryData={chromeData} />
               <TimelineGrid zoomLevel={zoomLevel} months={months} versionHistoryData={chromeData} />
               <TimelineGrid zoomLevel={zoomLevel} months={months} versionHistoryData={chromeData} />
               <TimelineGrid zoomLevel={zoomLevel} months={months} versionHistoryData={chromeData} />
