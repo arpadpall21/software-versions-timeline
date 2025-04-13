@@ -21,7 +21,7 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software }) => {
 
   const t = useTranslations('components.monthsGrid.months');
 
-  const timelineColor = 'lightgreen';
+  const timelineColor = appConfig.supportedSoftwares[software].color.light;     // TODO (changes on current theme)
 
   useEffect(() => {
     getVersionHistory(software).then((data) => setVersionHistoryData(data));
@@ -42,7 +42,11 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software }) => {
     <div className={'flex h-[100px] bg-gridBg dark:bg-gridBgD'}>
       {monthsWithTimeline.map((month) => {
         return (
-          <div className={'relative border-l border-borPri h-full w-gridCellW'} key={month.yearMonth}>
+          <div
+            className={'relative h-full w-gridCellW border-gridBor dark:border-gridBorD'}
+            style={{ borderLeftWidth: month.monthName === 'jan' ? 3 : 1 }}
+            key={month.yearMonth}
+          >
             {Array.isArray(versionHistoryData?.[month.yearMonth]) &&
               versionHistoryData[month.yearMonth].map((monthData) => (
                 <div
