@@ -24,8 +24,11 @@ const Logo: React.FC<Props> = ({ zoomLevel, software }) => {
   }, [zoomLevel]);
 
   return (
-    <div className={'h-[100px] bg-gridBg dark:bg-gridBgD'}>
-      <div className={'smoothTransform'} style={{ transform: `scaleX(${scaleLogoX}) scaleY(${scaleLogoY})` }}>
+    <div className={'relative h-[100px] bg-gridBg dark:bg-gridBgD'}>
+      <div
+        className={'absolute bottom-0 smoothTransform'}
+        style={{ transform: `scaleX(${scaleLogoX}) scaleY(${scaleLogoY})` }}
+      >
         <Image src={logoPath} width={80} height={80} alt={displayName} title={displayName} />
       </div>
     </div>
