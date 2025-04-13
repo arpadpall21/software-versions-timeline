@@ -1,26 +1,33 @@
 'use client';
 
-import { useMemo } from 'react';
-import { type VersionHistoryData, type Month } from '@/misc/types';
+import { useState, useEffect, useMemo } from 'react';
+import { type VersionHistoryData, type Month, type Software } from '@/misc/types';
 import { calcPercentOf, calcMonthTimeline } from '@/misc/helpers';
 import TextBallon from './TextBalloon';
 import { useTranslations } from 'next-intl';
 import appConfig from '../../../../config/appConfig';
+import { getVersionHistory } from '@/app/version-map/action';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
 interface Props {
   zoomLevel: number;
   months: Month[];
-  versionHistoryData?: VersionHistoryData;
+  software: Software;
 }
 
-const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, versionHistoryData }) => {
+const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software }) => {
+  const [versionHistoryData, setVersionHistoryData] = useState<VersionHistoryData>();
+
   const t = useTranslations('components.monthsGrid.months');
 
   const timelineColor = 'lightgreen';
 
-  const monthsWithTimeline = useMemo(() => {
+  useEffect(() => {
+    getVersionHistory(software).then((data) => setVersionHistoryData(data));
+  }, [software]);
+
+  const monthsWithTimeline: Month[] = useMemo(() => {
     if (versionHistoryData) {
       return calcMonthTimeline(months, versionHistoryData);
     }

@@ -9,8 +9,7 @@ import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
 import TimelineGrid from '@/app/version-map/Components/TimelineGrid';
 import MonthsGrid from '@/app/version-map/Components/MonthsGrid';
 import SideLogo from './SideLogo';
-import { getVersionHistory } from '@/app/version-map/action';
-import { type VersionHistoryData, type Month, Software } from '@/misc/types';
+import { type Month, Software } from '@/misc/types';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
@@ -25,18 +24,6 @@ const GridFrame: React.FC = () => {
   useEffect(() => {
     setMonths(calcMonthsUpToCurrent(2023, 10));   // TODO (default start month handle)
   }, []);
-
-
-
-
-  const [chromeData, setChromeData] = useState<VersionHistoryData>();    // TODO
-
-  useEffect(() => {                     // TODO
-    getVersionHistory(Software.CHROME)
-      .then((data) => setChromeData(data))
-  }, [])
-
-
 
   useEffect(() => {
     if (scrollZoomEnabled) {
@@ -100,6 +87,9 @@ const GridFrame: React.FC = () => {
               <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
               <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
               <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
+              <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
+              <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
+              <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
             </div>
           </div>
         </div>
@@ -111,9 +101,12 @@ const GridFrame: React.FC = () => {
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scale(${zoomLevel})` }}>
-              <TimelineGrid zoomLevel={zoomLevel} months={months} versionHistoryData={chromeData} />
-              <TimelineGrid zoomLevel={zoomLevel} months={months} versionHistoryData={chromeData} />
-              <TimelineGrid zoomLevel={zoomLevel} months={months} versionHistoryData={chromeData} />
+              <TimelineGrid zoomLevel={zoomLevel} months={months} software={Software.CHROME} />
+              <TimelineGrid zoomLevel={zoomLevel} months={months} software={Software.CHROME} />
+              <TimelineGrid zoomLevel={zoomLevel} months={months} software={Software.CHROME} />
+              <TimelineGrid zoomLevel={zoomLevel} months={months} software={Software.CHROME} />
+              <TimelineGrid zoomLevel={zoomLevel} months={months} software={Software.CHROME} />
+              <TimelineGrid zoomLevel={zoomLevel} months={months} software={Software.CHROME} />
             </div>
           </div>
         </div>
