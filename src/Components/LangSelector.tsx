@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { validLang } from '@/misc/helpers';
+import { getLang } from '@/misc/helpers';
 import Cookies from 'js-cookie';
 import { type Lang } from '@/misc/types';
 import appConfig from '../../config/appConfig';
@@ -18,7 +18,7 @@ const LangSelector: React.FC = () => {
   const t = useTranslations('components.languageSelector');
 
   useEffect(() => {
-    const lang: Lang = validLang(Cookies.get('lang'));
+    const lang: Lang = getLang(Cookies.get('lang'));
     setLangState(lang.langCode);
   }, []);
 

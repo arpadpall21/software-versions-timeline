@@ -21,7 +21,7 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software }) => {
 
   const t = useTranslations('components.monthsGrid.months');
 
-  const timelineColor = 'lightgreen';
+  const timelineColor = appConfig.supportedSoftwares[software].color.light;     // TODO (changes on current theme)
 
   useEffect(() => {
     getVersionHistory(software).then((data) => setVersionHistoryData(data));

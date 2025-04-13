@@ -5,13 +5,13 @@ const minZoomLevel = appConfig.zoom.minLevel;
 const maxZoomLevel = appConfig.zoom.maxLevel;
 const zoomSensitivity = appConfig.zoom.sensitivity;
 
-export function validLang(langCode: string = ''): Lang {
+export function getLang(langCode: string = ''): Lang {
   return appConfig.lang.supportedLanguages[langCode]
     ? appConfig.lang.supportedLanguages[langCode]
     : appConfig.lang.defaultLanguage;
 }
 
-export function validTheme(theme: string = ''): string {
+export function validTheme(theme: string = ''): string {    // TODO (refactor)
   return appConfig.theme.supportedThemes.includes(theme) ? theme : 'auto';
 }
 

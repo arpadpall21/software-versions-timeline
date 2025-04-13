@@ -31,7 +31,7 @@ const supportedSoftwares: { [software in Software]: SupportedSoftware } = {
   [Software.CHROME]: {
     displayName: 'Google Chrome',
     color: {
-      light: 'green',
+      light: 'lightgreen',
       dark: 'darkgreen',
     },
     logoPath: '/softwareLogos/chrome.png',
