@@ -18,8 +18,8 @@ const MonthsGrid: React.FC<Props> = ({ zoomLevel, months }) => {
 
   const { scaleTextX, scaleTextY } = useMemo(() => {
     return {
-      scaleTextX: zoomLevel <= defaultZoomLevel ? 1 : calcPercentOf(1, zoomLevel) / 100,
-      scaleTextY: zoomLevel < defaultZoomLevel ? zoomLevel : 1,
+      scaleTextX: zoomLevel <= defaultZoomLevel ? defaultZoomLevel : calcPercentOf(defaultZoomLevel, zoomLevel) / 100,
+      scaleTextY: zoomLevel < defaultZoomLevel ? zoomLevel : defaultZoomLevel,
     };
   }, [zoomLevel]);
 

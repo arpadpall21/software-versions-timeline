@@ -2,6 +2,10 @@ import { type Lang, Software } from '../src/misc/types';
 
 interface SupportedSoftware {
   displayName: string;
+  color: {
+    light: string;
+    dark: string;
+  };
   logoPath: string;
   dataPath: string;
 }
@@ -24,8 +28,24 @@ interface AppConfig {
 }
 
 const supportedSoftwares: { [software in Software]: SupportedSoftware } = {
-  [Software.CHROME]: { displayName: 'Chrome', logoPath: 'softwareLogos/chrome.png', dataPath: 'data/test_software.json' },
-  [Software.FIREFOX]: { displayName: 'Firefox', logoPath: 'softwareLogos/firefox.png', dataPath: 'data/firefox.json' },
+  [Software.CHROME]: {
+    displayName: 'Google Chrome',
+    color: {
+      light: 'green',
+      dark: 'darkgreen',
+    },
+    logoPath: '/softwareLogos/chrome.png',
+    dataPath: 'data/test_software.json',
+  },
+  [Software.FIREFOX]: {
+    displayName: 'Firefox',
+    color: {
+      light: 'yellow',
+      dark: 'orange',
+    },
+    logoPath: '/softwareLogos/firefox.png',
+    dataPath: 'data/firefox.json',
+  },
 };
 const supportedLanguages: { [langCode: string]: Lang } = {
   en: { langCode: 'en', lang: 'English' },

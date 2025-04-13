@@ -23,7 +23,7 @@ const TextBallon: React.FC<Props> = ({ text, textsSecondary, backgroundColor = '
           className={`
           max-h-0 max-w-0 overflow-hidden opacity-0
           group-hover:max-h-[1000px] group-hover:max-w-[1000px] group-hover:opacity-100
-          transition-all duration-300 ease-in-out`}
+          transition-all duration-400 ease-in-out`}
         >
           {textsSecondary.map((text) => (
             <div key={text}>{text}</div>

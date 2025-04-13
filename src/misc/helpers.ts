@@ -59,7 +59,7 @@ function getDate(versionHistoryData: VersionHistoryData, which: 'first' | 'last'
 }
 
 /**
- * calculate the timeline length for each month
+ * calculates the timeline length for each month
  */
 export function calcMonthTimeline(months: Month[], versionHistoryData: VersionHistoryData): Month[] {
   const firstYearMonth: string = getDate(versionHistoryData, 'first');
