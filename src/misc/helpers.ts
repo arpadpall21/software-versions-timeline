@@ -12,6 +12,13 @@ export function parseAppTheme(theme: string): AppTheme {
   return (themes.includes(theme as AppTheme) ? theme : defaultAppTheme) as AppTheme;
 }
 
+/**
+ * call only in client component react hook
+ */
+export function getCurrentBrowserTheme(): 'light' | 'dark' {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
 export function getLang(langCode: string = ''): Lang {
   return appConfig.lang.supportedLanguages[langCode]
     ? appConfig.lang.supportedLanguages[langCode]

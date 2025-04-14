@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import Dropdown from '@/Components/Dropdown';
 import store from '@/misc/store';
 import { type AppTheme } from '@/misc/types';
-import { defaultAppTheme, parseAppTheme } from '@/misc/helpers';
+import { defaultAppTheme, parseAppTheme, getCurrentBrowserTheme } from '@/misc/helpers';
 
 const ThemeSelector: React.FC = () => {
   const [themeState, setThemeState] = useState<AppTheme>(defaultAppTheme);
@@ -27,10 +27,10 @@ const ThemeSelector: React.FC = () => {
       }
       default: {
         store.setTheme('auto');
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          document.documentElement.classList.add('dark');
-        } else {
+        if (getCurrentBrowserTheme() === 'light') {
           document.documentElement.classList.remove('dark');
+        } else {
+          document.documentElement.classList.add('dark');
         }
       }
     }
