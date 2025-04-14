@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import Dropdown from '@/Components/Dropdown';
+import store from '@/misc/store';
 
 const themes: string[] = ['auto', 'light', 'dark'];
 const defaultTheme: string = themes[0];
