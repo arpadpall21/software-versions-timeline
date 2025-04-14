@@ -4,33 +4,29 @@ import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import Dropdown from '@/Components/Dropdown';
 import store from '@/misc/store';
-
-const themes: string[] = ['auto', 'light', 'dark'];
-const defaultTheme: string = themes[0];
+import { type AppTheme } from '@/misc/types';
+import { defaultAppTheme, parseAppTheme } from '@/misc/helpers';
 
 const ThemeSelector: React.FC = () => {
-  const [themeState, setThemeState] = useState<string>(defaultTheme);
+  const [themeState, setThemeState] = useState<AppTheme>(defaultAppTheme);
   const t = useTranslations('components.themeSelector');
 
-  useEffect(() => {
-    const storedTheme = window.localStorage.getItem('theme') || '';
-    setThemeState(themes.includes(storedTheme) ? storedTheme : defaultTheme);
-  }, []);
+  useEffect(() => setThemeState(store.getTheme()), []);
 
   useEffect(() => {
     switch (themeState) {
       case 'light': {
-        window.localStorage.setItem('theme', 'light');
+        store.setTheme('light');
         document.documentElement.classList.remove('dark');
         break;
       }
       case 'dark': {
-        window.localStorage.setItem('theme', 'dark');
+        store.setTheme('dark');
         document.documentElement.classList.add('dark');
         break;
       }
       default: {
-        window.localStorage.setItem('theme', 'auto');
+        store.setTheme('auto');
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
           document.documentElement.classList.add('dark');
         } else {
@@ -48,7 +44,7 @@ const ThemeSelector: React.FC = () => {
         ['light', t('lightMode')],
         ['dark', t('darkMode')],
       ]}
-      dropdownHandler={(e) => setThemeState(e.target.value)}
+      dropdownHandler={(e) => setThemeState(parseAppTheme(e.target.value))}
       title={t('theme')}
     />
   );

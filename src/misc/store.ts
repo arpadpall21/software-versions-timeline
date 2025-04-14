@@ -5,20 +5,17 @@
  * so store functions can only be used in client component react hooks (useState, useEffect, etc...)
  */
 
-type Theme = 'auto' | 'light' | 'dark';
-
-const themes: Theme[] = ['auto', 'light', 'dark'];
-const defaultTheme: Theme = themes[0];
+import { type AppTheme } from './types';
+import { parseAppTheme } from '@/misc/helpers';
 
 interface Store {
-  getTheme(): Theme;
-  setTheme(theme: Theme): Theme;
+  getTheme(): AppTheme;
+  setTheme(theme: AppTheme): AppTheme;
 }
 
 const store: Store = {
   getTheme() {
-    const storedTheme = window.localStorage.getItem('theme') || '';
-    return (themes.includes(storedTheme as Theme) ? storedTheme : defaultTheme) as Theme;
+    return parseAppTheme(window.localStorage.getItem('theme') || '');
   },
   setTheme(theme) {
     window.localStorage.setItem('theme', theme);

@@ -17,3 +17,5 @@ export type Month = {
   monthName: string;
   timeline?: { from: 'left' | 'right'; percent: number };
 };
+
+export type AppTheme = 'auto' | 'light' | 'dark';
