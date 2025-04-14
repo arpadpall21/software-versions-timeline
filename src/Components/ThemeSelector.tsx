@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
 import { useTranslations } from 'next-intl';
 import Dropdown from '@/Components/Dropdown';
 
@@ -9,7 +8,7 @@ const themes: string[] = ['auto', 'light', 'dark'];
 const defaultTheme: string = themes[0];
 
 const ThemeSelector: React.FC = () => {
-  const [themeState, setThemeState] = useState<string>('auto');
+  const [themeState, setThemeState] = useState<string>(defaultTheme);
   const t = useTranslations('components.themeSelector');
 
   useEffect(() => {

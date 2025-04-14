@@ -16,9 +16,6 @@ interface AppConfig {
     defaultLanguage: Lang;
     supportedLanguages: { [langCode: string]: Lang };
   };
-  theme: {
-    supportedThemes: string[];
-  };
   zoom: {
     minLevel: number;
     maxLevel: number;
@@ -60,9 +57,6 @@ const appConfig: AppConfig = {
   lang: {
     defaultLanguage,
     supportedLanguages,
-  },
-  theme: {
-    supportedThemes: ['light', 'dark', 'auto'],
   },
   zoom: {
     minLevel: 0.5,
