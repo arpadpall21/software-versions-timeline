@@ -1,18 +1,28 @@
-import { type Lang, type Month, type VersionHistoryData } from '@/misc/types';
+import { type Lang, type Month, type VersionHistoryData, type AppTheme } from '@/misc/types';
 import appConfig from '../../config/appConfig';
 
 const minZoomLevel = appConfig.zoom.minLevel;
 const maxZoomLevel = appConfig.zoom.maxLevel;
 const zoomSensitivity = appConfig.zoom.sensitivity;
 
+const themes: AppTheme[] = ['auto', 'light', 'dark'];
+export const defaultAppTheme: AppTheme = themes[0];
+
+export function parseAppTheme(theme: string): AppTheme {
+  return (themes.includes(theme as AppTheme) ? theme : defaultAppTheme) as AppTheme;
+}
+
+/**
+ * call only in client component react hook
+ */
+export function getCurrentBrowserTheme(): 'light' | 'dark' {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
 export function getLang(langCode: string = ''): Lang {
   return appConfig.lang.supportedLanguages[langCode]
     ? appConfig.lang.supportedLanguages[langCode]
     : appConfig.lang.defaultLanguage;
-}
-
-export function validTheme(theme: string = ''): string {    // TODO (refactor)
-  return appConfig.theme.supportedThemes.includes(theme) ? theme : 'auto';
 }
 
 export function calcTimelineZoom(direction: 'zoomIn' | 'zoomOut', currentZoomLevel: number): number {

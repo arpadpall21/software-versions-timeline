@@ -1,37 +1,36 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
 import { useTranslations } from 'next-intl';
-import { validTheme } from '@/misc/helpers';
 import Dropdown from '@/Components/Dropdown';
+import store from '@/misc/store';
+import { type AppTheme } from '@/misc/types';
+import { defaultAppTheme, parseAppTheme, getCurrentBrowserTheme } from '@/misc/helpers';
 
 const ThemeSelector: React.FC = () => {
-  const [themeState, setThemeState] = useState<string>('auto');
+  const [themeState, setThemeState] = useState<AppTheme>(defaultAppTheme);
   const t = useTranslations('components.themeSelector');
 
-  useEffect(() => {
-    setThemeState(validTheme(Cookies.get('theme')));
-  }, []);
+  useEffect(() => setThemeState(store.getTheme()), []);
 
   useEffect(() => {
     switch (themeState) {
       case 'light': {
-        Cookies.set('theme', 'light');
+        store.setTheme('light');
         document.documentElement.classList.remove('dark');
         break;
       }
       case 'dark': {
-        Cookies.set('theme', 'dark');
+        store.setTheme('dark');
         document.documentElement.classList.add('dark');
         break;
       }
       default: {
-        Cookies.set('theme', 'auto');
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          document.documentElement.classList.add('dark');
-        } else {
+        store.setTheme('auto');
+        if (getCurrentBrowserTheme() === 'light') {
           document.documentElement.classList.remove('dark');
+        } else {
+          document.documentElement.classList.add('dark');
         }
       }
     }
@@ -45,7 +44,7 @@ const ThemeSelector: React.FC = () => {
         ['light', t('lightMode')],
         ['dark', t('darkMode')],
       ]}
-      dropdownHandler={(e) => setThemeState(e.target.value)}
+      dropdownHandler={(e) => setThemeState(parseAppTheme(e.target.value))}
       title={t('theme')}
     />
   );
