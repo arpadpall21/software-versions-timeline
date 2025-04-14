@@ -11,10 +11,6 @@ export function getLang(langCode: string = ''): Lang {
     : appConfig.lang.defaultLanguage;
 }
 
-export function validTheme(theme: string = ''): string {    // TODO (refactor)
-  return appConfig.theme.supportedThemes.includes(theme) ? theme : 'auto';
-}
-
 export function calcTimelineZoom(direction: 'zoomIn' | 'zoomOut', currentZoomLevel: number): number {
   if (direction === 'zoomIn') {
     return Math.max(currentZoomLevel - zoomSensitivity, minZoomLevel);

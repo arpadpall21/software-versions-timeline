@@ -3,31 +3,34 @@
 import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { useTranslations } from 'next-intl';
-import { validTheme } from '@/misc/helpers';
 import Dropdown from '@/Components/Dropdown';
+
+const themes: string[] = ['auto', 'light', 'dark'];
+const defaultTheme: string = themes[0];
 
 const ThemeSelector: React.FC = () => {
   const [themeState, setThemeState] = useState<string>('auto');
   const t = useTranslations('components.themeSelector');
 
   useEffect(() => {
-    setThemeState(validTheme(Cookies.get('theme')));
+    const storedTheme = window.localStorage.getItem('theme') || '';
+    setThemeState(themes.includes(storedTheme) ? storedTheme : defaultTheme);
   }, []);
 
   useEffect(() => {
     switch (themeState) {
       case 'light': {
-        Cookies.set('theme', 'light');
+        window.localStorage.setItem('theme', 'light');
         document.documentElement.classList.remove('dark');
         break;
       }
       case 'dark': {
-        Cookies.set('theme', 'dark');
+        window.localStorage.setItem('theme', 'dark');
         document.documentElement.classList.add('dark');
         break;
       }
       default: {
-        Cookies.set('theme', 'auto');
+        window.localStorage.setItem('theme', 'auto');
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
           document.documentElement.classList.add('dark');
         } else {
