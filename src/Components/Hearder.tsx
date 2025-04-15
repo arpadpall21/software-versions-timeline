@@ -1,9 +1,9 @@
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import logo from '../../public/V logo.png';
 
-const Header: React.FC = () => {
-  const t = useTranslations();
+const Header: React.FC = async () => {
+  const t = await getTranslations();
 
   return (
     <header className={'border-b-2 border-borPri dark:border-borPriD'}>

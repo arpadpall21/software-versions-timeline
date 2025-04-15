@@ -26,6 +26,9 @@
         "dec": "Dez"
       }
     },
+    "supportedSoftwares": {
+      "supportedSoftwares": "Unterstützte Software"
+    },
     "footer": {
       "copyright": "Urheberrecht © 2025 {name}. Alle Rechte vorbehalten."
     }
