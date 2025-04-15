@@ -6,7 +6,9 @@ const VersionMapPage = () => {
   return (
     <>
       <GridFrame />
-      <SupportedSoftwares />
+      <div className={'max-sm:hidden md:block my-7'}>
+        <SupportedSoftwares />
+      </div>
     </>
   );
 };
