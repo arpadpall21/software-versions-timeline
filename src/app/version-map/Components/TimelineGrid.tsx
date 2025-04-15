@@ -57,7 +57,7 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, twTimeline
                     <TextBallon
                       text={monthData.version}
                       textsSecondary={[`(${month.yearMonth.slice(0, 4)}.${t(month.monthName)}.${monthData.day})`]}
-                      twTimelineStyle={twTimelineStyle}
+                      twStyle={twTimelineStyle}
                     />
                   </div>
                 </div>

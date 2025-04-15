@@ -3,20 +3,20 @@
 interface Props {
   text: string;
   textsSecondary: string[];
-  twTimelineStyle: string;
+  twStyle: string;
 }
 /*
  * Does not affect the layout (positioned absolute)
  * positioned (and slaled) relative to its middle bottom point
  */
-const TextBallon: React.FC<Props> = ({ text, textsSecondary, twTimelineStyle }) => {
+const TextBallon: React.FC<Props> = ({ text, textsSecondary, twStyle }) => {
   return (
     <div className={'group relative'}>
       <div
         className={`
           absolute bottom-[7px] left-1/2 transform -translate-x-1/2 px-2 rounded-sm text-center
           text-gridFg dark:text-gridFgD border border-gridFg dark:border-gridFgD
-          ${twTimelineStyle}`}
+          ${twStyle}`}
       >
         <div>{text}</div>
         <div

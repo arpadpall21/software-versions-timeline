@@ -11,9 +11,10 @@ const defaultZoomLevel = appConfig.zoom.defaultLevel;
 interface Props {
   zoomLevel: number;
   software: Software;
+  twStyle: string;
 }
 
-const Logo: React.FC<Props> = ({ zoomLevel, software }) => {
+const Logo: React.FC<Props> = ({ zoomLevel, software, twStyle }) => {
   const { logoPath, displayName } = appConfig.supportedSoftwares[software];
 
   const { scaleLogoX, scaleLogoY } = useMemo(() => {
@@ -24,7 +25,7 @@ const Logo: React.FC<Props> = ({ zoomLevel, software }) => {
   }, [zoomLevel]);
 
   return (
-    <div className={'relative h-[100px] bg-gridBg dark:bg-gridBgD'}>
+    <div className={`relative h-[100px] ${twStyle}`}>
       <div
         className={'absolute bottom-0 smoothTransform'}
         style={{ transform: `scaleX(${scaleLogoX}) scaleY(${scaleLogoY})` }}
