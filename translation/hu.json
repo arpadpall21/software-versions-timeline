@@ -26,6 +26,9 @@
         "dec": "Dec"
       }
     },
+    "supportedSoftwares": {
+      "supportedSoftwares": "Támogatott Szoftverek"
+    },
     "footer": {
       "copyright": "Szerzői jog © 2025 {name}. Minden jog fenntartva."
     }

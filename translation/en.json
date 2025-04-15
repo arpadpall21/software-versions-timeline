@@ -1,5 +1,5 @@
 {
-  "mainTitle": "Softwares Version Timeline",
+  "mainTitle": "Software Versions Timeline",
   "components": {
     "languageSelector": {
       "language": "Language"
@@ -25,6 +25,9 @@
         "nov": "Nov",
         "dec": "Dec"
       }
+    },
+    "supportedSoftwares": {
+      "supportedSoftwares": "Supported Softwares"
     },
     "footer": {
       "copyright": "Copyright © 2025 {name}. All rights reserved."

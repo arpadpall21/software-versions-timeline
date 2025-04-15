@@ -18,6 +18,7 @@ async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
           content={`Software version history timeline to compare key updates and milestones
             across different software releases.`}
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       </head>
       <NextIntlClientProvider messages={messages}>
         <body className={`${redHatText.className} antialiased bg-bgPri text-fgPri dark:bg-bgPriD dark:text-fgPriD`}>
