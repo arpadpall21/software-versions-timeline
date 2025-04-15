@@ -28,8 +28,8 @@ const supportedSoftwares: { [software in Software]: SupportedSoftware } = {
   },
   [Software.FIREFOX]: {
     displayName: 'Firefox',
-    logoPath: '/softwareLogos/firefox.png',
-    dataPath: 'data/firefox.json',
+    logoPath: '/softwareLogos/firefox.webp',
+    dataPath: 'data/test_software.json',
   },
 };
 const supportedLanguages: { [langCode: string]: Lang } = {

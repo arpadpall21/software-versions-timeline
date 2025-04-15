@@ -21,8 +21,8 @@ const defaultZoomLevel = appConfig.zoom.defaultLevel;
  * https://tailwindcss.com/docs/detecting-classes-in-source-files#class-detection-in-depth
  */
 const twTimelineStyle: { [software in Software]: string } = {
-  [Software.CHROME]: 'bg-[#ff0000] dark:bg-[#ffff00]',
-  [Software.FIREFOX]: 'bg-[#ff0000] dark:bg-[#00ff00]',
+  [Software.CHROME]: 'bg-[#fbd447] dark:bg-[#9e862d] dark:text-white',
+  [Software.FIREFOX]: 'bg-[#437aa8] text-white dark:bg-[#356085] dark:text-[#dbdbdb]',
 };
 
 const GridFrame: React.FC = () => {
@@ -97,9 +97,9 @@ const GridFrame: React.FC = () => {
           <div style={{ transform: `translateY(${position.y}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scaleY(${zoomLevel})` }}>
               <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} twStyle={twTimelineStyle[Software.CHROME]} />
+              <SideLogo zoomLevel={zoomLevel} software={Software.FIREFOX} twStyle={twTimelineStyle[Software.FIREFOX]} />
               <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} twStyle={twTimelineStyle[Software.CHROME]} />
-              <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} twStyle={twTimelineStyle[Software.CHROME]} />
-              <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} twStyle={twTimelineStyle[Software.CHROME]} />
+              <SideLogo zoomLevel={zoomLevel} software={Software.FIREFOX} twStyle={twTimelineStyle[Software.FIREFOX]} />
               <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} twStyle={twTimelineStyle[Software.CHROME]} />
             </div>
           </div>
@@ -121,8 +121,8 @@ const GridFrame: React.FC = () => {
               <TimelineGrid
                 zoomLevel={zoomLevel}
                 months={months}
-                software={Software.CHROME}
-                twTimelineStyle={twTimelineStyle[Software.CHROME]}
+                software={Software.FIREFOX}
+                twTimelineStyle={twTimelineStyle[Software.FIREFOX]}
               />
               <TimelineGrid
                 zoomLevel={zoomLevel}
@@ -133,8 +133,8 @@ const GridFrame: React.FC = () => {
               <TimelineGrid
                 zoomLevel={zoomLevel}
                 months={months}
-                software={Software.CHROME}
-                twTimelineStyle={twTimelineStyle[Software.CHROME]}
+                software={Software.FIREFOX}
+                twTimelineStyle={twTimelineStyle[Software.FIREFOX]}
               />
               <TimelineGrid
                 zoomLevel={zoomLevel}
