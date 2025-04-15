@@ -27,7 +27,7 @@ const supportedSoftwares: { [software in Software]: SupportedSoftware } = {
     dataPath: 'data/test_software.json',
   },
   [Software.FIREFOX]: {
-    displayName: 'Firefox',
+    displayName: 'Mozilla Firefox',
     logoPath: '/softwareLogos/firefox.webp',
     dataPath: 'data/test_software.json',
   },
