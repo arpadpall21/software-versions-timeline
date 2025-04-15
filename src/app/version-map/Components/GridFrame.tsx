@@ -13,6 +13,18 @@ import { type Month, Software } from '@/misc/types';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
+/**
+ * Tailwind utilities are parsed on build time so they cannot be iterpolated with values,
+ *   this also means in that including tailwind utilities in appConfig doesn't work either.
+ * So I'm kind of forced to implement this crappy solution in order to map tailwind utilities to software timelines :(
+ *
+ * https://tailwindcss.com/docs/detecting-classes-in-source-files#class-detection-in-depth
+ */
+const twTimelineStyle: { [software in Software]: string } = {
+  [Software.CHROME]: 'bg-[#fbd447] dark:bg-[#9e862d] dark:text-white',
+  [Software.FIREFOX]: 'bg-[#437aa8] text-white dark:bg-[#356085] dark:text-[#dbdbdb]',
+};
+
 const GridFrame: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
@@ -22,7 +34,7 @@ const GridFrame: React.FC = () => {
   const [months, setMonths] = useState<Month[]>([]);
 
   useEffect(() => {
-    setMonths(calcMonthsUpToCurrent(2023, 10));   // TODO (default start month handle)
+    setMonths(calcMonthsUpToCurrent(2023, 10)); // TODO (default start month handle)
   }, []);
 
   useEffect(() => {
@@ -84,11 +96,11 @@ const GridFrame: React.FC = () => {
         <div className={'overflow-hidden border-r border-black dark:border-white'}>
           <div style={{ transform: `translateY(${position.y}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scaleY(${zoomLevel})` }}>
-              <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
-              <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
-              <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
-              <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
-              <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} />
+              <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} twStyle={twTimelineStyle[Software.CHROME]} />
+              <SideLogo zoomLevel={zoomLevel} software={Software.FIREFOX} twStyle={twTimelineStyle[Software.FIREFOX]} />
+              <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} twStyle={twTimelineStyle[Software.CHROME]} />
+              <SideLogo zoomLevel={zoomLevel} software={Software.FIREFOX} twStyle={twTimelineStyle[Software.FIREFOX]} />
+              <SideLogo zoomLevel={zoomLevel} software={Software.CHROME} twStyle={twTimelineStyle[Software.CHROME]} />
             </div>
           </div>
         </div>
@@ -100,11 +112,36 @@ const GridFrame: React.FC = () => {
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scale(${zoomLevel})` }}>
-              <TimelineGrid zoomLevel={zoomLevel} months={months} software={Software.CHROME} />
-              <TimelineGrid zoomLevel={zoomLevel} months={months} software={Software.CHROME} />
-              <TimelineGrid zoomLevel={zoomLevel} months={months} software={Software.CHROME} />
-              <TimelineGrid zoomLevel={zoomLevel} months={months} software={Software.CHROME} />
-              <TimelineGrid zoomLevel={zoomLevel} months={months} software={Software.CHROME} />
+              <TimelineGrid
+                zoomLevel={zoomLevel}
+                months={months}
+                software={Software.CHROME}
+                twTimelineStyle={twTimelineStyle[Software.CHROME]}
+              />
+              <TimelineGrid
+                zoomLevel={zoomLevel}
+                months={months}
+                software={Software.FIREFOX}
+                twTimelineStyle={twTimelineStyle[Software.FIREFOX]}
+              />
+              <TimelineGrid
+                zoomLevel={zoomLevel}
+                months={months}
+                software={Software.CHROME}
+                twTimelineStyle={twTimelineStyle[Software.CHROME]}
+              />
+              <TimelineGrid
+                zoomLevel={zoomLevel}
+                months={months}
+                software={Software.FIREFOX}
+                twTimelineStyle={twTimelineStyle[Software.FIREFOX]}
+              />
+              <TimelineGrid
+                zoomLevel={zoomLevel}
+                months={months}
+                software={Software.CHROME}
+                twTimelineStyle={twTimelineStyle[Software.CHROME]}
+              />
             </div>
           </div>
         </div>
