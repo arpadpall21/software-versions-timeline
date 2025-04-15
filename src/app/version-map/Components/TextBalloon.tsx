@@ -7,7 +7,7 @@ interface Props {
 }
 /*
  * Does not affect the layout (positioned absolute)
- * positioned (and slaled) relative to its middle bottom point
+ * positioned relative to its middle bottom point
  */
 const TextBallon: React.FC<Props> = ({ text, textsSecondary, twStyle }) => {
   return (
