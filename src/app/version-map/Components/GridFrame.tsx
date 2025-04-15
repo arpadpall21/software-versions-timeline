@@ -21,8 +21,8 @@ const defaultZoomLevel = appConfig.zoom.defaultLevel;
  * https://tailwindcss.com/docs/detecting-classes-in-source-files#class-detection-in-depth
  */
 const twTimelineStyle: { [software in Software]: string } = {
-  [Software.CHROME]: 'bg-[#fbd447] dark:bg-[#9e862d] dark:text-white',
-  [Software.FIREFOX]: 'bg-[#437aa8] text-white dark:bg-[#356085] dark:text-[#dbdbdb]',
+  [Software.CHROME]: 'bg-[#fbd447] dark:bg-[#9e862d] dark:text-[#e8e8e8]',
+  [Software.FIREFOX]: 'bg-[#437aa8] text-white dark:bg-[#356085] dark:text-[#e8e8e8]',
 };
 
 const GridFrame: React.FC = () => {

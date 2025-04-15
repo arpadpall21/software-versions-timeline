@@ -32,10 +32,11 @@ const TextBallon: React.FC<Props> = ({ text, textsSecondary, twStyle }) => {
       </div>
       <div
         className={`
-        absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0
+        absolute bottom-0 w-0 h-0 left-1/2 transform -translate-x-1/2
         border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent
         border-t-[8px] border-t-gridFg dark:border-t-gridFgD`}
       />
+      <div className={'absolute top-0 h-[15px] w-[13px] left-1/2 transform -translate-x-1/2'}></div>
     </div>
   );
 };
