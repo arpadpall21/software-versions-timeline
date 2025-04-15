@@ -15,7 +15,7 @@ const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
 /**
  * Tailwind utilities are parsed on build time so they cannot be iterpolated with values,
- *   this also means in this case that including tailwind styles in appConfig doesn't work either.
+ *   this also means in that including tailwind utilities in appConfig doesn't work either.
  * So I'm kind of forced to implement this crappy solution in order to map tailwind utilities to software timelines :(
  *
  * https://tailwindcss.com/docs/detecting-classes-in-source-files#class-detection-in-depth
