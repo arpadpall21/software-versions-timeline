@@ -63,10 +63,10 @@ const GridFrame: React.FC = () => {
 
   function handleMouseWheel(e: React.WheelEvent) {
     if (scrollZoomEnabled && e.deltaY > 0) {
-      setZoomLevel(calcTimelineZoom('zoomIn', zoomLevel));
+      setZoomLevel(calcTimelineZoom('zoomOut', zoomLevel));
       return;
     } else if (scrollZoomEnabled && e.deltaY < 0) {
-      setZoomLevel(calcTimelineZoom('zoomOut', zoomLevel));
+      setZoomLevel(calcTimelineZoom('zoomIn', zoomLevel));
     }
   }
 

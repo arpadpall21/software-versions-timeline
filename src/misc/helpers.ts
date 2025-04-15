@@ -3,7 +3,6 @@ import appConfig from '../../config/appConfig';
 
 const minZoomLevel = appConfig.zoom.minLevel;
 const maxZoomLevel = appConfig.zoom.maxLevel;
-const zoomSensitivity = appConfig.zoom.sensitivity;
 
 const themes: AppTheme[] = ['auto', 'light', 'dark'];
 export const defaultAppTheme: AppTheme = themes[0];
@@ -26,10 +25,12 @@ export function getLang(langCode: string = ''): Lang {
 }
 
 export function calcTimelineZoom(direction: 'zoomIn' | 'zoomOut', currentZoomLevel: number): number {
+  const zoomSensitivity: number = currentZoomLevel / 10;
+
   if (direction === 'zoomIn') {
-    return Math.max(currentZoomLevel - zoomSensitivity, minZoomLevel);
+    return Math.min(currentZoomLevel + zoomSensitivity, maxZoomLevel);
   }
-  return Math.min(currentZoomLevel + zoomSensitivity, maxZoomLevel);
+  return Math.max(currentZoomLevel - zoomSensitivity, minZoomLevel);
 }
 
 export function calcPercentOf(fraction: number, total: number = 100): number {
