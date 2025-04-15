@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
-import { type VersionHistoryData, type Month, type Software } from '@/misc/types';
+import { type VersionHistoryData, type Month, Software } from '@/misc/types';
 import { calcPercentOf, calcMonthTimeline } from '@/misc/helpers';
 import TextBallon from './TextBalloon';
 import { useTranslations } from 'next-intl';
@@ -14,14 +14,13 @@ interface Props {
   zoomLevel: number;
   months: Month[];
   software: Software;
+  twTimelineStyle: string;
 }
 
-const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software }) => {
+const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, twTimelineStyle }) => {
   const [versionHistoryData, setVersionHistoryData] = useState<VersionHistoryData>();
 
   const t = useTranslations('components.monthsGrid.months');
-
-  const timelineColor = appConfig.supportedSoftwares[software].color.light;     // TODO (changes on current theme)
 
   useEffect(() => {
     getVersionHistory(software).then((data) => setVersionHistoryData(data));
@@ -58,16 +57,15 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software }) => {
                     <TextBallon
                       text={monthData.version}
                       textsSecondary={[`(${month.yearMonth.slice(0, 4)}.${t(month.monthName)}.${monthData.day})`]}
-                      backgroundColor={timelineColor}
+                      backgroundColor={'red'}
                     />
                   </div>
                 </div>
               ))}
             {month.timeline && (
               <div
-                className={'absolute top-[68px]'}
+                className={`absolute top-[68px] ${twTimelineStyle}`}
                 style={{
-                  backgroundColor: timelineColor,
                   width: month.timeline.percent,
                   height: timelineHeight,
                   left: month.timeline.from === 'left' ? '-1px' : undefined,

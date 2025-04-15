@@ -2,10 +2,6 @@ import { type Lang, Software } from '../src/misc/types';
 
 interface SupportedSoftware {
   displayName: string;
-  color: {
-    light: string;
-    dark: string;
-  };
   logoPath: string;
   dataPath: string;
 }
@@ -27,19 +23,11 @@ interface AppConfig {
 const supportedSoftwares: { [software in Software]: SupportedSoftware } = {
   [Software.CHROME]: {
     displayName: 'Google Chrome',
-    color: {
-      light: 'lightgreen',
-      dark: 'darkgreen',
-    },
     logoPath: '/softwareLogos/chrome.png',
     dataPath: 'data/test_software.json',
   },
   [Software.FIREFOX]: {
     displayName: 'Firefox',
-    color: {
-      light: 'yellow',
-      dark: 'orange',
-    },
     logoPath: '/softwareLogos/firefox.png',
     dataPath: 'data/firefox.json',
   },
