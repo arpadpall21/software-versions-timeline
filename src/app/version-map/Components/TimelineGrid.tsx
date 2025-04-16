@@ -7,6 +7,7 @@ import TextBallon from './TextBalloon';
 import { useTranslations } from 'next-intl';
 import appConfig from '../../../../config/appConfig';
 import { getVersionHistory } from '@/app/version-map/action';
+import Skeleton from '@/Components/Skeleton';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
@@ -34,8 +35,22 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, twTimeline
     return months;
   }, [months, versionHistoryData]);
 
-  const scaleTextBallon: number = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel]);
-  const timelineHeight: number = useMemo(() => Math.round(Math.max(1, Math.min(8, 8 / zoomLevel))), [zoomLevel]);
+  const { scaleTextBallon, timelineHeight } = useMemo(
+    () => ({
+      scaleTextBallon: calcPercentOf(defaultZoomLevel, zoomLevel) / 100,
+      timelineHeight: Math.round(Math.max(1, Math.min(8, 8 / zoomLevel))),
+    }),
+    [zoomLevel],
+  );
+
+  // if (!versionHistoryData) {
+  if (true) {
+    return (
+      <div className={'h-[100px] border border-red-500'}>
+        <Skeleton />
+      </div>
+    );
+  }
 
   return (
     <div className={'flex h-[100px] bg-gridBg dark:bg-gridBgD'}>
