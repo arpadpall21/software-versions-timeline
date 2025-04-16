@@ -46,7 +46,7 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, twTimeline
   // if (!versionHistoryData) {
   if (true) {
     return (
-      <div className={'h-[100px] border border-red-500'}>
+      <div className={'h-[100px]'}>
         <Skeleton />
       </div>
     );

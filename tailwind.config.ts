@@ -22,6 +22,7 @@ export default {
         gridFg: '#434958',
         gridBg: '#f0f8ff',
         gridBor: 'lightgray',
+        skel: 'blue',
 
         // dark
         bgPriD: '#191942',
@@ -36,6 +37,7 @@ export default {
         gridFgD: '#A0A0A0',
         gridBgD: '#0C2340',
         gridBorD: '#A0A0A0',
+        skelD: 'green',
       },
       spacing: {
         mobPad: '12px',
