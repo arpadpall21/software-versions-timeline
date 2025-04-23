@@ -5,7 +5,7 @@ const Skeleton: React.FC = () => {
     <div className={'relative h-full w-full border border-red-400'}>
       <div
         className={`absolute h-full w-[200%] animate-skeletonSwipe
-          bg-gradient-to-r from-skel via-white to-skel dark:from-skelD dark:via-black dark:to-skelD`}
+          bg-gradient-to-r from-skelPri via-skelSec to-skelPri dark:from-skelPriD dark:via-skelSecD dark:to-skelPriD`}
       />
     </div>
   );
