@@ -2,11 +2,10 @@
 
 const Skeleton: React.FC = () => {
   return (
-    <div className={'h-full w-full'}>
+    <div className={'relative h-full w-full border border-red-400'}>
       <div
-        className={
-          'h-full w-[200%] bg-gradient-to-r from-skel via-white to-skel dark:from-skelD dark:via-black dark:to-skelD'
-        }
+        className={`absolute h-full w-[200%] animate-skeletonSwipe
+          bg-gradient-to-r from-skel via-white to-skel dark:from-skelD dark:via-black dark:to-skelD`}
       />
     </div>
   );

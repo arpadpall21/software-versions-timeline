@@ -46,11 +46,16 @@ export default {
       },
       animation: {
         'fast-pop': 'fast-pop 200ms',
+        skeletonSwipe: 'skeletonSwipe 2000ms linear infinite',
       },
       keyframes: {
         'fast-pop': {
           from: { 'font-weight': 'bold' },
           to: { 'font-weight': 'normal' },
+        },
+        skeletonSwipe: {
+          from: { left: '-200%' },
+          to: { left: '100%' },
         },
       },
     },
