@@ -22,8 +22,8 @@ export default {
         gridFg: '#434958',
         gridBg: '#f0f8ff',
         gridBor: 'lightgray',
-        skelPri: 'blue',
-        skelSec: 'red',
+        skelPri: '#f0f8ff',
+        skelSec: '#4444bc',
 
         // dark
         bgPriD: '#191942',
@@ -35,11 +35,11 @@ export default {
         fgPopD: '#4c44bc',
         bgWarnD: '#fdba74',
         bgWarnHoverD: '#fb923c',
-        gridFgD: '#A0A0A0',
-        gridBgD: '#0C2340',
-        gridBorD: '#A0A0A0',
-        skelPriD: 'green',
-        skelSecD: 'orange',
+        gridFgD: '#a0a0a0',
+        gridBgD: '#0c2340',
+        gridBorD: '#a0a0a0',
+        skelPriD: '#0c2340',
+        skelSecD: '#4c44bc',
       },
       spacing: {
         mobPad: '12px',
