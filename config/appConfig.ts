@@ -22,14 +22,14 @@ interface AppConfig {
 
 const supportedSoftwares: { [software in Software]: SupportedSoftware } = {
   [Software.CHROME]: {
-    displayName: 'Google Chrome',
+    displayName: 'Google Chrome (Desktop)',
     logoPath: '/softwareLogos/chrome.png',
-    dataPath: 'data/test_software.json',
+    dataPath: 'data/chrome.json',
   },
   [Software.FIREFOX]: {
-    displayName: 'Mozilla Firefox',
+    displayName: 'Mozilla Firefox (Desktop)',
     logoPath: '/softwareLogos/firefox.webp',
-    dataPath: 'data/test_software.json',
+    dataPath: 'data/firefox.json',
   },
 };
 const supportedLanguages: { [langCode: string]: Lang } = {
