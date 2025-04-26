@@ -41,6 +41,11 @@ const supportedSoftwares: { [software in Software]: SupportedSoftware } = {
     logoPath: '/softwareLogos/edge.webp',
     dataPath: 'data/edge.json',
   },
+  [Software.NODE]: {
+    displayName: 'Node.js',
+    logoPath: '/softwareLogos/nodeJs.png',
+    dataPath: 'data/nodeJs.json',
+  },
 };
 const supportedLanguages: { [langCode: string]: Lang } = {
   en: { langCode: 'en', lang: 'English' },

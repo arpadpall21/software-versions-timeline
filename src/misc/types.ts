@@ -3,6 +3,7 @@ export enum Software {
   FIREFOX = 'FIREFOX',
   OPERA = 'OPERA',
   EDGE = 'EDGE',
+  NODE = 'NODE',
 }
 
 export interface Lang {
