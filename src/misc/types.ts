@@ -3,8 +3,19 @@ export enum Software {
   FIREFOX = 'FIREFOX',
   OPERA = 'OPERA',
   EDGE = 'EDGE',
+  SAFARI = 'SAFARI',
   NODE = 'NODE',
+  REACT = 'REACT',
+  PYTHON = 'PYTHON',
 }
+
+interface SupportedSoftware {
+  displayName: string;
+  logoPath: string;
+  dataPath: string;
+}
+
+export type SupportedSoftwares = { [software in Software]: SupportedSoftware };
 
 export interface Lang {
   langCode: string;
