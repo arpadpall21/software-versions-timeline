@@ -119,8 +119,11 @@ const GridFrame: React.FC = () => {
           onMouseDown={handleMouseDown}
         >
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
-          <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
-            <div className={'smoothTransform'} style={{ transform: `scale(${zoomLevel})` }}>
+          <div
+            className={'min-w-full float-right'}
+            style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
+          >
+            <div className={'min-w-full smoothTransform'} style={{ transform: `scale(${zoomLevel})` }}>
               {softwareList.map((software, i) => (
                 <TimelineGrid
                   zoomLevel={zoomLevel}

@@ -22,6 +22,8 @@ export default {
         gridFg: '#434958',
         gridBg: '#f0f8ff',
         gridBor: 'lightgray',
+        skelPri: '#f0f8ff',
+        skelSec: '#4444bc',
 
         // dark
         bgPriD: '#191942',
@@ -33,9 +35,11 @@ export default {
         fgPopD: '#4c44bc',
         bgWarnD: '#fdba74',
         bgWarnHoverD: '#fb923c',
-        gridFgD: '#A0A0A0',
-        gridBgD: '#0C2340',
-        gridBorD: '#A0A0A0',
+        gridFgD: '#a0a0a0',
+        gridBgD: '#0c2340',
+        gridBorD: '#a0a0a0',
+        skelPriD: '#0c2340',
+        skelSecD: '#4c44bc',
       },
       spacing: {
         mobPad: '12px',
@@ -44,11 +48,16 @@ export default {
       },
       animation: {
         'fast-pop': 'fast-pop 200ms',
+        skeletonSwipe: 'skeletonSwipe 2000ms linear infinite',
       },
       keyframes: {
         'fast-pop': {
           from: { 'font-weight': 'bold' },
           to: { 'font-weight': 'normal' },
+        },
+        skeletonSwipe: {
+          from: { left: '-200%' },
+          to: { left: '100%' },
         },
       },
     },

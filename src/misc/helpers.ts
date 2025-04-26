@@ -12,7 +12,7 @@ export function parseAppTheme(theme: string): AppTheme {
 }
 
 /**
- * call only in client component react hook
+ * only in client component hook
  */
 export function getCurrentBrowserTheme(): 'light' | 'dark' {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';

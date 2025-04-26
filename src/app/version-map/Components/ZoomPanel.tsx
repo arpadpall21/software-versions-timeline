@@ -38,7 +38,7 @@ const ZoomPanel: React.FC<Props> = ({ zoomLevel, setZoomLevel, setPosition }) =>
       </div>
       <div
         className={`mt-3 text-fgPri dark:text-fgPriD animate-fast-pop text-center
-          border-2 border-borPri dark:border-borPriD rounded-md bg-bgSec dark:bg-bgSecD shadow-md `}
+          border-2 border-borPri dark:border-borPriD rounded-md bg-bgSec dark:bg-bgSecD shadow-md`}
         key={zoomLevel.toFixed(1)}
         title={'Zoom Level'}
       >
