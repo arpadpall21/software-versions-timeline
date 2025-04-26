@@ -25,14 +25,15 @@ type SoftwareList = [Software, Software, Software, Software, Software];
 const twTimelineStyle: { [software in Software]: string } = {
   [Software.CHROME]: 'bg-[#fbd447] dark:bg-[#9e862d] text-[#2e2e2e] dark:text-[#d1d1d1]',
   [Software.FIREFOX]: 'bg-[#437aa8] dark:bg-[#356085] text-white dark:text-[#ededed]',
-  [Software.OPERA]: 'bg-[#ff7e7e] dark:bg-[#B06F6F] text-[#2e2e2e] dark:text-[#d1d1d1]',
+  [Software.OPERA]: 'bg-[#ff7e7e] dark:bg-[#b06f6f] text-[#2e2e2e] dark:text-[#d1d1d1]',
+  [Software.EDGE]: 'bg-[#0782d7] dark:bg-[#044A7A] text-[#ebebeb] dark:text-[#bdbdbd]',
 };
 
 const defaultSoftwareList: SoftwareList = [
   Software.CHROME,
   Software.FIREFOX,
   Software.OPERA,
-  Software.FIREFOX,
+  Software.EDGE,
   Software.CHROME,
 ];
 

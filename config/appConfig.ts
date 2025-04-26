@@ -22,19 +22,24 @@ interface AppConfig {
 
 const supportedSoftwares: { [software in Software]: SupportedSoftware } = {
   [Software.CHROME]: {
-    displayName: 'Google Chrome (Desktop)',
+    displayName: 'Google Chrome',
     logoPath: '/softwareLogos/chrome.png',
     dataPath: 'data/chrome.json',
   },
   [Software.FIREFOX]: {
-    displayName: 'Mozilla Firefox (Desktop)',
+    displayName: 'Mozilla Firefox',
     logoPath: '/softwareLogos/firefox.webp',
     dataPath: 'data/firefox.json',
   },
   [Software.OPERA]: {
-    displayName: 'Opera (Desktop)',
+    displayName: 'Opera',
     logoPath: '/softwareLogos/opera.png',
     dataPath: 'data/opera.json',
+  },
+  [Software.EDGE]: {
+    displayName: 'Microsoft Edge',
+    logoPath: '/softwareLogos/edge.webp',
+    dataPath: 'data/edge.json',
   },
 };
 const supportedLanguages: { [langCode: string]: Lang } = {
