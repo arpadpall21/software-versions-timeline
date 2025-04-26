@@ -1,6 +1,7 @@
 export enum Software {
   CHROME = 'CHROME',
   FIREFOX = 'FIREFOX',
+  OPERA = 'OPERA',
 }
 
 export interface Lang {

@@ -31,6 +31,11 @@ const supportedSoftwares: { [software in Software]: SupportedSoftware } = {
     logoPath: '/softwareLogos/firefox.webp',
     dataPath: 'data/firefox.json',
   },
+  [Software.OPERA]: {
+    displayName: 'Opera (Desktop)',
+    logoPath: '/softwareLogos/opera.png',
+    dataPath: 'data/opera.json',
+  },
 };
 const supportedLanguages: { [langCode: string]: Lang } = {
   en: { langCode: 'en', lang: 'English' },
