@@ -41,13 +41,8 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, twTimeline
     return months;
   }, [months, versionHistory]);
 
-  const { scaleTextBallon, timelineHeight } = useMemo(
-    () => ({
-      scaleTextBallon: calcPercentOf(defaultZoomLevel, zoomLevel) / 100,
-      timelineHeight: Math.round(Math.max(1, Math.min(8, 8 / zoomLevel))),
-    }),
-    [zoomLevel],
-  );
+  const scaleTextBallon: number = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel]);
+  const timelineHeight: number = useMemo(() => Math.round(Math.max(1, Math.min(8, 8 / zoomLevel))), [zoomLevel]);
 
   if (versionHistoryError) {
     return <div className={'flex h-[100px] bg-red-100 dark:bg-red-950'} />;
