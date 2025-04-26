@@ -19,21 +19,27 @@ interface Props {
 }
 
 const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, twTimelineStyle }) => {
-  const [versionHistoryData, setVersionHistoryData] = useState<VersionHistoryData>();
+  const [versionHistory, setVersionHistory] = useState<VersionHistoryData>();
+  const [versionHistoryError, setVersionHistoryError] = useState<boolean>(false);
 
   const t = useTranslations('components.monthsGrid.months');
 
   useEffect(() => {
-    getVersionHistory(software).then((data) => setVersionHistoryData(data));
+    getVersionHistory(software)
+      .then((data) => setVersionHistory(data))
+      .catch((err) => {
+        console.error(err);
+        setVersionHistoryError(true);
+      });
   }, [software]);
 
   const monthsWithTimeline: Month[] = useMemo(() => {
-    if (versionHistoryData) {
-      return calcMonthTimeline(months, versionHistoryData);
+    if (versionHistory) {
+      return calcMonthTimeline(months, versionHistory);
     }
 
     return months;
-  }, [months, versionHistoryData]);
+  }, [months, versionHistory]);
 
   const { scaleTextBallon, timelineHeight } = useMemo(
     () => ({
@@ -43,8 +49,10 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, twTimeline
     [zoomLevel],
   );
 
-  // if (!versionHistoryData) {
-  if (true) {
+  if (versionHistoryError) {
+    return <div className={'flex h-[100px] bg-red-100 dark:bg-red-950'} />;
+  }
+  if (!versionHistory) {
     return (
       <div className={'h-[100px]'}>
         <Skeleton />
@@ -61,8 +69,8 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, twTimeline
             style={{ borderLeftWidth: month.monthName === 'jan' ? 3 : 1 }}
             key={month.yearMonth}
           >
-            {Array.isArray(versionHistoryData?.[month.yearMonth]) &&
-              versionHistoryData[month.yearMonth].map((monthData) => (
+            {Array.isArray(versionHistory?.[month.yearMonth]) &&
+              versionHistory[month.yearMonth].map((monthData) => (
                 <div
                   className={'absolute bottom-[32px] z-10 hover:z-50'}
                   style={{ left: calcPercentOf(monthData.day, 31) - 1 }}
