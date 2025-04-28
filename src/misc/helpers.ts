@@ -43,7 +43,7 @@ export function calcMonthsUpToCurrent(startYear: number, startMonth: number = 1)
   const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
   const today = new Date();
   const endYear = today.getUTCFullYear();
-  const endMonth = today.getUTCMonth() + 2;
+  const endMonth = today.getUTCMonth() + 1;
 
   for (let year = startYear; year <= endYear; year++) {
     for (let month = year === startYear ? startMonth : 1; month <= (year === endYear ? endMonth : 12); month++) {

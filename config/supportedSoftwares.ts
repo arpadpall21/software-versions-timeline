@@ -10,7 +10,8 @@ const supportedSoftwares: SupportedSoftwares = {
   [Software.FIREFOX]: {
     displayName: 'Mozilla Firefox',
     logoPath: '/softwareLogos/firefox.webp',
-    dataPath: 'data/chrome.json',       // TODO
+    dataPath: 'data/firefox.json',
+    sources: ['https://www.mozilla.org/en-US/firefox/releases/'],
   },
   [Software.OPERA]: {
     displayName: 'Opera',
