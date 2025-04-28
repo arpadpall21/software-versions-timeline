@@ -5,41 +5,42 @@ const supportedSoftwares: SupportedSoftwares = {
     displayName: 'Google Chrome',
     logoPath: '/softwareLogos/chrome.png',
     dataPath: 'data/chrome.json',
+    sources: ['https://developer.chrome.com/release-notes'],
   },
   [Software.FIREFOX]: {
     displayName: 'Mozilla Firefox',
     logoPath: '/softwareLogos/firefox.webp',
-    dataPath: 'data/firefox.json',
+    dataPath: 'data/chrome.json',       // TODO
   },
   [Software.OPERA]: {
     displayName: 'Opera',
     logoPath: '/softwareLogos/opera.png',
-    dataPath: 'data/opera.json',
+    dataPath: 'data/chrome.json',       // TODO
   },
   [Software.EDGE]: {
     displayName: 'Microsoft Edge',
     logoPath: '/softwareLogos/edge.webp',
-    dataPath: 'data/edge.json',
+    dataPath: 'data/chrome.json',       // TODO
   },
   [Software.SAFARI]: {
     displayName: 'Safari',
     logoPath: '/softwareLogos/safari.png',
-    dataPath: 'data/safari__dummy.json',
+    dataPath: 'data/chrome.json',       // TODO
   },
   [Software.NODE]: {
     displayName: 'Node.js',
     logoPath: '/softwareLogos/nodeJs.png',
-    dataPath: 'data/nodeJs.json',
+    dataPath: 'data/chrome.json',       // TODO
   },
   [Software.REACT]: {
     displayName: 'React.js',
     logoPath: '/softwareLogos/react.webp',
-    dataPath: 'data/react__dummy.json',
+    dataPath: 'data/chrome.json',       // TODO
   },
   [Software.PYTHON]: {
     displayName: 'Python',
     logoPath: '/softwareLogos/python.webp',
-    dataPath: 'data/python__dummy.json',
+    dataPath: 'data/chrome.json',       // TODO
   },
 };
 

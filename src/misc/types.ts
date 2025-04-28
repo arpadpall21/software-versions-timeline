@@ -13,6 +13,7 @@ interface SupportedSoftware {
   displayName: string;
   logoPath: string;
   dataPath: string;
+  sources?: string[];
 }
 
 export type SupportedSoftwares = { [software in Software]: SupportedSoftware };
