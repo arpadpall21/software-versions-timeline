@@ -38,7 +38,7 @@ const defaultSoftwareList: SoftwareList = [
   Software.FIREFOX,
   Software.OPERA,
   Software.EDGE,
-  Software.NODE,
+  Software.REACT,
 ];
 
 const GridFrame: React.FC = () => {
