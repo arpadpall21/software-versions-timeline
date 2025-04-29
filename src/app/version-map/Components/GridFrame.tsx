@@ -23,7 +23,7 @@ type SoftwareList = [Software, Software, Software, Software, Software];
  * https://tailwindcss.com/docs/detecting-classes-in-source-files#class-detection-in-depth
  */
 const twTimelineStyle: { [software in Software]: string } = {
-  [Software.CHROME]: 'bg-[#fbd447] dark:bg-[#9e862d] text-[#2e2e2e] dark:text-[#2b2b2b]',
+  [Software.CHROME]: 'bg-[#fbd447] dark:bg-[#9e862d] text-[#2e2e2e] dark:text-[#2B2B2B]',
   [Software.FIREFOX]: 'bg-[#437aa8] dark:bg-[#356085] text-white dark:text-[#ededed]',
   [Software.OPERA]: 'bg-[#ff7e7e] dark:bg-[#b06f6f] text-[#2e2e2e] dark:text-[#2b2b2b]',
   [Software.EDGE]: 'bg-[#0782d7] dark:bg-[#044a7a] text-white dark:text-[#bdbdbd]',
@@ -38,7 +38,7 @@ const defaultSoftwareList: SoftwareList = [
   Software.FIREFOX,
   Software.OPERA,
   Software.EDGE,
-  Software.REACT,
+  Software.SAFARI,
 ];
 
 const GridFrame: React.FC = () => {

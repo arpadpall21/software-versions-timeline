@@ -46,7 +46,8 @@ const supportedSoftwares: SupportedSoftwares = {
   [Software.PYTHON]: {
     displayName: 'Python',
     logoPath: '/softwareLogos/python.webp',
-    dataPath: 'data/chrome.json',       // TODO
+    dataPath: 'data/python.json',
+    source: 'https://www.python.org/downloads/source/',
   },
 };
 
