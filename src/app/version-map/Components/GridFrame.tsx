@@ -36,7 +36,7 @@ const twTimelineStyle: { [software in Software]: string } = {
 const defaultSoftwareList: SoftwareList = [
   Software.CHROME,
   Software.FIREFOX,
-  Software.SAFARI,
+  Software.OPERA,
   Software.REACT,
   Software.PYTHON,
 ];
@@ -51,7 +51,7 @@ const GridFrame: React.FC = () => {
   const [softwareList, setSoftwareList] = useState<SoftwareList>(defaultSoftwareList);
 
   useEffect(() => {
-    setMonths(calcMonthsUpToCurrent(2022, 9)); // TODO (default start month handle)
+    setMonths(calcMonthsUpToCurrent(2023, 1)); // TODO (default start month handle)
   }, []);
 
   useEffect(() => {

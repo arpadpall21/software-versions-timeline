@@ -16,7 +16,8 @@ const supportedSoftwares: SupportedSoftwares = {
   [Software.OPERA]: {
     displayName: 'Opera',
     logoPath: '/softwareLogos/opera.png',
-    dataPath: 'data/chrome.json',       // TODO
+    dataPath: 'data/opera.json',
+    sources: ['https://en.wikipedia.org/wiki/History_of_the_Opera_web_browser'],
   },
   [Software.EDGE]: {
     displayName: 'Microsoft Edge',

@@ -79,6 +79,10 @@ export function calcMonthTimeline(months: Month[], versionHistoryData: VersionHi
   const firstMonthHavingVersionIdx: number = months.findIndex((month) => month.yearMonth === firstYearMonth);
   const lastMonthHavingVersionIdx: number = months.findLastIndex((month) => month.yearMonth === lastYearMonth);
 
+  if (lastMonthHavingVersionIdx < 0) {
+    return months;
+  }
+
   months[firstMonthHavingVersionIdx < 0 ? 0 : firstMonthHavingVersionIdx].timeline = {
     from: 'right',
     percent: firstMonthHavingVersionIdx < 0 ? 100 : 100 - calcPercentOf(versionHistoryData[firstYearMonth][0].day, 31),
