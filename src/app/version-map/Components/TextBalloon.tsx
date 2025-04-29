@@ -18,7 +18,7 @@ const TextBallon: React.FC<Props> = ({ text, textsSecondary, twStyle }) => {
           text-gridFg dark:text-gridFgD border border-gridFg dark:border-gridFgD
           ${twStyle}`}
       >
-        <div>{text}</div>
+        <div className={'text-nowrap'}>{text}</div>
         <div
           className={`
           max-h-0 max-w-0 overflow-hidden opacity-0

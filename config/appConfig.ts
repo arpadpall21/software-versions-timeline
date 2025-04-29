@@ -1,13 +1,8 @@
-import { type Lang, Software } from '../src/misc/types';
-
-interface SupportedSoftware {
-  displayName: string;
-  logoPath: string;
-  dataPath: string;
-}
+import { type Lang, type SupportedSoftwares } from '../src/misc/types';
+import supportedSoftwares from './supportedSoftwares';
 
 interface AppConfig {
-  supportedSoftwares: { [software in Software]: SupportedSoftware };
+  supportedSoftwares: SupportedSoftwares;
   lang: {
     defaultLanguage: Lang;
     supportedLanguages: { [langCode: string]: Lang };
@@ -20,18 +15,6 @@ interface AppConfig {
   };
 }
 
-const supportedSoftwares: { [software in Software]: SupportedSoftware } = {
-  [Software.CHROME]: {
-    displayName: 'Google Chrome',
-    logoPath: '/softwareLogos/chrome.png',
-    dataPath: 'data/test_software.json',
-  },
-  [Software.FIREFOX]: {
-    displayName: 'Mozilla Firefox',
-    logoPath: '/softwareLogos/firefox.webp',
-    dataPath: 'data/test_software.json',
-  },
-};
 const supportedLanguages: { [langCode: string]: Lang } = {
   en: { langCode: 'en', lang: 'English' },
   fr: { langCode: 'fr', lang: 'Français' },
