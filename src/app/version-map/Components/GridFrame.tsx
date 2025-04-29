@@ -26,7 +26,7 @@ const twTimelineStyle: { [software in Software]: string } = {
   [Software.CHROME]: 'bg-[#fbd447] dark:bg-[#9e862d] text-[#2e2e2e] dark:text-[#2b2b2b]',
   [Software.FIREFOX]: 'bg-[#437aa8] dark:bg-[#356085] text-white dark:text-[#ededed]',
   [Software.OPERA]: 'bg-[#ff7e7e] dark:bg-[#b06f6f] text-[#2e2e2e] dark:text-[#2b2b2b]',
-  [Software.EDGE]: 'bg-[#0782d7] dark:bg-[#044a7a] text-[#f7f7f7] dark:text-[#bdbdbd]',
+  [Software.EDGE]: 'bg-[#0782d7] dark:bg-[#044a7a] text-white dark:text-[#bdbdbd]',
   [Software.SAFARI]: 'bg-[#bcbec2] dark:bg-[#4A4B4D] text-[#2e2e2e] dark:text-[#bdbdbd]',
   [Software.NODE]: 'bg-[#529e43] dark:bg-[#2c5424] text-[#f7f7f7] dark:text-[#bdbdbd]',
   [Software.REACT]: 'bg-[#039ab0] dark:bg-[#01505C] text-[#f7f7f7] dark:text-[#bdbdbd]',
@@ -37,7 +37,7 @@ const defaultSoftwareList: SoftwareList = [
   Software.CHROME,
   Software.FIREFOX,
   Software.OPERA,
-  Software.REACT,
+  Software.EDGE,
   Software.PYTHON,
 ];
 

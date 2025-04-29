@@ -22,7 +22,8 @@ const supportedSoftwares: SupportedSoftwares = {
   [Software.EDGE]: {
     displayName: 'Microsoft Edge',
     logoPath: '/softwareLogos/edge.webp',
-    dataPath: 'data/chrome.json',       // TODO
+    dataPath: 'data/edge.json',
+    sources: ['https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnote-stable-channel'],
   },
   [Software.SAFARI]: {
     displayName: 'Safari',
