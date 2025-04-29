@@ -34,7 +34,8 @@ const supportedSoftwares: SupportedSoftwares = {
   [Software.NODE]: {
     displayName: 'Node.js',
     logoPath: '/softwareLogos/nodeJs.png',
-    dataPath: 'data/chrome.json',       // TODO
+    dataPath: 'data/nodeJs.json',
+    sources: ['https://nodejs.org/en/about/previous-releases'],
   },
   [Software.REACT]: {
     displayName: 'React.js',
