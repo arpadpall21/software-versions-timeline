@@ -28,7 +28,8 @@ const supportedSoftwares: SupportedSoftwares = {
   [Software.SAFARI]: {
     displayName: 'Safari',
     logoPath: '/softwareLogos/safari.png',
-    dataPath: 'data/chrome.json',       // TODO
+    dataPath: 'data/safari.json',
+    sources: ['https://developer.apple.com/documentation/safari-release-notes'],
   },
   [Software.NODE]: {
     displayName: 'Node.js',
