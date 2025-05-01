@@ -6,8 +6,8 @@ import { calcTimelineZoom, calcMonthsUpToCurrent } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
-import TimelineGrid from '@/app/version-map/Components/TimelineGrid';
-import MonthsGrid from '@/app/version-map/Components/MonthsGrid';
+import Timeline from '@/app/version-map/Components/Timeline';
+import MonthsTimeline from '@/app/version-map/Components/MonthsTimeline';
 import SideLogo from './SideLogo';
 import { type Month, type LocalCache, Software } from '@/misc/types';
 
@@ -103,7 +103,7 @@ const GridFrame: React.FC = () => {
         <div className={'col-span-2 border-b border-black dark:border-white overflow-hidden'}>
           <div className={'float-right'} style={{ transform: `translateX(${position.x}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scaleX(${zoomLevel})` }}>
-              <MonthsGrid zoomLevel={zoomLevel} months={months} />
+              <MonthsTimeline zoomLevel={zoomLevel} months={months} />
             </div>
           </div>
         </div>
@@ -128,7 +128,7 @@ const GridFrame: React.FC = () => {
           >
             <div className={'min-w-full smoothTransform'} style={{ transform: `scale(${zoomLevel})` }}>
               {softwareList.map((software, i) => (
-                <TimelineGrid
+                <Timeline
                   zoomLevel={zoomLevel}
                   months={months}
                   software={software}

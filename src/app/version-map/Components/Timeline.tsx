@@ -20,7 +20,7 @@ interface Props {
   twTimelineStyle: string;
 }
 
-const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, cache, twTimelineStyle }) => {
+const Timeline: React.FC<Props> = ({ zoomLevel, months, software, cache, twTimelineStyle }) => {
   const [versionHistory, setVersionHistory] = useState<VersionHistoryData>();
   const [versionHistoryError, setVersionHistoryError] = useState<boolean>(false);
   const [monthsWithTimeline, setMonthsWithTimeline] = useState<Month[]>([]);
@@ -83,6 +83,7 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, cache, twT
                       text={monthData.version}
                       textsSecondary={[`(${month.yearMonth.slice(0, 4)}.${t(month.monthName)}.${monthData.day})`]}
                       twStyle={twTimelineStyle}
+                      link={appConfig.supportedSoftwares[software].source}
                     />
                   </div>
                 </div>
@@ -105,4 +106,4 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, cache, twT
   );
 };
 
-export default TimelineGrid;
+export default Timeline;
