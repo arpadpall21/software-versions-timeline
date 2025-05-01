@@ -21,25 +21,22 @@ interface Props {
 const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, twTimelineStyle }) => {
   const [versionHistory, setVersionHistory] = useState<VersionHistoryData>();
   const [versionHistoryError, setVersionHistoryError] = useState<boolean>(false);
+  const [monthsWithTimeline, setMonthsWithTimeline] = useState<Month[]>([]);
 
   const t = useTranslations('components.monthsGrid.months');
 
+  // TODO implement some caching (reading the source file at each component render is bad for the performance)
   useEffect(() => {
     getVersionHistory(software)
-      .then((data) => setVersionHistory(data))
+      .then((historyData) => {
+        setVersionHistory(historyData);
+        setMonthsWithTimeline(calcMonthTimeline(months, historyData));
+      })
       .catch((err) => {
         console.error(err);
         setVersionHistoryError(true);
       });
-  }, [software]);
-
-  const monthsWithTimeline: Month[] = useMemo(() => {
-    if (versionHistory) {
-      return calcMonthTimeline(months, versionHistory);
-    }
-
-    return months;
-  }, [months, versionHistory]);
+  }, [months, software]);
 
   const scaleTextBallon: number = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel]);
   const timelineHeight: number = useMemo(() => Math.round(Math.max(1, Math.min(8, 8 / zoomLevel))), [zoomLevel]);

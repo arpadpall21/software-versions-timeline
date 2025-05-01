@@ -2,6 +2,7 @@
 
 import '@/app/globals.css';
 import { useState, useEffect } from 'react';
+import { cloneDeep } from 'lodash';
 import { calcTimelineZoom, calcMonthsUpToCurrent } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
@@ -23,14 +24,14 @@ type SoftwareList = [Software, Software, Software, Software, Software];
  * https://tailwindcss.com/docs/detecting-classes-in-source-files#class-detection-in-depth
  */
 const twTimelineStyle: { [software in Software]: string } = {
-  [Software.CHROME]: 'bg-[#fbd447] dark:bg-[#9e862d] text-[#2e2e2e] dark:text-[#2B2B2B]',
+  [Software.CHROME]: 'bg-[#fbd447] dark:bg-[#9e862d] text-[#2e2e2e] dark:text-[#1c1c1c]',
   [Software.FIREFOX]: 'bg-[#437aa8] dark:bg-[#356085] text-white dark:text-[#ededed]',
-  [Software.OPERA]: 'bg-[#ff7e7e] dark:bg-[#b06f6f] text-[#2e2e2e] dark:text-[#2B2B2B]',
+  [Software.OPERA]: 'bg-[#ff7e7e] dark:bg-[#b06f6f] text-[#2e2e2e] dark:text-[#1c1c1c]',
   [Software.EDGE]: 'bg-[#0782d7] dark:bg-[#044a7a] text-white dark:text-[#bdbdbd]',
   [Software.SAFARI]: 'bg-[#bcbec2] dark:bg-[#4A4B4D] text-[#2e2e2e] dark:text-[#bdbdbd]',
   [Software.NODE]: 'bg-[#529e43] dark:bg-[#2c5424] text-white dark:text-[#bdbdbd]',
   [Software.REACT]: 'bg-[#039ab0] dark:bg-[#01505C] text-[#f7f7f7] dark:text-[#bdbdbd]',
-  [Software.PYTHON]: 'bg-[#e3ab1e] dark:bg-[#856411] text-[#2e2e2e] dark:text-[#2B2B2B]',
+  [Software.PYTHON]: 'bg-[#e3ab1e] dark:bg-[#856411] text-[#2e2e2e] dark:text-[#1c1c1c]',
 };
 
 const defaultSoftwareList: SoftwareList = [
@@ -133,7 +134,7 @@ const GridFrame: React.FC = () => {
               {softwareList.map((software, i) => (
                 <TimelineGrid
                   zoomLevel={zoomLevel}
-                  months={months}
+                  months={cloneDeep(months)}
                   software={software}
                   twTimelineStyle={twTimelineStyle[software]}
                   key={i}
