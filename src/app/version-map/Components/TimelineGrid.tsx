@@ -27,31 +27,23 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, cache, twT
 
   const t = useTranslations('components.monthsGrid.months');
 
-
-
-  // console.log('--- timeline grid rendered ---')
-  // console.log('version history')
-  // console.log(versionHistory)
-  
-
-
-
-
-
-
-
-
-  // TODO implement some caching (reading the source file at each component render is bad for the performance)
   useEffect(() => {
-    getVersionHistory(software)
-      .then((historyData) => {
-        setVersionHistory(historyData);
-        setMonthsWithTimeline(calcMonthTimeline(cloneDeep(months), historyData));
-      })
-      .catch((err) => {
-        console.error(err);
-        setVersionHistoryError(true);
-      });
+    if (cache[software]) {
+      setVersionHistory(cache[software]);
+      setMonthsWithTimeline(calcMonthTimeline(cloneDeep(months), cache[software]));
+    } else {
+      getVersionHistory(software)
+        .then((historyData) => {
+          cache[software] = historyData;
+          setVersionHistory(historyData);
+          setMonthsWithTimeline(calcMonthTimeline(cloneDeep(months), historyData));
+        })
+        .catch((err) => {
+          console.error(err);
+          setVersionHistoryError(true);
+        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [months, software]);
 
   const scaleTextBallon: number = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel]);
