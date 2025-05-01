@@ -32,6 +32,9 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, cache, twT
       setVersionHistory(cache[software]);
       setMonthsWithTimeline(calcMonthTimeline(cloneDeep(months), cache[software]));
     } else {
+      setVersionHistory(undefined);
+      setMonthsWithTimeline([]);
+
       getVersionHistory(software)
         .then((historyData) => {
           cache[software] = historyData;

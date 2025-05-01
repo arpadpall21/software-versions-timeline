@@ -51,9 +51,6 @@ const GridFrame: React.FC = () => {
   const [months, setMonths] = useState<Month[]>([]);
   const [softwareList, setSoftwareList] = useState<SoftwareList>(defaultSoftwareList);
 
-
-  // console.log('--- gird frame rendered ---')
-
   useEffect(() => {
     setMonths(calcMonthsUpToCurrent(2023, 1)); // TODO (default start month handle)
   }, []);
