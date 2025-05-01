@@ -1,6 +1,6 @@
 export enum Software {
   CHROME = 'CHROME',
-  FIREFOX = 'FIREFOX',
+  MOZILLA = 'MOZILLA',
   OPERA = 'OPERA',
   EDGE = 'EDGE',
   SAFARI = 'SAFARI',
