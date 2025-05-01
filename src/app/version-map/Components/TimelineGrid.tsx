@@ -33,7 +33,7 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, twTimeline
       });
   }, [software]);
 
-  const monthsWithTimeline: Month[] = useMemo(() => {
+  const monthsWithTimeline: Month[] = useMemo(() => {     // refactor this needs to be a state
     if (versionHistory) {
       return calcMonthTimeline(months, versionHistory);
     }
