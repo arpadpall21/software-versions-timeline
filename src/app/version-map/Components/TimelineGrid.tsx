@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { cloneDeep } from 'lodash';
 import { type VersionHistoryData, type Month, type LocalCache, Software } from '@/misc/types';
 import { calcPercentOf, calcMonthTimeline } from '@/misc/helpers';
-import TextBallon from './TextBalloon';
+import TextBallon from '@/Components/TextBalloon';
 import { useTranslations } from 'next-intl';
 import appConfig from '../../../../config/appConfig';
 import { getVersionHistory } from '@/app/version-map/action';

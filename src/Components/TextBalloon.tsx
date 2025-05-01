@@ -11,7 +11,7 @@ interface Props {
  */
 const TextBallon: React.FC<Props> = ({ text, textsSecondary, twStyle }) => {
   return (
-    <div className={'group relative'}>
+    <div className={'group relative hover:cursor-pointer'}>
       <div
         className={`
           absolute bottom-[7px] left-1/2 transform -translate-x-1/2 px-2 rounded-sm text-center
