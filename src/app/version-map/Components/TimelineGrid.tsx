@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import { cloneDeep } from 'lodash';
-import { type VersionHistoryData, type Month, Software } from '@/misc/types';
+import { type VersionHistoryData, type Month, type LocalCache, Software } from '@/misc/types';
 import { calcPercentOf, calcMonthTimeline } from '@/misc/helpers';
 import TextBallon from './TextBalloon';
 import { useTranslations } from 'next-intl';
@@ -16,15 +16,30 @@ interface Props {
   zoomLevel: number;
   months: Month[];
   software: Software;
+  cache: LocalCache;
   twTimelineStyle: string;
 }
 
-const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, twTimelineStyle }) => {
+const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, cache, twTimelineStyle }) => {
   const [versionHistory, setVersionHistory] = useState<VersionHistoryData>();
   const [versionHistoryError, setVersionHistoryError] = useState<boolean>(false);
   const [monthsWithTimeline, setMonthsWithTimeline] = useState<Month[]>([]);
 
   const t = useTranslations('components.monthsGrid.months');
+
+
+
+  // console.log('--- timeline grid rendered ---')
+  // console.log('version history')
+  // console.log(versionHistory)
+  
+
+
+
+
+
+
+
 
   // TODO implement some caching (reading the source file at each component render is bad for the performance)
   useEffect(() => {
@@ -45,7 +60,7 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, twTimeline
   if (versionHistoryError) {
     return <div className={'flex h-[100px] bg-red-100 dark:bg-red-950'} />;
   }
-  if (!versionHistory) {
+  if (!versionHistory || monthsWithTimeline.length === 0) {
     return (
       <div className={'h-[100px]'}>
         <Skeleton />
