@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
+import { cloneDeep } from 'lodash';
 import { type VersionHistoryData, type Month, Software } from '@/misc/types';
 import { calcPercentOf, calcMonthTimeline } from '@/misc/helpers';
 import TextBallon from './TextBalloon';
@@ -30,7 +31,7 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, twTimeline
     getVersionHistory(software)
       .then((historyData) => {
         setVersionHistory(historyData);
-        setMonthsWithTimeline(calcMonthTimeline(months, historyData));
+        setMonthsWithTimeline(calcMonthTimeline(cloneDeep(months), historyData));
       })
       .catch((err) => {
         console.error(err);

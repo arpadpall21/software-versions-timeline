@@ -2,7 +2,6 @@
 
 import '@/app/globals.css';
 import { useState, useEffect } from 'react';
-import { cloneDeep } from 'lodash';
 import { calcTimelineZoom, calcMonthsUpToCurrent } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
@@ -134,7 +133,7 @@ const GridFrame: React.FC = () => {
               {softwareList.map((software, i) => (
                 <TimelineGrid
                   zoomLevel={zoomLevel}
-                  months={cloneDeep(months)}
+                  months={months}
                   software={software}
                   twTimelineStyle={twTimelineStyle[software]}
                   key={i}
