@@ -27,9 +27,11 @@ const Logo: React.FC<Props> = ({ zoomLevel, software, twStyle }) => {
   return (
     <div className={`relative h-[100px] ${twStyle}`}>
       <select
-        className={`absolute w-[18px] top-0 right-0 z-10 hover:cursor-pointer
-          bg-bgPri dark:bg-bgPriD text-fgPop  dark:text-fgPopD
-          border border-borPri dark:border-borPriD`}
+        className={`w-[18px]  absolute top-[2px] right-[2px] z-10 hover:cursor-pointer
+          rounded-sm border border-borPri dark:border-borPriD
+        bg-bgPri dark:bg-bgPriD text-fgPop dark:text-fgPopD
+          outline-8 focus:outline-foc focus:dark:outline-focD sm:has-[:focus]:outline
+        `}
       >
         {Object.values(appConfig.supportedSoftwares).map((s, i) => (
           <option value={appConfig.supportedSoftwares[software].displayName} key={i}>
