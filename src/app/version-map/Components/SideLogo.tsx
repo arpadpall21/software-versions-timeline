@@ -26,6 +26,17 @@ const Logo: React.FC<Props> = ({ zoomLevel, software, twStyle }) => {
 
   return (
     <div className={`relative h-[100px] ${twStyle}`}>
+      <select
+        className={`absolute w-[18px] top-0 right-0 z-10 hover:cursor-pointer
+          bg-bgPri dark:bg-bgPriD text-fgPop  dark:text-fgPopD
+          border border-borPri dark:border-borPriD`}
+      >
+        {Object.values(appConfig.supportedSoftwares).map((s, i) => (
+          <option value={appConfig.supportedSoftwares[software].displayName} key={i}>
+            {s.displayName}
+          </option>
+        ))}
+      </select>
       <div
         className={'absolute bottom-1 right-1 smoothTransform'}
         style={{ transform: `scaleX(${scaleLogoX}) scaleY(${scaleLogoY})` }}

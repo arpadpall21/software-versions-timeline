@@ -12,7 +12,7 @@ interface Props {
  */
 const TextBallon: React.FC<Props> = ({ text, textsSecondary, twStyle, link }) => {
   return (
-    <a className={'group block relative hover:cursor-pointer'} href={link} target="_blanc">
+    <a className={'group block relative hover:cursor-pointer'} href={link} target="_blanc" tabIndex={-1}>
       <div
         className={`
           absolute bottom-[7px] left-1/2 transform -translate-x-1/2 px-2 rounded-sm text-center
