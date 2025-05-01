@@ -39,7 +39,7 @@ const defaultSoftwareList: SoftwareList = [
   Software.MOZILLA,
   Software.OPERA,
   Software.EDGE,
-  Software.PYTHON,
+  Software.SAFARI,
 ];
 
 const GridFrame: React.FC = () => {
