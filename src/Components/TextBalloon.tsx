@@ -4,14 +4,15 @@ interface Props {
   text: string;
   textsSecondary: string[];
   twStyle: string;
+  link?: string;
 }
 /*
  * Does not affect the layout (positioned absolute)
  * positioned relative to its middle bottom point
  */
-const TextBallon: React.FC<Props> = ({ text, textsSecondary, twStyle }) => {
+const TextBallon: React.FC<Props> = ({ text, textsSecondary, twStyle, link }) => {
   return (
-    <div className={'group relative hover:cursor-pointer'}>
+    <a className={'group block relative hover:cursor-pointer'} href={link} target="_blanc">
       <div
         className={`
           absolute bottom-[7px] left-1/2 transform -translate-x-1/2 px-2 rounded-sm text-center
@@ -37,7 +38,7 @@ const TextBallon: React.FC<Props> = ({ text, textsSecondary, twStyle }) => {
         border-t-[8px] border-t-gridFg dark:border-t-gridFgD`}
       />
       <div className={'absolute top-0 h-[15px] w-[13px] left-1/2 transform -translate-x-1/2'}></div>
-    </div>
+    </a>
   );
 };
 
