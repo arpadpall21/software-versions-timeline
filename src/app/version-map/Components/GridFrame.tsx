@@ -2,7 +2,6 @@
 
 import '@/app/globals.css';
 import { useState, useEffect } from 'react';
-import { cloneDeep } from 'lodash';
 import { calcTimelineZoom, calcMonthsUpToCurrent } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
@@ -10,9 +9,10 @@ import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
 import TimelineGrid from '@/app/version-map/Components/TimelineGrid';
 import MonthsGrid from '@/app/version-map/Components/MonthsGrid';
 import SideLogo from './SideLogo';
-import { type Month, Software } from '@/misc/types';
+import { type Month, type LocalCache, Software } from '@/misc/types';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
+const localCache: LocalCache = {};
 
 type SoftwareList = [Software, Software, Software, Software, Software];
 
@@ -48,12 +48,8 @@ const GridFrame: React.FC = () => {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
-  const [months, setMonths] = useState<Month[]>([]);
+  const [months, setMonths] = useState<Month[]>(calcMonthsUpToCurrent(2023, 1));
   const [softwareList, setSoftwareList] = useState<SoftwareList>(defaultSoftwareList);
-
-  useEffect(() => {
-    setMonths(calcMonthsUpToCurrent(2023, 1)); // TODO (default start month handle)
-  }, []);
 
   useEffect(() => {
     if (scrollZoomEnabled) {
@@ -134,8 +130,9 @@ const GridFrame: React.FC = () => {
               {softwareList.map((software, i) => (
                 <TimelineGrid
                   zoomLevel={zoomLevel}
-                  months={cloneDeep(months)}
+                  months={months}
                   software={software}
+                  cache={localCache}
                   twTimelineStyle={twTimelineStyle[software]}
                   key={i}
                 />

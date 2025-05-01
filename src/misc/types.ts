@@ -34,3 +34,5 @@ export type Month = {
 };
 
 export type AppTheme = 'auto' | 'light' | 'dark';
+
+export type LocalCache = { [key: string]: VersionHistoryData };
