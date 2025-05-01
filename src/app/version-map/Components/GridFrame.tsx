@@ -48,12 +48,8 @@ const GridFrame: React.FC = () => {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
-  const [months, setMonths] = useState<Month[]>([]);
+  const [months, setMonths] = useState<Month[]>(calcMonthsUpToCurrent(2023, 1));
   const [softwareList, setSoftwareList] = useState<SoftwareList>(defaultSoftwareList);
-
-  useEffect(() => {
-    setMonths(calcMonthsUpToCurrent(2023, 1)); // TODO (default start month handle)
-  }, []);
 
   useEffect(() => {
     if (scrollZoomEnabled) {

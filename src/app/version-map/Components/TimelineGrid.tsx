@@ -46,8 +46,7 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, cache, twT
           setVersionHistoryError(true);
         });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [months, software]);
+  }, [months, software, cache]);
 
   const scaleTextBallon: number = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel]);
   const timelineHeight: number = useMemo(() => Math.round(Math.max(1, Math.min(8, 8 / zoomLevel))), [zoomLevel]);
