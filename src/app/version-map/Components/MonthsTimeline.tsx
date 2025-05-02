@@ -10,10 +10,10 @@ const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
 interface Props {
   zoomLevel: number;
-  months: Month[];
+  displayedMonths: Month[];
 }
 
-const MonthsTimeline: React.FC<Props> = ({ zoomLevel, months }) => {
+const MonthsTimeline: React.FC<Props> = ({ zoomLevel, displayedMonths }) => {
   const t = useTranslations('components.monthsGrid.months');
 
   const { scaleTextX, scaleTextY } = useMemo(() => {
@@ -25,7 +25,7 @@ const MonthsTimeline: React.FC<Props> = ({ zoomLevel, months }) => {
 
   return (
     <div className={'flex bg-gridBg dark:bg-gridBgD h-[60px]'}>
-      {months.map((month) => {
+      {displayedMonths.map((month) => {
         return (
           <div
             className={'text-center top-0 border-gridBor dark:border-gridBorD h-full w-gridCellW'}

@@ -39,7 +39,7 @@ const GridFrame: React.FC = () => {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
-  const [months, setMonths] = useState<Month[]>(calcMonthsUpToCurrent(2023, 1));
+  const [displayedMonths, setdisplayedMonths] = useState<Month[]>(calcMonthsUpToCurrent(2023, 1));
   const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>();
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
@@ -96,7 +96,7 @@ const GridFrame: React.FC = () => {
         <div className={'col-span-2 border-b border-black dark:border-white overflow-hidden'}>
           <div className={'float-right'} style={{ transform: `translateX(${position.x}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scaleX(${zoomLevel})` }}>
-              <MonthsTimeline zoomLevel={zoomLevel} months={months} />
+              <MonthsTimeline zoomLevel={zoomLevel} displayedMonths={displayedMonths} />
             </div>
           </div>
         </div>
@@ -133,7 +133,7 @@ const GridFrame: React.FC = () => {
                 displayedSoftwares.map((software, i) => (
                   <Timeline
                     zoomLevel={zoomLevel}
-                    months={months}
+                    displayedMonths={displayedMonths}
                     software={software}
                     cache={localCache}
                     twTimelineStyle={twTimelineStyle[software]}
