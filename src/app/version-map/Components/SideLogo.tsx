@@ -27,11 +27,10 @@ const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx, setDisplayed
     };
   }, [zoomLevel]);
 
-  console.log('-------------------------')
-  console.log(idx)
-
   function dropdownHandler(e: React.ChangeEvent<HTMLSelectElement>) {
-    console.log(window)
+    console.log(e.target.value)
+    
+    // console.log(window)
     
     
     
@@ -49,9 +48,9 @@ const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx, setDisplayed
         value={appConfig.supportedSoftwares[software].displayName}
         onChange={dropdownHandler}
       >
-        {Object.values(appConfig.supportedSoftwares).map((s, i) => (
-          <option value={s.displayName} key={i}>      // i got this nicely
-            {s.displayName}
+        {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
+          <option value={software} key={i}>
+            {supportedSoftware.displayName}
           </option>
         ))}
       </select>
