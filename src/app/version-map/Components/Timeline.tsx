@@ -48,6 +48,8 @@ const Timeline: React.FC<Props> = ({ zoomLevel, months, software, cache, twTimel
     }
   }, [months, software, cache]);
 
+  useEffect(() => setVersionHistoryError(false), [software]);
+
   const scaleTextBallon: number = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel]);
   const timelineHeight: number = useMemo(() => Math.round(Math.max(1, Math.min(8, 8 / zoomLevel))), [zoomLevel]);
 
