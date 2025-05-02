@@ -29,7 +29,7 @@ export default {
         // dark
         bgPriD: '#191942',
         bgSecD: 'black',
-        fgPriD: '#f6f7f9',
+        fgPriD: '#c5cede',
         fgSecD: '#6d7b8f',
         borPriD: 'black',
         focD: 'white',
