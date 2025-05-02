@@ -16,7 +16,7 @@ interface Props {
   software: Software;
   idx: number;
   displayedSoftwares: DisplayedSoftwares;
-  setDisplayedSoftwares: React.Dispatch<React.SetStateAction<DisplayedSoftwares>>;
+  setDisplayedSoftwares: React.Dispatch<React.SetStateAction<DisplayedSoftwares | undefined>>;
 }
 
 const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx, displayedSoftwares, setDisplayedSoftwares }) => {

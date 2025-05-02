@@ -40,7 +40,7 @@ const GridFrame: React.FC = () => {
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
   const [months, setMonths] = useState<Month[]>(calcMonthsUpToCurrent(2023, 1));
-  const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>(defaultDisplayedSoftwares);
+  const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>();
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
@@ -103,17 +103,18 @@ const GridFrame: React.FC = () => {
         <div className={'overflow-hidden border-r border-black dark:border-white'}>
           <div style={{ transform: `translateY(${position.y}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scaleY(${zoomLevel})` }}>
-              {displayedSoftwares.map((software, i) => (
-                <SideLogo
-                  zoomLevel={zoomLevel}
-                  twStyle={twTimelineStyle[software]}
-                  software={software}
-                  idx={i}
-                  displayedSoftwares={displayedSoftwares}
-                  setDisplayedSoftwares={setDisplayedSoftwares}
-                  key={i}
-                />
-              ))}
+              {displayedSoftwares &&
+                displayedSoftwares.map((software, i) => (
+                  <SideLogo
+                    zoomLevel={zoomLevel}
+                    twStyle={twTimelineStyle[software]}
+                    software={software}
+                    idx={i}
+                    displayedSoftwares={displayedSoftwares}
+                    setDisplayedSoftwares={setDisplayedSoftwares}
+                    key={i}
+                  />
+                ))}
             </div>
           </div>
         </div>
@@ -128,16 +129,17 @@ const GridFrame: React.FC = () => {
             style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
           >
             <div className={'min-w-full smoothTransform'} style={{ transform: `scale(${zoomLevel})` }}>
-              {displayedSoftwares.map((software, i) => (
-                <Timeline
-                  zoomLevel={zoomLevel}
-                  months={months}
-                  software={software}
-                  cache={localCache}
-                  twTimelineStyle={twTimelineStyle[software]}
-                  key={i}
-                />
-              ))}
+              {displayedSoftwares &&
+                displayedSoftwares.map((software, i) => (
+                  <Timeline
+                    zoomLevel={zoomLevel}
+                    months={months}
+                    software={software}
+                    cache={localCache}
+                    twTimelineStyle={twTimelineStyle[software]}
+                    key={i}
+                  />
+                ))}
             </div>
           </div>
         </div>
