@@ -19,17 +19,21 @@ const ZoomPanel: React.FC<Props> = ({ zoomLevel, setZoomLevel, setPosition }) =>
           border-2 border-borPri dark:border-borPriD rounded-md bg-bgPri dark:bg-bgPriD`}
       >
         <button
-          className={'hover:bg-bgSec dark:hover:bg-bgSecD'}
+          className={'rounded-t-[0.25rem] hover:bg-bgIntHover dark:hover:bg-bgIntHoverD'}
           onMouseDown={() => setZoomLevel(calcTimelineZoom('zoomIn', zoomLevel))}
           title={'Zoom In'}
         >
           +
         </button>
-        <button className={'hover:bg-bgSec dark:hover:bg-bgSecD'} onClick={handleResetClick} title={'Zoom Reset'}>
+        <button
+          className={'hover:bg-bgIntHover dark:hover:bg-bgIntHoverD'}
+          onClick={handleResetClick}
+          title={'Zoom Reset'}
+        >
           ↺
         </button>
         <button
-          className={'hover:bg-bgSec dark:hover:bg-bgSecD'}
+          className={'rounded-b-[0.25rem] hover:bg-bgIntHover dark:hover:bg-bgIntHoverD'}
           onMouseDown={() => setZoomLevel(calcTimelineZoom('zoomOut', zoomLevel))}
           title={'Reset Grid'}
         >
