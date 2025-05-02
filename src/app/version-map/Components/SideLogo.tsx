@@ -5,16 +5,19 @@ import Image from 'next/image';
 import { Software } from '@/misc/types';
 import { calcPercentOf } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
+import { type DisplayedSoftwares } from '@/misc/types';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
 interface Props {
   zoomLevel: number;
-  software: Software;
   twStyle: string;
+  software: Software;
+  idx: number;
+  setDisplayedSoftwares: React.Dispatch<React.SetStateAction<DisplayedSoftwares>>;
 }
 
-const Logo: React.FC<Props> = ({ zoomLevel, software, twStyle }) => {
+const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx, setDisplayedSoftwares }) => {
   const { logoPath, displayName } = appConfig.supportedSoftwares[software];
 
   const { scaleLogoX, scaleLogoY } = useMemo(() => {
@@ -23,6 +26,16 @@ const Logo: React.FC<Props> = ({ zoomLevel, software, twStyle }) => {
       scaleLogoY: zoomLevel <= defaultZoomLevel ? defaultZoomLevel : calcPercentOf(defaultZoomLevel, zoomLevel) / 100,
     };
   }, [zoomLevel]);
+
+  console.log('-------------------------')
+  console.log(idx)
+
+  function dropdownHandler(e: React.ChangeEvent<HTMLSelectElement>) {
+    console.log(window)
+    
+    
+    
+  }
 
   return (
     <div className={`relative h-[100px] ${twStyle}`}>
@@ -33,9 +46,11 @@ const Logo: React.FC<Props> = ({ zoomLevel, software, twStyle }) => {
           outline-8 focus:outline-foc focus:dark:outline-focD sm:has-[:focus]:outline
           hover:cursor-pointer hover:bg-bgIntHover dark:hover:bg-bgIntHoverD
         `}
+        value={appConfig.supportedSoftwares[software].displayName}
+        onChange={dropdownHandler}
       >
         {Object.values(appConfig.supportedSoftwares).map((s, i) => (
-          <option value={appConfig.supportedSoftwares[software].displayName} key={i}>
+          <option value={s.displayName} key={i}>      // i got this nicely
             {s.displayName}
           </option>
         ))}
