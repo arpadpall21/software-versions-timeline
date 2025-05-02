@@ -2,7 +2,7 @@
 
 import '@/app/globals.css';
 import { useState, useEffect } from 'react';
-import { calcTimelineZoom, calcMonthsUpToCurrent } from '@/misc/helpers';
+import { calcTimelineZoom, calcMonthsUpToCurrent, defaultDisplayedSoftwares } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
@@ -32,14 +32,6 @@ const twTimelineStyle: { [software in Software]: string } = {
   [Software.PYTHON]: 'bg-[#e3ab1e] dark:bg-[#856411] text-[#2e2e2e] dark:text-[#1c1c1c]',
 };
 
-const defaultSoftwareList: DisplayedSoftwares = [
-  Software.CHROME,
-  Software.MOZILLA,
-  Software.OPERA,
-  Software.EDGE,
-  Software.SAFARI,
-];
-
 const GridFrame: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
@@ -47,7 +39,7 @@ const GridFrame: React.FC = () => {
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
   const [months, setMonths] = useState<Month[]>(calcMonthsUpToCurrent(2023, 1));
-  const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>(defaultSoftwareList);
+  const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>(defaultDisplayedSoftwares);
 
   useEffect(() => {
     if (scrollZoomEnabled) {
