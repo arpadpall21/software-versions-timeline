@@ -10,6 +10,7 @@ import Timeline from '@/app/version-map/Components/Timeline';
 import MonthsTimeline from '@/app/version-map/Components/MonthsTimeline';
 import SideLogo from './SideLogo';
 import { type Month, type LocalCache, type DisplayedSoftwares, Software } from '@/misc/types';
+import store from '@/misc/store';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 const localCache: LocalCache = {};
@@ -40,6 +41,8 @@ const GridFrame: React.FC = () => {
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
   const [months, setMonths] = useState<Month[]>(calcMonthsUpToCurrent(2023, 1));
   const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>(defaultDisplayedSoftwares);
+
+  useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
   useEffect(() => {
     if (scrollZoomEnabled) {

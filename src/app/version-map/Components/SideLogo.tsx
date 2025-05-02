@@ -6,6 +6,7 @@ import { Software } from '@/misc/types';
 import { calcPercentOf } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import { type DisplayedSoftwares } from '@/misc/types';
+import store from '@/misc/store';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
@@ -31,6 +32,8 @@ const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx, displayedSof
   function dropdownHandler(e: React.ChangeEvent<HTMLSelectElement>) {
     const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
     displayedSoftwaresClone[idx] = e.target.value as Software;
+
+    store.setDisplayedSoftwares(displayedSoftwaresClone);
     setDisplayedSoftwares(displayedSoftwaresClone);
   }
 
