@@ -2,19 +2,18 @@
 
 import '@/app/globals.css';
 import { useState, useEffect } from 'react';
-import { calcTimelineZoom, calcMonthsUpToCurrent } from '@/misc/helpers';
+import { calcTimelineZoom, calcMonthsUpToCurrent, defaultDisplayedSoftwares } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
-import TimelineGrid from '@/app/version-map/Components/TimelineGrid';
-import MonthsGrid from '@/app/version-map/Components/MonthsGrid';
+import Timeline from '@/app/version-map/Components/Timeline';
+import MonthsTimeline from '@/app/version-map/Components/MonthsTimeline';
 import SideLogo from './SideLogo';
-import { type Month, type LocalCache, Software } from '@/misc/types';
+import { type Month, type LocalCache, type DisplayedSoftwares, Software } from '@/misc/types';
+import store from '@/misc/store';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 const localCache: LocalCache = {};
-
-type SoftwareList = [Software, Software, Software, Software, Software];
 
 /**
  * Tailwind utilities are parsed at build time so they cannot be iterpolated with values,
@@ -34,14 +33,6 @@ const twTimelineStyle: { [software in Software]: string } = {
   [Software.PYTHON]: 'bg-[#e3ab1e] dark:bg-[#856411] text-[#2e2e2e] dark:text-[#1c1c1c]',
 };
 
-const defaultSoftwareList: SoftwareList = [
-  Software.CHROME,
-  Software.MOZILLA,
-  Software.OPERA,
-  Software.EDGE,
-  Software.PYTHON,
-];
-
 const GridFrame: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
@@ -49,7 +40,9 @@ const GridFrame: React.FC = () => {
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
   const [months, setMonths] = useState<Month[]>(calcMonthsUpToCurrent(2023, 1));
-  const [softwareList, setSoftwareList] = useState<SoftwareList>(defaultSoftwareList);
+  const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>();
+
+  useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
   useEffect(() => {
     if (scrollZoomEnabled) {
@@ -103,16 +96,25 @@ const GridFrame: React.FC = () => {
         <div className={'col-span-2 border-b border-black dark:border-white overflow-hidden'}>
           <div className={'float-right'} style={{ transform: `translateX(${position.x}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scaleX(${zoomLevel})` }}>
-              <MonthsGrid zoomLevel={zoomLevel} months={months} />
+              <MonthsTimeline zoomLevel={zoomLevel} months={months} />
             </div>
           </div>
         </div>
         <div className={'overflow-hidden border-r border-black dark:border-white'}>
           <div style={{ transform: `translateY(${position.y}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scaleY(${zoomLevel})` }}>
-              {softwareList.map((software, i) => (
-                <SideLogo zoomLevel={zoomLevel} software={software} twStyle={twTimelineStyle[software]} key={i} />
-              ))}
+              {displayedSoftwares &&
+                displayedSoftwares.map((software, i) => (
+                  <SideLogo
+                    zoomLevel={zoomLevel}
+                    twStyle={twTimelineStyle[software]}
+                    software={software}
+                    idx={i}
+                    displayedSoftwares={displayedSoftwares}
+                    setDisplayedSoftwares={setDisplayedSoftwares}
+                    key={i}
+                  />
+                ))}
             </div>
           </div>
         </div>
@@ -127,16 +129,17 @@ const GridFrame: React.FC = () => {
             style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
           >
             <div className={'min-w-full smoothTransform'} style={{ transform: `scale(${zoomLevel})` }}>
-              {softwareList.map((software, i) => (
-                <TimelineGrid
-                  zoomLevel={zoomLevel}
-                  months={months}
-                  software={software}
-                  cache={localCache}
-                  twTimelineStyle={twTimelineStyle[software]}
-                  key={i}
-                />
-              ))}
+              {displayedSoftwares &&
+                displayedSoftwares.map((software, i) => (
+                  <Timeline
+                    zoomLevel={zoomLevel}
+                    months={months}
+                    software={software}
+                    cache={localCache}
+                    twTimelineStyle={twTimelineStyle[software]}
+                    key={i}
+                  />
+                ))}
             </div>
           </div>
         </div>

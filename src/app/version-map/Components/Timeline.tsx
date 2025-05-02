@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { cloneDeep } from 'lodash';
 import { type VersionHistoryData, type Month, type LocalCache, Software } from '@/misc/types';
 import { calcPercentOf, calcMonthTimeline } from '@/misc/helpers';
-import TextBallon from './TextBalloon';
+import TextBallon from '@/Components/TextBalloon';
 import { useTranslations } from 'next-intl';
 import appConfig from '../../../../config/appConfig';
 import { getVersionHistory } from '@/app/version-map/action';
@@ -20,7 +20,7 @@ interface Props {
   twTimelineStyle: string;
 }
 
-const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, cache, twTimelineStyle }) => {
+const Timeline: React.FC<Props> = ({ zoomLevel, months, software, cache, twTimelineStyle }) => {
   const [versionHistory, setVersionHistory] = useState<VersionHistoryData>();
   const [versionHistoryError, setVersionHistoryError] = useState<boolean>(false);
   const [monthsWithTimeline, setMonthsWithTimeline] = useState<Month[]>([]);
@@ -47,6 +47,8 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, cache, twT
         });
     }
   }, [months, software, cache]);
+
+  useEffect(() => setVersionHistoryError(false), [software]);
 
   const scaleTextBallon: number = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel]);
   const timelineHeight: number = useMemo(() => Math.round(Math.max(1, Math.min(8, 8 / zoomLevel))), [zoomLevel]);
@@ -83,6 +85,7 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, cache, twT
                       text={monthData.version}
                       textsSecondary={[`(${month.yearMonth.slice(0, 4)}.${t(month.monthName)}.${monthData.day})`]}
                       twStyle={twTimelineStyle}
+                      link={appConfig.supportedSoftwares[software].source}
                     />
                   </div>
                 </div>
@@ -105,4 +108,4 @@ const TimelineGrid: React.FC<Props> = ({ zoomLevel, months, software, cache, twT
   );
 };
 
-export default TimelineGrid;
+export default Timeline;

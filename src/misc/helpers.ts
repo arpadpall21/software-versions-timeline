@@ -1,4 +1,11 @@
-import { type Lang, type Month, type VersionHistoryData, type AppTheme } from '@/misc/types';
+import {
+  type Lang,
+  type Month,
+  type VersionHistoryData,
+  type AppTheme,
+  type DisplayedSoftwares,
+  Software,
+} from '@/misc/types';
 import appConfig from '../../config/appConfig';
 
 const minZoomLevel = appConfig.zoom.minLevel;
@@ -6,9 +13,35 @@ const maxZoomLevel = appConfig.zoom.maxLevel;
 
 const themes: AppTheme[] = ['auto', 'light', 'dark'];
 export const defaultAppTheme: AppTheme = themes[0];
+export const defaultDisplayedSoftwares: DisplayedSoftwares = [
+  Software.CHROME,
+  Software.MOZILLA,
+  Software.OPERA,
+  Software.EDGE,
+  Software.SAFARI,
+];
 
 export function parseAppTheme(theme: string): AppTheme {
   return (themes.includes(theme as AppTheme) ? theme : defaultAppTheme) as AppTheme;
+}
+/**
+ * argument <displayedSoftwares> is expected to be a comma separated vlue string
+ */
+export function parseDisplayedSofwares(displayedSoftwares: string): DisplayedSoftwares {
+  const softwareList: string[] = displayedSoftwares.split(',');
+
+  if (softwareList.length !== defaultDisplayedSoftwares.length) {
+    return defaultDisplayedSoftwares;
+  }
+
+  const supportedSoftwares: string[] = Object.values(Software);
+  for (const software of softwareList) {
+    if (!supportedSoftwares.includes(software)) {
+      return defaultDisplayedSoftwares;
+    }
+  }
+
+  return softwareList as DisplayedSoftwares;
 }
 
 /**

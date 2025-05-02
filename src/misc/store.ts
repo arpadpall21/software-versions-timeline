@@ -2,15 +2,17 @@
  * Waning!
  *
  * The <window> object is not available on module import (apparently because of dynamic module loading)
- * so store functions can only be used in client component react hooks (useState, useEffect, etc...)
+ * so store functions are only available client component hooks (useState, useEffect, etc...)
  */
 
-import { type AppTheme } from './types';
-import { parseAppTheme } from '@/misc/helpers';
+import { type AppTheme, type DisplayedSoftwares } from './types';
+import { parseAppTheme, parseDisplayedSofwares } from '@/misc/helpers';
 
 interface Store {
   getTheme(): AppTheme;
   setTheme(theme: AppTheme): AppTheme;
+  getDisplayedSoftwares(): DisplayedSoftwares;
+  setDisplayedSoftwares(DisplayedSoftwares: DisplayedSoftwares): DisplayedSoftwares;
 }
 
 const store: Store = {
@@ -20,6 +22,13 @@ const store: Store = {
   setTheme(theme) {
     window.localStorage.setItem('theme', theme);
     return theme;
+  },
+  getDisplayedSoftwares() {
+    return parseDisplayedSofwares(window.localStorage.getItem('displayedSoftwares') || '');
+  },
+  setDisplayedSoftwares(displayedSoftwares) {
+    window.localStorage.setItem('displayedSoftwares', displayedSoftwares.join(','));
+    return displayedSoftwares;
   },
 };
 

@@ -29,6 +29,11 @@
     "supportedSoftwares": {
       "supportedSoftwares": "Logiciels Supportés"
     },
+    "zoomPanel": {
+      "zoomIn": "Agrandir",
+      "zoomOut": "Réduire",
+      "reset": "Réinitialiser le Zoom"
+    },
     "footer": {
       "copyright": "Droits d'auteur © 2025 {name}. Tous droits réservés."
     }

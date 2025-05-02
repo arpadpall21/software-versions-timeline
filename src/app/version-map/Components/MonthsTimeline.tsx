@@ -13,7 +13,7 @@ interface Props {
   months: Month[];
 }
 
-const MonthsGrid: React.FC<Props> = ({ zoomLevel, months }) => {
+const MonthsTimeline: React.FC<Props> = ({ zoomLevel, months }) => {
   const t = useTranslations('components.monthsGrid.months');
 
   const { scaleTextX, scaleTextY } = useMemo(() => {
@@ -45,4 +45,4 @@ const MonthsGrid: React.FC<Props> = ({ zoomLevel, months }) => {
   );
 };
 
-export default MonthsGrid;
+export default MonthsTimeline;

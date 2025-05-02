@@ -12,12 +12,14 @@ interface Props {
 const Dropdown: React.FC<Props> = ({ selectedItem, optionItems, dropdownHandler, title }) => {
   return (
     <div
-      className={`border w-36 rounded-sm outline-2 outline-offset 
-        outline-foc dark:outline-focD sm:has-[:focus]:outline border-borPri dark:border-borPriD`}
+      className={`w-36 border rounded-sm border-borPri dark:border-borPriD
+        bg-bgSec dark:bg-bgSecD
+        outline-2 outline-foc dark:outline-focD sm:has-[:focus]:outline`}
     >
-      {title && <p className={'text-center text-fgSec bg-bgSec dark:text-fgSecD dark:bg-bgSecD'}>{title}</p>}
+      {title && <p className={'text-center text-fgSec dark:text-fgSecD bg-bgSec dark:bg-bgSecD'}>{title}</p>}
       <select
-        className={'text-center w-full focus:outline-none bg-bgPri text-fgPop dark:bg-bgPriD dark:text-fgPopD'}
+        className={`text-center w-full focus:outline-none bg-bgPri dark:bg-bgPriD text-fgPop  dark:text-fgPopD
+          hover:cursor-pointer hover:bg-bgIntHover dark:hover:bg-bgIntHoverD`}
         value={selectedItem}
         onChange={dropdownHandler}
       >
