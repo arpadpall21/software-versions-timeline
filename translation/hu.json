@@ -29,6 +29,11 @@
     "supportedSoftwares": {
       "supportedSoftwares": "Támogatott Szoftverek"
     },
+    "zoomPanel": {
+      "zoomIn": "Nagyítás",
+      "zoomOut": "Kicsinyítés",
+      "reset": "Nagyítás Visszaállítása"
+    },
     "footer": {
       "copyright": "Szerzői jog © 2025 {name}. Minden jog fenntartva."
     }

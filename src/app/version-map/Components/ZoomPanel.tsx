@@ -1,4 +1,7 @@
+'use client';
+
 import { calcTimelineZoom } from '@/misc/helpers';
+import { useTranslations } from 'next-intl';
 
 interface Props {
   zoomLevel: number;
@@ -7,6 +10,8 @@ interface Props {
 }
 
 const ZoomPanel: React.FC<Props> = ({ zoomLevel, setZoomLevel, setPosition }) => {
+  const t = useTranslations('components.zoomPanel');
+
   function handleResetClick() {
     setPosition({ x: 0, y: 0 });
     setZoomLevel(1);
@@ -21,21 +26,21 @@ const ZoomPanel: React.FC<Props> = ({ zoomLevel, setZoomLevel, setPosition }) =>
         <button
           className={'rounded-t-[0.25rem] hover:bg-bgIntHover dark:hover:bg-bgIntHoverD'}
           onMouseDown={() => setZoomLevel(calcTimelineZoom('zoomIn', zoomLevel))}
-          title={'Zoom In'}
+          title={t('zoomIn')}
         >
           +
         </button>
         <button
           className={'hover:bg-bgIntHover dark:hover:bg-bgIntHoverD'}
           onClick={handleResetClick}
-          title={'Zoom Reset'}
+          title={t('reset')}
         >
           ↺
         </button>
         <button
           className={'rounded-b-[0.25rem] hover:bg-bgIntHover dark:hover:bg-bgIntHoverD'}
           onMouseDown={() => setZoomLevel(calcTimelineZoom('zoomOut', zoomLevel))}
-          title={'Reset Grid'}
+          title={t('zoomOut')}
         >
           -
         </button>
