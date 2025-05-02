@@ -5,11 +5,11 @@ import '@/app/globals.css';
 interface Props {
   selectedItem: string;
   optionItems: [string, string][]; // [attrValue, value]
-  dropdownHandler?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleDropdown?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   title?: string;
 }
 
-const Dropdown: React.FC<Props> = ({ selectedItem, optionItems, dropdownHandler, title }) => {
+const Dropdown: React.FC<Props> = ({ selectedItem, optionItems, handleDropdown, title }) => {
   return (
     <div
       className={`w-36 border rounded-sm border-borPri dark:border-borPriD
@@ -21,7 +21,7 @@ const Dropdown: React.FC<Props> = ({ selectedItem, optionItems, dropdownHandler,
         className={`text-center w-full focus:outline-none bg-bgPri dark:bg-bgPriD text-fgPop  dark:text-fgPopD
           hover:cursor-pointer hover:bg-bgIntHover dark:hover:bg-bgIntHoverD`}
         value={selectedItem}
-        onChange={dropdownHandler}
+        onChange={handleDropdown}
       >
         {optionItems.map(([attrValue, value]) => {
           return (

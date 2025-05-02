@@ -22,7 +22,7 @@ const LangSelector: React.FC = () => {
     setLangState(lang.langCode);
   }, []);
 
-  function dropdownHandler(e: React.ChangeEvent<HTMLSelectElement>) {
+  function handleDropdown(e: React.ChangeEvent<HTMLSelectElement>) {
     setLangState(e.target.value);
     Cookies.set('lang', e.target.value);
     router.refresh();
@@ -35,7 +35,7 @@ const LangSelector: React.FC = () => {
         supportedLanguages[lang].langCode,
         supportedLanguages[lang].lang,
       ])}
-      dropdownHandler={dropdownHandler}
+      handleDropdown={handleDropdown}
       title={t('language')}
     />
   );

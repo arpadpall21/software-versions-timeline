@@ -2,7 +2,7 @@
 
 import '@/app/globals.css';
 import { useState, useEffect } from 'react';
-import { calcTimelineZoom, calcMonthsUpToCurrent, defaultDisplayedSoftwares } from '@/misc/helpers';
+import { calcTimelineZoom, calcMonthsUpToCurrent } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
@@ -64,7 +64,7 @@ const GridFrame: React.FC = () => {
     setOffset({ x: e.clientX - position.x, y: e.clientY - position.y });
   }
 
-  function mouseUpHandler() {
+  function handleMouseUp() {
     setIsDragging(false);
   }
 
@@ -83,9 +83,9 @@ const GridFrame: React.FC = () => {
         relative overflow-hidden select-none my-7
         shadow-[0_0_4px_1px] shadow-borPri dark:shadow-borPriD bg-bgSec dark:bg-bgSecD`}
       onWheel={handleMouseWheel}
-      onMouseLeave={mouseUpHandler}
+      onMouseLeave={handleMouseUp}
       onMouseMove={handleMouseMove}
-      onMouseUp={mouseUpHandler}
+      onMouseUp={handleMouseUp}
     >
       <ZoomPanel zoomLevel={zoomLevel} setZoomLevel={setZoomLevel} setPosition={setPosition} />
       <div

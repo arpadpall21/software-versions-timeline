@@ -29,7 +29,7 @@ const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx, displayedSof
     };
   }, [zoomLevel]);
 
-  function dropdownHandler(e: React.ChangeEvent<HTMLSelectElement>) {
+  function handleDropdown(e: React.ChangeEvent<HTMLSelectElement>) {
     const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
     displayedSoftwaresClone[idx] = e.target.value as Software;
 
@@ -47,7 +47,7 @@ const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx, displayedSof
           hover:cursor-pointer hover:bg-bgIntHover dark:hover:bg-bgIntHoverD
         `}
         value={software}
-        onChange={dropdownHandler}
+        onChange={handleDropdown}
       >
         {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
           <option value={software} key={i}>

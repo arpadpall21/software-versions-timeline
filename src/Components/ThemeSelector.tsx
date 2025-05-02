@@ -44,7 +44,7 @@ const ThemeSelector: React.FC = () => {
         ['light', t('lightMode')],
         ['dark', t('darkMode')],
       ]}
-      dropdownHandler={(e) => setThemeState(parseAppTheme(e.target.value))}
+      handleDropdown={(e) => setThemeState(parseAppTheme(e.target.value))}
       title={t('theme')}
     />
   );
