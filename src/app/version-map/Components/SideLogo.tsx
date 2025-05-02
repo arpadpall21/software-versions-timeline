@@ -14,10 +14,11 @@ interface Props {
   twStyle: string;
   software: Software;
   idx: number;
+  displayedSoftwares: DisplayedSoftwares;
   setDisplayedSoftwares: React.Dispatch<React.SetStateAction<DisplayedSoftwares>>;
 }
 
-const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx, setDisplayedSoftwares }) => {
+const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx, displayedSoftwares, setDisplayedSoftwares }) => {
   const { logoPath, displayName } = appConfig.supportedSoftwares[software];
 
   const { scaleLogoX, scaleLogoY } = useMemo(() => {
@@ -28,12 +29,9 @@ const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx, setDisplayed
   }, [zoomLevel]);
 
   function dropdownHandler(e: React.ChangeEvent<HTMLSelectElement>) {
-    console.log(e.target.value)
-    
-    // console.log(window)
-    
-    
-    
+    const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
+    displayedSoftwaresClone[idx] = e.target.value as Software;
+    setDisplayedSoftwares(displayedSoftwaresClone);
   }
 
   return (
@@ -45,7 +43,7 @@ const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx, setDisplayed
           outline-8 focus:outline-foc focus:dark:outline-focD sm:has-[:focus]:outline
           hover:cursor-pointer hover:bg-bgIntHover dark:hover:bg-bgIntHoverD
         `}
-        value={appConfig.supportedSoftwares[software].displayName}
+        value={software}
         onChange={dropdownHandler}
       >
         {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (

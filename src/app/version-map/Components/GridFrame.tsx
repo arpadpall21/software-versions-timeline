@@ -114,6 +114,7 @@ const GridFrame: React.FC = () => {
                   twStyle={twTimelineStyle[software]}
                   software={software}
                   idx={i}
+                  displayedSoftwares={displayedSoftwares}
                   setDisplayedSoftwares={setDisplayedSoftwares}
                   key={i}
                 />
