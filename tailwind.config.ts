@@ -25,6 +25,12 @@ export default {
         gridBor: 'lightgray',
         skelPri: '#f0f8ff',
         skelSec: '#4444bc',
+        btnTxt: '#4444bc',
+        btnBg: '#fafaff',
+        btnBgHov: '#ebebff',
+        btnTxtPop: '#c5cede',
+        btnBgPop: '#4444bc',
+        btnBgHovPop: '#353594',
 
         // dark
         bgPriD: '#191942',
@@ -42,6 +48,12 @@ export default {
         gridBorD: '#a0a0a0',
         skelPriD: '#0c2340',
         skelSecD: '#4c44bc',
+        btnTxtD: '#4c44bc',
+        btnBgD: '#191942',
+        btnBgHovD: '#23235c',
+        btnTxtPopD: '#c5cede',
+        btnBgPopD: '#4c44bc',
+        btnBgHovPopD: '#39338c',
       },
       spacing: {
         mobPad: '12px',
