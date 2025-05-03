@@ -3,6 +3,7 @@ import supportedSoftwares from './supportedSoftwares';
 
 interface AppConfig {
   supportedSoftwares: SupportedSoftwares;
+  oldestYear: number;
   lang: {
     defaultLanguage: Lang;
     supportedLanguages: { [langCode: string]: Lang };
@@ -25,6 +26,7 @@ const defaultLanguage: Lang = supportedLanguages.en;
 
 const appConfig: AppConfig = {
   supportedSoftwares,
+  oldestYear: 1994,
   lang: {
     defaultLanguage,
     supportedLanguages,
