@@ -136,3 +136,15 @@ export function calcMonthTimeline(months: Month[], versionHistoryData: VersionHi
     return month;
   });
 }
+
+export function getYearRange(endInc: number | 'current'): string[] {
+  const result: string[] = [];
+  const endYear: number = endInc === 'current' ? new Date().getFullYear() : endInc;
+
+  for (let i = appConfig.oldestYear; i <= endYear; i++) {
+    result.push(i.toString());
+  }
+
+  result.reverse();
+  return result;
+}
