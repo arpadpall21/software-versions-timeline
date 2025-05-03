@@ -7,7 +7,7 @@ interface Props {
   handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button: React.FC<Props> = ({ text, pop, handleClick }) => {
+const Button: React.FC<Props> = ({ text, width, pop, handleClick }) => {
   /**
    * Tailwind utilities are parsed at build time so they cannot be iterpolated with values,
    *   in this situation this means we cannot conditionally change tailwind utilities
@@ -22,6 +22,7 @@ const Button: React.FC<Props> = ({ text, pop, handleClick }) => {
           border-2 border-borPri dark:border-borPriD rounded-md bg-btnBgPop dark:bg-btnBgPopD
           font-bold text-btnTxtPop dark:text-btnTxtPopD 
           hover:bg-btnBgHovPop dark:hover:bg-btnBgHovPopD`}
+        style={{ width }}
         onClick={handleClick}
       >
         {text}
@@ -35,6 +36,7 @@ const Button: React.FC<Props> = ({ text, pop, handleClick }) => {
         border-2 border-borPri dark:border-borPriD rounded-md bg-btnBg dark:bg-btnBgD
         text-btnTxt dark:text-btnTxtD 
         hover:bg-btnBgHov dark:hover:bg-btnBgHovD`}
+      style={{ width }}
       onClick={handleClick}
     >
       {text}

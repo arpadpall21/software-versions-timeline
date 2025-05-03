@@ -137,7 +137,7 @@ export function calcMonthTimeline(months: Month[], versionHistoryData: VersionHi
   });
 }
 
-export function getYearRange(endInc: number | 'current'): string[] {
+export function calcYearRange(endInc: number | 'current'): string[] {
   const result: string[] = [];
   const endYear: number = endInc === 'current' ? new Date().getFullYear() : endInc;
 
