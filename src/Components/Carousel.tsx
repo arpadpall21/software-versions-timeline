@@ -1,10 +1,10 @@
 interface Props {
-
+  children: React.ReactNode;
 }
 
-const Carousel: React.FC<Props> = ({  }) => {
+const Carousel: React.FC<Props> = ({ children }) => {
 
-  return <p> Carousel! </p>
+  return <div> {children} </div>
 }
 
 export default Carousel;
