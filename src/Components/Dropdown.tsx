@@ -18,8 +18,9 @@ const Dropdown: React.FC<Props> = ({ selectedItem, optionItems, handleDropdown, 
     >
       {title && <p className={'text-center text-fgSec dark:text-fgSecD bg-bgSec dark:bg-bgSecD'}>{title}</p>}
       <select
-        className={`text-center w-full focus:outline-none bg-bgPri dark:bg-bgPriD text-fgPop  dark:text-fgPopD
-          hover:cursor-pointer hover:bg-bgIntHover dark:hover:bg-bgIntHoverD`}
+        className={`text-center w-full focus:outline-none
+          text-btnFg dark:text-btnFgD bg-btnBg dark:bg-btnBgD
+          hover:cursor-pointer hover:bg-btnBgHov dark:hover:bg-btnBgHovD`}
         value={selectedItem}
         onChange={handleDropdown}
       >
