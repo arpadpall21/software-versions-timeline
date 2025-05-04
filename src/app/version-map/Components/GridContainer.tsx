@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
-import { calcMonthsUpToCurrent, calcYearRange } from '@/misc/helpers';
+import { calcMonthRange, calcYearRange } from '@/misc/helpers';
 import { type Month } from '@/misc/types';
 import appConfig from '../../../../config/appConfig';
 
@@ -11,7 +11,7 @@ const defaultYearRange: string[] = calcYearRange('current');
 const maxYearsRight: number = 6;
 
 const GridContainer: React.FC = () => {
-  const [displayedMonths, setdisplayedMonths] = useState<Month[]>(calcMonthsUpToCurrent(2023, 6));
+  const [displayedMonths, setdisplayedMonths] = useState<Month[]>(calcMonthRange({ year: 2023, month: 6 }));
   const [yearRange, setYearRange] = useState<string[]>(defaultYearRange);
   const [selectedYear, setSelectedYear] = useState<string>(defaultYearRange[0]);
 
