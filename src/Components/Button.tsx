@@ -20,7 +20,7 @@ const Button: React.FC<Props> = ({ text, width, pop, handleClick }) => {
       <button
         className={`shadow-md px-3 ml-1 
           border-2 border-borPri dark:border-borPriD rounded-md bg-btnBgPop dark:bg-btnBgPopD
-          font-bold text-btnTxtPop dark:text-btnTxtPopD 
+          font-bold text-btnFgPop dark:text-btnFgPopD 
           hover:bg-btnBgHovPop dark:hover:bg-btnBgHovPopD`}
         style={{ width }}
         onClick={handleClick}
@@ -34,7 +34,7 @@ const Button: React.FC<Props> = ({ text, width, pop, handleClick }) => {
     <button
       className={` shadow-md px-3 ml-1
         border-2 border-borPri dark:border-borPriD rounded-md bg-btnBg dark:bg-btnBgD
-        text-btnTxt dark:text-btnTxtD 
+        text-btnFg dark:text-btnFgD 
         hover:bg-btnBgHov dark:hover:bg-btnBgHovD`}
       style={{ width }}
       onClick={handleClick}
