@@ -128,10 +128,7 @@ const GridFrame: React.FC<Props> = ({ displayedMonths, setDisplayedMonths }) => 
           onMouseDown={handleMouseDown}
         >
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
-          <div
-            className={'min-w-full float-right'}
-            style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
-          >
+          <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
             <div className={'min-w-full smoothTransform'} style={{ transform: `scale(${zoomLevel})` }}>
               {displayedSoftwares &&
                 displayedSoftwares.map((software, i) => (

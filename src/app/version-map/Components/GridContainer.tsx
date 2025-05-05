@@ -11,7 +11,7 @@ const defaultYearRange: string[] = calcYearRange('current');
 const maxYearsRight: number = 6;
 
 const GridContainer: React.FC = () => {
-  const [displayedMonths, setdisplayedMonths] = useState<Month[]>(calcMonthRange({ year: 2023, month: 6 }));
+  const [displayedMonths, setdisplayedMonths] = useState<Month[]>(calcMonthRange({ year: 2015, month: 1 }, 'current'));
   const [yearRange, setYearRange] = useState<string[]>(defaultYearRange);
   const [selectedYear, setSelectedYear] = useState<string>(defaultYearRange[0]);
 

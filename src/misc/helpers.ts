@@ -70,13 +70,16 @@ export function calcPercentOf(fraction: number, total: number = 100): number {
   return Math.floor((fraction / total) * 100);
 }
 
-export function calcMonthRange(start: { year: number; month: number }, end?: { year: number; month: number }): Month[] {
+export function calcMonthRange(
+  start: { year: number; month: number },
+  end: { year: number; month: number } | 'current',
+): Month[] {
   const result: Month[] = [];
 
   const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
   const today = new Date();
-  const endYear = today.getUTCFullYear();
-  const endMonth = today.getUTCMonth() + 1;
+  const endYear = end === 'current' ? today.getFullYear() : end.year;
+  const endMonth = end === 'current' ? today.getMonth() + 1 : end.month;
 
   for (let year = start.year; year <= endYear; year++) {
     for (let month = year === start.year ? start.month : 1; month <= (year === endYear ? endMonth : 12); month++) {
