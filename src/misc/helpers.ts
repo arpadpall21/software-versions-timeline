@@ -70,13 +70,18 @@ export function calcPercentOf(fraction: number, total: number = 100): number {
   return Math.floor((fraction / total) * 100);
 }
 
-export function calcMonthsUpToCurrent(startYear: number, startMonth: number = 1): Month[] {
+export function calcMonthRange(endYear: number, endMonth: number, monthsToSubtract: number): Month[] {
   const result: Month[] = [];
-
   const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
-  const today = new Date();
-  const endYear = today.getUTCFullYear();
-  const endMonth = today.getUTCMonth() + 1;
+
+  const totalMonths: number = endYear * 12 + endMonth;
+  const resultTotalMonths: number = totalMonths - monthsToSubtract;
+
+  const resultYear = Math.floor(resultTotalMonths / 12);
+  const resultMonth = resultTotalMonths % 12;
+
+  const startYear = resultMonth === 0 ? resultYear - 1 : resultYear;
+  const startMonth = resultMonth === 0 ? 12 : resultMonth;
 
   for (let year = startYear; year <= endYear; year++) {
     for (let month = year === startYear ? startMonth : 1; month <= (year === endYear ? endMonth : 12); month++) {
@@ -84,6 +89,18 @@ export function calcMonthsUpToCurrent(startYear: number, startMonth: number = 1)
     }
   }
 
+  return result;
+}
+
+export function calcYearRange(endInc: number | 'current'): number[] {
+  const result: number[] = [];
+  const endYear: number = endInc === 'current' ? new Date().getFullYear() : endInc;
+
+  for (let i = appConfig.oldestYear; i <= endYear; i++) {
+    result.push(i);
+  }
+
+  result.reverse();
   return result;
 }
 

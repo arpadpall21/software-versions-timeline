@@ -1,11 +1,11 @@
 import '@/app/globals.css';
-import GridFrame from '@/app/version-map/Components/GridFrame';
+import GridContainer from '@/app/version-map/Components/GridContainer';
 import SupportedSoftwares from '@/app/version-map/Components/SupportedSoftwares';
 
 const VersionMapPage = () => {
   return (
     <>
-      <GridFrame />
+      <GridContainer />
       <div className={'max-sm:hidden md:block my-7'}>
         <SupportedSoftwares />
       </div>

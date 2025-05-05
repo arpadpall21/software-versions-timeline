@@ -2,7 +2,7 @@
 
 import '@/app/globals.css';
 import { useState, useEffect } from 'react';
-import { calcTimelineZoom, calcMonthsUpToCurrent, defaultDisplayedSoftwares } from '@/misc/helpers';
+import { calcTimelineZoom } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
@@ -33,13 +33,17 @@ const twTimelineStyle: { [software in Software]: string } = {
   [Software.PYTHON]: 'bg-[#e3ab1e] dark:bg-[#856411] text-[#2e2e2e] dark:text-[#1c1c1c]',
 };
 
-const GridFrame: React.FC = () => {
+interface Props {
+  displayedMonths: Month[];
+  setDisplayedMonths: React.Dispatch<React.SetStateAction<Month[]>>;
+}
+
+const GridFrame: React.FC<Props> = ({ displayedMonths, setDisplayedMonths }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
-  const [months, setMonths] = useState<Month[]>(calcMonthsUpToCurrent(2023, 1));
   const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>();
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
@@ -64,7 +68,7 @@ const GridFrame: React.FC = () => {
     setOffset({ x: e.clientX - position.x, y: e.clientY - position.y });
   }
 
-  function mouseUpHandler() {
+  function handleMouseUp() {
     setIsDragging(false);
   }
 
@@ -83,9 +87,9 @@ const GridFrame: React.FC = () => {
         relative overflow-hidden select-none my-7
         shadow-[0_0_4px_1px] shadow-borPri dark:shadow-borPriD bg-bgSec dark:bg-bgSecD`}
       onWheel={handleMouseWheel}
-      onMouseLeave={mouseUpHandler}
+      onMouseLeave={handleMouseUp}
       onMouseMove={handleMouseMove}
-      onMouseUp={mouseUpHandler}
+      onMouseUp={handleMouseUp}
     >
       <ZoomPanel zoomLevel={zoomLevel} setZoomLevel={setZoomLevel} setPosition={setPosition} />
       <div
@@ -96,7 +100,7 @@ const GridFrame: React.FC = () => {
         <div className={'col-span-2 border-b border-black dark:border-white overflow-hidden'}>
           <div className={'float-right'} style={{ transform: `translateX(${position.x}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scaleX(${zoomLevel})` }}>
-              <MonthsTimeline zoomLevel={zoomLevel} months={months} />
+              <MonthsTimeline zoomLevel={zoomLevel} displayedMonths={displayedMonths} />
             </div>
           </div>
         </div>
@@ -124,16 +128,13 @@ const GridFrame: React.FC = () => {
           onMouseDown={handleMouseDown}
         >
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
-          <div
-            className={'min-w-full float-right'}
-            style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
-          >
+          <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
             <div className={'min-w-full smoothTransform'} style={{ transform: `scale(${zoomLevel})` }}>
               {displayedSoftwares &&
                 displayedSoftwares.map((software, i) => (
                   <Timeline
                     zoomLevel={zoomLevel}
-                    months={months}
+                    displayedMonths={displayedMonths}
                     software={software}
                     cache={localCache}
                     twTimelineStyle={twTimelineStyle[software]}

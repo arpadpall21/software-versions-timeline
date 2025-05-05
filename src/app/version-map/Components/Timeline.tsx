@@ -14,13 +14,13 @@ const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
 interface Props {
   zoomLevel: number;
-  months: Month[];
+  displayedMonths: Month[];
   software: Software;
   cache: LocalCache;
   twTimelineStyle: string;
 }
 
-const Timeline: React.FC<Props> = ({ zoomLevel, months, software, cache, twTimelineStyle }) => {
+const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, cache, twTimelineStyle }) => {
   const [versionHistory, setVersionHistory] = useState<VersionHistoryData>();
   const [versionHistoryError, setVersionHistoryError] = useState<boolean>(false);
   const [monthsWithTimeline, setMonthsWithTimeline] = useState<Month[]>([]);
@@ -30,7 +30,7 @@ const Timeline: React.FC<Props> = ({ zoomLevel, months, software, cache, twTimel
   useEffect(() => {
     if (cache[software]) {
       setVersionHistory(cache[software]);
-      setMonthsWithTimeline(calcMonthTimeline(cloneDeep(months), cache[software]));
+      setMonthsWithTimeline(calcMonthTimeline(cloneDeep(displayedMonths), cache[software]));
     } else {
       setVersionHistory(undefined);
       setMonthsWithTimeline([]);
@@ -39,14 +39,14 @@ const Timeline: React.FC<Props> = ({ zoomLevel, months, software, cache, twTimel
         .then((historyData) => {
           cache[software] = historyData;
           setVersionHistory(historyData);
-          setMonthsWithTimeline(calcMonthTimeline(cloneDeep(months), historyData));
+          setMonthsWithTimeline(calcMonthTimeline(cloneDeep(displayedMonths), historyData));
         })
         .catch((err) => {
           console.error(err);
           setVersionHistoryError(true);
         });
     }
-  }, [months, software, cache]);
+  }, [displayedMonths, software, cache]);
 
   useEffect(() => setVersionHistoryError(false), [software]);
 
