@@ -90,12 +90,12 @@ export function calcMonthRange(
   return result;
 }
 
-export function calcYearRange(endInc: number | 'current'): string[] {
-  const result: string[] = [];
+export function calcYearRange(endInc: number | 'current'): number[] {
+  const result: number[] = [];
   const endYear: number = endInc === 'current' ? new Date().getFullYear() : endInc;
 
   for (let i = appConfig.oldestYear; i <= endYear; i++) {
-    result.push(i.toString());
+    result.push(i);
   }
 
   result.reverse();
