@@ -9,9 +9,16 @@ import appConfig from '../../../../config/appConfig';
 
 const defaultYearRange: number[] = calcYearRange('current');
 const maxYearsRight: number = 6;
+const today = new Date();
+const currentYear = today.getFullYear();
+const currentMonth = today.getMonth() + 1;
+
+const monthsToRender: number = 18; // TODO: fine grain this when fingraining the zoom
 
 const GridContainer: React.FC = () => {
-  const [displayedMonths, setdisplayedMonths] = useState<Month[]>(calcMonthRange({ year: 2015, month: 1 }, 'current'));
+  const [displayedMonths, setdisplayedMonths] = useState<Month[]>(
+    calcMonthRange(currentYear, currentMonth, monthsToRender),
+  );
   const [yearRange, setYearRange] = useState<number[]>(defaultYearRange);
   const [selectedYear, setSelectedYear] = useState<number>(defaultYearRange[0]);
 
@@ -21,7 +28,7 @@ const GridContainer: React.FC = () => {
       : defaultYearRange[0];
     setSelectedYear(selectedYear);
     setYearRange(calcYearRange(Math.min(selectedYear + maxYearsRight, appConfig.newestYear)));
-    setdisplayedMonths(calcMonthRange({ year: selectedYear, month: 1 }, { year: selectedYear, month: 12 }));
+    setdisplayedMonths(calcMonthRange(selectedYear, selectedYear === currentYear ? currentMonth : 12, monthsToRender));
   }
 
   return (

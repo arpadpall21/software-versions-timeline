@@ -70,19 +70,21 @@ export function calcPercentOf(fraction: number, total: number = 100): number {
   return Math.floor((fraction / total) * 100);
 }
 
-export function calcMonthRange(
-  start: { year: number; month: number },
-  end: { year: number; month: number } | 'current',
-): Month[] {
+export function calcMonthRange(endYear: number, endMonth: number, monthsToSubtract: number): Month[] {
   const result: Month[] = [];
-
   const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
-  const today = new Date();
-  const endYear = end === 'current' ? today.getFullYear() : end.year;
-  const endMonth = end === 'current' ? today.getMonth() + 1 : end.month;
 
-  for (let year = start.year; year <= endYear; year++) {
-    for (let month = year === start.year ? start.month : 1; month <= (year === endYear ? endMonth : 12); month++) {
+  const totalMonths: number = endYear * 12 + endMonth;
+  const resultTotalMonths: number = totalMonths - monthsToSubtract;
+
+  const resultYear = Math.floor(resultTotalMonths / 12);
+  const resultMonth = resultTotalMonths % 12;
+
+  const startYear = resultMonth === 0 ? resultYear - 1 : resultYear;
+  const startMonth = resultMonth === 0 ? 12 : resultMonth;
+
+  for (let year = startYear; year <= endYear; year++) {
+    for (let month = year === startYear ? startMonth : 1; month <= (year === endYear ? endMonth : 12); month++) {
       result.push({ yearMonth: `${year}-${month.toString().padStart(2, '0')}`, monthName: monthMap[month - 1] });
     }
   }
