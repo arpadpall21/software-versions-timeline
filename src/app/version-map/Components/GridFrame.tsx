@@ -10,7 +10,6 @@ import Timeline from '@/app/version-map/Components/Timeline';
 import MonthsTimeline from '@/app/version-map/Components/MonthsTimeline';
 import SideLogo from './SideLogo';
 import { type Month, type DisplayedSoftwares, Software } from '@/misc/types';
-import store from '@/misc/store';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
@@ -33,19 +32,23 @@ const twTimelineStyle: { [software in Software]: string } = {
 };
 
 interface Props {
+  displayedSoftwares?: DisplayedSoftwares;
+  setDisplayedSoftwares: React.Dispatch<React.SetStateAction<DisplayedSoftwares | undefined>>;
   displayedMonths: Month[];
   setDisplayedMonths: React.Dispatch<React.SetStateAction<Month[]>>;
 }
 
-const GridFrame: React.FC<Props> = ({ displayedMonths, setDisplayedMonths }) => {
+const GridFrame: React.FC<Props> = ({
+  displayedSoftwares,
+  setDisplayedSoftwares,
+  displayedMonths,
+  setDisplayedMonths,
+}) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
-  const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>();
-
-  useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
   useEffect(() => {
     if (scrollZoomEnabled) {
@@ -128,7 +131,7 @@ const GridFrame: React.FC<Props> = ({ displayedMonths, setDisplayedMonths }) => 
         >
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
-            <div className={'min-w-full smoothTransform'} style={{ transform: `scale(${zoomLevel})` }}>
+            <div className={'smoothTransform'} style={{ transform: `scale(${zoomLevel})` }}>
               {displayedSoftwares &&
                 displayedSoftwares.map((software, i) => (
                   <Timeline
