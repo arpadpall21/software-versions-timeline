@@ -23,22 +23,20 @@ export interface Lang {
   lang: string;
 }
 
-interface DayVersion {
-  day: number;
-  version: string;
+export interface HistoryData {
+  [yearMonth: string]: {
+    versions: { day: number; version: string }[];
+  };
 }
-
-interface DayVersionWithTimeline extends DayVersion {
-  timeline: { from: 'left' | 'right'; percent: number };
-}
-
-export type VersionHistoryData = { [yearMonth: string]: DayVersion[] };
-export type VersionHistoryDataWithTimeline = { [yearMonth: string]: DayVersionWithTimeline[] };
-
-export interface VersionHistory {
-  data: VersionHistoryDataWithTimeline;
-  oldestYearMonth: YearMonth;
-  newestYearMonth: YearMonth;
+export interface ParsedHistoryData {
+  data: {
+    [yearMonth: string]: {
+      versions: { day: number; version: string }[];
+      timeline: { from: 'left' | 'right'; percent: number };
+    };
+  };
+  newestMonth: YearMonth;
+  oldestMonth: YearMonth;
 }
 
 export interface Month {

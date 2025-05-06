@@ -1,36 +1,31 @@
 'use server';
 
 import { readFile } from 'node:fs/promises';
-import { type VersionHistory, type VersionHistoryData, Software } from '@/misc/types';
+import { type HistoryData, type ParsedHistoryData, Software } from '@/misc/types';
 import appConfig from '../../../config/appConfig';
 
-export async function getVersionHistory(software: Software): Promise<VersionHistory> {
+export async function getVersionHistory(software: Software): Promise<ParsedHistoryData> {
   try {
-    if (software === 'NODE') {      // TODO remove at the end
-      let newestYear: number = 1970;
-      let newestMonth: number = 1;
-      let oldestYear: number = 2500;
-      let oldestMonth: number = 12;
-    
+    if (software === 'CHROME') {      // TODO remove at the end
       const data = await readFile(appConfig.supportedSoftwares[software].dataPath);
-      const historyData: VersionHistoryData = JSON.parse(data.toString());
+      const historyData: HistoryData = JSON.parse(data.toString());
 
+      const dates: Date[] = [];
       for (const yearMonth in historyData) {
-        console.log(yearMonth)
+        dates.push(new Date(yearMonth + '-01'));
       }
 
+      const times: number[] = [...dates].map((date) => date.getTime());
+      const oldestDate: Date = new Date(Math.min(...times));
+      const newestDate: Date = new Date(Math.max(...times));
 
-      // console.log( historyData )
 
 
-      const result: VersionHistory = {
+      const result: ParsedHistoryData = {
         data: {},
-        oldestYearMonth: { year: olde, month: 12 },
-        newestYearMonth: { year: 1979, month: 1 },
+        oldestMonth: { year: oldestYear, month: oldestMonth },
+        newestMonth: { year: newestYear, month: newestMonth },
       };
-
-      // need to return
-      // data 
 
 
       console.log(result)
