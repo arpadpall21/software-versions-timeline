@@ -23,18 +23,37 @@ export interface Lang {
   lang: string;
 }
 
-export interface VersionHistoryData {
-  [yearMonth: string]: { day: number; version: string }[];
+interface DayVersion {
+  day: number;
+  version: string;
 }
 
-export type Month = {
+interface DayVersionWithTimeline extends DayVersion {
+  timeline: { from: 'left' | 'right'; percent: number };
+}
+
+export type VersionHistoryData = { [yearMonth: string]: DayVersion[] };
+export type VersionHistoryDataWithTimeline = { [yearMonth: string]: DayVersionWithTimeline[] };
+
+export interface VersionHistory {
+  data: VersionHistoryDataWithTimeline;
+  oldestYearMonth: YearMonth;
+  newestYearMonth: YearMonth;
+}
+
+export interface Month {
   yearMonth: string;
   monthName: string;
   timeline?: { from: 'left' | 'right'; percent: number };
-};
+}
 
 export type AppTheme = 'auto' | 'light' | 'dark';
 
-export type LocalCache = { [key: string]: VersionHistoryData };
+export type FeCache = { [key: string]: VersionHistory };
 
 export type DisplayedSoftwares = [Software, Software, Software, Software, Software];
+
+export interface YearMonth {
+  year: number;
+  month: number;
+}

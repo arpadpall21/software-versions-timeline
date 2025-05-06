@@ -1,9 +1,10 @@
 import {
   type Lang,
   type Month,
-  type VersionHistoryData,
+  type VersionHistory,
   type AppTheme,
   type DisplayedSoftwares,
+  type YearMonth,
   Software,
 } from '@/misc/types';
 import appConfig from '../../config/appConfig';
@@ -70,11 +71,16 @@ export function calcPercentOf(fraction: number, total: number = 100): number {
   return Math.floor((fraction / total) * 100);
 }
 
-export function calcMonthRange(endYear: number, endMonth: number, monthsToSubtract: number): Month[] {
+export function calcMonthRange(
+  endDate: YearMonth,
+  monthsToSubtract: number,
+  minAllowedMonth?: YearMonth,
+  maxAllowedMonth?: YearMonth,
+): Month[] {
   const result: Month[] = [];
   const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
-  const totalMonths: number = endYear * 12 + endMonth;
+  const totalMonths: number = endDate.year * 12 + endDate.month;
   const resultTotalMonths: number = totalMonths - monthsToSubtract;
 
   const resultYear = Math.floor(resultTotalMonths / 12);
@@ -83,8 +89,12 @@ export function calcMonthRange(endYear: number, endMonth: number, monthsToSubtra
   const startYear = resultMonth === 0 ? resultYear - 1 : resultYear;
   const startMonth = resultMonth === 0 ? 12 : resultMonth;
 
-  for (let year = startYear; year <= endYear; year++) {
-    for (let month = year === startYear ? startMonth : 1; month <= (year === endYear ? endMonth : 12); month++) {
+  for (let year = startYear; year <= endDate.year; year++) {
+    for (
+      let month = year === startYear ? startMonth : 1;
+      month <= (year === endDate.year ? endDate.month : 12);
+      month++
+    ) {
       result.push({ yearMonth: `${year}-${month.toString().padStart(2, '0')}`, monthName: monthMap[month - 1] });
     }
   }
@@ -92,7 +102,7 @@ export function calcMonthRange(endYear: number, endMonth: number, monthsToSubtra
   return result;
 }
 
-export function calcYearRange(endInc: number | 'current'): number[] {
+export function calcYearRange(endInc: number | 'current'): number[] {   // TODO: refactor
   const result: number[] = [];
   const endYear: number = endInc === 'current' ? new Date().getFullYear() : endInc;
 
@@ -104,10 +114,10 @@ export function calcYearRange(endInc: number | 'current'): number[] {
   return result;
 }
 
-function getDate(versionHistoryData: VersionHistoryData, which: 'first' | 'last' = 'first'): string {
+function getDate(versionHistory: VersionHistory, which: 'first' | 'last' = 'first'): string {
   let result: string = which === 'first' ? '2500-01' : '1970-01';
 
-  for (const yearMonth in versionHistoryData) {
+  for (const yearMonth in versionHistory.data) {
     if (which === 'first' && yearMonth < result) {
       result = yearMonth;
     }
@@ -122,9 +132,9 @@ function getDate(versionHistoryData: VersionHistoryData, which: 'first' | 'last'
 /**
  * calculates the timeline length for each month
  */
-export function calcMonthTimeline(months: Month[], versionHistoryData: VersionHistoryData): Month[] {
-  const firstYearMonth: string = getDate(versionHistoryData, 'first');
-  const lastYearMonth: string = getDate(versionHistoryData, 'last');
+export function calcMonthTimeline(months: Month[], versionHistory: VersionHistory): Month[] {
+  const firstYearMonth: string = getDate(versionHistory.data, 'first');
+  const lastYearMonth: string = getDate(versionHistory, 'last');
 
   const firstMonthHavingVersionIdx: number = months.findIndex((month) => month.yearMonth === firstYearMonth);
   const lastMonthHavingVersionIdx: number = months.findLastIndex((month) => month.yearMonth === lastYearMonth);
@@ -135,11 +145,11 @@ export function calcMonthTimeline(months: Month[], versionHistoryData: VersionHi
 
   months[firstMonthHavingVersionIdx < 0 ? 0 : firstMonthHavingVersionIdx].timeline = {
     from: 'right',
-    percent: firstMonthHavingVersionIdx < 0 ? 100 : 100 - calcPercentOf(versionHistoryData[firstYearMonth][0].day, 31),
+    percent: firstMonthHavingVersionIdx < 0 ? 100 : 100 - calcPercentOf(versionHistory.data[firstYearMonth][0].day, 31),
   };
   months[lastMonthHavingVersionIdx].timeline = {
     from: 'left',
-    percent: calcPercentOf(versionHistoryData[lastYearMonth][versionHistoryData[lastYearMonth].length - 1].day, 31),
+    percent: calcPercentOf(versionHistory[lastYearMonth][versionHistory[lastYearMonth].length - 1].day, 31),
   };
 
   return months.map((month, i) => {
