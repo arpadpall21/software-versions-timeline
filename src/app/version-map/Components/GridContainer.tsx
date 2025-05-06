@@ -12,9 +12,9 @@ const defaultYearRange: number[] = calcYearRange('current');
 const maxYearsRight: number = 6;
 const today = new Date();
 const currentYear = today.getFullYear();
-const nextMonth = today.getMonth() + 2;
+const currentMonth = today.getMonth() + 1;
 
-const monthsToRender: number = 18; // TODO: fine grain this when finegraining the zoom
+const nrOfmonthsToRender: number = 18; // TODO: fine grain this when finegraining the zoom
 
 export const FeCacheContext = createContext<{
   feCache: FeCache;
@@ -23,7 +23,7 @@ export const FeCacheContext = createContext<{
 
 const GridContainer: React.FC = () => {
   const [displayedMonths, setdisplayedMonths] = useState<Month[]>(
-    calcMonthRange({ year: currentYear, month: nextMonth }, monthsToRender),
+    calcMonthRange({ year: currentYear, month: currentMonth }, nrOfmonthsToRender),
   );
   const [displayedYearButtons, setDisplayedYearButtons] = useState<number[]>(defaultYearRange);
   const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>();
@@ -41,7 +41,7 @@ const GridContainer: React.FC = () => {
     setSelectedYear(selectedYear);
     setDisplayedYearButtons(calcYearRange(Math.min(selectedYear + maxYearsRight, appConfig.newestYear)));
     setdisplayedMonths(
-      calcMonthRange({ year: selectedYear, month: selectedYear === currentYear ? nextMonth : 12 }, monthsToRender),
+      calcMonthRange({ year: selectedYear, month: selectedYear === currentYear ? currentMonth : 12 }, nrOfmonthsToRender),
     );
   }
 

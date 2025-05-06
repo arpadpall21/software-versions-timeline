@@ -71,7 +71,12 @@ export function calcPercentOf(fraction: number, total: number = 100): number {
   return Math.floor((fraction / total) * 100);
 }
 
-export function calcMonthRange(endDate: YearMonth, monthsToSubtract: number): Month[] {
+export function calcMonthRange(
+  endDate: YearMonth,
+  monthsToSubtract: number,
+  minAllowedMonth?: YearMonth,
+  maxAllowedMonth?: YearMonth,
+): Month[] {
   const result: Month[] = [];
   const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
