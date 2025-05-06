@@ -34,9 +34,9 @@ const GridContainer: React.FC = () => {
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
-  console.log('--- grid container rendered ---');
-  console.log('displayable oldest month', displayableOldestMonth);
-  console.log('displayable newest month', displayableNewestMonth);
+  // console.log('--- grid container rendered ---');
+  // console.log('displayable oldest month', displayableOldestMonth);
+  // console.log('displayable newest month', displayableNewestMonth);
 
   useEffect(() => {
     const oldestMonthYear = { year: 1970, month: 1 };
