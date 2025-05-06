@@ -18,16 +18,30 @@ export async function getVersionHistory(software: Software): Promise<HistoryData
       const times: number[] = [...dates].map((date) => date.getTime());
       const oldestDate: Date = new Date(Math.min(...times));
       const newestDate: Date = new Date(Math.max(...times));
-      const oldestMonth: YearMonth = { year: oldestDate.getFullYear(), month: oldestDate.getMonth() + 1 };
-      const newestMonth: YearMonth = { year: newestDate.getFullYear(), month: newestDate.getMonth() + 1 };
+      const oldestYear: number = oldestDate.getFullYear();
+      const oldestMonth: number = oldestDate.getMonth() + 1;
+      const newestYear: number = newestDate.getFullYear();
+      const newestMonth: number = newestDate.getMonth() + 1;
 
       const parsedData: ParsedHistoryData = {};
       while (oldestDate <= newestDate) {
-        const yearMonth: string = `${oldestDate.getFullYear()}-${String(oldestDate.getMonth() + 1).padStart(2, '0')}`;
+        const year: number = oldestDate.getFullYear();
+        const month: number = oldestDate.getMonth() + 1;
+        const yearMonth: string = `${year}-${month.toString().padStart(2, '0')}`;
 
-        if (historyData[yearMonth]) {
+        if (year === oldestYear && month === oldestMonth) {
           parsedData[yearMonth] = {
             versions: historyData[yearMonth].versions,
+            timeline: { from: 'right', percent: -1 },   // TODO calc start
+          };
+        } else if (year === newestYear && month === newestMonth) {
+          parsedData[yearMonth] = {
+            versions: historyData[yearMonth].versions,
+            timeline: { from: 'left', percent: -1 },   // TODO calc end
+          };
+        } else {
+          parsedData[yearMonth] = {
+            versions: historyData[yearMonth] ? historyData[yearMonth].versions : undefined,
             timeline: { from: 'left', percent: 100 },
           };
         }
@@ -35,10 +49,12 @@ export async function getVersionHistory(software: Software): Promise<HistoryData
         oldestDate.setMonth(oldestDate.getMonth() + 1);
       }
 
-      const result: HistoryDataResponse = { data: parsedData, oldestMonth, newestMonth };
+      const result: HistoryDataResponse = {
+        data: parsedData,
+        oldestMonth: { year: oldestYear, month: oldestMonth },
+        newestMonth: { year: newestYear, month: newestMonth },
+      };
 
-
-      console.log(result)
       return result;
     }
   } catch (err) {

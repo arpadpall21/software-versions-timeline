@@ -38,6 +38,8 @@ const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTim
 
       getVersionHistory(software)
         .then((historyData) => {
+          console.log(historyData);
+        
           feCache[software] = historyData;
           setFeCache(feCache);
           setVersionHistory(historyData);

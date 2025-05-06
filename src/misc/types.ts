@@ -29,9 +29,9 @@ export interface HistoryData {
   };
 }
 
-export interface ParsedHistoryData extends HistoryData {
+export interface ParsedHistoryData {
   [yearMonth: string]: {
-    versions: { day: number; version: string }[];
+    versions?: { day: number; version: string }[];
     timeline: { from: 'left' | 'right'; percent: number };
   };
 }
