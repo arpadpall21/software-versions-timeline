@@ -34,6 +34,21 @@ const GridContainer: React.FC = () => {
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
+  console.log('--- grid container rendered ---');
+  console.log('displayable oldest month', displayableOldestMonth);
+  console.log('displayable newest month', displayableNewestMonth);
+
+  useEffect(() => {
+    const oldestMonthYear = { year: 1970, month: 1 };
+    const newestMonthYear = { year: 2500, month: 12 };
+    
+    for (const software in feCache) {
+      
+    }
+    
+  }, [displayedSoftwares]);
+
+
   function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
     const selectedYear: number = e.currentTarget.textContent
       ? Number.parseInt(e.currentTarget.textContent)
