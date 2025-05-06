@@ -28,13 +28,16 @@ export interface HistoryData {
     versions: { day: number; version: string }[];
   };
 }
-export interface ParsedHistoryData {
-  data: {
-    [yearMonth: string]: {
-      versions: { day: number; version: string }[];
-      timeline: { from: 'left' | 'right'; percent: number };
-    };
+
+export interface ParsedHistoryData extends HistoryData {
+  [yearMonth: string]: {
+    versions: { day: number; version: string }[];
+    timeline: { from: 'left' | 'right'; percent: number };
   };
+}
+
+export interface HistoryDataResponse {
+  data: ParsedHistoryData;
   newestMonth: YearMonth;
   oldestMonth: YearMonth;
 }
