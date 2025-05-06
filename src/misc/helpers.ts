@@ -1,7 +1,7 @@
 import {
   type Lang,
   type Month,
-  type VersionHistory,
+  type VersionHistoryResponse,
   type AppTheme,
   type DisplayedSoftwares,
   type YearMonth,

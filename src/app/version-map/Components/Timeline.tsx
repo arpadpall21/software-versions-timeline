@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo, useContext } from 'react';
 import { cloneDeep } from 'lodash';
 import { type VersionHistoryResponse, type Month, Software } from '@/misc/types';
-import { calcPercentOf, calcMonthTimeline } from '@/misc/helpers';
+import { calcPercentOf } from '@/misc/helpers';
 import TextBallon from '@/Components/TextBalloon';
 import { useTranslations } from 'next-intl';
 import appConfig from '../../../../config/appConfig';
@@ -62,11 +62,6 @@ const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTim
     );
   }
 
-  if (software === 'NODE') {
-    console.log(versionHistory)
-    console.log(displayedMonths);
-  }
-
   return (
     <div className={'flex h-[100px] bg-gridBg dark:bg-gridBgD'}>
       {displayedMonths.map((month) => {
@@ -76,7 +71,7 @@ const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTim
             style={{ borderLeftWidth: month.monthName === 'jan' ? 3 : 1 }}
             key={month.yearMonth}
           >
-            {Array.isArray(versionHistory.data[month.yearMonth]?.versions) &&
+            {Array.isArray(versionHistory?.data[month.yearMonth]?.versions) &&
               versionHistory.data[month.yearMonth].versions.map(({ day, version }) => (
                 <div
                   className={'absolute bottom-[32px] z-10 hover:z-50'}
