@@ -4,6 +4,7 @@ import {
   type VersionHistoryData,
   type AppTheme,
   type DisplayedSoftwares,
+  type YearMonth,
   Software,
 } from '@/misc/types';
 import appConfig from '../../config/appConfig';
@@ -70,11 +71,11 @@ export function calcPercentOf(fraction: number, total: number = 100): number {
   return Math.floor((fraction / total) * 100);
 }
 
-export function calcMonthRange(endYear: number, endMonth: number, monthsToSubtract: number): Month[] {
+export function calcMonthRange(endDate: YearMonth, monthsToSubtract: number): Month[] {
   const result: Month[] = [];
   const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
-  const totalMonths: number = endYear * 12 + endMonth;
+  const totalMonths: number = endDate.year * 12 + endDate.month;
   const resultTotalMonths: number = totalMonths - monthsToSubtract;
 
   const resultYear = Math.floor(resultTotalMonths / 12);
@@ -83,8 +84,12 @@ export function calcMonthRange(endYear: number, endMonth: number, monthsToSubtra
   const startYear = resultMonth === 0 ? resultYear - 1 : resultYear;
   const startMonth = resultMonth === 0 ? 12 : resultMonth;
 
-  for (let year = startYear; year <= endYear; year++) {
-    for (let month = year === startYear ? startMonth : 1; month <= (year === endYear ? endMonth : 12); month++) {
+  for (let year = startYear; year <= endDate.year; year++) {
+    for (
+      let month = year === startYear ? startMonth : 1;
+      month <= (year === endDate.year ? endDate.month : 12);
+      month++
+    ) {
       result.push({ yearMonth: `${year}-${month.toString().padStart(2, '0')}`, monthName: monthMap[month - 1] });
     }
   }
@@ -92,7 +97,7 @@ export function calcMonthRange(endYear: number, endMonth: number, monthsToSubtra
   return result;
 }
 
-export function calcYearRange(endInc: number | 'current'): number[] {
+export function calcYearRange(endInc: number | 'current'): number[] {   // TODO: refactor
   const result: number[] = [];
   const endYear: number = endInc === 'current' ? new Date().getFullYear() : endInc;
 

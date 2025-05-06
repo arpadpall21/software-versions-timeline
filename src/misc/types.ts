@@ -38,3 +38,8 @@ export type AppTheme = 'auto' | 'light' | 'dark';
 export type FeCache = { [key: string]: VersionHistoryData };
 
 export type DisplayedSoftwares = [Software, Software, Software, Software, Software];
+
+export interface YearMonth {
+  year: number;
+  month: number;
+}
