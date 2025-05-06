@@ -1,14 +1,15 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useContext } from 'react';
 import { cloneDeep } from 'lodash';
-import { type VersionHistoryData, type Month, type LocalCache, Software } from '@/misc/types';
+import { type VersionHistoryData, type Month, Software } from '@/misc/types';
 import { calcPercentOf, calcMonthTimeline } from '@/misc/helpers';
 import TextBallon from '@/Components/TextBalloon';
 import { useTranslations } from 'next-intl';
 import appConfig from '../../../../config/appConfig';
 import { getVersionHistory } from '@/app/version-map/action';
 import Skeleton from '@/Components/Skeleton';
+import { FeCacheContext } from '@/app/version-map/Components/GridContainer';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
@@ -16,28 +17,29 @@ interface Props {
   zoomLevel: number;
   displayedMonths: Month[];
   software: Software;
-  cache: LocalCache;
   twTimelineStyle: string;
 }
 
-const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, cache, twTimelineStyle }) => {
+const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTimelineStyle }) => {
   const [versionHistory, setVersionHistory] = useState<VersionHistoryData>();
   const [versionHistoryError, setVersionHistoryError] = useState<boolean>(false);
   const [monthsWithTimeline, setMonthsWithTimeline] = useState<Month[]>([]);
+  const { feCache, setFeCache } = useContext(FeCacheContext);
 
   const t = useTranslations('components.monthsGrid.months');
 
   useEffect(() => {
-    if (cache[software]) {
-      setVersionHistory(cache[software]);
-      setMonthsWithTimeline(calcMonthTimeline(cloneDeep(displayedMonths), cache[software]));
+    if (feCache[software]) {
+      setVersionHistory(feCache[software]);
+      setMonthsWithTimeline(calcMonthTimeline(cloneDeep(displayedMonths), feCache[software]));
     } else {
       setVersionHistory(undefined);
       setMonthsWithTimeline([]);
 
       getVersionHistory(software)
         .then((historyData) => {
-          cache[software] = historyData;
+          feCache[software] = historyData;
+          setFeCache(feCache);
           setVersionHistory(historyData);
           setMonthsWithTimeline(calcMonthTimeline(cloneDeep(displayedMonths), historyData));
         })
@@ -46,7 +48,7 @@ const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, cache
           setVersionHistoryError(true);
         });
     }
-  }, [displayedMonths, software, cache]);
+  }, [displayedMonths, software, feCache, setFeCache]);
 
   useEffect(() => setVersionHistoryError(false), [software]);
 

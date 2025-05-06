@@ -9,11 +9,10 @@ import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
 import Timeline from '@/app/version-map/Components/Timeline';
 import MonthsTimeline from '@/app/version-map/Components/MonthsTimeline';
 import SideLogo from './SideLogo';
-import { type Month, type LocalCache, type DisplayedSoftwares, Software } from '@/misc/types';
+import { type Month, type DisplayedSoftwares, Software } from '@/misc/types';
 import store from '@/misc/store';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
-const localCache: LocalCache = {};
 
 /**
  * Tailwind utilities are parsed at build time so they cannot be iterpolated with values,
@@ -136,7 +135,6 @@ const GridFrame: React.FC<Props> = ({ displayedMonths, setDisplayedMonths }) => 
                     zoomLevel={zoomLevel}
                     displayedMonths={displayedMonths}
                     software={software}
-                    cache={localCache}
                     twTimelineStyle={twTimelineStyle[software]}
                     key={i}
                   />

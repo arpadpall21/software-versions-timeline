@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, createContext } from 'react';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
 import { calcMonthRange, calcYearRange } from '@/misc/helpers';
-import { type Month } from '@/misc/types';
+import { type Month, type FeCache } from '@/misc/types';
 import appConfig from '../../../../config/appConfig';
 
 const defaultYearRange: number[] = calcYearRange('current');
@@ -13,28 +13,34 @@ const today = new Date();
 const currentYear = today.getFullYear();
 const currentMonth = today.getMonth() + 1;
 
-const monthsToRender: number = 18; // TODO: fine grain this when fingraining the zoom
+const monthsToRender: number = 18; // TODO: fine grain this when finegraining the zoom
+
+export const FeCacheContext = createContext<{
+  feCache: FeCache;
+  setFeCache: React.Dispatch<React.SetStateAction<FeCache>>;
+}>({ feCache: {}, setFeCache: () => {} });
 
 const GridContainer: React.FC = () => {
   const [displayedMonths, setdisplayedMonths] = useState<Month[]>(
     calcMonthRange(currentYear, currentMonth, monthsToRender),
   );
-  const [yearRange, setYearRange] = useState<number[]>(defaultYearRange);
+  const [displayedYearButtons, setDisplayedYearButtons] = useState<number[]>(defaultYearRange);
   const [selectedYear, setSelectedYear] = useState<number>(defaultYearRange[0]);
+  const [feCache, setFeCache] = useState<FeCache>({});
 
   function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
     const selectedYear: number = e.currentTarget.textContent
       ? Number.parseInt(e.currentTarget.textContent)
       : defaultYearRange[0];
     setSelectedYear(selectedYear);
-    setYearRange(calcYearRange(Math.min(selectedYear + maxYearsRight, appConfig.newestYear)));
+    setDisplayedYearButtons(calcYearRange(Math.min(selectedYear + maxYearsRight, appConfig.newestYear)));
     setdisplayedMonths(calcMonthRange(selectedYear, selectedYear === currentYear ? currentMonth : 12, monthsToRender));
   }
 
   return (
-    <>
+    <FeCacheContext.Provider value={{ feCache, setFeCache }}>
       <div className={'my-7 overflow-hidden whitespace-nowrap'} style={{ direction: 'rtl' }}>
-        {yearRange.map((year) => (
+        {displayedYearButtons.map((year) => (
           <Button
             text={year.toString()}
             width={70}
@@ -45,7 +51,7 @@ const GridContainer: React.FC = () => {
         ))}
       </div>
       <GridFrame displayedMonths={displayedMonths} setDisplayedMonths={setdisplayedMonths} />
-    </>
+    </FeCacheContext.Provider>
   );
 };
 
