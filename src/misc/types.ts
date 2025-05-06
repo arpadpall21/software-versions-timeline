@@ -36,7 +36,7 @@ export interface ParsedHistoryData {
   };
 }
 
-export interface HistoryDataResponse {
+export interface VersionHistoryResponse {
   data: ParsedHistoryData;
   newestMonth: YearMonth;
   oldestMonth: YearMonth;
@@ -45,7 +45,7 @@ export interface HistoryDataResponse {
 export interface Month {
   yearMonth: string;
   monthName: string;
-  timeline?: { from: 'left' | 'right'; percent: number };
+  timeline?: { from: 'left' | 'right'; percent: number };   // TODO: to be removed
 }
 
 export type AppTheme = 'auto' | 'light' | 'dark';

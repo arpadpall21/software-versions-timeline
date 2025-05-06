@@ -1,11 +1,11 @@
 'use server';
 
 import { readFile } from 'node:fs/promises';
-import { type HistoryData, type HistoryDataResponse, type ParsedHistoryData, Software } from '@/misc/types';
+import { type HistoryData, type VersionHistoryResponse, type ParsedHistoryData, Software } from '@/misc/types';
 import { calcPercentOf } from '@/misc/helpers';
 import appConfig from '../../../config/appConfig';
 
-export async function getVersionHistory(software: Software): Promise<HistoryDataResponse> {
+export async function getVersionHistory(software: Software): Promise<VersionHistoryResponse> {
   try {
     const data = await readFile(appConfig.supportedSoftwares[software].dataPath);
     const historyData: HistoryData = JSON.parse(data.toString());
@@ -55,7 +55,7 @@ export async function getVersionHistory(software: Software): Promise<HistoryData
       oldestDate.setMonth(oldestDate.getMonth() + 1);
     }
 
-    const result: HistoryDataResponse = {
+    const result: VersionHistoryResponse = {
       data: parsedData,
       oldestMonth: { year: oldestYear, month: oldestMonth },
       newestMonth: { year: newestYear, month: newestMonth },
