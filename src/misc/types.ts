@@ -27,12 +27,13 @@ interface DayVersion {
   day: number;
   version: string;
 }
+
 interface DayVersionWithTimeline extends DayVersion {
   timeline: { from: 'left' | 'right'; percent: number };
 }
 
-export type VersionHistoryData = { [yearMonth: string]: DayVersion }[];
-export type VersionHistoryDataWithTimeline = { [yearMonth: string]: DayVersionWithTimeline }[];
+export type VersionHistoryData = { [yearMonth: string]: DayVersion[] };
+export type VersionHistoryDataWithTimeline = { [yearMonth: string]: DayVersionWithTimeline[] };
 
 export interface VersionHistory {
   data: VersionHistoryDataWithTimeline;

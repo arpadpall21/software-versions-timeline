@@ -7,19 +7,30 @@ import appConfig from '../../../config/appConfig';
 export async function getVersionHistory(software: Software): Promise<VersionHistory> {
   try {
     if (software === 'NODE') {      // TODO remove at the end
+      let newestYear: number = 1970;
+      let newestMonth: number = 1;
       let oldestYear: number = 2500;
       let oldestMonth: number = 12;
-      let newestYear: number = 2500;
-      let newestMonth: number = 12;
     
       const data = await readFile(appConfig.supportedSoftwares[software].dataPath);
       const historyData: VersionHistoryData = JSON.parse(data.toString());
 
+      for (const yearMonth in historyData) {
+        console.log(yearMonth)
+      }
+
+
+      // console.log( historyData )
+
+
       const result: VersionHistory = {
-        data: historyData,
+        data: {},
         oldestYearMonth: { year: olde, month: 12 },
         newestYearMonth: { year: 1979, month: 1 },
       };
+
+      // need to return
+      // data 
 
 
       console.log(result)
