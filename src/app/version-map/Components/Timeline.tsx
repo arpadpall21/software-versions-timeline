@@ -71,6 +71,8 @@ const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTim
             key={month.yearMonth}
           >
             {Array.isArray(versionHistory?.data?.[month.yearMonth]?.versions) &&
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-expect-error
               versionHistory.data[month.yearMonth].versions.map(({ day, version }) => (
                 <div
                   className={'absolute bottom-[32px] z-10 hover:z-50'}
