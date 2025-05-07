@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useMemo, useContext } from 'react';
-import { cloneDeep } from 'lodash';
 import { type VersionHistoryResponse, type Month, Software } from '@/misc/types';
 import { calcPercentOf } from '@/misc/helpers';
 import TextBallon from '@/Components/TextBalloon';
@@ -29,14 +28,14 @@ const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTim
 
   useEffect(() => {
     if (feCache[software]) {
-      // setVersionHistory(feCache[software]);
+      setVersionHistory(feCache[software]);
     } else {
-      // setVersionHistory(undefined);
+      setVersionHistory(undefined);
 
       getVersionHistory(software)
         .then((historyData) => {
-          // feCache[software] = historyData;
-          // setFeCache(feCache);
+          feCache[software] = historyData;
+          setFeCache(feCache);
           setVersionHistory(historyData);
         })
         .catch((err) => {
@@ -71,7 +70,7 @@ const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTim
             style={{ borderLeftWidth: month.monthName === 'jan' ? 3 : 1 }}
             key={month.yearMonth}
           >
-            {Array.isArray(versionHistory?.data[month.yearMonth]?.versions) &&
+            {Array.isArray(versionHistory?.data?.[month.yearMonth]?.versions) &&
               versionHistory.data[month.yearMonth].versions.map(({ day, version }) => (
                 <div
                   className={'absolute bottom-[32px] z-10 hover:z-50'}

@@ -45,12 +45,11 @@ export interface VersionHistoryResponse {
 export interface Month {
   yearMonth: string;
   monthName: string;
-  timeline?: { from: 'left' | 'right'; percent: number };   // TODO: to be removed
 }
 
 export type AppTheme = 'auto' | 'light' | 'dark';
 
-export type FeCache = { [key: string]: VersionHistory };
+export type FeCache = { [key: string]: VersionHistoryResponse };
 
 export type DisplayedSoftwares = [Software, Software, Software, Software, Software];
 
