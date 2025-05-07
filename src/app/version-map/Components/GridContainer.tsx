@@ -38,15 +38,15 @@ const GridContainer: React.FC = () => {
   // console.log('displayable oldest month', displayableOldestMonth);
   // console.log('displayable newest month', displayableNewestMonth);
 
-  useEffect(() => {
-    const oldestMonthYear = { year: 1970, month: 1 };
-    const newestMonthYear = { year: 2500, month: 12 };
+  // useEffect(() => {
+  //   const oldestMonthYear = { year: 1970, month: 1 };
+  //   const newestMonthYear = { year: 2500, month: 12 };
     
-    for (const software in feCache) {
+  //   for (const software in feCache) {
       
-    }
+  //   }
     
-  }, [displayedSoftwares]);
+  // }, [displayedSoftwares]);
 
 
   function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {

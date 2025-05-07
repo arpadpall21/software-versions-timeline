@@ -1,12 +1,4 @@
-import {
-  type Lang,
-  type Month,
-  type VersionHistory,
-  type AppTheme,
-  type DisplayedSoftwares,
-  type YearMonth,
-  Software,
-} from '@/misc/types';
+import { type Lang, type Month, type AppTheme, type DisplayedSoftwares, type YearMonth, Software } from '@/misc/types';
 import appConfig from '../../config/appConfig';
 
 const minZoomLevel = appConfig.zoom.minLevel;
@@ -112,54 +104,4 @@ export function calcYearRange(endInc: number | 'current'): number[] {   // TODO:
 
   result.reverse();
   return result;
-}
-
-function getDate(versionHistory: VersionHistory, which: 'first' | 'last' = 'first'): string {
-  let result: string = which === 'first' ? '2500-01' : '1970-01';
-
-  for (const yearMonth in versionHistory.data) {
-    if (which === 'first' && yearMonth < result) {
-      result = yearMonth;
-    }
-    if (which === 'last' && yearMonth > result) {
-      result = yearMonth;
-    }
-  }
-
-  return result;
-}
-
-/**
- * calculates the timeline length for each month
- */
-export function calcMonthTimeline(months: Month[], versionHistory: VersionHistory): Month[] {
-  const firstYearMonth: string = getDate(versionHistory.data, 'first');
-  const lastYearMonth: string = getDate(versionHistory, 'last');
-
-  const firstMonthHavingVersionIdx: number = months.findIndex((month) => month.yearMonth === firstYearMonth);
-  const lastMonthHavingVersionIdx: number = months.findLastIndex((month) => month.yearMonth === lastYearMonth);
-
-  if (lastMonthHavingVersionIdx < 0) {
-    return months;
-  }
-
-  months[firstMonthHavingVersionIdx < 0 ? 0 : firstMonthHavingVersionIdx].timeline = {
-    from: 'right',
-    percent: firstMonthHavingVersionIdx < 0 ? 100 : 100 - calcPercentOf(versionHistory.data[firstYearMonth][0].day, 31),
-  };
-  months[lastMonthHavingVersionIdx].timeline = {
-    from: 'left',
-    percent: calcPercentOf(versionHistory[lastYearMonth][versionHistory[lastYearMonth].length - 1].day, 31),
-  };
-
-  return months.map((month, i) => {
-    if (i > firstMonthHavingVersionIdx && i < lastMonthHavingVersionIdx) {
-      month.timeline = {
-        from: 'left',
-        percent: 100,
-      };
-    }
-
-    return month;
-  });
 }
