@@ -16,6 +16,11 @@ interface SupportedSoftware {
   source?: string;
 }
 
+export interface YearMonth {
+  year: number;
+  month: number;
+}
+
 export type SupportedSoftwares = { [software in Software]: SupportedSoftware };
 
 export interface Lang {
@@ -47,13 +52,13 @@ export interface Month {
   monthName: string;
 }
 
+export interface MonthLimit {
+  start: YearMonth;
+  end: YearMonth;
+}
+
 export type AppTheme = 'auto' | 'light' | 'dark';
 
 export type FeCache = { [key: string]: VersionHistoryResponse };
 
 export type DisplayedSoftwares = [Software, Software, Software, Software, Software];
-
-export interface YearMonth {
-  year: number;
-  month: number;
-}

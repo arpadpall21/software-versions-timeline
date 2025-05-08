@@ -1,4 +1,13 @@
-import { type Lang, type Month, type AppTheme, type DisplayedSoftwares, type YearMonth, Software } from '@/misc/types';
+import {
+  type Lang,
+  type Month,
+  type AppTheme,
+  type DisplayedSoftwares,
+  type YearMonth,
+  type MonthLimit,
+  Software,
+  FeCache,
+} from '@/misc/types';
 import appConfig from '../../config/appConfig';
 
 const minZoomLevel = appConfig.zoom.minLevel;
@@ -63,12 +72,7 @@ export function calcPercentOf(fraction: number, total: number = 100): number {
   return Math.floor((fraction / total) * 100);
 }
 
-export function calcMonthRange(
-  endDate: YearMonth,
-  monthsToSubtract: number,
-  minAllowedMonth?: YearMonth,
-  maxAllowedMonth?: YearMonth,
-): Month[] {
+export function calcMonthRange(endDate: YearMonth, monthsToSubtract: number): Month[] {
   const result: Month[] = [];
   const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
@@ -92,6 +96,30 @@ export function calcMonthRange(
   }
 
   return result;
+}
+
+
+// TODO: refactor after the server action return dates
+export function calcMaxMonthLimit(displayedSoftware: DisplayedSoftwares, feCache: FeCache): MonthLimit | undefined {
+  // if (Object.keys(feCache).length === 0) {
+    const today = new Date();
+    const end: YearMonth = { year: today.getFullYear(), month: today.getMonth() + 1 };
+
+    return { start: { year: 1970, month: 1 }, end };
+  // }
+  // let oldestMonth = new Date('2500-01-01');
+  // let newestMonth = new Date(0);
+
+  // let start: YearMonth = { year: 1970, month: 1 };
+
+  // for (const software of displayedSoftware) {
+  //   if (feCache[software]) {
+  //     start = feCache[software].newestMonth;
+  //     end = feCache[software].oldestMonth;
+  //   }
+  // }
+
+  // return { start, end };
 }
 
 export function calcYearRange(endInc: number | 'current'): number[] {   // TODO: refactor

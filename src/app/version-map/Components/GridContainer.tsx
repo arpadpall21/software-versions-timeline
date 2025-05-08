@@ -3,8 +3,8 @@
 import { useState, createContext, useEffect } from 'react';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
-import { calcMonthRange, calcYearRange } from '@/misc/helpers';
-import { type Month, type FeCache, type DisplayedSoftwares, type YearMonth } from '@/misc/types';
+import { defaultDisplayedSoftwares, calcMonthRange, calcYearRange, calcMaxMonthLimit } from '@/misc/helpers';
+import { type Month, type FeCache, type DisplayedSoftwares, type MonthLimit } from '@/misc/types';
 import appConfig from '../../../../config/appConfig';
 import store from '@/misc/store';
 
@@ -22,19 +22,24 @@ export const FeCacheContext = createContext<{
 }>({ feCache: {}, setFeCache: () => {} });
 
 const GridContainer: React.FC = () => {
+  const [feCache, setFeCache] = useState<FeCache>({});
   const [displayedMonths, setdisplayedMonths] = useState<Month[]>(
     calcMonthRange({ year: currentYear, month: currentMonth }, nrOfmonthsToRender),
   );
   const [displayedYearButtons, setDisplayedYearButtons] = useState<number[]>(defaultYearRange);
-  const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>();
+  const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>(defaultDisplayedSoftwares);
   const [selectedYear, setSelectedYear] = useState<number>(defaultYearRange[0]);
-  const [feCache, setFeCache] = useState<FeCache>({});
-  const [displayableOldestMonth, setDisplayableOldestMonth] = useState<YearMonth>();
-  const [displayableNewestMonth, setDisplayableNewestMonth] = useState<YearMonth>();
+  const [displayableMaxMonthLimit, setDisplayableMaxMonthLimit] = useState<MonthLimit>();
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
-  // console.log('--- grid container rendered ---');
+  // useEffect(() => {
+  //   calcMaxMonthLimit(displayedSoftwares, feCache);
+  // }, [displayedSoftwares, feCache]);
+
+  
+  
+  
   // console.log('displayable oldest month', displayableOldestMonth);
   // console.log('displayable newest month', displayableNewestMonth);
 

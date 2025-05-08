@@ -33,7 +33,7 @@ const twTimelineStyle: { [software in Software]: string } = {
 
 interface Props {
   displayedSoftwares?: DisplayedSoftwares;
-  setDisplayedSoftwares: React.Dispatch<React.SetStateAction<DisplayedSoftwares | undefined>>;
+  setDisplayedSoftwares: React.Dispatch<React.SetStateAction<DisplayedSoftwares>>;
   displayedMonths: Month[];
   setDisplayedMonths: React.Dispatch<React.SetStateAction<Month[]>>;
 }
