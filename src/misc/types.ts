@@ -43,8 +43,8 @@ export interface ParsedHistoryData {
 
 export interface VersionHistoryResponse {
   data: ParsedHistoryData;
-  newestMonth: YearMonth;
-  oldestMonth: YearMonth;
+  oldestDate: Date;
+  newestDate: Date;
 }
 
 export interface Month {
