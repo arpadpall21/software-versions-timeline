@@ -19,9 +19,12 @@ export async function getVersionHistory(software: Software): Promise<VersionHist
     const oldestDate: Date = new Date(Math.min(...times));
     const newestDate: Date = new Date(Math.max(...times));
 
-    const dateClone: Date = new Date(oldestDate);
+    const dateClone = new Date(oldestDate);
     const parsedData: ParsedHistoryData = {};
-    while (dateClone <= newestDate) {
+    while (
+      dateClone.getFullYear() < newestDate.getFullYear() ||
+      (dateClone.getFullYear() === newestDate.getFullYear() && dateClone.getMonth() <= newestDate.getMonth())
+    ) {
       const year: number = dateClone.getFullYear();
       const month: number = dateClone.getMonth() + 1;
       const yearMonth: string = `${year}-${month.toString().padStart(2, '0')}`;
