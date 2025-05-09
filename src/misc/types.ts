@@ -52,9 +52,9 @@ export interface Month {
   monthName: string;
 }
 
-export interface MonthLimit {
-  start: YearMonth;
-  end: YearMonth;
+export interface DisplayableDateLimit {
+  oldestDate: Date;
+  newestDate: Date;
 }
 
 export type AppTheme = 'auto' | 'light' | 'dark';

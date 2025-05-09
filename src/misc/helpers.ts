@@ -4,7 +4,7 @@ import {
   type AppTheme,
   type DisplayedSoftwares,
   type YearMonth,
-  type MonthLimit,
+  type DisplayableDateLimit,
   Software,
   FeCache,
 } from '@/misc/types';
@@ -98,28 +98,29 @@ export function calcMonthRange(endDate: YearMonth, monthsToSubtract: number): Mo
   return result;
 }
 
+export function calcDisplayableDateLimit(
+  displayedSoftware: DisplayedSoftwares,
+  feCache: FeCache,
+): DisplayableDateLimit {
+  if (Object.keys(feCache).length === 0) {
+    return { oldestDate: new Date(1995), newestDate: new Date() };
+  }
 
-// TODO: refactor after the server action return dates
-export function calcMaxMonthLimit(displayedSoftware: DisplayedSoftwares, feCache: FeCache): MonthLimit | undefined {
-  // if (Object.keys(feCache).length === 0) {
-    const today = new Date();
-    const end: YearMonth = { year: today.getFullYear(), month: today.getMonth() + 1 };
+  let oldestDate = new Date('2500-01-01');
+  let newestDate = new Date(0);
 
-    return { start: { year: 1970, month: 1 }, end };
-  // }
-  // let oldestMonth = new Date('2500-01-01');
-  // let newestMonth = new Date(0);
+  for (const software of displayedSoftware) {
+    if (feCache[software]) {
+      if (feCache[software].oldestDate < oldestDate) {
+        oldestDate = feCache[software].oldestDate;
+      }
+      if (feCache[software].newestDate > newestDate) {
+        newestDate = feCache[software].newestDate;
+      }
+    }
+  }
 
-  // let start: YearMonth = { year: 1970, month: 1 };
-
-  // for (const software of displayedSoftware) {
-  //   if (feCache[software]) {
-  //     start = feCache[software].newestMonth;
-  //     end = feCache[software].oldestMonth;
-  //   }
-  // }
-
-  // return { start, end };
+  return { oldestDate, newestDate };
 }
 
 export function calcYearRange(endInc: number | 'current'): number[] {   // TODO: refactor
