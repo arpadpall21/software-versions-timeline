@@ -35,7 +35,7 @@ const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTim
       getVersionHistory(software)
         .then((historyData) => {
           feCache[software] = historyData;
-          setFeCache(feCache);  // TODO: maybe cache refactor
+          setFeCache({...feCache});  // TODO: maybe cache refactor
           setVersionHistory(historyData);
         })
         .catch((err) => {

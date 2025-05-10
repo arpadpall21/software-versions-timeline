@@ -123,12 +123,17 @@ export function calcDisplayableDateLimit(
   return { oldestDate, newestDate };
 }
 
-export function calcYearRange(endInc: number | 'current'): number[] {   // TODO: refactor
+export function getYearRange(displayableDateLimit: DisplayableDateLimit): number[] {
   const result: number[] = [];
-  const endYear: number = endInc === 'current' ? new Date().getFullYear() : endInc;
 
-  for (let i = appConfig.oldestYear; i <= endYear; i++) {
-    result.push(i);
+  const oldestDateClone = new Date(displayableDateLimit.oldestDate); // clone avois mutating the state
+  const newestYear = displayableDateLimit.newestDate.getFullYear()
+
+  while (oldestDateClone.getFullYear() <= newestYear) {
+    const year: number = oldestDateClone.getFullYear();
+    result.push(year);
+
+    oldestDateClone.setFullYear(year + 1);
   }
 
   result.reverse();
