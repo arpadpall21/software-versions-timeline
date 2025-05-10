@@ -35,7 +35,7 @@ const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTim
       getVersionHistory(software)
         .then((historyData) => {
           feCache[software] = historyData;
-          setFeCache(feCache);
+          setFeCache({...feCache});  // TODO: maybe cache refactor
           setVersionHistory(historyData);
         })
         .catch((err) => {
@@ -77,7 +77,7 @@ const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTim
                 <div
                   className={'absolute bottom-[32px] z-10 hover:z-50'}
                   style={{ left: calcPercentOf(day, 31) - 1 }}
-                  key={version}
+                  key={day}
                 >
                   <div className={'smoothTransform'} style={{ transform: `scale(${scaleTextBallon})` }}>
                     <TextBallon

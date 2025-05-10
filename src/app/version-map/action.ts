@@ -18,18 +18,18 @@ export async function getVersionHistory(software: Software): Promise<VersionHist
     const times: number[] = [...dates].map((date) => date.getTime());
     const oldestDate: Date = new Date(Math.min(...times));
     const newestDate: Date = new Date(Math.max(...times));
-    const oldestYear: number = oldestDate.getFullYear();
-    const oldestMonth: number = oldestDate.getMonth() + 1;
-    const newestYear: number = newestDate.getFullYear();
-    const newestMonth: number = newestDate.getMonth() + 1;
 
+    const dateClone = new Date(oldestDate);
     const parsedData: ParsedHistoryData = {};
-    while (oldestDate <= newestDate) {
-      const year: number = oldestDate.getFullYear();
-      const month: number = oldestDate.getMonth() + 1;
+    while (
+      dateClone.getFullYear() < newestDate.getFullYear() ||
+      (dateClone.getFullYear() === newestDate.getFullYear() && dateClone.getMonth() <= newestDate.getMonth())
+    ) {
+      const year: number = dateClone.getFullYear();
+      const month: number = dateClone.getMonth() + 1;
       const yearMonth: string = `${year}-${month.toString().padStart(2, '0')}`;
 
-      if (year === oldestYear && month === oldestMonth) {
+      if (year === oldestDate.getFullYear() && month === oldestDate.getMonth() + 1) {
         parsedData[yearMonth] = {
           versions: historyData[yearMonth].versions,
           timeline: {
@@ -37,7 +37,7 @@ export async function getVersionHistory(software: Software): Promise<VersionHist
             percent: 100 - calcPercentOf(Math.min(...historyData[yearMonth].versions.map(({ day }) => day)), 31),
           },
         };
-      } else if (year === newestYear && month === newestMonth) {
+      } else if (year === newestDate.getFullYear() && month === newestDate.getMonth() + 1) {
         parsedData[yearMonth] = {
           versions: historyData[yearMonth].versions,
           timeline: {
@@ -52,16 +52,10 @@ export async function getVersionHistory(software: Software): Promise<VersionHist
         };
       }
 
-      oldestDate.setMonth(oldestDate.getMonth() + 1);
+      dateClone.setMonth(dateClone.getMonth() + 1);
     }
 
-    const result: VersionHistoryResponse = {
-      data: parsedData,
-      oldestMonth: { year: oldestYear, month: oldestMonth },
-      newestMonth: { year: newestYear, month: newestMonth },
-    };
-
-    return result;
+    return { data: parsedData, oldestDate, newestDate };
   } catch (err) {
     console.error(`Failed to get version history data for software: ${software}`, err);
     throw err;

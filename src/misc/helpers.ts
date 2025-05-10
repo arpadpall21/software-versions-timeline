@@ -1,4 +1,13 @@
-import { type Lang, type Month, type AppTheme, type DisplayedSoftwares, type YearMonth, Software } from '@/misc/types';
+import {
+  type Lang,
+  type Month,
+  type AppTheme,
+  type DisplayedSoftwares,
+  type YearMonth,
+  type DisplayableDateLimit,
+  Software,
+  FeCache,
+} from '@/misc/types';
 import appConfig from '../../config/appConfig';
 
 const minZoomLevel = appConfig.zoom.minLevel;
@@ -63,12 +72,7 @@ export function calcPercentOf(fraction: number, total: number = 100): number {
   return Math.floor((fraction / total) * 100);
 }
 
-export function calcMonthRange(
-  endDate: YearMonth,
-  monthsToSubtract: number,
-  minAllowedMonth?: YearMonth,
-  maxAllowedMonth?: YearMonth,
-): Month[] {
+export function calcMonthRange(endDate: YearMonth, monthsToSubtract: number): Month[] {
   const result: Month[] = [];
   const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
@@ -94,12 +98,42 @@ export function calcMonthRange(
   return result;
 }
 
-export function calcYearRange(endInc: number | 'current'): number[] {   // TODO: refactor
-  const result: number[] = [];
-  const endYear: number = endInc === 'current' ? new Date().getFullYear() : endInc;
+export function calcDisplayableDateLimit(
+  displayedSoftware: DisplayedSoftwares,
+  feCache: FeCache,
+): DisplayableDateLimit {
+  if (Object.keys(feCache).length === 0) {
+    return { oldestDate: new Date(1995), newestDate: new Date() };
+  }
 
-  for (let i = appConfig.oldestYear; i <= endYear; i++) {
-    result.push(i);
+  let oldestDate = new Date('2500-01-01');
+  let newestDate = new Date(0);
+
+  for (const software of displayedSoftware) {
+    if (feCache[software]) {
+      if (feCache[software].oldestDate < oldestDate) {
+        oldestDate = feCache[software].oldestDate;
+      }
+      if (feCache[software].newestDate > newestDate) {
+        newestDate = feCache[software].newestDate;
+      }
+    }
+  }
+
+  return { oldestDate, newestDate };
+}
+
+export function getYearRange(displayableDateLimit: DisplayableDateLimit): number[] {
+  const result: number[] = [];
+
+  const oldestDateClone = new Date(displayableDateLimit.oldestDate); // clone avois mutating the state
+  const newestYear = displayableDateLimit.newestDate.getFullYear()
+
+  while (oldestDateClone.getFullYear() <= newestYear) {
+    const year: number = oldestDateClone.getFullYear();
+    result.push(year);
+
+    oldestDateClone.setFullYear(year + 1);
   }
 
   result.reverse();

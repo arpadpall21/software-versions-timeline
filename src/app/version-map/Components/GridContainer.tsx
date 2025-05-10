@@ -3,13 +3,10 @@
 import { useState, createContext, useEffect } from 'react';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
-import { calcMonthRange, calcYearRange } from '@/misc/helpers';
-import { type Month, type FeCache, type DisplayedSoftwares, type YearMonth } from '@/misc/types';
-import appConfig from '../../../../config/appConfig';
+import { defaultDisplayedSoftwares, calcMonthRange, getYearRange, calcDisplayableDateLimit } from '@/misc/helpers';
+import { type Month, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit } from '@/misc/types';
 import store from '@/misc/store';
 
-const defaultYearRange: number[] = calcYearRange('current');
-const maxYearsRight: number = 6;
 const today = new Date();
 const currentYear = today.getFullYear();
 const currentMonth = today.getMonth() + 1;
@@ -22,47 +19,52 @@ export const FeCacheContext = createContext<{
 }>({ feCache: {}, setFeCache: () => {} });
 
 const GridContainer: React.FC = () => {
+  const [feCache, setFeCache] = useState<FeCache>({});
   const [displayedMonths, setdisplayedMonths] = useState<Month[]>(
     calcMonthRange({ year: currentYear, month: currentMonth }, nrOfmonthsToRender),
   );
-  const [displayedYearButtons, setDisplayedYearButtons] = useState<number[]>(defaultYearRange);
-  const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>();
-  const [selectedYear, setSelectedYear] = useState<number>(defaultYearRange[0]);
-  const [feCache, setFeCache] = useState<FeCache>({});
-  const [displayableOldestMonth, setDisplayableOldestMonth] = useState<YearMonth>();
-  const [displayableNewestMonth, setDisplayableNewestMonth] = useState<YearMonth>();
+  const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>(defaultDisplayedSoftwares);
+  const [displayedYearButtons, setDisplayedYearButtons] = useState<number[]>([]);
+  const [selectedYear, setSelectedYear] = useState<number>(currentYear);
+  const [displayableDateLimit, setDisplayablDateLimit] = useState<DisplayableDateLimit>({
+    newestDate: today,
+    oldestDate: new Date(today.setFullYear(-3)),
+  });
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
-  // console.log('--- grid container rendered ---');
-  // console.log('displayable oldest month', displayableOldestMonth);
-  // console.log('displayable newest month', displayableNewestMonth);
+  useEffect(() => {
+    setDisplayablDateLimit(calcDisplayableDateLimit(displayedSoftwares, feCache));
+  }, [displayedSoftwares, feCache]);
 
-  // useEffect(() => {
-  //   const oldestMonthYear = { year: 1970, month: 1 };
-  //   const newestMonthYear = { year: 2500, month: 12 };
-    
-  //   for (const software in feCache) {
-      
-  //   }
-    
-  // }, [displayedSoftwares]);
-
+  useEffect(() => {
+    if (displayableDateLimit) {
+      const { newestDate } = displayableDateLimit;
+      setDisplayedYearButtons(getYearRange(displayableDateLimit));
+      setdisplayedMonths(
+        calcMonthRange({ year: newestDate.getFullYear(), month: newestDate.getMonth() + 2 }, nrOfmonthsToRender),
+      );
+      setSelectedYear(newestDate.getFullYear());
+    }
+  }, [displayableDateLimit]);
 
   function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
+    const { newestDate } = displayableDateLimit;
     const selectedYear: number = e.currentTarget.textContent
       ? Number.parseInt(e.currentTarget.textContent)
-      : defaultYearRange[0];
+      : currentYear;
     setSelectedYear(selectedYear);
-    setDisplayedYearButtons(calcYearRange(Math.min(selectedYear + maxYearsRight, appConfig.newestYear)));
     setdisplayedMonths(
-      calcMonthRange({ year: selectedYear, month: selectedYear === currentYear ? currentMonth : 12 }, nrOfmonthsToRender),
+      calcMonthRange(
+        { year: selectedYear, month: selectedYear === newestDate.getFullYear() ? newestDate.getMonth() + 2 : 12 },
+        nrOfmonthsToRender,
+      ),
     );
   }
 
   return (
     <FeCacheContext.Provider value={{ feCache, setFeCache }}>
-      <div className={'my-7 overflow-hidden whitespace-nowrap'} style={{ direction: 'rtl' }}>
+      <div className={'h-12 mt-7 overflow-auto whitespace-nowrap'} style={{ direction: 'rtl' }}>
         {displayedYearButtons.map((year) => (
           <Button
             text={year.toString()}
