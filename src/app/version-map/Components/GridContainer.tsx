@@ -13,13 +13,9 @@ const currentMonth = today.getMonth() + 1;
 
 const nrOfmonthsToRender: number = 18; // TODO: fine grain this when finegraining the zoom
 
-export const FeCacheContext = createContext<{
-  feCache: FeCache;
-  setFeCache: React.Dispatch<React.SetStateAction<FeCache>>;
-}>({ feCache: {}, setFeCache: () => {} });
+export const feCache: FeCache = {};
 
 const GridContainer: React.FC = () => {
-  const [feCache, setFeCache] = useState<FeCache>({});
   const [displayedMonths, setdisplayedMonths] = useState<Month[]>(
     calcMonthRange({ year: currentYear, month: currentMonth }, nrOfmonthsToRender),
   );
@@ -29,13 +25,13 @@ const GridContainer: React.FC = () => {
   const [displayableDateLimit, setDisplayablDateLimit] = useState<DisplayableDateLimit>({
     newestDate: today,
     oldestDate: new Date(today.setFullYear(-3)),
-  });
+  }); // TODO: should be undefined when default
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
   useEffect(() => {
     setDisplayablDateLimit(calcDisplayableDateLimit(displayedSoftwares, feCache));
-  }, [displayedSoftwares, feCache]);
+  }, [displayedSoftwares]);
 
   useEffect(() => {
     if (displayableDateLimit) {
@@ -63,7 +59,7 @@ const GridContainer: React.FC = () => {
   }
 
   return (
-    <FeCacheContext.Provider value={{ feCache, setFeCache }}>
+    <>
       <div className={'h-12 mt-7 overflow-auto whitespace-nowrap'} style={{ direction: 'rtl' }}>
         {displayedYearButtons.map((year) => (
           <Button
@@ -81,7 +77,7 @@ const GridContainer: React.FC = () => {
         displayedMonths={displayedMonths}
         setDisplayedMonths={setdisplayedMonths}
       />
-    </FeCacheContext.Provider>
+    </>
   );
 };
 
