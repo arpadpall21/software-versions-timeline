@@ -1,7 +1,7 @@
 'use server';
 
 import { readFile } from 'node:fs/promises';
-import { type HistoryData, type VersionHistoryResponse, type ParsedHistoryData, Software } from '@/misc/types';
+import { type RawHistoryData, type ParsedVersionHistoryData, type ParsedHistoryData, Software } from '@/misc/types';
 import { calcPercentOf } from '@/misc/helpers';
 import appConfig from '../../../config/appConfig';
 
@@ -14,10 +14,13 @@ function delay(milliseconds) {    // TODO: for testing remove it
 }
 
 
-export async function getVersionHistory(software: Software): Promise<VersionHistoryResponse> {
+export async function getVersionHistory(softwares: Software[]): Promise<ParsedVersionHistoryData> {
   try {
-    const data = await readFile(appConfig.supportedSoftwares[software].dataPath);
-    const historyData: HistoryData = JSON.parse(data.toString());
+    const data = await readFile(appConfig.supportedSoftwares[softwares[0]].dataPath);
+    const historyData: RawHistoryData = JSON.parse(data.toString());
+
+
+    // parseHistoryData(historyData)
 
     const dates: Date[] = [];
     for (const yearMonth in historyData) {

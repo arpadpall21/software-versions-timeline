@@ -28,7 +28,17 @@ export interface Lang {
   lang: string;
 }
 
-export interface HistoryData {
+export interface Month {
+  yearMonth: string;
+  monthName: string;
+}
+
+export interface DisplayableDateLimit {
+  oldestDate: Date;
+  newestDate: Date;
+}
+
+export interface RawHistoryData {
   [yearMonth: string]: {
     versions: { day: number; version: string }[];
   };
@@ -41,24 +51,15 @@ export interface ParsedHistoryData {
   };
 }
 
-export interface VersionHistoryResponse {
+export interface ParsedVersionHistoryData {
   data: ParsedHistoryData;
   oldestDate: Date;
   newestDate: Date;
 }
 
-export interface Month {
-  yearMonth: string;
-  monthName: string;
-}
-
-export interface DisplayableDateLimit {
-  oldestDate: Date;
-  newestDate: Date;
-}
 
 export type AppTheme = 'auto' | 'light' | 'dark';
 
-export type FeCache = { [key: string]: VersionHistoryResponse };
+export type FeCache = { [key: string]: ParsedVersionHistoryData };
 
 export type DisplayedSoftwares = Software[];

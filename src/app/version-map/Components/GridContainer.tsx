@@ -41,7 +41,7 @@ const GridContainer: React.FC = () => {
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
   useEffect(() => {
-    getVersionHistory('CHROME')
+    getVersionHistory(['PYTHON', 'REACT'])
       .then((res) => console.log(res))
       .catch(err => console.error(err))
   }, [])
