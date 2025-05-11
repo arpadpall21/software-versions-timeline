@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
 import { defaultDisplayedSoftwares, calcMonthRange, getYearRange, calcDisplayableDateLimit } from '@/misc/helpers';
-import { type Month, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit, Software } from '@/misc/types';
+import { type Month, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit } from '@/misc/types';
 import store from '@/misc/store';
 
 const today = new Date();
