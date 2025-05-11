@@ -57,9 +57,9 @@ export interface ParsedVersionHistoryData {
   newestDate: Date;
 }
 
+export type GetVersionHistoryActionResponse = { [key: string]: ParsedVersionHistoryData };
+export type FeCache = GetVersionHistoryActionResponse;
 
 export type AppTheme = 'auto' | 'light' | 'dark';
-
-export type FeCache = { [key: string]: ParsedVersionHistoryData };
 
 export type DisplayedSoftwares = Software[];
