@@ -22,16 +22,15 @@ const GridContainer: React.FC = () => {
   const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>([]);
   const [displayedYearButtons, setDisplayedYearButtons] = useState<number[]>([]);
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
-  const [displayableDateLimit, setDisplayablDateLimit] = useState<DisplayableDateLimit>({
-    newestDate: today,
-    oldestDate: new Date(today.setFullYear(-3)),
-  }); // TODO: should be undefined when default
+  const [displayableDateLimit, setDisplayablDateLimit] = useState<DisplayableDateLimit>();
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
-  // useEffect(() => {
-  //   setDisplayablDateLimit(calcDisplayableDateLimit(displayedSoftwares, feCache));
-  // }, [displayedSoftwares]);
+  useEffect(() => {
+    if (Object.keys(feCache).length > 0) {
+      setDisplayablDateLimit(calcDisplayableDateLimit(displayedSoftwares, feCache));
+    }
+  }, [displayedSoftwares]);
 
   // useEffect(() => {
   //   if (displayableDateLimit) {
@@ -44,19 +43,19 @@ const GridContainer: React.FC = () => {
   //   }
   // }, [displayableDateLimit]);
 
-  function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
-    const { newestDate } = displayableDateLimit;
-    const selectedYear: number = e.currentTarget.textContent
-      ? Number.parseInt(e.currentTarget.textContent)
-      : currentYear;
-    setSelectedYear(selectedYear);
-    setdisplayedMonths(
-      calcMonthRange(
-        { year: selectedYear, month: selectedYear === newestDate.getFullYear() ? newestDate.getMonth() + 2 : 12 },
-        nrOfmonthsToRender,
-      ),
-    );
-  }
+  // function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
+  //   const { newestDate } = displayableDateLimit;
+  //   const selectedYear: number = e.currentTarget.textContent
+  //     ? Number.parseInt(e.currentTarget.textContent)
+  //     : currentYear;
+  //   setSelectedYear(selectedYear);
+  //   setdisplayedMonths(
+  //     calcMonthRange(
+  //       { year: selectedYear, month: selectedYear === newestDate.getFullYear() ? newestDate.getMonth() + 2 : 12 },
+  //       nrOfmonthsToRender,
+  //     ),
+  //   );
+  // }
 
   return (
     <>

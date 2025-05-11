@@ -103,7 +103,7 @@ export function calcDisplayableDateLimit(
   feCache: FeCache,
 ): DisplayableDateLimit {
   if (Object.keys(feCache).length === 0) {
-    return { oldestDate: new Date(1995), newestDate: new Date() };
+    return { oldestDate: new Date(0), newestDate: new Date() };
   }
 
   let oldestDate = new Date('2500-01-01');
