@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
 import { defaultDisplayedSoftwares, calcMonthRange, getYearRange, calcDisplayableDateLimit } from '@/misc/helpers';
-import { type Month, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit } from '@/misc/types';
+import { type Month, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit, Software } from '@/misc/types';
 import store from '@/misc/store';
 
 const today = new Date();
@@ -12,6 +12,8 @@ const currentYear = today.getFullYear();
 const currentMonth = today.getMonth() + 1;
 
 const nrOfmonthsToRender: number = 18; // TODO: fine grain this when finegraining the zoom
+const dateLimitMaxRetry: number = 5;
+const dateLimitRetryIntervalMs: number = 300;
 
 export const feCache: FeCache = {};
 
@@ -27,10 +29,31 @@ const GridContainer: React.FC = () => {
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
   useEffect(() => {
-    if (Object.keys(feCache).length > 0) {
+    if (
+      displayedSoftwares.length === defaultDisplayedSoftwares.length &&
+      displayedSoftwares.every((displayedSoftware) => Object.keys(feCache).includes(displayedSoftware))
+    ) {
       setDisplayablDateLimit(calcDisplayableDateLimit(displayedSoftwares, feCache));
+      return;
     }
+
+    let retryCycles: number = 0;
+    const intervalId = setInterval(() => {
+      retryCycles += 1;
+      if (
+        displayedSoftwares.length === defaultDisplayedSoftwares.length &&
+        displayedSoftwares.every((displayedSoftware) => Object.keys(feCache).includes(displayedSoftware))
+      ) {
+        setDisplayablDateLimit(calcDisplayableDateLimit(displayedSoftwares, feCache));
+        clearInterval(intervalId);
+      } else {
+        if (retryCycles > dateLimitMaxRetry) {
+          clearInterval(intervalId);
+        }
+      }
+    }, dateLimitRetryIntervalMs);
   }, [displayedSoftwares]);
+
 
   // useEffect(() => {
   //   if (displayableDateLimit) {
