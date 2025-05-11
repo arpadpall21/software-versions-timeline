@@ -5,6 +5,7 @@ import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
 import { defaultDisplayedSoftwares, calcMonthRange, getYearRange, calcDisplayableDateLimit } from '@/misc/helpers';
 import { type Month, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit } from '@/misc/types';
+import { getVersionHistory } from '@/app/version-map/action';
 import store from '@/misc/store';
 
 const today = new Date();
@@ -40,38 +41,45 @@ const GridContainer: React.FC = () => {
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
   useEffect(() => {
-    if (Object.keys(feCache).length > 0) {
-      setDisplayablDateLimit(calcDisplayableDateLimit(displayedSoftwares, feCache));
-      return;
-    }
-  }, [displayedSoftwares, feCache]);
+    getVersionHistory('CHROME')
+      .then((res) => console.log(res))
+      .catch(err => console.error(err))
+  }, [])
 
-  useEffect(() => {
-    if (displayableDateLimit) {
-      const { newestDate } = displayableDateLimit;
-      setDisplayedYearButtons(getYearRange(displayableDateLimit));
-      setdisplayedMonths(
-        calcMonthRange({ year: newestDate.getFullYear(), month: newestDate.getMonth() + 2 }, nrOfmonthsToRender),
-      );
-      setSelectedYear(newestDate.getFullYear());
-    }
-  }, [displayableDateLimit]);
 
-  function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
-    if (displayableDateLimit) {
-      const { newestDate } = displayableDateLimit;
-      const selectedYear: number = e.currentTarget.textContent
-        ? Number.parseInt(e.currentTarget.textContent)
-        : currentYear;
-      setSelectedYear(selectedYear);
-      setdisplayedMonths(
-        calcMonthRange(
-          { year: selectedYear, month: selectedYear === newestDate.getFullYear() ? newestDate.getMonth() + 2 : 12 },
-          nrOfmonthsToRender,
-        ),
-      );
-    }
-  }
+  // useEffect(() => {
+  //   if (Object.keys(feCache).length > 0) {
+  //     setDisplayablDateLimit(calcDisplayableDateLimit(displayedSoftwares, feCache));
+  //     return;
+  //   }
+  // }, [displayedSoftwares, feCache]);
+
+  // useEffect(() => {
+  //   if (displayableDateLimit) {
+  //     const { newestDate } = displayableDateLimit;
+  //     setDisplayedYearButtons(getYearRange(displayableDateLimit));
+  //     setdisplayedMonths(
+  //       calcMonthRange({ year: newestDate.getFullYear(), month: newestDate.getMonth() + 2 }, nrOfmonthsToRender),
+  //     );
+  //     setSelectedYear(newestDate.getFullYear());
+  //   }
+  // }, [displayableDateLimit]);
+
+  // function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
+  //   if (displayableDateLimit) {
+  //     const { newestDate } = displayableDateLimit;
+  //     const selectedYear: number = e.currentTarget.textContent
+  //       ? Number.parseInt(e.currentTarget.textContent)
+  //       : currentYear;
+  //     setSelectedYear(selectedYear);
+  //     setdisplayedMonths(
+  //       calcMonthRange(
+  //         { year: selectedYear, month: selectedYear === newestDate.getFullYear() ? newestDate.getMonth() + 2 : 12 },
+  //         nrOfmonthsToRender,
+  //       ),
+  //     );
+  //   }
+  // }
 
   return (
     <FeCacheContext.Provider value={{ feCache, setFeCache }}>
