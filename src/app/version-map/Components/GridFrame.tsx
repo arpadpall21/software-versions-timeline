@@ -32,7 +32,7 @@ const twTimelineStyle: { [software in Software]: string } = {
 };
 
 interface Props {
-  displayedSoftwares?: DisplayedSoftwares;
+  displayedSoftwares: DisplayedSoftwares;
   setDisplayedSoftwares: React.Dispatch<React.SetStateAction<DisplayedSoftwares>>;
   displayedMonths: Month[];
   setDisplayedMonths: React.Dispatch<React.SetStateAction<Month[]>>;
@@ -132,16 +132,15 @@ const GridFrame: React.FC<Props> = ({
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scale(${zoomLevel})` }}>
-              {displayedSoftwares &&
-                displayedSoftwares.map((software, i) => (
-                  <Timeline
-                    zoomLevel={zoomLevel}
-                    displayedMonths={displayedMonths}
-                    software={software}
-                    twTimelineStyle={twTimelineStyle[software]}
-                    key={i}
-                  />
-                ))}
+              {displayedSoftwares.map((software, i) => (
+                <Timeline
+                  zoomLevel={zoomLevel}
+                  displayedMonths={displayedMonths}
+                  software={software}
+                  twTimelineStyle={twTimelineStyle[software]}
+                  key={i}
+                />
+              ))}
             </div>
           </div>
         </div>

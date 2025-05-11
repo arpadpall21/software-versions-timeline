@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo, useContext } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { type VersionHistoryResponse, type Month, Software } from '@/misc/types';
 import { calcPercentOf } from '@/misc/helpers';
 import TextBallon from '@/Components/TextBalloon';
@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 import appConfig from '../../../../config/appConfig';
 import { getVersionHistory } from '@/app/version-map/action';
 import Skeleton from '@/Components/Skeleton';
-import { FeCacheContext } from '@/app/version-map/Components/GridContainer';
+import { feCache } from '@/app/version-map/Components/GridContainer';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
@@ -22,7 +22,6 @@ interface Props {
 const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTimelineStyle }) => {
   const [versionHistory, setVersionHistory] = useState<VersionHistoryResponse>();
   const [versionHistoryError, setVersionHistoryError] = useState<boolean>(false);
-  const { feCache, setFeCache } = useContext(FeCacheContext);
 
   const t = useTranslations('components.monthsGrid.months');
 
@@ -35,7 +34,6 @@ const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTim
       getVersionHistory(software)
         .then((historyData) => {
           feCache[software] = historyData;
-          setFeCache({...feCache});  // TODO: maybe cache refactor
           setVersionHistory(historyData);
         })
         .catch((err) => {
@@ -43,7 +41,7 @@ const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTim
           setVersionHistoryError(true);
         });
     }
-  }, [displayedMonths, software, feCache, setFeCache]);
+  }, [displayedMonths, software]);
 
   useEffect(() => setVersionHistoryError(false), [software]);
 
