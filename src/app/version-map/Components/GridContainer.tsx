@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, createContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
 import { defaultDisplayedSoftwares, calcMonthRange, getYearRange, calcDisplayableDateLimit } from '@/misc/helpers';
@@ -19,7 +19,7 @@ const GridContainer: React.FC = () => {
   const [displayedMonths, setdisplayedMonths] = useState<Month[]>(
     calcMonthRange({ year: currentYear, month: currentMonth }, nrOfmonthsToRender),
   );
-  const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>(defaultDisplayedSoftwares);
+  const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>([]);
   const [displayedYearButtons, setDisplayedYearButtons] = useState<number[]>([]);
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
   const [displayableDateLimit, setDisplayablDateLimit] = useState<DisplayableDateLimit>({
@@ -29,20 +29,20 @@ const GridContainer: React.FC = () => {
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
-  useEffect(() => {
-    setDisplayablDateLimit(calcDisplayableDateLimit(displayedSoftwares, feCache));
-  }, [displayedSoftwares]);
+  // useEffect(() => {
+  //   setDisplayablDateLimit(calcDisplayableDateLimit(displayedSoftwares, feCache));
+  // }, [displayedSoftwares]);
 
-  useEffect(() => {
-    if (displayableDateLimit) {
-      const { newestDate } = displayableDateLimit;
-      setDisplayedYearButtons(getYearRange(displayableDateLimit));
-      setdisplayedMonths(
-        calcMonthRange({ year: newestDate.getFullYear(), month: newestDate.getMonth() + 2 }, nrOfmonthsToRender),
-      );
-      setSelectedYear(newestDate.getFullYear());
-    }
-  }, [displayableDateLimit]);
+  // useEffect(() => {
+  //   if (displayableDateLimit) {
+  //     const { newestDate } = displayableDateLimit;
+  //     setDisplayedYearButtons(getYearRange(displayableDateLimit));
+  //     setdisplayedMonths(
+  //       calcMonthRange({ year: newestDate.getFullYear(), month: newestDate.getMonth() + 2 }, nrOfmonthsToRender),
+  //     );
+  //     setSelectedYear(newestDate.getFullYear());
+  //   }
+  // }, [displayableDateLimit]);
 
   function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
     const { newestDate } = displayableDateLimit;

@@ -61,4 +61,4 @@ export type AppTheme = 'auto' | 'light' | 'dark';
 
 export type FeCache = { [key: string]: VersionHistoryResponse };
 
-export type DisplayedSoftwares = [Software, Software, Software, Software, Software];
+export type DisplayedSoftwares = Software[];
