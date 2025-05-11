@@ -13,7 +13,7 @@ const currentMonth = today.getMonth() + 1;
 
 const nrOfmonthsToRender: number = 18; // TODO: fine grain this when finegraining the zoom
 const dateLimitMaxRetry: number = 5;
-const dateLimitRetryIntervalMs: number = 300;
+const dateLimitRetryIntervalMs: number = 200;
 
 export const feCache: FeCache = {};
 
@@ -54,31 +54,32 @@ const GridContainer: React.FC = () => {
     }, dateLimitRetryIntervalMs);
   }, [displayedSoftwares]);
 
+  useEffect(() => {
+    if (displayableDateLimit) {
+      const { newestDate } = displayableDateLimit;
+      setDisplayedYearButtons(getYearRange(displayableDateLimit));
+      setdisplayedMonths(
+        calcMonthRange({ year: newestDate.getFullYear(), month: newestDate.getMonth() + 2 }, nrOfmonthsToRender),
+      );
+      setSelectedYear(newestDate.getFullYear());
+    }
+  }, [displayableDateLimit]);
 
-  // useEffect(() => {
-  //   if (displayableDateLimit) {
-  //     const { newestDate } = displayableDateLimit;
-  //     setDisplayedYearButtons(getYearRange(displayableDateLimit));
-  //     setdisplayedMonths(
-  //       calcMonthRange({ year: newestDate.getFullYear(), month: newestDate.getMonth() + 2 }, nrOfmonthsToRender),
-  //     );
-  //     setSelectedYear(newestDate.getFullYear());
-  //   }
-  // }, [displayableDateLimit]);
-
-  // function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
-  //   const { newestDate } = displayableDateLimit;
-  //   const selectedYear: number = e.currentTarget.textContent
-  //     ? Number.parseInt(e.currentTarget.textContent)
-  //     : currentYear;
-  //   setSelectedYear(selectedYear);
-  //   setdisplayedMonths(
-  //     calcMonthRange(
-  //       { year: selectedYear, month: selectedYear === newestDate.getFullYear() ? newestDate.getMonth() + 2 : 12 },
-  //       nrOfmonthsToRender,
-  //     ),
-  //   );
-  // }
+  function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
+    if (displayableDateLimit) {
+      const { newestDate } = displayableDateLimit;
+      const selectedYear: number = e.currentTarget.textContent
+        ? Number.parseInt(e.currentTarget.textContent)
+        : currentYear;
+      setSelectedYear(selectedYear);
+      setdisplayedMonths(
+        calcMonthRange(
+          { year: selectedYear, month: selectedYear === newestDate.getFullYear() ? newestDate.getMonth() + 2 : 12 },
+          nrOfmonthsToRender,
+        ),
+      );
+    }
+  }
 
   return (
     <>
