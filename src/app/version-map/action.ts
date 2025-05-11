@@ -5,6 +5,15 @@ import { type HistoryData, type VersionHistoryResponse, type ParsedHistoryData, 
 import { calcPercentOf } from '@/misc/helpers';
 import appConfig from '../../../config/appConfig';
 
+function delay(milliseconds) {    // TODO: for testing remove it
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, milliseconds);
+  });
+}
+
+
 export async function getVersionHistory(software: Software): Promise<VersionHistoryResponse> {
   try {
     const data = await readFile(appConfig.supportedSoftwares[software].dataPath);

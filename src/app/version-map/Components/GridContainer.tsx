@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
 import { defaultDisplayedSoftwares, calcMonthRange, getYearRange, calcDisplayableDateLimit } from '@/misc/helpers';
@@ -15,7 +15,17 @@ const nrOfmonthsToRender: number = 18; // TODO: fine grain this when finegrainin
 const dateLimitMaxRetry: number = 5;
 const dateLimitRetryIntervalMs: number = 200;
 
-export const feCache: FeCache = {};
+// export const feCache: FeCache = {};
+
+console.log('______________________')
+
+export const FeCacheContext = createContext<{
+  feCache: FeCache;
+  setFeCache: React.Dispatch<React.SetStateAction<FeCache>>;
+}>({
+  feCache: {},
+  setFeCache: () => {},
+});
 
 const GridContainer: React.FC = () => {
   const [displayedMonths, setdisplayedMonths] = useState<Month[]>(
@@ -25,34 +35,16 @@ const GridContainer: React.FC = () => {
   const [displayedYearButtons, setDisplayedYearButtons] = useState<number[]>([]);
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
   const [displayableDateLimit, setDisplayablDateLimit] = useState<DisplayableDateLimit>();
+  const [feCache, setFeCache] = useState<FeCache>({});
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
   useEffect(() => {
-    if (
-      displayedSoftwares.length === defaultDisplayedSoftwares.length &&
-      displayedSoftwares.every((displayedSoftware) => Object.keys(feCache).includes(displayedSoftware))
-    ) {
+    if (Object.keys(feCache).length > 0) {
       setDisplayablDateLimit(calcDisplayableDateLimit(displayedSoftwares, feCache));
       return;
     }
-
-    let retryCycles: number = 0;
-    const intervalId = setInterval(() => {
-      retryCycles += 1;
-      if (
-        displayedSoftwares.length === defaultDisplayedSoftwares.length &&
-        displayedSoftwares.every((displayedSoftware) => Object.keys(feCache).includes(displayedSoftware))
-      ) {
-        setDisplayablDateLimit(calcDisplayableDateLimit(displayedSoftwares, feCache));
-        clearInterval(intervalId);
-      } else {
-        if (retryCycles > dateLimitMaxRetry) {
-          clearInterval(intervalId);
-        }
-      }
-    }, dateLimitRetryIntervalMs);
-  }, [displayedSoftwares]);
+  }, [displayedSoftwares, feCache]);
 
   useEffect(() => {
     if (displayableDateLimit) {
@@ -82,7 +74,7 @@ const GridContainer: React.FC = () => {
   }
 
   return (
-    <>
+    <FeCacheContext.Provider value={{ feCache, setFeCache }}>
       <div className={'h-12 mt-7 overflow-auto whitespace-nowrap'} style={{ direction: 'rtl' }}>
         {displayedYearButtons.map((year) => (
           <Button
@@ -100,7 +92,7 @@ const GridContainer: React.FC = () => {
         displayedMonths={displayedMonths}
         setDisplayedMonths={setdisplayedMonths}
       />
-    </>
+    </FeCacheContext.Provider>
   );
 };
 
