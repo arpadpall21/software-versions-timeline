@@ -15,14 +15,29 @@ function delay(milliseconds) {    // TODO: for testing remove it
 
 export async function getVersionHistory(softwares: Software[]): Promise<ParsedVersionHistoryData> {
   try {
-    return parseHistoryData(softwares[0]);
+    // console.log(
+    //   await Promise.allSettled([parseHistoryData(softwares[0]), parseHistoryData(softwares[1])])
+    // )
+  
+    const result = await Promise.allSettled(softwares.map((software) => parseHistoryData(software)));
+    
+    
+    result.forEach((results) => console.log(results))
+    
+    
+  
+  
+    const __result = await parseHistoryData(softwares[0]);
+    return __result.result;
   } catch (err) {
     console.error(`Failed to get version history data for software: ${softwares[0]}`, err);
     throw err;
   }
 }
 
-export async function parseHistoryData(software: Software): Promise<ParsedVersionHistoryData> {
+export async function parseHistoryData(
+  software: Software,
+): Promise<{ software: Software; result: ParsedVersionHistoryData }> {
   const data = await readFile(appConfig.supportedSoftwares[software].dataPath);
   const historyData: RawHistoryData = JSON.parse(data.toString());
 
@@ -71,5 +86,5 @@ export async function parseHistoryData(software: Software): Promise<ParsedVersio
     dateClone.setMonth(dateClone.getMonth() + 1);
   }
 
-  return { data: parsedData, oldestDate, newestDate };
+  return { software, result: { data: parsedData, oldestDate, newestDate } };
 }
