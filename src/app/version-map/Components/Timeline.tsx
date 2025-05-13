@@ -28,7 +28,7 @@ const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTim
 
   if (fetchLoading) {
     return (
-      <div className={'flex flex-row-reverse h-[100px] w-screen'}>
+      <div className={'flex h-[100px] w-screen'}>
         <Skeleton />
       </div>
     );
