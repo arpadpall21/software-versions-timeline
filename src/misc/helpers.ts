@@ -5,6 +5,9 @@ import {
   type DisplayedSoftwares,
   type YearMonth,
   type DisplayableDateLimit,
+  type RawHistoryData,
+  type ParsedVersionHistoryData,
+  type ParsedHistoryData,
   Software,
   FeCache,
 } from '@/misc/types';
@@ -99,17 +102,17 @@ export function calcMonthRange(endDate: YearMonth, monthsToSubtract: number): Mo
 }
 
 export function calcDisplayableDateLimit(
-  displayedSoftware: DisplayedSoftwares,
+  displayedSoftwares: DisplayedSoftwares,
   feCache: FeCache,
-): DisplayableDateLimit {
-  if (Object.keys(feCache).length === 0) {
-    return { oldestDate: new Date(0), newestDate: new Date() };
+): DisplayableDateLimit | undefined {
+  if (Object.keys(feCache).length === 0 || displayedSoftwares.length === 0) {
+    return;
   }
 
   let oldestDate = new Date('2500-01-01');
   let newestDate = new Date(0);
 
-  for (const software of displayedSoftware) {
+  for (const software of displayedSoftwares) {
     if (feCache[software]) {
       if (feCache[software].oldestDate < oldestDate) {
         oldestDate = feCache[software].oldestDate;
@@ -127,7 +130,7 @@ export function getYearRange(displayableDateLimit: DisplayableDateLimit): number
   const result: number[] = [];
 
   const oldestDateClone = new Date(displayableDateLimit.oldestDate); // clone avois mutating the state
-  const newestYear = displayableDateLimit.newestDate.getFullYear()
+  const newestYear = displayableDateLimit.newestDate.getFullYear();
 
   while (oldestDateClone.getFullYear() <= newestYear) {
     const year: number = oldestDateClone.getFullYear();
