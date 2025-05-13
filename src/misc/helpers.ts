@@ -130,7 +130,7 @@ export function getYearRange(displayableDateLimit: DisplayableDateLimit): number
   const result: number[] = [];
 
   const oldestDateClone = new Date(displayableDateLimit.oldestDate); // clone avois mutating the state
-  const newestYear = displayableDateLimit.newestDate.getFullYear()
+  const newestYear = displayableDateLimit.newestDate.getFullYear();
 
   while (oldestDateClone.getFullYear() <= newestYear) {
     const year: number = oldestDateClone.getFullYear();
@@ -141,53 +141,4 @@ export function getYearRange(displayableDateLimit: DisplayableDateLimit): number
 
   result.reverse();
   return result;
-}
-
-export function parseHistoryData(historyData: RawHistoryData): ParsedVersionHistoryData {
-  const dates: Date[] = [];
-  for (const yearMonth in historyData) {
-    dates.push(new Date(yearMonth + '-01'));
-  }
-
-  const times: number[] = [...dates].map((date) => date.getTime());
-  const oldestDate: Date = new Date(Math.min(...times));
-  const newestDate: Date = new Date(Math.max(...times));
-
-  const dateClone = new Date(oldestDate);
-  const parsedData: ParsedHistoryData = {};
-  while (
-    dateClone.getFullYear() < newestDate.getFullYear() ||
-    (dateClone.getFullYear() === newestDate.getFullYear() && dateClone.getMonth() <= newestDate.getMonth())
-  ) {
-    const year: number = dateClone.getFullYear();
-    const month: number = dateClone.getMonth() + 1;
-    const yearMonth: string = `${year}-${month.toString().padStart(2, '0')}`;
-
-    if (year === oldestDate.getFullYear() && month === oldestDate.getMonth() + 1) {
-      parsedData[yearMonth] = {
-        versions: historyData[yearMonth].versions,
-        timeline: {
-          from: 'right',
-          percent: 100 - calcPercentOf(Math.min(...historyData[yearMonth].versions.map(({ day }) => day)), 31),
-        },
-      };
-    } else if (year === newestDate.getFullYear() && month === newestDate.getMonth() + 1) {
-      parsedData[yearMonth] = {
-        versions: historyData[yearMonth].versions,
-        timeline: {
-          from: 'left',
-          percent: calcPercentOf(Math.max(...historyData[yearMonth].versions.map(({ day }) => day)), 31),
-        },
-      };
-    } else {
-      parsedData[yearMonth] = {
-        versions: historyData[yearMonth] ? historyData[yearMonth].versions : undefined,
-        timeline: { from: 'left', percent: 100 },
-      };
-    }
-
-    dateClone.setMonth(dateClone.getMonth() + 1);
-  }
-
-  return { data: parsedData, oldestDate, newestDate };
 }
