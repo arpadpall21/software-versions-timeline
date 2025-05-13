@@ -14,7 +14,10 @@ const currentMonth = today.getMonth() + 1;
 
 const nrOfmonthsToRender: number = 18; // TODO: fine grain this when finegraining the zoom
 
-export const FeCacheContext = createContext<FeCache>({});
+export const FeCacheContext = createContext<{ feCache: FeCache; fetchLoading: boolean }>({
+  feCache: {},
+  fetchLoading: true,
+});
 
 const GridContainer: React.FC = () => {
   const [displayedMonths, setdisplayedMonths] = useState<Month[]>(
@@ -25,6 +28,7 @@ const GridContainer: React.FC = () => {
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
   const [displayableDateLimit, setDisplayablDateLimit] = useState<DisplayableDateLimit>();
   const [feCache, setFeCache] = useState<FeCache>({});
+  const [fetchLoading, setFetchLoading] = useState<boolean>(true);
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
@@ -32,8 +36,12 @@ const GridContainer: React.FC = () => {
     const softwaresToFetch = displayedSoftwares.filter((software) => !feCache[software]);
 
     if (softwaresToFetch.length > 0) {
+      setFetchLoading(true);
       getVersionHistory([...new Set(softwaresToFetch)])
-        .then((res) => setFeCache({ ...feCache, ...res }))
+        .then((res) => {
+          setFetchLoading(false);
+          setFeCache({ ...feCache, ...res });
+        })
         .catch(console.error);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -74,7 +82,7 @@ const GridContainer: React.FC = () => {
   // }
 
   return (
-    <FeCacheContext.Provider value={feCache}>
+    <FeCacheContext.Provider value={{ feCache, fetchLoading }}>
       <div className={'h-12 mt-7 overflow-auto whitespace-nowrap'} style={{ direction: 'rtl' }}>
         {displayedYearButtons.map((year) => (
           <Button

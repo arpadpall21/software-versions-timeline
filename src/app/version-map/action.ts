@@ -35,6 +35,10 @@ export async function getVersionHistory(softwares: Software[]): Promise<GetVersi
 
 export async function parseHistoryData(software: Software): Promise<ParsedVersionHistoryData> {
   try {
+        await delay(1000);
+
+  
+  
     if (Math.random() > 0.5) {
       throw Error('test');
     }
@@ -87,8 +91,6 @@ export async function parseHistoryData(software: Software): Promise<ParsedVersio
 
       dateClone.setMonth(dateClone.getMonth() + 1);
     }
-
-    await delay(2500);
 
     return { data: parsedData, oldestDate, newestDate };
   } catch (err) {

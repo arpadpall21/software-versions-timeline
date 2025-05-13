@@ -1,12 +1,11 @@
 'use client';
 
-import { useState, useEffect, useMemo, useContext } from 'react';
-import { type Month, Software, FeCache } from '@/misc/types';
+import { useMemo, useContext } from 'react';
+import { type Month, Software } from '@/misc/types';
 import { calcPercentOf } from '@/misc/helpers';
 import TextBallon from '@/Components/TextBalloon';
 import { useTranslations } from 'next-intl';
 import appConfig from '../../../../config/appConfig';
-import { getVersionHistory } from '@/app/version-map/action';
 import Skeleton from '@/Components/Skeleton';
 import { FeCacheContext } from '@/app/version-map/Components/GridContainer';
 
@@ -20,21 +19,22 @@ interface Props {
 }
 
 const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTimelineStyle }) => {
-  const feCache = useContext(FeCacheContext);
+  const { feCache, fetchLoading } = useContext(FeCacheContext);
+
   const t = useTranslations('components.monthsGrid.months');
 
   const scaleTextBallon: number = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel]);
   const timelineHeight: number = useMemo(() => Math.round(Math.max(1, Math.min(8, 8 / zoomLevel))), [zoomLevel]);
 
-  if (feCache[software] === null) {
-    return <div className={'flex h-[100px] bg-red-100 dark:bg-red-950'} />;
-  }
-  if (feCache[software] === undefined) {
+  if (fetchLoading) {
     return (
-      <div className={'h-[100px]'}>
+      <div className={'flex flex-row-reverse h-[100px] w-screen'}>
         <Skeleton />
       </div>
     );
+  }
+  if (!feCache[software]) {
+    return <div className={'h-[100px] bg-bgLoadErr dark:bg-bgLoadErrD'} />;
   }
 
   return (
