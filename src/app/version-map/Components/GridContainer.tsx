@@ -41,11 +41,15 @@ const GridContainer: React.FC = () => {
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
   useEffect(() => {
-    getVersionHistory(['PYTHON', 'REACT'])
-      .then((res) => console.log(res))
-      .catch(err => console.error(err))
-  }, [])
+    const softwaresToFetch = displayedSoftwares.filter((software) => !feCache[software]);
 
+    if (softwaresToFetch.length > 0) {
+      getVersionHistory([...new Set(softwaresToFetch)])
+        .then((res) => setFeCache({ ...feCache, ...res }))
+        .catch(console.error);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [displayedSoftwares]);
 
   // useEffect(() => {
   //   if (Object.keys(feCache).length > 0) {

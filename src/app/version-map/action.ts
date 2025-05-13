@@ -35,6 +35,11 @@ export async function getVersionHistory(softwares: Software[]): Promise<GetVersi
 
 export async function parseHistoryData(software: Software): Promise<ParsedVersionHistoryData> {
   try {
+    if (Math.random() > 0.5) {
+      throw Error('test');
+    }
+    
+    
     const data = await readFile(appConfig.supportedSoftwares[software].dataPath);
     const historyData: RawHistoryData = JSON.parse(data.toString());
 
