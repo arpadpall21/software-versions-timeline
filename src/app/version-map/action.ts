@@ -11,14 +11,6 @@ import {
 import { calcPercentOf } from '@/misc/helpers';
 import appConfig from '../../../config/appConfig';
 
-function delay(milliseconds) {    // TODO: for testing remove it
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, milliseconds);
-  });
-}
-
 export async function getVersionHistory(softwares: Software[]): Promise<GetVersionHistoryActionResponse> {
   const response: GetVersionHistoryActionResponse = {};
   const results = await Promise.allSettled(softwares.map((software) => parseHistoryData(software)));
@@ -35,15 +27,6 @@ export async function getVersionHistory(softwares: Software[]): Promise<GetVersi
 
 export async function parseHistoryData(software: Software): Promise<ParsedVersionHistoryData> {
   try {
-        await delay(1000);
-
-  
-  
-    if (Math.random() > 0.5) {
-      throw Error('test');
-    }
-    
-    
     const data = await readFile(appConfig.supportedSoftwares[software].dataPath);
     const historyData: RawHistoryData = JSON.parse(data.toString());
 

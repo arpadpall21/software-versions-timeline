@@ -3,7 +3,7 @@
 import { useState, useEffect, createContext } from 'react';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
-import { defaultDisplayedSoftwares, calcMonthRange, getYearRange, calcDisplayableDateLimit } from '@/misc/helpers';
+import { calcMonthRange, getYearRange, calcDisplayableDateLimit } from '@/misc/helpers';
 import { type Month, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit } from '@/misc/types';
 import { getVersionHistory } from '@/app/version-map/action';
 import store from '@/misc/store';
@@ -39,51 +39,54 @@ const GridContainer: React.FC = () => {
       setFetchLoading(true);
       getVersionHistory([...new Set(softwaresToFetch)])
         .then((res) => {
+          const newFeCache: FeCache = { ...feCache, ...res };
           setFetchLoading(false);
-          setFeCache({ ...feCache, ...res });
+          setDisplayablDateLimit(calcDisplayableDateLimit(displayedSoftwares, newFeCache));
+          setFeCache(newFeCache);
         })
         .catch(console.error);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [displayedSoftwares]);
 
-  // useEffect(() => {
-  //   if (Object.keys(feCache).length > 0) {
-  //     setDisplayablDateLimit(calcDisplayableDateLimit(displayedSoftwares, feCache));
-  //     return;
-  //   }
-  // }, [displayedSoftwares, feCache]);
+  useEffect(() => {
+    const newDisplayableDateLimit: DisplayableDateLimit | undefined = calcDisplayableDateLimit(
+      displayedSoftwares,
+      feCache,
+    );
 
-  // useEffect(() => {
-  //   if (displayableDateLimit) {
-  //     const { newestDate } = displayableDateLimit;
-  //     setDisplayedYearButtons(getYearRange(displayableDateLimit));
-  //     setdisplayedMonths(
-  //       calcMonthRange({ year: newestDate.getFullYear(), month: newestDate.getMonth() + 2 }, nrOfmonthsToRender),
-  //     );
-  //     setSelectedYear(newestDate.getFullYear());
-  //   }
-  // }, [displayableDateLimit]);
+    if (newDisplayableDateLimit) {
+      const { newestDate } = newDisplayableDateLimit;
 
-  // function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
-  //   if (displayableDateLimit) {
-  //     const { newestDate } = displayableDateLimit;
-  //     const selectedYear: number = e.currentTarget.textContent
-  //       ? Number.parseInt(e.currentTarget.textContent)
-  //       : currentYear;
-  //     setSelectedYear(selectedYear);
-  //     setdisplayedMonths(
-  //       calcMonthRange(
-  //         { year: selectedYear, month: selectedYear === newestDate.getFullYear() ? newestDate.getMonth() + 2 : 12 },
-  //         nrOfmonthsToRender,
-  //       ),
-  //     );
-  //   }
-  // }
+      setDisplayedYearButtons(getYearRange(newDisplayableDateLimit));
+      setDisplayablDateLimit(newDisplayableDateLimit);
+      setdisplayedMonths(
+        calcMonthRange({ year: newestDate.getFullYear(), month: newestDate.getMonth() + 2 }, nrOfmonthsToRender),
+      );
+      setSelectedYear(newestDate.getFullYear());
+    }
+  }, [displayedSoftwares, feCache]);
+
+  function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
+    if (displayableDateLimit) {
+      const { newestDate } = displayableDateLimit;
+      const selectedYear: number = e.currentTarget.textContent
+        ? Number.parseInt(e.currentTarget.textContent)
+        : currentYear;
+
+      setSelectedYear(selectedYear);
+      setdisplayedMonths(
+        calcMonthRange(
+          { year: selectedYear, month: selectedYear === newestDate.getFullYear() ? newestDate.getMonth() + 2 : 12 },
+          nrOfmonthsToRender,
+        ),
+      );
+    }
+  }
 
   return (
     <FeCacheContext.Provider value={{ feCache, fetchLoading }}>
-      <div className={'h-12 mt-7 overflow-auto whitespace-nowrap'} style={{ direction: 'rtl' }}>
+      <div className={'h-12 mt-7 overflow-x-auto whitespace-nowrap'} style={{ direction: 'rtl' }}>
         {displayedYearButtons.map((year) => (
           <Button
             text={year.toString()}

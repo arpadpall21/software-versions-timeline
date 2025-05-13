@@ -33,7 +33,8 @@ const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTim
       </div>
     );
   }
-  if (!feCache[software]) {
+  if (feCache[software] === null) {
+    console.error(`Failed to get version history data for software: ${software}`);
     return <div className={'h-[100px] bg-bgLoadErr dark:bg-bgLoadErrD'} />;
   }
 
