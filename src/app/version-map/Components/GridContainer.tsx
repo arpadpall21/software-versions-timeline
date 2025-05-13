@@ -13,20 +13,8 @@ const currentYear = today.getFullYear();
 const currentMonth = today.getMonth() + 1;
 
 const nrOfmonthsToRender: number = 18; // TODO: fine grain this when finegraining the zoom
-const dateLimitMaxRetry: number = 5;
-const dateLimitRetryIntervalMs: number = 200;
 
-// export const feCache: FeCache = {};
-
-console.log('______________________')
-
-export const FeCacheContext = createContext<{
-  feCache: FeCache;
-  setFeCache: React.Dispatch<React.SetStateAction<FeCache>>;
-}>({
-  feCache: {},
-  setFeCache: () => {},
-});
+export const FeCacheContext = createContext<FeCache>({});
 
 const GridContainer: React.FC = () => {
   const [displayedMonths, setdisplayedMonths] = useState<Month[]>(
@@ -86,7 +74,7 @@ const GridContainer: React.FC = () => {
   // }
 
   return (
-    <FeCacheContext.Provider value={{ feCache, setFeCache }}>
+    <FeCacheContext.Provider value={feCache}>
       <div className={'h-12 mt-7 overflow-auto whitespace-nowrap'} style={{ direction: 'rtl' }}>
         {displayedYearButtons.map((year) => (
           <Button

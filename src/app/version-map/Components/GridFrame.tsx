@@ -132,7 +132,7 @@ const GridFrame: React.FC<Props> = ({
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scale(${zoomLevel})` }}>
-              {/* {displayedSoftwares.map((software, i) => (
+              {displayedSoftwares.map((software, i) => (
                 <Timeline
                   zoomLevel={zoomLevel}
                   displayedMonths={displayedMonths}
@@ -140,7 +140,7 @@ const GridFrame: React.FC<Props> = ({
                   twTimelineStyle={twTimelineStyle[software]}
                   key={i}
                 />
-              ))} */}
+              ))}
             </div>
           </div>
         </div>

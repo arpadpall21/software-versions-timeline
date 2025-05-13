@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo, useContext } from 'react';
-import { type VersionHistoryResponse, type Month, Software, FeCache } from '@/misc/types';
+import { type Month, Software, FeCache } from '@/misc/types';
 import { calcPercentOf } from '@/misc/helpers';
 import TextBallon from '@/Components/TextBalloon';
 import { useTranslations } from 'next-intl';
@@ -20,40 +20,16 @@ interface Props {
 }
 
 const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTimelineStyle }) => {
-  const [versionHistory, setVersionHistory] = useState<VersionHistoryResponse>();
-  const [versionHistoryError, setVersionHistoryError] = useState<boolean>(false);
-  const { feCache, setFeCache } = useContext(FeCacheContext);
-
+  const feCache = useContext(FeCacheContext);
   const t = useTranslations('components.monthsGrid.months');
-
-  useEffect(() => {
-    if (feCache[software]) {
-      setVersionHistory(feCache[software]);
-    } else {
-      setVersionHistory(undefined);
-      getVersionHistory(software)
-        .then((historyData) => {
-          const feCacheClone: FeCache = { ...feCache };
-          feCache[software] = historyData;
-          setFeCache(feCacheClone);
-          setVersionHistory(historyData);
-        })
-        .catch((err) => {
-          console.error(err);
-          setVersionHistoryError(true);
-        });
-    }
-  }, [displayedMonths, feCache, setFeCache, software]);
-
-  useEffect(() => setVersionHistoryError(false), [software]);
 
   const scaleTextBallon: number = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel]);
   const timelineHeight: number = useMemo(() => Math.round(Math.max(1, Math.min(8, 8 / zoomLevel))), [zoomLevel]);
 
-  if (versionHistoryError) {
+  if (feCache[software] === null) {
     return <div className={'flex h-[100px] bg-red-100 dark:bg-red-950'} />;
   }
-  if (!versionHistory) {
+  if (feCache[software] === undefined) {
     return (
       <div className={'h-[100px]'}>
         <Skeleton />
@@ -70,10 +46,10 @@ const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTim
             style={{ borderLeftWidth: month.monthName === 'jan' ? 3 : 1 }}
             key={month.yearMonth}
           >
-            {Array.isArray(versionHistory?.data?.[month.yearMonth]?.versions) &&
+            {Array.isArray(feCache[software]?.data?.[month.yearMonth]?.versions) &&
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-expect-error
-              versionHistory.data[month.yearMonth].versions.map(({ day, version }) => (
+              feCache[software].data[month.yearMonth].versions.map(({ day, version }) => (
                 <div
                   className={'absolute bottom-[32px] z-10 hover:z-50'}
                   style={{ left: calcPercentOf(day, 31) - 1 }}
@@ -89,14 +65,14 @@ const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTim
                   </div>
                 </div>
               ))}
-            {versionHistory.data[month.yearMonth]?.timeline && (
+            {feCache[software]?.data[month.yearMonth]?.timeline && (
               <div
                 className={`absolute top-[68px] ${twTimelineStyle}`}
                 style={{
-                  width: versionHistory.data[month.yearMonth].timeline.percent,
+                  width: feCache[software].data[month.yearMonth].timeline.percent,
                   height: timelineHeight,
-                  left: versionHistory.data[month.yearMonth].timeline.from === 'left' ? '-1px' : undefined,
-                  right: versionHistory.data[month.yearMonth].timeline.from === 'right' ? '-1px' : undefined,
+                  left: feCache[software].data[month.yearMonth].timeline.from === 'left' ? '-1px' : undefined,
+                  right: feCache[software].data[month.yearMonth].timeline.from === 'right' ? '-1px' : undefined,
                 }}
               ></div>
             )}
