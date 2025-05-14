@@ -104,25 +104,36 @@ export function calcMonthRange(endDate: YearMonth, minusMonths: number): Month[]
 export function new__calcMonthRange(
   endDate: Date,
   minusMonths: number,
-  displayableDateLimit: DisplayableDateLimit,
+  settings?: {
+    extend?: { start?: number; end?: number };
+    displayableDateLimit?: DisplayableDateLimit;
+  },
 ): Month[] {
   const result: Month[] = [];
   const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
-  const startDate = new Date(endDate);
-  startDate.setMonth(startDate.getMonth() - minusMonths);
+  const _endDate = new Date(endDate);
+  if (settings?.extend?.end) {
+    _endDate.setMonth(_endDate.getMonth() + settings.extend.end);
+  }
+
+  const _startDate = new Date(endDate);
+  _startDate.setMonth(_startDate.getMonth() - (minusMonths - 1));
+  if (settings?.extend?.start) {
+    _startDate.setMonth(_startDate.getMonth() - settings.extend.start);
+  }
 
   while (
-    startDate.getFullYear() < endDate.getFullYear() ||
-    (startDate.getFullYear() === endDate.getFullYear() && startDate.getMonth() <= endDate.getMonth())
+    _startDate.getFullYear() < _endDate.getFullYear() ||
+    (_startDate.getFullYear() === _endDate.getFullYear() && _startDate.getMonth() <= _endDate.getMonth())
   ) {
-    const year: number = startDate.getFullYear();
-    const month: number = startDate.getMonth() + 1;
+    const year: number = _startDate.getFullYear();
+    const month: number = _startDate.getMonth() + 1;
     const yearMonth: string = `${year}-${month.toString().padStart(2, '0')}`;
 
     result.push({ yearMonth, monthName: monthMap[month - 1] });
 
-    startDate.setMonth(startDate.getMonth() + 1);
+    _startDate.setMonth(_startDate.getMonth() + 1);
   }
 
   return result;
