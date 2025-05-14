@@ -75,12 +75,12 @@ export function calcPercentOf(fraction: number, total: number = 100): number {
   return Math.floor((fraction / total) * 100);
 }
 
-export function calcMonthRange(endDate: YearMonth, monthsToSubtract: number): Month[] {
+export function calcMonthRange(endDate: YearMonth, minusMonths: number): Month[] {
   const result: Month[] = [];
   const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
   const totalMonths: number = endDate.year * 12 + endDate.month;
-  const resultTotalMonths: number = totalMonths - monthsToSubtract;
+  const resultTotalMonths: number = totalMonths - minusMonths;
 
   const resultYear = Math.floor(resultTotalMonths / 12);
   const resultMonth = resultTotalMonths % 12;
@@ -100,6 +100,44 @@ export function calcMonthRange(endDate: YearMonth, monthsToSubtract: number): Mo
 
   return result;
 }
+
+export function new__calcMonthRange(
+  endDate: Date,
+  minusMonths: number,
+  displayableDateLimit: DisplayableDateLimit,
+): Month[] {
+  const result: Month[] = [];
+  const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+
+  const startDate = new Date(endDate);
+  startDate.setMonth(startDate.getMonth() - minusMonths);
+
+  while (
+    startDate.getFullYear() < endDate.getFullYear() ||
+    (startDate.getFullYear() === endDate.getFullYear() && startDate.getMonth() <= endDate.getMonth())
+  ) {
+    const year: number = startDate.getFullYear();
+    const month: number = startDate.getMonth() + 1;
+    const yearMonth: string = `${year}-${month.toString().padStart(2, '0')}`;
+
+    result.push({ yearMonth, monthName: monthMap[month - 1] });
+
+    startDate.setMonth(startDate.getMonth() + 1);
+  }
+
+  return result;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 export function calcDisplayableDateLimit(
   displayedSoftwares: DisplayedSoftwares,
