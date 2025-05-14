@@ -105,8 +105,8 @@ export function new__calcMonthRange(
   endDate: Date,
   minusMonths: number,
   settings?: {
-    extend?: { start?: number; end?: number };
     dateLimit?: DisplayableDateLimit;
+    extendEndDateByMonths?: number;
   },
 ): Month[] {
   const result: Month[] = [];
@@ -116,11 +116,8 @@ export function new__calcMonthRange(
   let _startDate = new Date(endDate);
   _startDate.setMonth(_startDate.getMonth() - (minusMonths - 1));
 
-  if (settings?.extend?.end) {
-    _endDate.setMonth(_endDate.getMonth() + settings.extend.end);
-  }
-  if (settings?.extend?.start) {
-    _startDate.setMonth(_startDate.getMonth() - settings.extend.start);
+  if (settings?.extendEndDateByMonths) {
+    _endDate.setMonth(_endDate.getMonth() + settings.extendEndDateByMonths);
   }
   if (settings?.dateLimit) {
     _endDate = _endDate.getTime() > settings.dateLimit.newestDate.getTime() ? settings.dateLimit.newestDate : _endDate;
@@ -158,6 +155,7 @@ export function new__calcMonthRange(
 export function calcDisplayableDateLimit(
   displayedSoftwares: DisplayedSoftwares,
   feCache: FeCache,
+  extendMonthRange?: { min?: number; max?: number },
 ): DisplayableDateLimit | undefined {
   if (Object.keys(feCache).length === 0 || displayedSoftwares.length === 0) {
     return;
@@ -169,12 +167,19 @@ export function calcDisplayableDateLimit(
   for (const software of displayedSoftwares) {
     if (feCache[software]) {
       if (feCache[software].oldestDate < oldestDate) {
-        oldestDate = feCache[software].oldestDate;
+        oldestDate = new Date(feCache[software].oldestDate);
       }
       if (feCache[software].newestDate > newestDate) {
-        newestDate = feCache[software].newestDate;
+        newestDate = new Date(feCache[software].newestDate);
       }
     }
+  }
+
+  if (extendMonthRange?.min) {
+    oldestDate.setMonth(oldestDate.getMonth() - extendMonthRange.min);
+  }
+  if (extendMonthRange?.max) {
+    newestDate.setMonth(newestDate.getMonth() + extendMonthRange.max);
   }
 
   return { oldestDate, newestDate };

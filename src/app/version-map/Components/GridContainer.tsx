@@ -3,15 +3,16 @@
 import { useState, useEffect, createContext } from 'react';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
-import { calcMonthRange, getYearRange, calcDisplayableDateLimit } from '@/misc/helpers';
+import { calcMonthRange, getYearRange, calcDisplayableDateLimit, new__calcMonthRange } from '@/misc/helpers';
 import { type Month, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit } from '@/misc/types';
 import { getVersionHistory } from '@/app/version-map/action';
 import store from '@/misc/store';
+import appConfig from '../../../../config/appConfig';
 
 const today = new Date();
 const currentYear = today.getFullYear();
-const currentMonth = today.getMonth() + 1;
 
+const extendDisplayableMonthRange = appConfig.extendDisplayableMonthRange;
 const nrOfmonthsToRender: number = 18; // TODO: fine grain this when finegraining the zoom
 
 export const FeCacheContext = createContext<{ feCache: FeCache; fetchLoading: boolean }>({
@@ -20,9 +21,7 @@ export const FeCacheContext = createContext<{ feCache: FeCache; fetchLoading: bo
 });
 
 const GridContainer: React.FC = () => {
-  const [displayedMonths, setdisplayedMonths] = useState<Month[]>(
-    calcMonthRange({ year: currentYear, month: currentMonth }, nrOfmonthsToRender),
-  );
+  const [displayedMonths, setdisplayedMonths] = useState<Month[]>(new__calcMonthRange(today, nrOfmonthsToRender));
   const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>([]);
   const [displayedYearButtons, setDisplayedYearButtons] = useState<number[]>([]);
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
@@ -41,7 +40,7 @@ const GridContainer: React.FC = () => {
         .then((res) => {
           const newFeCache: FeCache = { ...feCache, ...res };
           setFetchLoading(false);
-          setDisplayablDateLimit(calcDisplayableDateLimit(displayedSoftwares, newFeCache));
+          setDisplayablDateLimit(calcDisplayableDateLimit(displayedSoftwares, newFeCache, extendDisplayableMonthRange));
           setFeCache(newFeCache);
         })
         .catch(console.error);
@@ -50,18 +49,16 @@ const GridContainer: React.FC = () => {
   }, [displayedSoftwares]);
 
   useEffect(() => {
-    const newDisplayableDateLimit: DisplayableDateLimit | undefined = calcDisplayableDateLimit(
-      displayedSoftwares,
-      feCache,
-    );
+    const newDisplayableDateLimit = calcDisplayableDateLimit(displayedSoftwares, feCache, extendDisplayableMonthRange);
 
     if (newDisplayableDateLimit) {
       const { newestDate } = newDisplayableDateLimit;
-
       setDisplayedYearButtons(getYearRange(newDisplayableDateLimit));
       setDisplayablDateLimit(newDisplayableDateLimit);
       setdisplayedMonths(
-        calcMonthRange({ year: newestDate.getFullYear(), month: newestDate.getMonth() + 2 }, nrOfmonthsToRender),
+        new__calcMonthRange(newestDate, nrOfmonthsToRender, {
+          dateLimit: newDisplayableDateLimit,
+        }),
       );
       setSelectedYear(newestDate.getFullYear());
     }
