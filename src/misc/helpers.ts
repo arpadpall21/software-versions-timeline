@@ -77,13 +77,13 @@ export function calcMonthRange(endDate: Date, nrOfMonths: number, dateLimit?: Di
 
   let _endDate = new Date(endDate);
   if (dateLimit?.newestDate) {
-    _endDate = _endDate.getTime() > dateLimit.newestDate.getTime() ? dateLimit.newestDate : _endDate;
+    _endDate = _endDate.getTime() > dateLimit.newestDate.getTime() ? new Date(dateLimit.newestDate) : _endDate;
   }
 
   let _startDate = new Date(_endDate);
   _startDate.setMonth(_startDate.getMonth() - (nrOfMonths - 1));
   if (dateLimit?.oldestDate) {
-    _startDate = _startDate.getTime() < dateLimit.oldestDate.getTime() ? dateLimit.oldestDate : _startDate;
+    _startDate = _startDate.getTime() < dateLimit.oldestDate.getTime() ? new Date(dateLimit.oldestDate) : _startDate;
   }
 
   while (

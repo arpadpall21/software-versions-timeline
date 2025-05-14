@@ -13,7 +13,7 @@ const today: Date = new Date();
 const currentYear: number = today.getFullYear();
 
 const extendDisplayableMonthRange = appConfig.extendDisplayableMonthRange;
-const nrOfmonthsToRender: number = 13; // TODO: fine grain this when finegraining the zoom
+const nrOfmonthsToRender: number = 20; // TODO: fine grain this when finegraining the zoom
 
 export const FeCacheContext = createContext<{ feCache: FeCache; fetchLoading: boolean }>({
   feCache: {},
