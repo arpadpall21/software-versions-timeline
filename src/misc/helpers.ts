@@ -3,11 +3,7 @@ import {
   type Month,
   type AppTheme,
   type DisplayedSoftwares,
-  type YearMonth,
   type DisplayableDateLimit,
-  type RawHistoryData,
-  type ParsedVersionHistoryData,
-  type ParsedHistoryData,
   Software,
   FeCache,
 } from '@/misc/types';
@@ -75,54 +71,19 @@ export function calcPercentOf(fraction: number, total: number = 100): number {
   return Math.floor((fraction / total) * 100);
 }
 
-export function calcMonthRange(endDate: YearMonth, minusMonths: number): Month[] {
-  const result: Month[] = [];
-  const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
-
-  const totalMonths: number = endDate.year * 12 + endDate.month;
-  const resultTotalMonths: number = totalMonths - minusMonths;
-
-  const resultYear = Math.floor(resultTotalMonths / 12);
-  const resultMonth = resultTotalMonths % 12;
-
-  const startYear = resultMonth === 0 ? resultYear - 1 : resultYear;
-  const startMonth = resultMonth === 0 ? 12 : resultMonth;
-
-  for (let year = startYear; year <= endDate.year; year++) {
-    for (
-      let month = year === startYear ? startMonth : 1;
-      month <= (year === endDate.year ? endDate.month : 12);
-      month++
-    ) {
-      result.push({ yearMonth: `${year}-${month.toString().padStart(2, '0')}`, monthName: monthMap[month - 1] });
-    }
-  }
-
-  return result;
-}
-
-export function new__calcMonthRange(
-  endDate: Date,
-  minusMonths: number,
-  settings?: {
-    dateLimit?: DisplayableDateLimit;
-    extendEndDateByMonths?: number;
-  },
-): Month[] {
+export function calcMonthRange(endDate: Date, nrOfMonths: number, dateLimit?: DisplayableDateLimit): Month[] {
   const result: Month[] = [];
   const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
   let _endDate = new Date(endDate);
-  let _startDate = new Date(endDate);
-  _startDate.setMonth(_startDate.getMonth() - (minusMonths - 1));
-
-  if (settings?.extendEndDateByMonths) {
-    _endDate.setMonth(_endDate.getMonth() + settings.extendEndDateByMonths);
+  if (dateLimit?.newestDate) {
+    _endDate = _endDate.getTime() > dateLimit.newestDate.getTime() ? dateLimit.newestDate : _endDate;
   }
-  if (settings?.dateLimit) {
-    _endDate = _endDate.getTime() > settings.dateLimit.newestDate.getTime() ? settings.dateLimit.newestDate : _endDate;
-    _startDate =
-      _startDate.getTime() < settings.dateLimit.oldestDate.getTime() ? settings.dateLimit.oldestDate : _startDate;
+
+  let _startDate = new Date(_endDate);
+  _startDate.setMonth(_startDate.getMonth() - (nrOfMonths - 1));
+  if (dateLimit?.oldestDate) {
+    _startDate = _startDate.getTime() < dateLimit.oldestDate.getTime() ? dateLimit.oldestDate : _startDate;
   }
 
   while (
@@ -140,17 +101,6 @@ export function new__calcMonthRange(
 
   return result;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 export function calcDisplayableDateLimit(
   displayedSoftwares: DisplayedSoftwares,
