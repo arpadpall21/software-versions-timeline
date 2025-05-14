@@ -22,10 +22,13 @@ interface Props {
 const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx, displayedSoftwares, setDisplayedSoftwares }) => {
   const { logoPath, displayName } = appConfig.supportedSoftwares[software];
 
-  const { scaleLogoX, scaleLogoY } = useMemo(() => {
+  const { scaleLogoX, scaleLogoY, scaleDropdownX, scaleDropdownY, bottomSpaceDropdown } = useMemo(() => {
     return {
       scaleLogoX: zoomLevel < defaultZoomLevel ? zoomLevel : defaultZoomLevel,
       scaleLogoY: zoomLevel <= defaultZoomLevel ? defaultZoomLevel : calcPercentOf(defaultZoomLevel, zoomLevel) / 100,
+      scaleDropdownX: 1,
+      scaleDropdownY: calcPercentOf(defaultZoomLevel, zoomLevel) / 100,
+      bottomSpaceDropdown: zoomLevel >= defaultZoomLevel ? 2 * zoomLevel : 6 / zoomLevel,
     };
   }, [zoomLevel]);
 
@@ -40,12 +43,13 @@ const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx, displayedSof
   return (
     <div className={`relative h-[100px] ${twStyle}`}>
       <select
-        className={`absolute w-[18px] bottom-[2px] right-[2px] z-10
+        className={`absolute w-[18px] right-[2px] z-10
           rounded-sm border border-borPri dark:border-borPriD
           text-btnFg dark:text-btnFgD bg-btnBg dark:bg-btnBgD
           outline-8 focus:outline-foc focus:dark:outline-focD sm:has-[:focus]:outline
           hover:cursor-pointer hover:bg-btnBgHov dark:hover:hover:bg-btnBgHovD
         `}
+        style={{ bottom: bottomSpaceDropdown, transform: `scaleX(${scaleDropdownX}) scaleY(${scaleDropdownY})` }}
         value={software}
         onChange={handleDropdown}
       >
