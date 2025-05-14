@@ -106,21 +106,26 @@ export function new__calcMonthRange(
   minusMonths: number,
   settings?: {
     extend?: { start?: number; end?: number };
-    displayableDateLimit?: DisplayableDateLimit;
+    dateLimit?: DisplayableDateLimit;
   },
 ): Month[] {
   const result: Month[] = [];
   const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
-  const _endDate = new Date(endDate);
+  let _endDate = new Date(endDate);
+  let _startDate = new Date(endDate);
+  _startDate.setMonth(_startDate.getMonth() - (minusMonths - 1));
+
   if (settings?.extend?.end) {
     _endDate.setMonth(_endDate.getMonth() + settings.extend.end);
   }
-
-  const _startDate = new Date(endDate);
-  _startDate.setMonth(_startDate.getMonth() - (minusMonths - 1));
   if (settings?.extend?.start) {
     _startDate.setMonth(_startDate.getMonth() - settings.extend.start);
+  }
+  if (settings?.dateLimit) {
+    _endDate = _endDate.getTime() > settings.dateLimit.newestDate.getTime() ? settings.dateLimit.newestDate : _endDate;
+    _startDate =
+      _startDate.getTime() < settings.dateLimit.oldestDate.getTime() ? settings.dateLimit.oldestDate : _startDate;
   }
 
   while (
