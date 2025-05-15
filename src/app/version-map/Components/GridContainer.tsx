@@ -4,7 +4,7 @@ import { useState, useEffect, createContext } from 'react';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
 import { calcMonthRange, getYearRange, calcDisplayableDateLimit } from '@/misc/helpers';
-import { type Month, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit, Software } from '@/misc/types';
+import { type Months, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit, Software } from '@/misc/types';
 import { getVersionHistory } from '@/app/version-map/action';
 import store from '@/misc/store';
 import appConfig from '../../../../config/appConfig';
@@ -20,8 +20,8 @@ export const GridContainerContext = createContext<{
   fetchLoading: boolean;
   displayedSoftwares: DisplayedSoftwares;
   setDisplayedSoftwares: React.Dispatch<React.SetStateAction<DisplayedSoftwares>>;
-  displayedMonths: Month[];
-  setDisplayedMonths: React.Dispatch<React.SetStateAction<Month[]>>;
+  displayedMonths: Months;
+  setDisplayedMonths: React.Dispatch<React.SetStateAction<Months>>;
 }>({
   feCache: {},
   fetchLoading: true,
@@ -32,7 +32,7 @@ export const GridContainerContext = createContext<{
 });
 
 const GridContainer: React.FC = () => {
-  const [displayedMonths, setDisplayedMonths] = useState<Month[]>(calcMonthRange(today, nrOfmonthsToRender));
+  const [displayedMonths, setDisplayedMonths] = useState<Months>(calcMonthRange(today, nrOfmonthsToRender));
   const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>([]);
   const [displayedYearButtons, setDisplayedYearButtons] = useState<number[]>([]);
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);

@@ -1,9 +1,9 @@
 import {
   type Lang,
-  type Month,
   type AppTheme,
   type DisplayedSoftwares,
   type DisplayableDateLimit,
+  type Months,
   Software,
   FeCache,
 } from '@/misc/types';
@@ -71,8 +71,8 @@ export function calcPercentOf(fraction: number, total: number = 100): number {
   return Math.floor((fraction / total) * 100);
 }
 
-export function calcMonthRange(endDate: Date, nrOfMonths: number, dateLimit?: DisplayableDateLimit): Month[] {
-  const result: Month[] = [];
+export function calcMonthRange(endDate: Date, nrOfMonths: number, dateLimit?: DisplayableDateLimit): Months {
+  const result: Months = [];
   const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
   let _endDate = new Date(endDate);
