@@ -34,9 +34,7 @@ const MonthsTimeline: React.FC<Props> = ({ zoomLevel }) => {
           >
             <div className={'smoothTransform'} style={{ transform: `scaleX(${scaleTextX}) scaleY(${scaleTextY})` }}>
               <p className={'text-gridFg dark:text-gridFgD'}>{t(month.monthName)}</p>
-              {month.monthName === 'jan' && (
-                <p className={'text-gridFg dark:text-gridFgD'}>{month.yearMonth.slice(0, 4)} </p>
-              )}
+              <p className={'opacity-50 text-gridFg dark:text-gridFgD'}>{month.yearMonth.slice(0, 4)} </p>
             </div>
           </div>
         );
