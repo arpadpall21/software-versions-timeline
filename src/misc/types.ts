@@ -7,6 +7,7 @@ export enum Software {
   NODE = 'NODE',
   REACT = 'REACT',
   PYTHON = 'PYTHON',
+  INTERNET_EXPLORER = 'INTERNET_EXPLORER',
 }
 
 interface SupportedSoftware {
