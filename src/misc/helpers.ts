@@ -3,11 +3,7 @@ import {
   type Month,
   type AppTheme,
   type DisplayedSoftwares,
-  type YearMonth,
   type DisplayableDateLimit,
-  type RawHistoryData,
-  type ParsedVersionHistoryData,
-  type ParsedHistoryData,
   Software,
   FeCache,
 } from '@/misc/types';
@@ -75,27 +71,32 @@ export function calcPercentOf(fraction: number, total: number = 100): number {
   return Math.floor((fraction / total) * 100);
 }
 
-export function calcMonthRange(endDate: YearMonth, monthsToSubtract: number): Month[] {
+export function calcMonthRange(endDate: Date, nrOfMonths: number, dateLimit?: DisplayableDateLimit): Month[] {
   const result: Month[] = [];
   const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
-  const totalMonths: number = endDate.year * 12 + endDate.month;
-  const resultTotalMonths: number = totalMonths - monthsToSubtract;
+  let _endDate = new Date(endDate);
+  if (dateLimit?.newestDate) {
+    _endDate = _endDate.getTime() > dateLimit.newestDate.getTime() ? new Date(dateLimit.newestDate) : _endDate;
+  }
 
-  const resultYear = Math.floor(resultTotalMonths / 12);
-  const resultMonth = resultTotalMonths % 12;
+  let _startDate = new Date(_endDate);
+  _startDate.setMonth(_startDate.getMonth() - (nrOfMonths - 1));
+  if (dateLimit?.oldestDate) {
+    _startDate = _startDate.getTime() < dateLimit.oldestDate.getTime() ? new Date(dateLimit.oldestDate) : _startDate;
+  }
 
-  const startYear = resultMonth === 0 ? resultYear - 1 : resultYear;
-  const startMonth = resultMonth === 0 ? 12 : resultMonth;
+  while (
+    _startDate.getFullYear() < _endDate.getFullYear() ||
+    (_startDate.getFullYear() === _endDate.getFullYear() && _startDate.getMonth() <= _endDate.getMonth())
+  ) {
+    const year: number = _startDate.getFullYear();
+    const month: number = _startDate.getMonth() + 1;
+    const yearMonth: string = `${year}-${month.toString().padStart(2, '0')}`;
 
-  for (let year = startYear; year <= endDate.year; year++) {
-    for (
-      let month = year === startYear ? startMonth : 1;
-      month <= (year === endDate.year ? endDate.month : 12);
-      month++
-    ) {
-      result.push({ yearMonth: `${year}-${month.toString().padStart(2, '0')}`, monthName: monthMap[month - 1] });
-    }
+    result.push({ yearMonth, monthName: monthMap[month - 1] });
+
+    _startDate.setMonth(_startDate.getMonth() + 1);
   }
 
   return result;
@@ -104,6 +105,7 @@ export function calcMonthRange(endDate: YearMonth, monthsToSubtract: number): Mo
 export function calcDisplayableDateLimit(
   displayedSoftwares: DisplayedSoftwares,
   feCache: FeCache,
+  extendMonthRange?: { min?: number; max?: number },
 ): DisplayableDateLimit | undefined {
   if (Object.keys(feCache).length === 0 || displayedSoftwares.length === 0) {
     return;
@@ -115,12 +117,19 @@ export function calcDisplayableDateLimit(
   for (const software of displayedSoftwares) {
     if (feCache[software]) {
       if (feCache[software].oldestDate < oldestDate) {
-        oldestDate = feCache[software].oldestDate;
+        oldestDate = new Date(feCache[software].oldestDate);
       }
       if (feCache[software].newestDate > newestDate) {
-        newestDate = feCache[software].newestDate;
+        newestDate = new Date(feCache[software].newestDate);
       }
     }
+  }
+
+  if (extendMonthRange?.min) {
+    oldestDate.setMonth(oldestDate.getMonth() - extendMonthRange.min);
+  }
+  if (extendMonthRange?.max) {
+    newestDate.setMonth(newestDate.getMonth() + extendMonthRange.max);
   }
 
   return { oldestDate, newestDate };

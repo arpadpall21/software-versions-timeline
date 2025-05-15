@@ -16,11 +16,6 @@ interface SupportedSoftware {
   source?: string;
 }
 
-export interface YearMonth {
-  year: number;
-  month: number;
-}
-
 export type SupportedSoftwares = { [software in Software]: SupportedSoftware };
 
 export interface Lang {

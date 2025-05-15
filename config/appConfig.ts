@@ -13,6 +13,10 @@ interface AppConfig {
     defaultLevel: number;
     sensitivity: number;
   };
+  extendDisplayableMonthRange: {
+    min: number;
+    max: number;
+  };
 }
 
 const supportedLanguages: { [langCode: string]: Lang } = {
@@ -34,6 +38,10 @@ const appConfig: AppConfig = {
     maxLevel: 10,
     defaultLevel: 1,
     sensitivity: 0.1,
+  },
+  extendDisplayableMonthRange: {
+    min: 1,
+    max: 1,
   },
 };
 
