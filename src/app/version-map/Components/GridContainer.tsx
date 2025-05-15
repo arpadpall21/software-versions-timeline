@@ -4,10 +4,11 @@ import { useState, useEffect, createContext } from 'react';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
 import { calcMonthRange, getYearRange, calcDisplayableDateLimit } from '@/misc/helpers';
-import { type Months, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit, Software } from '@/misc/types';
+import { type Months, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit } from '@/misc/types';
 import { getVersionHistory } from '@/app/version-map/action';
 import store from '@/misc/store';
 import appConfig from '../../../../config/appConfig';
+import { Software } from '../../../../config/supportedSoftwares';
 
 const today: Date = new Date();
 const currentYear: number = today.getFullYear();

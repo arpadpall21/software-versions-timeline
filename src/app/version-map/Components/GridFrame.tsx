@@ -9,8 +9,8 @@ import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
 import Timeline from '@/app/version-map/Components/Timeline';
 import MonthsTimeline from '@/app/version-map/Components/MonthsTimeline';
 import SideLogo from './SideLogo';
-import { Software } from '@/misc/types';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
+import { Software } from '../../../../config/supportedSoftwares';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
@@ -27,10 +27,10 @@ const twTimelineStyle: { [software in Software]: string } = {
   [Software.OPERA]: 'bg-[#ff7e7e] dark:bg-[#b06f6f] text-[#2e2e2e] dark:text-[#1c1c1c]',
   [Software.EDGE]: 'bg-[#0782d7] dark:bg-[#044a7a] text-white dark:text-[#bdbdbd]',
   [Software.SAFARI]: 'bg-[#bcbec2] dark:bg-[#4A4B4D] text-[#2e2e2e] dark:text-[#bdbdbd]',
-  [Software.NODE]: 'bg-[#529e43] dark:bg-[#2c5424] text-white dark:text-[#bdbdbd]',
-  [Software.REACT]: 'bg-[#039ab0] dark:bg-[#01505C] text-[#f7f7f7] dark:text-[#bdbdbd]',
-  [Software.PYTHON]: 'bg-[#e3ab1e] dark:bg-[#856411] text-[#2e2e2e] dark:text-[#1c1c1c]',
   [Software.INTERNET_EXPLORER]: 'bg-[#a6eaff] dark:bg-[#3e8196] text-[#2e2e2e] dark:text-[#1c1c1c]',
+  [Software.REACT]: 'bg-[#039ab0] dark:bg-[#01505C] text-[#f7f7f7] dark:text-[#bdbdbd]',
+  [Software.NODE]: 'bg-[#529e43] dark:bg-[#2c5424] text-white dark:text-[#bdbdbd]',
+  [Software.PYTHON]: 'bg-[#e3ab1e] dark:bg-[#856411] text-[#2e2e2e] dark:text-[#1c1c1c]',
 };
 
 const GridFrame = () => {

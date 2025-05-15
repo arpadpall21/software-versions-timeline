@@ -1,14 +1,4 @@
-export enum Software {
-  CHROME = 'CHROME',
-  MOZILLA = 'MOZILLA',
-  OPERA = 'OPERA',
-  EDGE = 'EDGE',
-  SAFARI = 'SAFARI',
-  NODE = 'NODE',
-  REACT = 'REACT',
-  PYTHON = 'PYTHON',
-  INTERNET_EXPLORER = 'INTERNET_EXPLORER',
-}
+import { Software } from '../../config/supportedSoftwares';
 
 interface SupportedSoftware {
   displayName: string;

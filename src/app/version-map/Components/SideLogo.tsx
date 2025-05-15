@@ -2,12 +2,12 @@
 
 import { useContext, useMemo } from 'react';
 import Image from 'next/image';
-import { Software } from '@/misc/types';
 import { calcPercentOf } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import { type DisplayedSoftwares } from '@/misc/types';
 import store from '@/misc/store';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
+import { Software } from '../../../../config/supportedSoftwares';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
