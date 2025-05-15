@@ -40,7 +40,7 @@ const appConfig: AppConfig = {
     sensitivity: 0.1,
   },
   extendDisplayableMonthRange: {
-    min: 1,
+    min: 2,
     max: 1,
   },
 };

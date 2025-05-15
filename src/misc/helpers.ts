@@ -71,7 +71,12 @@ export function calcPercentOf(fraction: number, total: number = 100): number {
   return Math.floor((fraction / total) * 100);
 }
 
-export function calcMonthRange(endDate: Date, nrOfMonths: number, dateLimit?: DisplayableDateLimit): Months {
+export function calcMonthRange(
+  endDate: Date,
+  nrOfMonths: number,
+  dateLimit?: DisplayableDateLimit,
+  addExtraMonth?: number,
+): Months {
   const result: Months = [];
   const monthMap: string[] = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
@@ -84,6 +89,16 @@ export function calcMonthRange(endDate: Date, nrOfMonths: number, dateLimit?: Di
   _startDate.setMonth(_startDate.getMonth() - (nrOfMonths - 1));
   if (dateLimit?.oldestDate) {
     _startDate = _startDate.getTime() < dateLimit.oldestDate.getTime() ? new Date(dateLimit.oldestDate) : _startDate;
+  }
+
+  if (addExtraMonth && dateLimit?.newestDate) {
+    const endDateWithExtraMonth = new Date(_endDate);
+    endDateWithExtraMonth.setMonth(endDateWithExtraMonth.getMonth() + addExtraMonth);
+
+    _endDate =
+      endDateWithExtraMonth.getTime() > dateLimit.newestDate.getTime()
+        ? new Date(dateLimit.newestDate)
+        : endDateWithExtraMonth;
   }
 
   while (

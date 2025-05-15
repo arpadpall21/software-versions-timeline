@@ -70,7 +70,7 @@ const GridContainer: React.FC = () => {
       }
       setDisplayedYearButtons(getYearRange(newDisplayableDateLimit));
       setDisplayablDateLimit(newDisplayableDateLimit);
-      setDisplayedMonths(calcMonthRange(latestDate, nrOfmonthsToRender, newDisplayableDateLimit));
+      setDisplayedMonths(calcMonthRange(latestDate, nrOfmonthsToRender, newDisplayableDateLimit, 1));
       setSelectedYear(latestDate.getFullYear());
     }
   }, [displayedSoftwares, feCache, selectedSoftwareByUser]);
