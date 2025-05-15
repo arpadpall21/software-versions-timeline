@@ -15,9 +15,10 @@ interface Props {
   zoomLevel: number;
   software: Software;
   twTimelineStyle: string;
+  height: number;
 }
 
-const Timeline: React.FC<Props> = ({ zoomLevel, software, twTimelineStyle }) => {
+const Timeline: React.FC<Props> = ({ zoomLevel, software, twTimelineStyle, height }) => {
   const { feCache, fetchLoading, displayedMonths } = useContext(GridContainerContext);
   const t = useTranslations('components.monthsGrid.months');
 
@@ -26,18 +27,18 @@ const Timeline: React.FC<Props> = ({ zoomLevel, software, twTimelineStyle }) => 
 
   if (fetchLoading) {
     return (
-      <div className={'flex h-[100px] w-screen'}>
+      <div className={'flex w-screen'} style={{ height }}>
         <Skeleton />
       </div>
     );
   }
   if (feCache[software] === null) {
     console.error(`Failed to get version history data for software: ${software}`);
-    return <div className={'h-[100px] bg-bgLoadErr dark:bg-bgLoadErrD'} />;
+    return <div className={'bg-bgLoadErr dark:bg-bgLoadErrD'} style={{ height }} />;
   }
 
   return (
-    <div className={'flex h-[100px] bg-gridBg dark:bg-gridBgD'}>
+    <div className={'flex bg-gridBg dark:bg-gridBgD'} style={{ height }}>
       {displayedMonths.map((month) => {
         return (
           <div
@@ -50,8 +51,8 @@ const Timeline: React.FC<Props> = ({ zoomLevel, software, twTimelineStyle }) => 
               // @ts-expect-error
               feCache[software].data[month.yearMonth].versions.map(({ day, version }) => (
                 <div
-                  className={'absolute bottom-[32px] z-10 hover:z-50'}
-                  style={{ left: calcPercentOf(day, 31) - 1 }}
+                  className={'absolute z-10 hover:z-50'}
+                  style={{ left: calcPercentOf(day, 31) - 1, bottom: 32 - (100 - height) }}
                   key={day}
                 >
                   <div className={'smoothTransform'} style={{ transform: `scale(${scaleTextBallon})` }}>

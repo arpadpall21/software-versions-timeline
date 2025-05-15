@@ -126,6 +126,7 @@ const GridFrame = () => {
                   zoomLevel={zoomLevel}
                   software={software}
                   twTimelineStyle={twTimelineStyle[software]}
+                  height={90}
                   key={i}
                 />
               ))}
