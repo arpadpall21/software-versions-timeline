@@ -9,16 +9,16 @@ import Skeleton from '@/Components/Skeleton';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 import { Software } from '../../../../config/supportedSoftwares';
 
-const defaultZoomLevel = appConfig.zoom.defaultLevel;
+const defaultZoomLevel: number = appConfig.zoom.defaultLevel;
+const height: number = 100;
 
 interface Props {
   zoomLevel: number;
   software: Software;
   twTimelineStyle: string;
-  height: number;
 }
 
-const Timeline: React.FC<Props> = ({ zoomLevel, software, twTimelineStyle, height }) => {
+const Timeline: React.FC<Props> = ({ zoomLevel, software, twTimelineStyle }) => {
   const { feCache, fetchLoading, displayedMonths } = useContext(GridContainerContext);
   const t = useTranslations('components.monthsGrid.months');
 
