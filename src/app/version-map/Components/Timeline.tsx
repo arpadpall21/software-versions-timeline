@@ -7,7 +7,7 @@ import TextBallon from '@/Components/TextBalloon';
 import { useTranslations } from 'next-intl';
 import appConfig from '../../../../config/appConfig';
 import Skeleton from '@/Components/Skeleton';
-import { FeCacheContext } from '@/app/version-map/Components/GridContainer';
+import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
@@ -19,7 +19,7 @@ interface Props {
 }
 
 const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTimelineStyle }) => {
-  const { feCache, fetchLoading } = useContext(FeCacheContext);
+  const { feCache, fetchLoading } = useContext(GridContainerContext);
 
   const t = useTranslations('components.monthsGrid.months');
 

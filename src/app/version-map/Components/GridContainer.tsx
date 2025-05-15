@@ -4,7 +4,7 @@ import { useState, useEffect, createContext } from 'react';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
 import { calcMonthRange, getYearRange, calcDisplayableDateLimit } from '@/misc/helpers';
-import { type Month, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit } from '@/misc/types';
+import { type Month, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit, Software } from '@/misc/types';
 import { getVersionHistory } from '@/app/version-map/action';
 import store from '@/misc/store';
 import appConfig from '../../../../config/appConfig';
@@ -15,7 +15,7 @@ const currentYear: number = today.getFullYear();
 const extendDisplayableMonthRange = appConfig.extendDisplayableMonthRange;
 const nrOfmonthsToRender: number = 20; // TODO: fine grain this when finegraining the zoom
 
-export const FeCacheContext = createContext<{ feCache: FeCache; fetchLoading: boolean }>({
+export const GridContainerContext = createContext<{ feCache: FeCache; fetchLoading: boolean }>({
   feCache: {},
   fetchLoading: true,
 });
@@ -25,6 +25,7 @@ const GridContainer: React.FC = () => {
   const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>([]);
   const [displayedYearButtons, setDisplayedYearButtons] = useState<number[]>([]);
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
+  const [selectedSoftwareByUser, setSelectedSoftwareByUser] = useState<Software>();
   const [displayableDateLimit, setDisplayablDateLimit] = useState<DisplayableDateLimit>();
   const [feCache, setFeCache] = useState<FeCache>({});
   const [fetchLoading, setFetchLoading] = useState<boolean>(true);
@@ -33,7 +34,6 @@ const GridContainer: React.FC = () => {
 
   useEffect(() => {
     const softwaresToFetch = displayedSoftwares.filter((software) => !feCache[software]);
-
     if (softwaresToFetch.length > 0) {
       setFetchLoading(true);
       getVersionHistory([...new Set(softwaresToFetch)])
@@ -50,7 +50,6 @@ const GridContainer: React.FC = () => {
 
   useEffect(() => {
     const newDisplayableDateLimit = calcDisplayableDateLimit(displayedSoftwares, feCache, extendDisplayableMonthRange);
-
     if (newDisplayableDateLimit) {
       const { newestDate } = newDisplayableDateLimit;
       setDisplayedYearButtons(getYearRange(newDisplayableDateLimit));
@@ -71,7 +70,7 @@ const GridContainer: React.FC = () => {
   }
 
   return (
-    <FeCacheContext.Provider value={{ feCache, fetchLoading }}>
+    <GridContainerContext.Provider value={{ feCache, fetchLoading }}>
       <div className={'h-12 mt-7 overflow-x-auto whitespace-nowrap'} style={{ direction: 'rtl' }}>
         {displayedYearButtons.map((year) => (
           <Button
@@ -89,7 +88,7 @@ const GridContainer: React.FC = () => {
         displayedMonths={displayedMonths}
         setDisplayedMonths={setdisplayedMonths}
       />
-    </FeCacheContext.Provider>
+    </GridContainerContext.Provider>
   );
 };
 
