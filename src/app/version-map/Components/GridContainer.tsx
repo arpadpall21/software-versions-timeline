@@ -18,10 +18,12 @@ const nrOfmonthsToRender: number = 20; // TODO: fine grain this when finegrainin
 export const GridContainerContext = createContext<{
   feCache: FeCache;
   fetchLoading: boolean;
+  displayedSoftwares: DisplayedSoftwares;
   setDisplayedSoftwares: React.Dispatch<React.SetStateAction<DisplayedSoftwares>>;
 }>({
   feCache: {},
   fetchLoading: true,
+  displayedSoftwares: [],
   setDisplayedSoftwares: () => {},
 });
 
@@ -75,7 +77,7 @@ const GridContainer: React.FC = () => {
   }
 
   return (
-    <GridContainerContext.Provider value={{ feCache, fetchLoading, setDisplayedSoftwares }}>
+    <GridContainerContext.Provider value={{ feCache, fetchLoading, displayedSoftwares, setDisplayedSoftwares }}>
       <div className={'h-12 mt-7 overflow-x-auto whitespace-nowrap'} style={{ direction: 'rtl' }}>
         {displayedYearButtons.map((year) => (
           <Button
@@ -87,11 +89,7 @@ const GridContainer: React.FC = () => {
           />
         ))}
       </div>
-      <GridFrame
-        displayedSoftwares={displayedSoftwares}
-        displayedMonths={displayedMonths}
-        setDisplayedMonths={setdisplayedMonths}
-      />
+      <GridFrame displayedMonths={displayedMonths} setDisplayedMonths={setdisplayedMonths} />
     </GridContainerContext.Provider>
   );
 };

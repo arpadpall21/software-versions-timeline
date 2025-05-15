@@ -16,12 +16,11 @@ interface Props {
   twStyle: string;
   software: Software;
   idx: number;
-  displayedSoftwares: DisplayedSoftwares;
 }
 
-const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx, displayedSoftwares }) => {
+const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx }) => {
   const { logoPath, displayName } = appConfig.supportedSoftwares[software];
-  const { setDisplayedSoftwares } = useContext(GridContainerContext);
+  const { displayedSoftwares, setDisplayedSoftwares } = useContext(GridContainerContext);
 
   const { scaleLogoX, scaleLogoY, scaleDropdownX, scaleDropdownY, bottomSpaceDropdown } = useMemo(() => {
     return {

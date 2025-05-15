@@ -1,7 +1,7 @@
 'use client';
 
 import '@/app/globals.css';
-import { useState, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { calcTimelineZoom } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
@@ -9,7 +9,8 @@ import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
 import Timeline from '@/app/version-map/Components/Timeline';
 import MonthsTimeline from '@/app/version-map/Components/MonthsTimeline';
 import SideLogo from './SideLogo';
-import { type Month, type DisplayedSoftwares, Software } from '@/misc/types';
+import { type Month, Software } from '@/misc/types';
+import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
@@ -33,17 +34,17 @@ const twTimelineStyle: { [software in Software]: string } = {
 };
 
 interface Props {
-  displayedSoftwares: DisplayedSoftwares;
   displayedMonths: Month[];
   setDisplayedMonths: React.Dispatch<React.SetStateAction<Month[]>>;
 }
 
-const GridFrame: React.FC<Props> = ({ displayedSoftwares, displayedMonths, setDisplayedMonths }) => {
+const GridFrame: React.FC<Props> = ({ displayedMonths, setDisplayedMonths }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
+  const { displayedSoftwares } = useContext(GridContainerContext);
 
   useEffect(() => {
     if (scrollZoomEnabled) {
@@ -111,7 +112,6 @@ const GridFrame: React.FC<Props> = ({ displayedSoftwares, displayedMonths, setDi
                     twStyle={twTimelineStyle[software]}
                     software={software}
                     idx={i}
-                    displayedSoftwares={displayedSoftwares}
                     key={i}
                   />
                 ))}
