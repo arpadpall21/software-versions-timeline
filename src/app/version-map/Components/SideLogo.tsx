@@ -20,7 +20,7 @@ interface Props {
 
 const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx }) => {
   const { logoPath, displayName } = appConfig.supportedSoftwares[software];
-  const { displayedSoftwares, setDisplayedSoftwares } = useContext(GridContainerContext);
+  const { displayedSoftwares, setDisplayedSoftwares, setSelectedSoftwareByUser } = useContext(GridContainerContext);
 
   const { scaleLogoX, scaleLogoY, scaleDropdownX, scaleDropdownY, bottomSpaceDropdown } = useMemo(() => {
     return {
@@ -34,10 +34,12 @@ const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx }) => {
 
   function handleDropdown(e: React.ChangeEvent<HTMLSelectElement>) {
     const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
-    displayedSoftwaresClone[idx] = e.target.value as Software;
+    const selectedSoftware: Software = e.target.value as Software;
+    displayedSoftwaresClone[idx] = selectedSoftware;
 
     store.setDisplayedSoftwares(displayedSoftwaresClone);
     setDisplayedSoftwares(displayedSoftwaresClone);
+    setSelectedSoftwareByUser(selectedSoftware);
   }
 
   return (

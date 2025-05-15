@@ -22,6 +22,7 @@ export const GridContainerContext = createContext<{
   setDisplayedSoftwares: React.Dispatch<React.SetStateAction<DisplayedSoftwares>>;
   displayedMonths: Months;
   setDisplayedMonths: React.Dispatch<React.SetStateAction<Months>>;
+  setSelectedSoftwareByUser: React.Dispatch<React.SetStateAction<Software | undefined>>;
 }>({
   feCache: {},
   fetchLoading: true,
@@ -29,6 +30,7 @@ export const GridContainerContext = createContext<{
   setDisplayedSoftwares: () => {},
   displayedMonths: [],
   setDisplayedMonths: () => {},
+  setSelectedSoftwareByUser: () => {},
 });
 
 const GridContainer: React.FC = () => {
@@ -62,13 +64,16 @@ const GridContainer: React.FC = () => {
   useEffect(() => {
     const newDisplayableDateLimit = calcDisplayableDateLimit(displayedSoftwares, feCache, extendDisplayableMonthRange);
     if (newDisplayableDateLimit) {
-      const { newestDate } = newDisplayableDateLimit;
+      let { newestDate: latestDate } = newDisplayableDateLimit;
+      if (selectedSoftwareByUser && feCache[selectedSoftwareByUser]?.newestDate) {
+        latestDate = feCache[selectedSoftwareByUser].newestDate;
+      }
       setDisplayedYearButtons(getYearRange(newDisplayableDateLimit));
       setDisplayablDateLimit(newDisplayableDateLimit);
-      setDisplayedMonths(calcMonthRange(newestDate, nrOfmonthsToRender, newDisplayableDateLimit));
-      setSelectedYear(newestDate.getFullYear());
+      setDisplayedMonths(calcMonthRange(latestDate, nrOfmonthsToRender, newDisplayableDateLimit));
+      setSelectedYear(latestDate.getFullYear());
     }
-  }, [displayedSoftwares, feCache]);
+  }, [displayedSoftwares, feCache, selectedSoftwareByUser]);
 
   function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
     if (displayableDateLimit) {
@@ -82,7 +87,15 @@ const GridContainer: React.FC = () => {
 
   return (
     <GridContainerContext.Provider
-      value={{ feCache, fetchLoading, displayedSoftwares, setDisplayedSoftwares, displayedMonths, setDisplayedMonths }}
+      value={{
+        feCache,
+        fetchLoading,
+        displayedSoftwares,
+        setDisplayedSoftwares,
+        displayedMonths,
+        setDisplayedMonths,
+        setSelectedSoftwareByUser,
+      }}
     >
       <div className={'h-12 mt-7 overflow-x-auto whitespace-nowrap'} style={{ direction: 'rtl' }}>
         {displayedYearButtons.map((year) => (
