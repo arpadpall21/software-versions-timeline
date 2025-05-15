@@ -1,26 +1,24 @@
 'use client';
 
 import { useMemo, useContext } from 'react';
-import { type Month, Software } from '@/misc/types';
+import { Software } from '@/misc/types';
 import { calcPercentOf } from '@/misc/helpers';
 import TextBallon from '@/Components/TextBalloon';
 import { useTranslations } from 'next-intl';
 import appConfig from '../../../../config/appConfig';
 import Skeleton from '@/Components/Skeleton';
-import { FeCacheContext } from '@/app/version-map/Components/GridContainer';
+import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
 interface Props {
   zoomLevel: number;
-  displayedMonths: Month[];
   software: Software;
   twTimelineStyle: string;
 }
 
-const Timeline: React.FC<Props> = ({ zoomLevel, displayedMonths, software, twTimelineStyle }) => {
-  const { feCache, fetchLoading } = useContext(FeCacheContext);
-
+const Timeline: React.FC<Props> = ({ zoomLevel, software, twTimelineStyle }) => {
+  const { feCache, fetchLoading, displayedMonths } = useContext(GridContainerContext);
   const t = useTranslations('components.monthsGrid.months');
 
   const scaleTextBallon: number = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel]);

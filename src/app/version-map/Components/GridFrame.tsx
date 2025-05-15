@@ -1,7 +1,7 @@
 'use client';
 
 import '@/app/globals.css';
-import { useState, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { calcTimelineZoom } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
@@ -9,7 +9,8 @@ import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
 import Timeline from '@/app/version-map/Components/Timeline';
 import MonthsTimeline from '@/app/version-map/Components/MonthsTimeline';
 import SideLogo from './SideLogo';
-import { type Month, type DisplayedSoftwares, Software } from '@/misc/types';
+import { Software } from '@/misc/types';
+import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
@@ -32,24 +33,13 @@ const twTimelineStyle: { [software in Software]: string } = {
   [Software.INTERNET_EXPLORER]: 'bg-[#a6eaff] dark:bg-[#3e8196] text-[#2e2e2e] dark:text-[#1c1c1c]',
 };
 
-interface Props {
-  displayedSoftwares: DisplayedSoftwares;
-  setDisplayedSoftwares: React.Dispatch<React.SetStateAction<DisplayedSoftwares>>;
-  displayedMonths: Month[];
-  setDisplayedMonths: React.Dispatch<React.SetStateAction<Month[]>>;
-}
-
-const GridFrame: React.FC<Props> = ({
-  displayedSoftwares,
-  setDisplayedSoftwares,
-  displayedMonths,
-  setDisplayedMonths,
-}) => {
+const GridFrame = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
+  const { displayedSoftwares } = useContext(GridContainerContext);
 
   useEffect(() => {
     if (scrollZoomEnabled) {
@@ -103,7 +93,7 @@ const GridFrame: React.FC<Props> = ({
         <div className={'col-span-2 border-b border-black dark:border-white overflow-hidden'}>
           <div className={'float-right'} style={{ transform: `translateX(${position.x}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scaleX(${zoomLevel})` }}>
-              <MonthsTimeline zoomLevel={zoomLevel} displayedMonths={displayedMonths} />
+              <MonthsTimeline zoomLevel={zoomLevel} />
             </div>
           </div>
         </div>
@@ -117,8 +107,6 @@ const GridFrame: React.FC<Props> = ({
                     twStyle={twTimelineStyle[software]}
                     software={software}
                     idx={i}
-                    displayedSoftwares={displayedSoftwares}
-                    setDisplayedSoftwares={setDisplayedSoftwares}
                     key={i}
                   />
                 ))}
@@ -136,7 +124,6 @@ const GridFrame: React.FC<Props> = ({
               {displayedSoftwares.map((software, i) => (
                 <Timeline
                   zoomLevel={zoomLevel}
-                  displayedMonths={displayedMonths}
                   software={software}
                   twTimelineStyle={twTimelineStyle[software]}
                   key={i}
