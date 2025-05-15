@@ -1,19 +1,19 @@
 'use client';
 
-import { useMemo } from 'react';
-import { type Month } from '@/misc/types';
+import { useContext, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import appConfig from '../../../../config/appConfig';
 import { calcPercentOf } from '@/misc/helpers';
+import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
 interface Props {
   zoomLevel: number;
-  displayedMonths: Month[];
 }
 
-const MonthsTimeline: React.FC<Props> = ({ zoomLevel, displayedMonths }) => {
+const MonthsTimeline: React.FC<Props> = ({ zoomLevel }) => {
+  const { displayedMonths } = useContext(GridContainerContext);
   const t = useTranslations('components.monthsGrid.months');
 
   const { scaleTextX, scaleTextY } = useMemo(() => {

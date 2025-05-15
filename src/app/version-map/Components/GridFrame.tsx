@@ -9,7 +9,7 @@ import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
 import Timeline from '@/app/version-map/Components/Timeline';
 import MonthsTimeline from '@/app/version-map/Components/MonthsTimeline';
 import SideLogo from './SideLogo';
-import { type Month, Software } from '@/misc/types';
+import { Software } from '@/misc/types';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
@@ -33,12 +33,7 @@ const twTimelineStyle: { [software in Software]: string } = {
   [Software.INTERNET_EXPLORER]: 'bg-[#a6eaff] dark:bg-[#3e8196] text-[#2e2e2e] dark:text-[#1c1c1c]',
 };
 
-interface Props {
-  displayedMonths: Month[];
-  setDisplayedMonths: React.Dispatch<React.SetStateAction<Month[]>>;
-}
-
-const GridFrame: React.FC<Props> = ({ displayedMonths, setDisplayedMonths }) => {
+const GridFrame = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -98,7 +93,7 @@ const GridFrame: React.FC<Props> = ({ displayedMonths, setDisplayedMonths }) => 
         <div className={'col-span-2 border-b border-black dark:border-white overflow-hidden'}>
           <div className={'float-right'} style={{ transform: `translateX(${position.x}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scaleX(${zoomLevel})` }}>
-              <MonthsTimeline zoomLevel={zoomLevel} displayedMonths={displayedMonths} />
+              <MonthsTimeline zoomLevel={zoomLevel} />
             </div>
           </div>
         </div>
@@ -129,7 +124,6 @@ const GridFrame: React.FC<Props> = ({ displayedMonths, setDisplayedMonths }) => 
               {displayedSoftwares.map((software, i) => (
                 <Timeline
                   zoomLevel={zoomLevel}
-                  displayedMonths={displayedMonths}
                   software={software}
                   twTimelineStyle={twTimelineStyle[software]}
                   key={i}

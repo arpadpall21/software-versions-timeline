@@ -20,15 +20,19 @@ export const GridContainerContext = createContext<{
   fetchLoading: boolean;
   displayedSoftwares: DisplayedSoftwares;
   setDisplayedSoftwares: React.Dispatch<React.SetStateAction<DisplayedSoftwares>>;
+  displayedMonths: Month[];
+  setDisplayedMonths: React.Dispatch<React.SetStateAction<Month[]>>;
 }>({
   feCache: {},
   fetchLoading: true,
   displayedSoftwares: [],
   setDisplayedSoftwares: () => {},
+  displayedMonths: [],
+  setDisplayedMonths: () => {},
 });
 
 const GridContainer: React.FC = () => {
-  const [displayedMonths, setdisplayedMonths] = useState<Month[]>(calcMonthRange(today, nrOfmonthsToRender));
+  const [displayedMonths, setDisplayedMonths] = useState<Month[]>(calcMonthRange(today, nrOfmonthsToRender));
   const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>([]);
   const [displayedYearButtons, setDisplayedYearButtons] = useState<number[]>([]);
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
@@ -61,7 +65,7 @@ const GridContainer: React.FC = () => {
       const { newestDate } = newDisplayableDateLimit;
       setDisplayedYearButtons(getYearRange(newDisplayableDateLimit));
       setDisplayablDateLimit(newDisplayableDateLimit);
-      setdisplayedMonths(calcMonthRange(newestDate, nrOfmonthsToRender, newDisplayableDateLimit));
+      setDisplayedMonths(calcMonthRange(newestDate, nrOfmonthsToRender, newDisplayableDateLimit));
       setSelectedYear(newestDate.getFullYear());
     }
   }, [displayedSoftwares, feCache]);
@@ -72,12 +76,14 @@ const GridContainer: React.FC = () => {
         ? Number.parseInt(e.currentTarget.textContent)
         : currentYear;
       setSelectedYear(selectedYear);
-      setdisplayedMonths(calcMonthRange(new Date(selectedYear, 11), nrOfmonthsToRender, displayableDateLimit));
+      setDisplayedMonths(calcMonthRange(new Date(selectedYear, 11), nrOfmonthsToRender, displayableDateLimit));
     }
   }
 
   return (
-    <GridContainerContext.Provider value={{ feCache, fetchLoading, displayedSoftwares, setDisplayedSoftwares }}>
+    <GridContainerContext.Provider
+      value={{ feCache, fetchLoading, displayedSoftwares, setDisplayedSoftwares, displayedMonths, setDisplayedMonths }}
+    >
       <div className={'h-12 mt-7 overflow-x-auto whitespace-nowrap'} style={{ direction: 'rtl' }}>
         {displayedYearButtons.map((year) => (
           <Button
@@ -89,7 +95,7 @@ const GridContainer: React.FC = () => {
           />
         ))}
       </div>
-      <GridFrame displayedMonths={displayedMonths} setDisplayedMonths={setdisplayedMonths} />
+      <GridFrame />
     </GridContainerContext.Provider>
   );
 };
