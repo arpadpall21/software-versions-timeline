@@ -15,9 +15,14 @@ const currentYear: number = today.getFullYear();
 const extendDisplayableMonthRange = appConfig.extendDisplayableMonthRange;
 const nrOfmonthsToRender: number = 20; // TODO: fine grain this when finegraining the zoom
 
-export const GridContainerContext = createContext<{ feCache: FeCache; fetchLoading: boolean }>({
+export const GridContainerContext = createContext<{
+  feCache: FeCache;
+  fetchLoading: boolean;
+  setDisplayedSoftwares: React.Dispatch<React.SetStateAction<DisplayedSoftwares>>;
+}>({
   feCache: {},
   fetchLoading: true,
+  setDisplayedSoftwares: () => {},
 });
 
 const GridContainer: React.FC = () => {
@@ -70,7 +75,7 @@ const GridContainer: React.FC = () => {
   }
 
   return (
-    <GridContainerContext.Provider value={{ feCache, fetchLoading }}>
+    <GridContainerContext.Provider value={{ feCache, fetchLoading, setDisplayedSoftwares }}>
       <div className={'h-12 mt-7 overflow-x-auto whitespace-nowrap'} style={{ direction: 'rtl' }}>
         {displayedYearButtons.map((year) => (
           <Button
@@ -84,7 +89,6 @@ const GridContainer: React.FC = () => {
       </div>
       <GridFrame
         displayedSoftwares={displayedSoftwares}
-        setDisplayedSoftwares={setDisplayedSoftwares}
         displayedMonths={displayedMonths}
         setDisplayedMonths={setdisplayedMonths}
       />

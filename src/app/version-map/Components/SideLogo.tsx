@@ -1,12 +1,13 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import Image from 'next/image';
 import { Software } from '@/misc/types';
 import { calcPercentOf } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import { type DisplayedSoftwares } from '@/misc/types';
 import store from '@/misc/store';
+import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
@@ -16,11 +17,11 @@ interface Props {
   software: Software;
   idx: number;
   displayedSoftwares: DisplayedSoftwares;
-  setDisplayedSoftwares: React.Dispatch<React.SetStateAction<DisplayedSoftwares>>;
 }
 
-const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx, displayedSoftwares, setDisplayedSoftwares }) => {
+const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx, displayedSoftwares }) => {
   const { logoPath, displayName } = appConfig.supportedSoftwares[software];
+  const { setDisplayedSoftwares } = useContext(GridContainerContext);
 
   const { scaleLogoX, scaleLogoY, scaleDropdownX, scaleDropdownY, bottomSpaceDropdown } = useMemo(() => {
     return {

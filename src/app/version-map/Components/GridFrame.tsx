@@ -34,17 +34,11 @@ const twTimelineStyle: { [software in Software]: string } = {
 
 interface Props {
   displayedSoftwares: DisplayedSoftwares;
-  setDisplayedSoftwares: React.Dispatch<React.SetStateAction<DisplayedSoftwares>>;
   displayedMonths: Month[];
   setDisplayedMonths: React.Dispatch<React.SetStateAction<Month[]>>;
 }
 
-const GridFrame: React.FC<Props> = ({
-  displayedSoftwares,
-  setDisplayedSoftwares,
-  displayedMonths,
-  setDisplayedMonths,
-}) => {
+const GridFrame: React.FC<Props> = ({ displayedSoftwares, displayedMonths, setDisplayedMonths }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -118,7 +112,6 @@ const GridFrame: React.FC<Props> = ({
                     software={software}
                     idx={i}
                     displayedSoftwares={displayedSoftwares}
-                    setDisplayedSoftwares={setDisplayedSoftwares}
                     key={i}
                   />
                 ))}
