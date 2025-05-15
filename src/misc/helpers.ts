@@ -4,10 +4,10 @@ import {
   type DisplayedSoftwares,
   type DisplayableDateLimit,
   type Months,
-  Software,
   FeCache,
 } from '@/misc/types';
 import appConfig from '../../config/appConfig';
+import { Software } from '../../config/supportedSoftwares';
 
 const minZoomLevel = appConfig.zoom.minLevel;
 const maxZoomLevel = appConfig.zoom.maxLevel;

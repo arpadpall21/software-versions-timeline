@@ -1,13 +1,13 @@
 'use client';
 
 import { useMemo, useContext } from 'react';
-import { Software } from '@/misc/types';
 import { calcPercentOf } from '@/misc/helpers';
 import TextBallon from '@/Components/TextBalloon';
 import { useTranslations } from 'next-intl';
 import appConfig from '../../../../config/appConfig';
 import Skeleton from '@/Components/Skeleton';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
+import { Software } from '../../../../config/supportedSoftwares';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 

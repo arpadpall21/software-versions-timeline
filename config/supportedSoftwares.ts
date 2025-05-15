@@ -1,4 +1,16 @@
-import { type SupportedSoftwares, Software } from '../src/misc/types';
+import { type SupportedSoftwares } from '../src/misc/types';
+
+export enum Software {
+  CHROME = 'CHROME',
+  MOZILLA = 'MOZILLA',
+  OPERA = 'OPERA',
+  EDGE = 'EDGE',
+  SAFARI = 'SAFARI',
+  INTERNET_EXPLORER = 'INTERNET_EXPLORER',
+  REACT = 'REACT',
+  NODE = 'NODE',
+  PYTHON = 'PYTHON',
+}
 
 const supportedSoftwares: SupportedSoftwares = {
   [Software.CHROME]: {
@@ -31,11 +43,11 @@ const supportedSoftwares: SupportedSoftwares = {
     dataPath: 'data/safari.json',
     source: 'https://developer.apple.com/documentation/safari-release-notes',
   },
-  [Software.NODE]: {
-    displayName: 'Node.js',
-    logoPath: '/softwareLogos/nodeJs.png',
-    dataPath: 'data/nodeJs.json',
-    source: 'https://nodejs.org/en/about/previous-releases',
+  [Software.INTERNET_EXPLORER]: {
+    displayName: 'Internet Explorer',
+    logoPath: '/softwareLogos/internetExplorer.png',
+    dataPath: 'data/internetExplorer.json',
+    source: 'https://en.wikipedia.org/wiki/Internet_Explorer_version_history#Microsoft_Internet_Explorer_1.x',
   },
   [Software.REACT]: {
     displayName: 'React.js',
@@ -43,17 +55,17 @@ const supportedSoftwares: SupportedSoftwares = {
     dataPath: 'data/react.json',
     source: 'https://react.dev/versions',
   },
+  [Software.NODE]: {
+    displayName: 'Node.js',
+    logoPath: '/softwareLogos/nodeJs.png',
+    dataPath: 'data/nodeJs.json',
+    source: 'https://nodejs.org/en/about/previous-releases',
+  },
   [Software.PYTHON]: {
     displayName: 'Python',
     logoPath: '/softwareLogos/python.webp',
     dataPath: 'data/python.json',
     source: 'https://www.python.org/downloads/source/',
-  },
-  [Software.INTERNET_EXPLORER]: {
-    displayName: 'Internet Explorer',
-    logoPath: '/softwareLogos/internetExplorer.png',
-    dataPath: 'data/internetExplorer.json',
-    source: 'https://en.wikipedia.org/wiki/Internet_Explorer_version_history#Microsoft_Internet_Explorer_1.x',
   },
 };
 

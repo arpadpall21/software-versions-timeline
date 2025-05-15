@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import appConfig from '../../../../config/appConfig';
 import Image from 'next/image';
-import { Software } from '@/misc/types';
+import { Software } from '../../../../config/supportedSoftwares';
 
 const SupportedSoftwares: React.FC = async () => {
   const t = await getTranslations('components.supportedSoftwares');
