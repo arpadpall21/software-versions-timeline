@@ -8,19 +8,11 @@ interface Props {
 }
 
 const Button: React.FC<Props> = ({ text, width, pop, handleClick }) => {
-  /**
-   * Tailwind utilities are parsed at build time so they cannot be iterpolated with values,
-   *   in this situation this means we cannot conditionally change tailwind utilities
-   * So code duplication is kind of unavoidable here :/
-   *
-   * https://tailwindcss.com/docs/detecting-classes-in-source-files#class-detection-in-depth
-   */
-
-  let twStyle = `bg-btnBgPop dark:bg-btnBgPopD font-bold text-btnFgPop
-    dark:text-btnFgPopD hover:bg-btnBgHovPop dark:hover:bg-btnBgHovPopD`;
-  if (pop) {
-    twStyle = `bg-btnBg dark:bg-btnBgD text-btnFg dark:text-btnFgD
+  let twStyle = `bg-btnBg dark:bg-btnBgD text-btnFg dark:text-btnFgD
       hover:bg-btnBgHov dark:hover:bg-btnBgHovD`;
+  if (pop) {
+    twStyle = `bg-btnBgPop dark:bg-btnBgPopD font-bold text-btnFgPop
+      dark:text-btnFgPopD hover:bg-btnBgHovPop dark:hover:bg-btnBgHovPopD`;
   }
 
   return (
