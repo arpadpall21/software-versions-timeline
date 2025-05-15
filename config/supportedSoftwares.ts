@@ -49,6 +49,12 @@ const supportedSoftwares: SupportedSoftwares = {
     dataPath: 'data/python.json',
     source: 'https://www.python.org/downloads/source/',
   },
+  [Software.INTERNET_EXPLORER]: {
+    displayName: 'Internet Explorer',
+    logoPath: '/softwareLogos/internetExplorer.png',
+    dataPath: 'data/internetExplorer.json',
+    source: 'https://en.wikipedia.org/wiki/Internet_Explorer_version_history#Microsoft_Internet_Explorer_1.x',
+  },
 };
 
 export default supportedSoftwares;
