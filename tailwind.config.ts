@@ -52,7 +52,7 @@ export default {
       spacing: {
         mobPad: '12px',
         deskPad: '18px',
-        gridCellW: '100px',
+        gridCellW: '70px',
       },
       animation: {
         'fast-pop': 'fast-pop 200ms',
