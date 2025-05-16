@@ -14,7 +14,7 @@ const today: Date = new Date();
 const currentYear: number = today.getFullYear();
 
 const extendDisplayableMonthRange = appConfig.extendDisplayableMonthRange;
-const nrOfmonthsToRender: number = 20; // TODO: fine grain this when finegraining the zoom
+const nrOfmonthsToRender: number = 30; // TODO: fine grain this when finegraining the zoom
 
 export const GridContainerContext = createContext<{
   feCache: FeCache;
