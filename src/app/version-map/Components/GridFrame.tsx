@@ -124,7 +124,7 @@ const GridFrame = () => {
             <div className={'smoothTransform'} style={{ transform: `scale(${zoomLevel})` }}>
               <div className={'relative h-[25px]'}>
                 <div className={'absolute bottom-0'}>
-                  <MonthsTimeline zoomLevel={zoomLevel} height={1500} gridOnly={true} />
+                  <MonthsTimeline zoomLevel={zoomLevel} height={1000} gridOnly={true} />
                 </div>
               </div>
               {displayedSoftwares.map((software, i) => (
