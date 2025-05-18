@@ -78,7 +78,7 @@ const GridFrame = () => {
     <div
       className={`
         relative overflow-hidden select-none mb-7 mt-3
-        shadow-[0_0_4px_1px] shadow-borPri dark:shadow-borPriD bg-bgSec dark:bg-bgSecD`}
+        shadow-[0_0_4px_1px] shadow-borPri dark:shadow-borPriD bg-gridBg dark:bg-gridBgD`}
       onWheel={handleMouseWheel}
       onMouseLeave={handleMouseUp}
       onMouseMove={handleMouseMove}
