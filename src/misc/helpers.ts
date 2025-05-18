@@ -166,3 +166,10 @@ export function getYearRange(displayableDateLimit: DisplayableDateLimit): number
   result.reverse();
   return result;
 }
+
+/**
+ * only in client component hook
+ */
+export function calcNrOfGridCellsToRender(gridCellWidth: number): number {
+  return Math.ceil(window.outerWidth / gridCellWidth);
+}

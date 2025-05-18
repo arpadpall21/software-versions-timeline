@@ -39,7 +39,7 @@ const GridFrame = () => {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
-  const { displayedSoftwares } = useContext(GridContainerContext);
+  const { displayedSoftwares, setDisplayedMonths } = useContext(GridContainerContext);
 
   useEffect(() => {
     if (scrollZoomEnabled) {

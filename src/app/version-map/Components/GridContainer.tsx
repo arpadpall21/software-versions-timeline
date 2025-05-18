@@ -3,18 +3,18 @@
 import { useState, useEffect, createContext } from 'react';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
-import { calcMonthRange, getYearRange, calcDisplayableDateLimit } from '@/misc/helpers';
+import { calcMonthRange, getYearRange, calcDisplayableDateLimit, calcNrOfGridCellsToRender } from '@/misc/helpers';
 import { type Months, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit } from '@/misc/types';
 import { getVersionHistory } from '@/app/version-map/action';
 import store from '@/misc/store';
 import appConfig from '../../../../config/appConfig';
 import { Software } from '../../../../config/supportedSoftwares';
+import tailwindConfig from '../../../../tailwind.config';
 
 const today: Date = new Date();
 const currentYear: number = today.getFullYear();
-
 const extendDisplayableMonthRange = appConfig.extendDisplayableMonthRange;
-const nrOfmonthsToRender: number = 30; // TODO: fine grain this when finegraining the zoom
+const girdCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
 
 export const GridContainerContext = createContext<{
   feCache: FeCache;
@@ -35,7 +35,7 @@ export const GridContainerContext = createContext<{
 });
 
 const GridContainer: React.FC = () => {
-  const [displayedMonths, setDisplayedMonths] = useState<Months>(calcMonthRange(today, nrOfmonthsToRender));
+  const [displayedMonths, setDisplayedMonths] = useState<Months>(calcMonthRange(today, 30));
   const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>([]);
   const [displayedYearButtons, setDisplayedYearButtons] = useState<number[]>([]);
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
@@ -71,7 +71,9 @@ const GridContainer: React.FC = () => {
       }
       setDisplayedYearButtons(getYearRange(newDisplayableDateLimit));
       setDisplayablDateLimit(newDisplayableDateLimit);
-      setDisplayedMonths(calcMonthRange(latestDate, nrOfmonthsToRender, newDisplayableDateLimit, 1));
+      setDisplayedMonths(
+        calcMonthRange(latestDate, calcNrOfGridCellsToRender(girdCellWidth), newDisplayableDateLimit, 1),
+      );
       setSelectedYear(latestDate.getFullYear());
     }
   }, [displayedSoftwares, feCache, selectedSoftwareByUser]);
@@ -82,7 +84,9 @@ const GridContainer: React.FC = () => {
         ? Number.parseInt(e.currentTarget.textContent)
         : currentYear;
       setSelectedYear(selectedYear);
-      setDisplayedMonths(calcMonthRange(new Date(selectedYear, 11), nrOfmonthsToRender, displayableDateLimit));
+      setDisplayedMonths(
+        calcMonthRange(new Date(selectedYear, 11), calcNrOfGridCellsToRender(girdCellWidth), displayableDateLimit),
+      );
     }
   }
 
