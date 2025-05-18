@@ -11,8 +11,10 @@ import MonthsTimeline from '@/app/version-map/Components/MonthsTimeline';
 import SideLogo from './SideLogo';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 import { Software } from '../../../../config/supportedSoftwares';
+import tailwindConfig from '../../../../tailwind.config';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
+const girdCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
 
 /**
  * Tailwind utilities are parsed at build time so they cannot be iterpolated with values,
@@ -39,7 +41,7 @@ const GridFrame = () => {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
-  const { displayedSoftwares, setDisplayedMonths } = useContext(GridContainerContext);
+  const { displayedSoftwares, displayedMonths, setDisplayedMonths } = useContext(GridContainerContext);
 
   useEffect(() => {
     if (scrollZoomEnabled) {
@@ -52,6 +54,14 @@ const GridFrame = () => {
   function handleMouseMove(e: React.MouseEvent) {
     if (isDragging) {
       setPosition({ x: e.clientX - offset.x, y: e.clientY - offset.y });
+
+      if (position.x > girdCellWidth || position.x < 0) {
+        const shiftMontsToLeft: number = -Math.floor(position.x / girdCellWidth);
+        
+        console.log(shiftMontsToLeft)
+        
+        
+      }
     }
   }
 
