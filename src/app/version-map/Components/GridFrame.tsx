@@ -100,6 +100,7 @@ const GridFrame = () => {
         <div className={'overflow-hidden border-r border-black dark:border-white'}>
           <div style={{ transform: `translateY(${position.y}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scaleY(${zoomLevel})` }}>
+              <div className={'h-[25px]'} />
               {displayedSoftwares &&
                 displayedSoftwares.map((software, i) => (
                   <SideLogo
@@ -121,6 +122,7 @@ const GridFrame = () => {
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scale(${zoomLevel})` }}>
+              <MonthsTimeline zoomLevel={zoomLevel} height={25} gridOnly={true} />
               {displayedSoftwares.map((software, i) => (
                 <Timeline
                   zoomLevel={zoomLevel}
