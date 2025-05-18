@@ -2,7 +2,7 @@
 
 import '@/app/globals.css';
 import { useState, useContext, useEffect } from 'react';
-import { calcTimelineZoom } from '@/misc/helpers';
+import { calcTimelineZoom, getShiftedLastMonth } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
@@ -56,9 +56,11 @@ const GridFrame = () => {
       setPosition({ x: e.clientX - offset.x, y: e.clientY - offset.y });
 
       if (position.x > girdCellWidth || position.x < 0) {
-        const shiftMontsToLeft: number = -Math.floor(position.x / girdCellWidth);
+        const shiftMonts: number = -Math.floor(position.x / girdCellWidth);
+        const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, shiftMonts);
         
-        console.log(shiftMontsToLeft)
+        console.log('***')
+        console.log(shiftedLastMonth)
         
         
       }

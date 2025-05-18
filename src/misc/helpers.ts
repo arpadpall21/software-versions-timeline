@@ -173,3 +173,10 @@ export function getYearRange(displayableDateLimit: DisplayableDateLimit): number
 export function calcNrOfGridCellsToRender(gridCellWidth: number): number {
   return Math.ceil(window.outerWidth / gridCellWidth);
 }
+
+export function getShiftedLastMonth(displayedMonths: Months, shiftBy: number): Date {
+  const lastMonth = displayedMonths[displayedMonths.length - 1];
+  const shiftedMonthIdx = Number.parseInt(lastMonth.yearMonth.slice(5)) - 1 + shiftBy;
+
+  return new Date(Number.parseInt(lastMonth.yearMonth.slice(0, 5)), shiftedMonthIdx);
+}
