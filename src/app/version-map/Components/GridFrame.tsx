@@ -122,7 +122,11 @@ const GridFrame = () => {
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
           <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scale(${zoomLevel})` }}>
-              <MonthsTimeline zoomLevel={zoomLevel} height={25} gridOnly={true} />
+              <div className={'relative h-[25px]'}>
+                <div className={'absolute bottom-0'}>
+                  <MonthsTimeline zoomLevel={zoomLevel} height={1500} gridOnly={true} />
+                </div>
+              </div>
               {displayedSoftwares.map((software, i) => (
                 <Timeline
                   zoomLevel={zoomLevel}
