@@ -65,7 +65,6 @@ const Timeline: React.FC<Props> = ({ zoomLevel, software, twTimelineStyle }) => 
                       text={version}
                       textsSecondary={[`(${month.yearMonth.slice(0, 4)}.${t(month.monthName)}.${day})`]}
                       twStyle={twTimelineStyle}
-                      link={appConfig.supportedSoftwares[software].source}
                     />
                   </div>
                 </div>
