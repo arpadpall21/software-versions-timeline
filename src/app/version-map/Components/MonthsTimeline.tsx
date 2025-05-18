@@ -19,13 +19,13 @@ const MonthsTimeline: React.FC<Props> = ({ zoomLevel, height = 60, gridOnly }) =
   const t = useTranslations('components.monthsGrid.months');
 
   const { scaleTextX, scaleTextY } = useMemo(() => {
-    if (!gridOnly) {
+    if (gridOnly) {
+      return { scaleTextX: 0, scaleTextY: 0 };
+    } else {
       return {
         scaleTextX: zoomLevel <= defaultZoomLevel ? defaultZoomLevel : calcPercentOf(defaultZoomLevel, zoomLevel) / 100,
         scaleTextY: zoomLevel < defaultZoomLevel ? zoomLevel : defaultZoomLevel,
       };
-    } else {
-      return { scaleTextX: 0, scaleTextY: 0 };
     }
   }, [gridOnly, zoomLevel]);
 
