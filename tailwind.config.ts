@@ -28,6 +28,9 @@ export default {
         btnFgPop: '#c5cede',
         btnBgPop: '#4444bc',
         btnBgHovPop: '#353594',
+        btnFgWarn: 'white',
+        btnBgWarn: '#ff5c5c',
+        btnBgHovWarn: '#e05151',
 
         // dark
         bgPriD: '#191942',
@@ -48,6 +51,9 @@ export default {
         btnFgPopD: '#c5cede',
         btnBgPopD: '#4c44bc',
         btnBgHovPopD: '#39338c',
+        btnFgWarnD: '#b0b0b0',
+        btnBgWarnD: '#851919',
+        btnBgHovWarnD: '#5c1111',
       },
       spacing: {
         mobPad: '12px',
