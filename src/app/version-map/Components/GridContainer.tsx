@@ -14,7 +14,7 @@ import tailwindConfig from '../../../../tailwind.config';
 const today: Date = new Date();
 const currentYear: number = today.getFullYear();
 const extendDisplayableMonthRange = appConfig.extendDisplayableMonthRange;
-const girdCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
+const gridCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
 
 export const GridContainerContext = createContext<{
   feCache: FeCache;
@@ -24,6 +24,9 @@ export const GridContainerContext = createContext<{
   displayedMonths: Months;
   setDisplayedMonths: React.Dispatch<React.SetStateAction<Months>>;
   setSelectedSoftwareByUser: React.Dispatch<React.SetStateAction<Software | undefined>>;
+  displayableDateLimit: DisplayableDateLimit | undefined;
+  gridOffset: number;
+  setGridOffset: React.Dispatch<React.SetStateAction<number>>;
 }>({
   feCache: {},
   fetchLoading: true,
@@ -32,10 +35,13 @@ export const GridContainerContext = createContext<{
   displayedMonths: [],
   setDisplayedMonths: () => {},
   setSelectedSoftwareByUser: () => {},
+  displayableDateLimit: undefined,
+  gridOffset: 0,
+  setGridOffset: () => {},
 });
 
 const GridContainer: React.FC = () => {
-  const [displayedMonths, setDisplayedMonths] = useState<Months>(calcMonthRange(today, 30));
+  const [displayedMonths, setDisplayedMonths] = useState<Months>([]);
   const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>([]);
   const [displayedYearButtons, setDisplayedYearButtons] = useState<number[]>([]);
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
@@ -43,6 +49,7 @@ const GridContainer: React.FC = () => {
   const [displayableDateLimit, setDisplayablDateLimit] = useState<DisplayableDateLimit>();
   const [feCache, setFeCache] = useState<FeCache>({});
   const [fetchLoading, setFetchLoading] = useState<boolean>(true);
+  const [gridOffset, setGridOffset] = useState<number>(0);
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
@@ -72,7 +79,7 @@ const GridContainer: React.FC = () => {
       setDisplayedYearButtons(getYearRange(newDisplayableDateLimit));
       setDisplayablDateLimit(newDisplayableDateLimit);
       setDisplayedMonths(
-        calcMonthRange(latestDate, calcNrOfGridCellsToRender(girdCellWidth), newDisplayableDateLimit, 1),
+        calcMonthRange(latestDate, calcNrOfGridCellsToRender(gridCellWidth), newDisplayableDateLimit, 1),
       );
       setSelectedYear(latestDate.getFullYear());
     }
@@ -85,7 +92,7 @@ const GridContainer: React.FC = () => {
         : currentYear;
       setSelectedYear(selectedYear);
       setDisplayedMonths(
-        calcMonthRange(new Date(selectedYear, 11), calcNrOfGridCellsToRender(girdCellWidth), displayableDateLimit),
+        calcMonthRange(new Date(selectedYear, 11), calcNrOfGridCellsToRender(gridCellWidth), displayableDateLimit),
       );
     }
   }
@@ -100,6 +107,9 @@ const GridContainer: React.FC = () => {
         displayedMonths,
         setDisplayedMonths,
         setSelectedSoftwareByUser,
+        displayableDateLimit,
+        gridOffset,
+        setGridOffset,
       }}
     >
       <div className={'h-12 mt-7 overflow-x-auto whitespace-nowrap'} style={{ direction: 'rtl' }}>

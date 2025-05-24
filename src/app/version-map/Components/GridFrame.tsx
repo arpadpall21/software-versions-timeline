@@ -2,7 +2,7 @@
 
 import '@/app/globals.css';
 import { useState, useContext, useEffect } from 'react';
-import { calcTimelineZoom, getShiftedLastMonth } from '@/misc/helpers';
+import { calcTimelineZoom, getShiftedLastMonth, calcNrOfGridCellsToRender, calcMonthRange } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
@@ -14,7 +14,7 @@ import { Software } from '../../../../config/supportedSoftwares';
 import tailwindConfig from '../../../../tailwind.config';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
-const girdCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
+const gridCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
 
 /**
  * Tailwind utilities are parsed at build time so they cannot be iterpolated with values,
@@ -41,7 +41,8 @@ const GridFrame = () => {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
-  const { displayedSoftwares, displayedMonths, setDisplayedMonths } = useContext(GridContainerContext);
+  const { displayedSoftwares, displayedMonths, setDisplayedMonths, displayableDateLimit, gridOffset } =
+    useContext(GridContainerContext);
 
   useEffect(() => {
     if (scrollZoomEnabled) {
@@ -55,15 +56,54 @@ const GridFrame = () => {
     if (isDragging) {
       setPosition({ x: e.clientX - offset.x, y: e.clientY - offset.y });
 
-      if (position.x > girdCellWidth || position.x < 0) {
-        const shiftMonts: number = -Math.floor(position.x / girdCellWidth);
-        const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, shiftMonts);
+// 1
+      if (position.x - gridCellWidth * 2 > gridOffset + gridCellWidth) {
+        // const monthOffset: number = Math.floor(position.x / girdCellWidth);
+        // const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, -monthOffset);
+        // const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(girdCellWidth);
+      
+        console.log('<<<')
         
-        console.log('***')
-        console.log(shiftedLastMonth)
         
+      } else if (position.x - gridCellWidth * 2 < gridOffset) {
+        console.log('>>>')
+        
+        
+        
+        // setGridOffset(monthOffset * girdCellWidth);
+        // setDisplayedMonths(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit));
         
       }
+
+
+
+
+
+      // if (position.x > girdOffset || position.x < girdOffset) {   // TODO: find a logic that only triggers when crossing month line
+      //   const monthOffset: number = Math.floor(position.x / girdCellWidth);
+        
+        
+        
+        // const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, monthOffset);
+        // const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(girdCellWidth);
+        
+        
+        // setDisplayedMonths(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit));
+        
+        
+      //   console.log('--- crossed month line ---')
+      //   console.log(girdOffset)
+        
+      //   setGridOffset(monthOffset * girdCellWidth);
+        
+        
+        
+        
+      // }
+      
+      
+      
+      
     }
   }
 
@@ -103,8 +143,11 @@ const GridFrame = () => {
         // onTouchEnd={mouseUpHandler}
       >
         <div className={'col-span-2 border-b border-black dark:border-white overflow-hidden'}>
-          <div className={'float-right'} style={{ transform: `translateX(${position.x}px)` }}>
-            <div className={'smoothTransform'} style={{ transform: `scaleX(${zoomLevel})` }}>
+          <div className={'relative float-right'} style={{ transform: `translateX(${position.x}px)` }}>
+            <div
+              className={'absolute smoothTransform'}
+              style={{ transform: `scaleX(${zoomLevel})`, right: gridOffset }}
+            >
               <MonthsTimeline zoomLevel={zoomLevel} />
             </div>
           </div>
@@ -132,8 +175,8 @@ const GridFrame = () => {
           onMouseDown={handleMouseDown}
         >
           <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
-          <div className={'float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
-            <div className={'smoothTransform'} style={{ transform: `scale(${zoomLevel})` }}>
+          <div className={'relative float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
+            <div className={'absolute smoothTransform'} style={{ transform: `scale(${zoomLevel})`, right: gridOffset }}>
               <div className={'relative h-[25px]'}>
                 <div className={'absolute bottom-0'}>
                   <MonthsTimeline zoomLevel={zoomLevel} height={1000} gridOnly={true} />
