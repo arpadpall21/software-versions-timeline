@@ -56,75 +56,17 @@ const GridFrame = () => {
     if (isDragging) {
       setPosition({ x: e.clientX - offset.x, y: e.clientY - offset.y });
 
-// 1
       if (position.x - gridCellWidth > gridOffset) {
-        console.log('>>>')
-        
-        
-        
-        
-        
-        
         const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, -1);
         const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(gridCellWidth);
-        
-        
-        // console.log(displayedMonths)
-        console.log(shiftedLastMonth)
-        console.log(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit))
-        
-        
-        
-        // console.log(monthOffset)
-        // console.log(shiftedLastMonth)
-        
-        
-        
-        setDisplayedMonths(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit))
+        setDisplayedMonths(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit));
         setGridOffset(gridOffset + gridCellWidth);
       } else if (position.x < gridOffset) {
-        console.log('<<<')
-        
-        
-        
         const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, 1);
         const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(gridCellWidth);
-        
-        
         setGridOffset(gridOffset - gridCellWidth);
         setDisplayedMonths(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit));
-        
       }
-
-
-
-
-
-      // if (position.x > girdOffset || position.x < girdOffset) {   // TODO: find a logic that only triggers when crossing month line
-      //   const monthOffset: number = Math.floor(position.x / girdCellWidth);
-        
-        
-        
-        // const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, monthOffset);
-        // const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(girdCellWidth);
-        
-        
-        // setDisplayedMonths(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit));
-        
-        
-      //   console.log('--- crossed month line ---')
-      //   console.log(girdOffset)
-        
-      //   setGridOffset(monthOffset * girdCellWidth);
-        
-        
-        
-        
-      // }
-      
-      
-      
-      
     }
   }
 

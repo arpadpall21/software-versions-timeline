@@ -40,6 +40,8 @@ export const GridContainerContext = createContext<{
   setGridOffset: () => {},
 });
 
+export const rightDefaultGridOffset: number = 0;
+
 const GridContainer: React.FC = () => {
   const [displayedMonths, setDisplayedMonths] = useState<Months>([]);
   const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>([]);
@@ -49,7 +51,7 @@ const GridContainer: React.FC = () => {
   const [displayableDateLimit, setDisplayablDateLimit] = useState<DisplayableDateLimit>();
   const [feCache, setFeCache] = useState<FeCache>({});
   const [fetchLoading, setFetchLoading] = useState<boolean>(true);
-  const [gridOffset, setGridOffset] = useState<number>(0);
+  const [gridOffset, setGridOffset] = useState<number>(0 - gridCellWidth * rightDefaultGridOffset);
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
