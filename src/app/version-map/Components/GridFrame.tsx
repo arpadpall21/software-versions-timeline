@@ -41,7 +41,7 @@ const GridFrame = () => {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
-  const { displayedSoftwares, displayedMonths, setDisplayedMonths, displayableDateLimit, gridOffset } =
+  const { displayedSoftwares, displayedMonths, setDisplayedMonths, displayableDateLimit, gridOffset, setGridOffset } =
     useContext(GridContainerContext);
 
   useEffect(() => {
@@ -57,21 +57,42 @@ const GridFrame = () => {
       setPosition({ x: e.clientX - offset.x, y: e.clientY - offset.y });
 
 // 1
-      if (position.x - gridCellWidth * 2 > gridOffset + gridCellWidth) {
-        // const monthOffset: number = Math.floor(position.x / girdCellWidth);
-        // const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, -monthOffset);
-        // const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(girdCellWidth);
-      
-        console.log('<<<')
-        
-        
-      } else if (position.x - gridCellWidth * 2 < gridOffset) {
+      if (position.x - gridCellWidth > gridOffset) {
         console.log('>>>')
         
         
         
-        // setGridOffset(monthOffset * girdCellWidth);
-        // setDisplayedMonths(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit));
+        
+        
+        
+        const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, -1);
+        const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(gridCellWidth);
+        
+        
+        // console.log(displayedMonths)
+        console.log(shiftedLastMonth)
+        console.log(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit))
+        
+        
+        
+        // console.log(monthOffset)
+        // console.log(shiftedLastMonth)
+        
+        
+        
+        setDisplayedMonths(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit))
+        setGridOffset(gridOffset + gridCellWidth);
+      } else if (position.x < gridOffset) {
+        console.log('<<<')
+        
+        
+        
+        const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, 1);
+        const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(gridCellWidth);
+        
+        
+        setGridOffset(gridOffset - gridCellWidth);
+        setDisplayedMonths(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit));
         
       }
 

@@ -171,7 +171,7 @@ export function getYearRange(displayableDateLimit: DisplayableDateLimit): number
  * only in client component hook
  */
 export function calcNrOfGridCellsToRender(gridCellWidth: number): number {
-  return Math.ceil(window.outerWidth / gridCellWidth);
+  return Math.ceil(window.outerWidth / gridCellWidth) + 5;
 }
 
 export function getShiftedLastMonth(displayedMonths: Months, shiftBy: number): Date {
