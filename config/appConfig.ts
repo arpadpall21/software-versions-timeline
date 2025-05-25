@@ -17,6 +17,11 @@ interface AppConfig {
     min: number;
     max: number;
   };
+  standByCells: {
+    // number of cells ready to be scrolled into view (user experience VS performance)
+    left: number;
+    right: number;
+  };
 }
 
 const supportedLanguages: { [langCode: string]: Lang } = {
@@ -42,6 +47,10 @@ const appConfig: AppConfig = {
   extendDisplayableMonthRange: {
     min: 2,
     max: 1,
+  },
+  standByCells: {
+    left: 0,
+    right: 0,
   },
 };
 
