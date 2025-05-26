@@ -49,8 +49,8 @@ const appConfig: AppConfig = {
     max: 1,
   },
   standByMonths: {
-    left: 0,
-    right: 0,
+    left: 2,
+    right: 2,
   },
 };
 

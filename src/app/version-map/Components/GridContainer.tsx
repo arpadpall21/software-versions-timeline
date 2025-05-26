@@ -85,7 +85,7 @@ const GridContainer: React.FC = () => {
     }
   }, [displayedSoftwares, feCache, selectedSoftwareByUser]);
 
-  function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
+  function handleYearButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
     if (displayableDateLimit) {
       const selectedYear: number = e.currentTarget.textContent
         ? Number.parseInt(e.currentTarget.textContent)
@@ -118,7 +118,7 @@ const GridContainer: React.FC = () => {
             text={year.toString()}
             width={70}
             pop={year === selectedYear}
-            handleClick={handleButtonClick}
+            handleClick={handleYearButtonClick}
             key={year}
           />
         ))}
