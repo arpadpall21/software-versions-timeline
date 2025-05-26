@@ -14,7 +14,7 @@ export interface Lang {
   lang: string;
 }
 
-export type Months = { yearMonth: string; monthName: string }[];
+export type Months = { date: Date; yearMonth: string; monthName: string }[];
 
 export interface DisplayableDateLimit {
   oldestDate: Date;

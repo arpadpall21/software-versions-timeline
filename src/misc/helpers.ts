@@ -26,7 +26,7 @@ export function parseAppTheme(theme: string): AppTheme {
   return (themes.includes(theme as AppTheme) ? theme : defaultAppTheme) as AppTheme;
 }
 /**
- * argument <displayedSoftwares> is expected to be a comma separated vlue string
+ * argument <displayedSoftwares> is expected to be a comma separated list of strings
  */
 export function parseDisplayedSofwares(displayedSoftwares: string): DisplayedSoftwares {
   const softwareList: string[] = displayedSoftwares.split(',');
@@ -46,7 +46,7 @@ export function parseDisplayedSofwares(displayedSoftwares: string): DisplayedSof
 }
 
 /**
- * only in client component hook
+ * usable in client component hook
  */
 export function getCurrentBrowserTheme(): 'light' | 'dark' {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -109,7 +109,7 @@ export function calcMonthRange(
     const month: number = _startDate.getMonth() + 1;
     const yearMonth: string = `${year}-${month.toString().padStart(2, '0')}`;
 
-    result.push({ yearMonth, monthName: monthMap[month - 1] });
+    result.push({ date: new Date(_startDate), yearMonth, monthName: monthMap[month - 1] });
 
     _startDate.setMonth(_startDate.getMonth() + 1);
   }
@@ -165,4 +165,18 @@ export function getYearRange(displayableDateLimit: DisplayableDateLimit): number
 
   result.reverse();
   return result;
+}
+
+/**
+ * usable in client component hook
+ */
+export function calcNrOfGridCellsToRender(gridCellWidth: number): number {
+  return Math.ceil(window.outerWidth / gridCellWidth) + appConfig.standByMonths.left + appConfig.standByMonths.right;
+}
+
+export function getShiftedLastMonth(displayedMonths: Months, shiftBy: number): Date {
+  const lastMonth = displayedMonths[displayedMonths.length - 1];
+  const shiftedMonthIdx = Number.parseInt(lastMonth.yearMonth.slice(5)) - 1 + shiftBy;
+
+  return new Date(Number.parseInt(lastMonth.yearMonth.slice(0, 5)), shiftedMonthIdx);
 }
