@@ -109,7 +109,7 @@ export function calcMonthRange(
     const month: number = _startDate.getMonth() + 1;
     const yearMonth: string = `${year}-${month.toString().padStart(2, '0')}`;
 
-    result.push({ yearMonth, monthName: monthMap[month - 1] });
+    result.push({ date: new Date(_startDate), yearMonth, monthName: monthMap[month - 1] });
 
     _startDate.setMonth(_startDate.getMonth() + 1);
   }
