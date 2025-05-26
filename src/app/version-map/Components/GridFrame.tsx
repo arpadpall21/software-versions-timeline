@@ -56,12 +56,12 @@ const GridFrame = () => {
     if (isDragging) {
       setPosition({ x: e.clientX - offset.x, y: e.clientY - offset.y });
 
-      if (position.x - gridCellWidth > gridOffset) {
+      if (position.x - gridCellWidth - gridCellWidth * appConfig.standByMonths.right > gridOffset) {
         const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, -1);
         const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(gridCellWidth);
-        setDisplayedMonths(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit));
         setGridOffset(gridOffset + gridCellWidth);
-      } else if (position.x < gridOffset) {
+        setDisplayedMonths(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit));
+      } else if (position.x - gridCellWidth * appConfig.standByMonths.right < gridOffset) {
         const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, 1);
         const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(gridCellWidth);
         setGridOffset(gridOffset - gridCellWidth);

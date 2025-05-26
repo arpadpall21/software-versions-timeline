@@ -17,8 +17,8 @@ interface AppConfig {
     min: number;
     max: number;
   };
-  standByCells: {
-    // number of cells ready to be scrolled into view (user experience VS performance)
+  standByMonths: {
+    // number of month cells ready to be scrolled into view (user experience VS performance)
     left: number;
     right: number;
   };
@@ -48,8 +48,8 @@ const appConfig: AppConfig = {
     min: 2,
     max: 1,
   },
-  standByCells: {
-    left: 0,
+  standByMonths: {
+    left: -12,
     right: 0,
   },
 };
