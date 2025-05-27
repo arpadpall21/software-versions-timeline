@@ -92,8 +92,13 @@ const GridContainer: React.FC = () => {
         : currentYear;
       setSelectedYear(selectedYear);
       setDisplayedMonths(
-        calcMonthRange(new Date(selectedYear, 11), calcNrOfGridCellsToRender(gridCellWidth), displayableDateLimit),
+        calcMonthRange(
+          new Date(selectedYear, 11 + appConfig.standByMonths.right),
+          calcNrOfGridCellsToRender(gridCellWidth),
+          displayableDateLimit,
+        ),
       );
+      setGridOffset(-(gridCellWidth * appConfig.standByMonths.right));
     }
   }
 
