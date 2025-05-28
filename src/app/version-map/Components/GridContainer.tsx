@@ -91,14 +91,22 @@ const GridContainer: React.FC = () => {
         ? Number.parseInt(e.currentTarget.textContent)
         : currentYear;
       setSelectedYear(selectedYear);
-      setDisplayedMonths(
-        calcMonthRange(
-          new Date(selectedYear, 11 + appConfig.standByMonths.right),
-          calcNrOfGridCellsToRender(gridCellWidth),
-          displayableDateLimit,
-        ),
-      );
-      setGridOffset(-(gridCellWidth * appConfig.standByMonths.right));
+
+      if (selectedYear === currentYear) {
+        setDisplayedMonths(
+          calcMonthRange(new Date(selectedYear, 11), calcNrOfGridCellsToRender(gridCellWidth), displayableDateLimit),
+        );
+        setGridOffset(0);
+      } else {
+        setDisplayedMonths(
+          calcMonthRange(
+            new Date(selectedYear, 11 + appConfig.standByMonths.right),
+            calcNrOfGridCellsToRender(gridCellWidth),
+            displayableDateLimit,
+          ),
+        );
+        setGridOffset(-(gridCellWidth * appConfig.standByMonths.right));
+      }
     }
   }
 
