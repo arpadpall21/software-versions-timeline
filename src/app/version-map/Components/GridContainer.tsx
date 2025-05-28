@@ -102,7 +102,6 @@ const GridContainer: React.FC = () => {
         ? Number.parseInt(e.currentTarget.textContent)
         : currentYear;
 
-      setSelectedYear(selectedYear);
       if (selectedYear === currentYear) {
         setDisplayedMonths(
           calcMonthRange(new Date(selectedYear, 11), calcNrOfGridCellsToRender(gridCellWidth), displayableDateLimit),
@@ -118,6 +117,10 @@ const GridContainer: React.FC = () => {
         );
         setGridOffset(-(gridCellWidth * appConfig.standByMonths.right));
       }
+
+      setSelectedYear(selectedYear);
+      setPosition({ x: 0, y: 0 });
+      setZoomLevel(1);
     }
   }
 
