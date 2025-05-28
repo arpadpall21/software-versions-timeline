@@ -15,8 +15,13 @@ const today: Date = new Date();
 const currentYear: number = today.getFullYear();
 const extendDisplayableMonthRange = appConfig.extendDisplayableMonthRange;
 const gridCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
+const defaultZoomLevel: number = appConfig.zoom.defaultLevel;
 
 export const GridContainerContext = createContext<{
+  position: { x: number; y: number };
+  setPosition: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>;
+  zoomLevel: number;
+  setZoomLevel: React.Dispatch<React.SetStateAction<number>>;
   feCache: FeCache;
   fetchLoading: boolean;
   displayedSoftwares: DisplayedSoftwares;
@@ -28,6 +33,10 @@ export const GridContainerContext = createContext<{
   gridOffset: number;
   setGridOffset: React.Dispatch<React.SetStateAction<number>>;
 }>({
+  position: { x: 0, y: 0 },
+  setPosition: () => {},
+  zoomLevel: defaultZoomLevel,
+  setZoomLevel: () => {},
   feCache: {},
   fetchLoading: true,
   displayedSoftwares: [],
@@ -41,6 +50,8 @@ export const GridContainerContext = createContext<{
 });
 
 const GridContainer: React.FC = () => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [displayedMonths, setDisplayedMonths] = useState<Months>([]);
   const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>([]);
   const [displayedYearButtons, setDisplayedYearButtons] = useState<number[]>([]);
@@ -49,7 +60,7 @@ const GridContainer: React.FC = () => {
   const [displayableDateLimit, setDisplayablDateLimit] = useState<DisplayableDateLimit>();
   const [feCache, setFeCache] = useState<FeCache>({});
   const [fetchLoading, setFetchLoading] = useState<boolean>(true);
-  const [gridOffset, setGridOffset] = useState<number>(0 - gridCellWidth * appConfig.standByMonths.right);
+  const [gridOffset, setGridOffset] = useState<number>(0);
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
@@ -78,28 +89,46 @@ const GridContainer: React.FC = () => {
       }
       setDisplayedYearButtons(getYearRange(newDisplayableDateLimit));
       setDisplayablDateLimit(newDisplayableDateLimit);
-      setDisplayedMonths(
-        calcMonthRange(latestDate, calcNrOfGridCellsToRender(gridCellWidth), newDisplayableDateLimit, 1),
-      );
+      setDisplayedMonths(calcMonthRange(latestDate, calcNrOfGridCellsToRender(gridCellWidth), newDisplayableDateLimit));
       setSelectedYear(latestDate.getFullYear());
     }
   }, [displayedSoftwares, feCache, selectedSoftwareByUser]);
 
-  function handleButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
+  function handleYearButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
     if (displayableDateLimit) {
       const selectedYear: number = e.currentTarget.textContent
         ? Number.parseInt(e.currentTarget.textContent)
         : currentYear;
+
+      if (selectedYear === currentYear) {
+        setDisplayedMonths(
+          calcMonthRange(new Date(selectedYear, 11), calcNrOfGridCellsToRender(gridCellWidth), displayableDateLimit),
+        );
+        setGridOffset(0);
+      } else {
+        setDisplayedMonths(
+          calcMonthRange(
+            new Date(selectedYear, 11 + appConfig.standByMonths.right),
+            calcNrOfGridCellsToRender(gridCellWidth),
+            displayableDateLimit,
+          ),
+        );
+        setGridOffset(-(gridCellWidth * appConfig.standByMonths.right));
+      }
+
       setSelectedYear(selectedYear);
-      setDisplayedMonths(
-        calcMonthRange(new Date(selectedYear, 11), calcNrOfGridCellsToRender(gridCellWidth), displayableDateLimit),
-      );
+      setPosition({ x: 0, y: 0 });
+      setZoomLevel(1);
     }
   }
 
   return (
     <GridContainerContext.Provider
       value={{
+        position,
+        setPosition,
+        zoomLevel,
+        setZoomLevel,
         feCache,
         fetchLoading,
         displayedSoftwares,
@@ -118,7 +147,7 @@ const GridContainer: React.FC = () => {
             text={year.toString()}
             width={70}
             pop={year === selectedYear}
-            handleClick={handleButtonClick}
+            handleClick={handleYearButtonClick}
             key={year}
           />
         ))}

@@ -1,15 +1,13 @@
 'use client';
 
+import { useContext } from 'react';
 import { calcTimelineZoom } from '@/misc/helpers';
 import { useTranslations } from 'next-intl';
+import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 
-interface Props {
-  zoomLevel: number;
-  setZoomLevel: (timelineZoomLevel: number) => void;
-  setPosition: (position: { x: number; y: number }) => void;
-}
+const ZoomPanel: React.FC = () => {
+  const { zoomLevel, setZoomLevel, setPosition } = useContext(GridContainerContext);
 
-const ZoomPanel: React.FC<Props> = ({ zoomLevel, setZoomLevel, setPosition }) => {
   const t = useTranslations('components.zoomPanel');
 
   function handleResetClick() {

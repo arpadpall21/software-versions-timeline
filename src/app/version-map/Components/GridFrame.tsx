@@ -13,7 +13,6 @@ import { GridContainerContext } from '@/app/version-map/Components/GridContainer
 import { Software } from '../../../../config/supportedSoftwares';
 import tailwindConfig from '../../../../tailwind.config';
 
-const defaultZoomLevel = appConfig.zoom.defaultLevel;
 const gridCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
 
 /**
@@ -36,13 +35,21 @@ const twTimelineStyle: { [software in Software]: string } = {
 };
 
 const GridFrame = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [scrollZoomEnabled, setScrollZoomEnabled] = useState<boolean>(false);
-  const { displayedSoftwares, displayedMonths, setDisplayedMonths, displayableDateLimit, gridOffset, setGridOffset } =
-    useContext(GridContainerContext);
+  const {
+    position,
+    setPosition,
+    zoomLevel,
+    setZoomLevel,
+    displayedSoftwares,
+    displayedMonths,
+    setDisplayedMonths,
+    displayableDateLimit,
+    gridOffset,
+    setGridOffset,
+  } = useContext(GridContainerContext);
 
   useEffect(() => {
     if (scrollZoomEnabled) {
@@ -107,7 +114,7 @@ const GridFrame = () => {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
-      <ZoomPanel zoomLevel={zoomLevel} setZoomLevel={setZoomLevel} setPosition={setPosition} />
+      <ZoomPanel />
       <div
         className={'grid grid-cols-[70px_auto] grid-rows-[60px_auto]'}
         // onTouchStart={mouseDownHandler}
