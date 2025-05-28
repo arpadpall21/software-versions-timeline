@@ -49,7 +49,7 @@ const GridContainer: React.FC = () => {
   const [displayableDateLimit, setDisplayablDateLimit] = useState<DisplayableDateLimit>();
   const [feCache, setFeCache] = useState<FeCache>({});
   const [fetchLoading, setFetchLoading] = useState<boolean>(true);
-  const [gridOffset, setGridOffset] = useState<number>(0 - gridCellWidth * appConfig.standByMonths.right);
+  const [gridOffset, setGridOffset] = useState<number>(0);
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
@@ -78,9 +78,14 @@ const GridContainer: React.FC = () => {
       }
       setDisplayedYearButtons(getYearRange(newDisplayableDateLimit));
       setDisplayablDateLimit(newDisplayableDateLimit);
+      
+      
       setDisplayedMonths(
-        calcMonthRange(latestDate, calcNrOfGridCellsToRender(gridCellWidth), newDisplayableDateLimit, 1),
+        calcMonthRange(latestDate, calcNrOfGridCellsToRender(gridCellWidth), newDisplayableDateLimit, 2),
       );
+      
+      console.log(displayedMonths)
+      
       setSelectedYear(latestDate.getFullYear());
     }
   }, [displayedSoftwares, feCache, selectedSoftwareByUser]);
@@ -90,8 +95,8 @@ const GridContainer: React.FC = () => {
       const selectedYear: number = e.currentTarget.textContent
         ? Number.parseInt(e.currentTarget.textContent)
         : currentYear;
-      setSelectedYear(selectedYear);
 
+      setSelectedYear(selectedYear);
       if (selectedYear === currentYear) {
         setDisplayedMonths(
           calcMonthRange(new Date(selectedYear, 11), calcNrOfGridCellsToRender(gridCellWidth), displayableDateLimit),
