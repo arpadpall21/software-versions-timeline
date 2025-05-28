@@ -25,6 +25,7 @@ export const defaultDisplayedSoftwares: DisplayedSoftwares = [
 export function parseAppTheme(theme: string): AppTheme {
   return (themes.includes(theme as AppTheme) ? theme : defaultAppTheme) as AppTheme;
 }
+
 /**
  * argument <displayedSoftwares> is expected to be a comma separated list of strings
  */
