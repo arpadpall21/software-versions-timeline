@@ -73,6 +73,7 @@ const GridFrame = () => {
         setGridOffset(gridOffset + gridCellWidth);
         setDisplayedMonths(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit));
       } else if (
+        gridOffset > 0 &&
         displayableDateLimit?.newestDate &&
         displayedMonths[displayedMonths.length - 1].date.getTime() < displayableDateLimit.newestDate.getTime() &&
         position.x - gridCellWidth * appConfig.standByMonths.right < gridOffset
