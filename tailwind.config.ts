@@ -29,8 +29,8 @@ export default {
         btnBgPop: '#4444bc',
         btnBgHovPop: '#353594',
         btnFgWarn: 'white',
-        btnBgWarn: '#ff5c5c',
-        btnBgHovWarn: '#e05151',
+        btnBgWarn: '#c73232',
+        btnBgHovWarn: '#a62a2a',
 
         // dark
         bgPriD: '#191942',
