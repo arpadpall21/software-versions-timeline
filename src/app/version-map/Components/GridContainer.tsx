@@ -92,6 +92,7 @@ const GridContainer: React.FC = () => {
         setPosition({ x: 0, y: 0 });
         setGridOffset(0);
         setZoomLevel(1);
+        setSelectedYear(feCache[selectedSoftwareByUser]?.newestDate.getFullYear());
       } else {
         setDisplayedMonths(
           calcMonthRange(
