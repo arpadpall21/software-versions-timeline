@@ -195,7 +195,7 @@ export function compareDates(date1: Date, operator: '<' | '>', date2: Date): boo
   } else if (
     operator === '>' &&
     (date1.getFullYear() > date2.getFullYear() ||
-      (date1.getFullYear === date2.getFullYear() && date1.getMonth() > date2.getMonth()))
+      (date1.getFullYear() === date2.getFullYear() && date1.getMonth() > date2.getMonth()))
   ) {
     return true;
   }
