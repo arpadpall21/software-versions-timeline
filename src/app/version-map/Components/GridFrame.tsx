@@ -55,6 +55,7 @@ const GridFrame = () => {
     displayableDateLimit,
     gridOffset,
     setGridOffset,
+    setSelectedYear,
   } = useContext(GridContainerContext);
 
   useEffect(() => {
@@ -76,8 +77,12 @@ const GridFrame = () => {
       ) {
         const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, -1);
         const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(gridCellWidth);
+        const visibleLatestMonth: Date = new Date(shiftedLastMonth);
+        visibleLatestMonth.setMonth(visibleLatestMonth.getMonth() - appConfig.standByMonths.right);
+
         setDisplayedMonths(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit));
         setGridOffset(gridOffset + gridCellWidth);
+        setSelectedYear(visibleLatestMonth.getFullYear());
       } else if (
         displayableDateLimit?.newestDate &&
         compareDates(displayedMonths[displayedMonths.length - 1].date, '<', displayableDateLimit.newestDate) &&
@@ -85,8 +90,12 @@ const GridFrame = () => {
       ) {
         const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, 1);
         const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(gridCellWidth);
+        const visibleLatestMonth: Date = new Date(shiftedLastMonth);
+        visibleLatestMonth.setMonth(visibleLatestMonth.getMonth() - appConfig.standByMonths.right);
+
         setDisplayedMonths(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit));
         setGridOffset(gridOffset - gridCellWidth);
+        setSelectedYear(visibleLatestMonth.getFullYear());
       }
     }
   }
