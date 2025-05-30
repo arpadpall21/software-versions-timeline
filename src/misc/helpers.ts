@@ -181,3 +181,24 @@ export function getShiftedLastMonth(displayedMonths: Months, shiftBy: number): D
 
   return new Date(Number.parseInt(lastMonth.yearMonth.slice(0, 5)), shiftedMonthIdx);
 }
+
+/**
+ * compares date objects by checking years & months only
+ */
+export function compareDates(date1: Date, operator: '<' | '>', date2: Date): boolean {
+  if (
+    operator === '<' &&
+    (date1.getFullYear() < date2.getFullYear() ||
+      (date1.getFullYear() === date2.getFullYear() && date1.getMonth() < date2.getMonth()))
+  ) {
+    return true;
+  } else if (
+    operator === '>' &&
+    (date1.getFullYear() > date2.getFullYear() ||
+      (date1.getFullYear() === date2.getFullYear() && date1.getMonth() > date2.getMonth()))
+  ) {
+    return true;
+  }
+
+  return false;
+}
