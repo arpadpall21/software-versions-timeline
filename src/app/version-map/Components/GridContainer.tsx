@@ -83,14 +83,27 @@ const GridContainer: React.FC = () => {
   useEffect(() => {
     const newDisplayableDateLimit = calcDisplayableDateLimit(displayedSoftwares, feCache, extendDisplayableMonthRange);
     if (newDisplayableDateLimit) {
-      let { newestDate: latestDate } = newDisplayableDateLimit;
       if (selectedSoftwareByUser && feCache[selectedSoftwareByUser]?.newestDate) {
-        latestDate = feCache[selectedSoftwareByUser].newestDate;
+        const adjustedEndDate: Date = new Date(feCache[selectedSoftwareByUser].newestDate);
+        adjustedEndDate.setMonth(adjustedEndDate.getMonth() + 1);
+        setDisplayedMonths(
+          calcMonthRange(adjustedEndDate, calcNrOfGridCellsToRender(gridCellWidth), newDisplayableDateLimit),
+        );
+        setPosition({ x: 0, y: 0 });
+        setGridOffset(0);
+        setZoomLevel(1);
+      } else {
+        setDisplayedMonths(
+          calcMonthRange(
+            newDisplayableDateLimit.newestDate,
+            calcNrOfGridCellsToRender(gridCellWidth),
+            newDisplayableDateLimit,
+          ),
+        );
       }
+
       setDisplayedYearButtons(getYearRange(newDisplayableDateLimit));
       setDisplayablDateLimit(newDisplayableDateLimit);
-      setDisplayedMonths(calcMonthRange(latestDate, calcNrOfGridCellsToRender(gridCellWidth), newDisplayableDateLimit));
-      setSelectedYear(latestDate.getFullYear());
     }
   }, [displayedSoftwares, feCache, selectedSoftwareByUser]);
 
