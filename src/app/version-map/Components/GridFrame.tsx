@@ -2,7 +2,13 @@
 
 import '@/app/globals.css';
 import { useState, useContext, useEffect } from 'react';
-import { calcTimelineZoom, getShiftedLastMonth, calcNrOfGridCellsToRender, calcMonthRange } from '@/misc/helpers';
+import {
+  calcTimelineZoom,
+  getShiftedLastMonth,
+  calcNrOfGridCellsToRender,
+  calcMonthRange,
+  compareDates,
+} from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
@@ -65,23 +71,22 @@ const GridFrame = () => {
 
       if (
         displayableDateLimit?.oldestDate &&
-        displayedMonths[0].date.getTime() > displayableDateLimit.oldestDate.getTime() &&
+        compareDates(displayedMonths[0].date, '>', displayableDateLimit.oldestDate) &&
         position.x - gridCellWidth - gridCellWidth * appConfig.standByMonths.right > gridOffset
       ) {
         const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, -1);
         const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(gridCellWidth);
-        setGridOffset(gridOffset + gridCellWidth);
         setDisplayedMonths(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit));
+        setGridOffset(gridOffset + gridCellWidth);
       } else if (
-        // gridOffset > 0 &&    // damn it!
         displayableDateLimit?.newestDate &&
-        displayedMonths[displayedMonths.length - 1].date.getTime() < displayableDateLimit.newestDate.getTime() &&
+        compareDates(displayedMonths[displayedMonths.length - 1].date, '<', displayableDateLimit.newestDate) &&
         position.x - gridCellWidth * appConfig.standByMonths.right < gridOffset
       ) {
         const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, 1);
         const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(gridCellWidth);
-        setGridOffset(gridOffset - gridCellWidth);
         setDisplayedMonths(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit));
+        setGridOffset(gridOffset - gridCellWidth);
       }
     }
   }
