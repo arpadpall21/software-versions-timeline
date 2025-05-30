@@ -32,6 +32,7 @@ export const GridContainerContext = createContext<{
   displayableDateLimit: DisplayableDateLimit | undefined;
   gridOffset: number;
   setGridOffset: React.Dispatch<React.SetStateAction<number>>;
+  setSelectedYear: React.Dispatch<React.SetStateAction<number>>;
 }>({
   position: { x: 0, y: 0 },
   setPosition: () => {},
@@ -47,6 +48,7 @@ export const GridContainerContext = createContext<{
   displayableDateLimit: undefined,
   gridOffset: 0,
   setGridOffset: () => {},
+  setSelectedYear: () => {},
 });
 
 const GridContainer: React.FC = () => {
@@ -153,6 +155,7 @@ const GridContainer: React.FC = () => {
         displayableDateLimit,
         gridOffset,
         setGridOffset,
+        setSelectedYear,
       }}
     >
       <div className={'h-12 mt-7 overflow-x-auto whitespace-nowrap'} style={{ direction: 'rtl' }}>
