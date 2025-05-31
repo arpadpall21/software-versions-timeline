@@ -131,11 +131,11 @@ const GridFrame = () => {
     >
       <ZoomPanel />
       <div
-        className={'grid grid-cols-[70px_auto] grid-rows-[60px_auto]'}
+        className={'relative grid grid-cols-[70px_auto] grid-rows-[60px_auto]'}
         // onTouchStart={mouseDownHandler}
         // onTouchEnd={mouseUpHandler}
       >
-        <div className={'col-span-2 border-b border-black dark:border-white overflow-hidden'}>
+        <div className={'col-span-2 col-start-1 row-start-1 border-b border-black dark:border-white overflow-hidden'}>
           <div className={'relative float-right'} style={{ transform: `translateX(${position.x}px)` }}>
             <div
               className={'absolute smoothTransform'}
@@ -145,7 +145,7 @@ const GridFrame = () => {
             </div>
           </div>
         </div>
-        <div className={'overflow-hidden border-r border-black dark:border-white'}>
+        <div className={'col-start-1 row-start-2 z-10 overflow-hidden bg-opacity-0'}>
           <div style={{ transform: `translateY(${position.y}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scaleY(${zoomLevel})` }}>
               <div className={'h-[25px]'} />
@@ -162,27 +162,35 @@ const GridFrame = () => {
             </div>
           </div>
         </div>
-        <div
-          className={'relative overflow-hidden min-h-[500px]'}
-          style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
-          onMouseDown={handleMouseDown}
-        >
-          <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
-          <div className={'relative float-right'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
-            <div className={'absolute smoothTransform'} style={{ transform: `scale(${zoomLevel})`, right: gridOffset }}>
-              <div className={'relative h-[25px]'}>
-                <div className={'absolute bottom-0'}>
-                  <MonthsTimeline zoomLevel={zoomLevel} height={1000} gridOnly={true} />
+        <div className={'absolute col-start-1 row-start-2 z-0 w-full'}>
+          <div
+            className={'relative overflow-hidden h-[550px]'}
+            style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+            onMouseDown={handleMouseDown}
+          >
+            <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
+            <div
+              className={'relative float-right'}
+              style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
+            >
+              <div
+                className={'absolute smoothTransform'}
+                style={{ transform: `scale(${zoomLevel})`, right: gridOffset }}
+              >
+                <div className={'relative h-[25px]'}>
+                  <div className={'absolute bottom-0'}>
+                    <MonthsTimeline zoomLevel={zoomLevel} height={1000} gridOnly={true} />
+                  </div>
                 </div>
+                {displayedSoftwares.map((software, i) => (
+                  <Timeline
+                    zoomLevel={zoomLevel}
+                    software={software}
+                    twTimelineStyle={twTimelineStyle[software]}
+                    key={i}
+                  />
+                ))}
               </div>
-              {displayedSoftwares.map((software, i) => (
-                <Timeline
-                  zoomLevel={zoomLevel}
-                  software={software}
-                  twTimelineStyle={twTimelineStyle[software]}
-                  key={i}
-                />
-              ))}
             </div>
           </div>
         </div>
