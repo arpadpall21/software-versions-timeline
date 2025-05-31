@@ -145,7 +145,7 @@ const GridFrame = () => {
             </div>
           </div>
         </div>
-        <div className={'overflow-hidden border-r border-black dark:border-white'}>
+        <div className={'overflow-hidden bg-opacity-0'}>
           <div style={{ transform: `translateY(${position.y}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scaleY(${zoomLevel})` }}>
               <div className={'h-[25px]'} />
