@@ -6,12 +6,13 @@ import { useTranslations } from 'next-intl';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 
 const ZoomPanel: React.FC = () => {
-  const { zoomLevel, setZoomLevel, setPosition } = useContext(GridContainerContext);
+  const { zoomLevel, setZoomLevel, setPosition, setGridOffset } = useContext(GridContainerContext);
 
   const t = useTranslations('components.zoomPanel');
 
   function handleResetClick() {
     setPosition({ x: 0, y: 0 });
+    setGridOffset(0);
     setZoomLevel(1);
   }
 
