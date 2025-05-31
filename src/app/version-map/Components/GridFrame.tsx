@@ -138,7 +138,7 @@ const GridFrame = () => {
         <div className={'col-span-2 col-start-1 row-start-1 border-b border-black dark:border-white overflow-hidden'}>
           <div className={'relative float-right'} style={{ transform: `translateX(${position.x}px)` }}>
             <div
-              className={'absolute smoothTransform'}
+              className={'absolute smoothTransform origin-right'}
               style={{ transform: `scaleX(${zoomLevel})`, right: gridOffset }}
             >
               <MonthsTimeline zoomLevel={zoomLevel} />
@@ -169,12 +169,9 @@ const GridFrame = () => {
             onMouseDown={handleMouseDown}
           >
             <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
-            <div
-              className={'relative float-right'}
-              style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
-            >
+            <div className={'relative'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
               <div
-                className={'absolute smoothTransform'}
+                className={'absolute smoothTransform origin-right'}
                 style={{ transform: `scale(${zoomLevel})`, right: gridOffset }}
               >
                 <div className={'relative h-[25px]'}>
