@@ -7,20 +7,13 @@ import {
   FeCache,
 } from '@/misc/types';
 import appConfig from '../../config/appConfig';
-import { Software } from '../../config/supportedSoftwares';
+import { Software, defaultDisplayedSoftwares } from '../../config/supportedSoftwares';
 
 const minZoomLevel = appConfig.zoom.minLevel;
 const maxZoomLevel = appConfig.zoom.maxLevel;
 
 const themes: AppTheme[] = ['auto', 'light', 'dark'];
 export const defaultAppTheme: AppTheme = themes[0];
-export const defaultDisplayedSoftwares: DisplayedSoftwares = [
-  Software.CHROME,
-  Software.MOZILLA,
-  Software.OPERA,
-  Software.EDGE,
-  Software.SAFARI,
-];
 
 export function parseAppTheme(theme: string): AppTheme {
   return (themes.includes(theme as AppTheme) ? theme : defaultAppTheme) as AppTheme;

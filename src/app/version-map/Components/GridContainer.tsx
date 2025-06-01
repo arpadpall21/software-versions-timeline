@@ -93,12 +93,14 @@ const GridContainer: React.FC = () => {
       if (selectedSoftwareByUser && feCache[selectedSoftwareByUser]?.newestDate) {
         const adjustedEndDate: Date = new Date(feCache[selectedSoftwareByUser].newestDate);
         adjustedEndDate.setMonth(adjustedEndDate.getMonth() + 1);
+
         setDisplayedMonths(
-          calcMonthRange(adjustedEndDate, calcNrOfGridCellsToRender(gridCellWidth), newDisplayableDateLimit),
+          calcMonthRange(adjustedEndDate, calcNrOfGridCellsToRender(originalGridCellWidth), newDisplayableDateLimit),
         );
         setPosition({ x: 0, y: 0 });
         setGridOffset(0);
         setZoomLevel(1);
+        setGridCellWidth(originalGridCellWidth);
         setSelectedYear(feCache[selectedSoftwareByUser]?.newestDate.getFullYear());
       } else {
         setDisplayedMonths(
@@ -113,6 +115,7 @@ const GridContainer: React.FC = () => {
       setDisplayedYearButtons(getYearRange(newDisplayableDateLimit));
       setDisplayablDateLimit(newDisplayableDateLimit);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [displayedSoftwares, feCache, selectedSoftwareByUser]);
 
   function handleYearButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
@@ -139,7 +142,6 @@ const GridContainer: React.FC = () => {
 
       setSelectedYear(selectedYear);
       setPosition({ x: 0, y: 0 });
-      setZoomLevel(1);
     }
   }
 

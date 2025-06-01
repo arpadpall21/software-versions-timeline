@@ -1,17 +1,22 @@
 'use client';
 
-import { useContext } from 'react';
+import { useContext, useImperativeHandle, RefObject } from 'react';
 import { calcTimelineZoom, calcNrOfGridCellsToRender, getDisplayedLastMonth, calcMonthRange } from '@/misc/helpers';
 import { useTranslations } from 'next-intl';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 import tailwindConfig from '../../../../tailwind.config';
 
+interface Props {
+  ref: RefObject<{ handleZoomChange: (zoom: 'zoomIn' | 'zoomOut' | 'reset') => void }>;
+}
+
 const originalGridCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
 
-const ZoomPanel: React.FC = () => {
+const ZoomPanel: React.FC<Props> = ({ ref }) => {
   const {
     zoomLevel,
     setZoomLevel,
+    setGridCellWidth,
     displayedMonths,
     setDisplayedMonths,
     displayableDateLimit,
@@ -21,24 +26,28 @@ const ZoomPanel: React.FC = () => {
 
   const t = useTranslations('components.zoomPanel');
 
-  function handleZoomReset() {
-    const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths, 0);
-    const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(originalGridCellWidth);
+  useImperativeHandle(ref, () => ({ handleZoomChange }));
 
-    setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
-    setPosition({ x: 0, y: 0 });
-    setGridOffset(0);
-    setZoomLevel(1);
-  }
+  function handleZoomChange(zoom: 'zoomIn' | 'zoomOut' | 'reset') {
+    if (zoom === 'reset') {
+      const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths, 0);
+      const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(originalGridCellWidth);
 
-  function handleZoomChange(zoom: 'zoomIn' | 'zoomOut') {
-    const newZoomLevel: number = calcTimelineZoom(zoom, zoomLevel);
-    const newGridCellWidth: number = originalGridCellWidth * newZoomLevel;
-    const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths, 0);
-    const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(newGridCellWidth);
+      setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
+      setPosition({ x: 0, y: 0 });
+      setGridOffset(0);
+      setZoomLevel(1);
+      setGridCellWidth(originalGridCellWidth);
+    } else {
+      const newZoomLevel: number = calcTimelineZoom(zoom, zoomLevel);
+      const newGridCellWidth: number = originalGridCellWidth * newZoomLevel;
+      const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths, 0);
+      const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(newGridCellWidth);
 
-    setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
-    setZoomLevel(newZoomLevel);
+      setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
+      setZoomLevel(newZoomLevel);
+      setGridCellWidth(newGridCellWidth);
+    }
   }
 
   return (
@@ -54,7 +63,11 @@ const ZoomPanel: React.FC = () => {
         >
           +
         </button>
-        <button className={'hover:bg-btnBgHov dark:hover:bg-btnBgHovD'} onClick={handleZoomReset} title={t('reset')}>
+        <button
+          className={'hover:bg-btnBgHov dark:hover:bg-btnBgHovD'}
+          onClick={() => handleZoomChange('reset')}
+          title={t('reset')}
+        >
           ↺
         </button>
         <button

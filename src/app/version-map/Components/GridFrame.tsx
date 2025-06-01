@@ -1,14 +1,8 @@
 'use client';
 
 import '@/app/globals.css';
-import { useState, useContext, useEffect } from 'react';
-import {
-  calcTimelineZoom,
-  getDisplayedLastMonth,
-  calcNrOfGridCellsToRender,
-  calcMonthRange,
-  compareDates,
-} from '@/misc/helpers';
+import { useState, useContext, useEffect, useRef, type RefObject } from 'react';
+import { getDisplayedLastMonth, calcNrOfGridCellsToRender, calcMonthRange, compareDates } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
@@ -45,7 +39,6 @@ const GridFrame = () => {
     position,
     setPosition,
     zoomLevel,
-    setZoomLevel,
     gridCellWidth,
     displayedSoftwares,
     displayedMonths,
@@ -55,6 +48,10 @@ const GridFrame = () => {
     setGridOffset,
     setSelectedYear,
   } = useContext(GridContainerContext);
+
+  const zoomPanelRef: RefObject<{ handleZoomChange: (zoom: 'zoomIn' | 'zoomOut' | 'reset') => void }> = useRef({
+    handleZoomChange: () => {},
+  });
 
   useEffect(() => {
     if (scrollZoomEnabled) {
@@ -110,10 +107,9 @@ const GridFrame = () => {
 
   function handleMouseWheel(e: React.WheelEvent) {
     if (scrollZoomEnabled && e.deltaY > 0) {
-      setZoomLevel(calcTimelineZoom('zoomOut', zoomLevel));
-      return;
+      zoomPanelRef.current.handleZoomChange('zoomOut');
     } else if (scrollZoomEnabled && e.deltaY < 0) {
-      setZoomLevel(calcTimelineZoom('zoomIn', zoomLevel));
+      zoomPanelRef.current.handleZoomChange('zoomIn');
     }
   }
 
@@ -127,7 +123,7 @@ const GridFrame = () => {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
-      <ZoomPanel />
+      <ZoomPanel ref={zoomPanelRef} />
       <div
         className={'relative grid grid-cols-[70px_auto] grid-rows-[60px_auto]'}
         // onTouchStart={mouseDownHandler}
