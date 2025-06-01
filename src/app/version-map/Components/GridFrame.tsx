@@ -170,7 +170,7 @@ const GridFrame = () => {
               >
                 <div className={'relative h-[25px]'}>
                   <div className={'absolute bottom-0'}>
-                    <MonthsTimeline zoomLevel={zoomLevel} height={1000} gridOnly={true} />
+                    <MonthsTimeline zoomLevel={zoomLevel} height={500} gridOnly={true} />
                   </div>
                 </div>
                 {displayedSoftwares.map((software, i) => (
@@ -181,6 +181,11 @@ const GridFrame = () => {
                     key={i}
                   />
                 ))}
+                <div className={'relative h-[25px]'}>
+                  <div className={'absolute top-0'}>
+                    <MonthsTimeline zoomLevel={zoomLevel} height={500} gridOnly={true} />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
