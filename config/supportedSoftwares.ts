@@ -1,4 +1,4 @@
-import { type SupportedSoftwares } from '../src/misc/types';
+import { type SupportedSoftwares, type DisplayedSoftwares } from '../src/misc/types';
 
 export enum Software {
   CHROME = 'CHROME',
@@ -11,6 +11,14 @@ export enum Software {
   NODE = 'NODE',
   PYTHON = 'PYTHON',
 }
+
+export const defaultDisplayedSoftwares: DisplayedSoftwares = [
+  Software.CHROME,
+  Software.MOZILLA,
+  Software.OPERA,
+  Software.EDGE,
+  Software.SAFARI,
+];
 
 const supportedSoftwares: SupportedSoftwares = {
   [Software.CHROME]: {
