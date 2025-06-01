@@ -1,18 +1,44 @@
 'use client';
 
 import { useContext } from 'react';
-import { calcTimelineZoom } from '@/misc/helpers';
+import { calcTimelineZoom, calcNrOfGridCellsToRender, getDisplayedLastMonth, calcMonthRange } from '@/misc/helpers';
 import { useTranslations } from 'next-intl';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
+import tailwindConfig from '../../../../tailwind.config';
+
+const originalGridCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
 
 const ZoomPanel: React.FC = () => {
-  const { zoomLevel, setZoomLevel, setPosition } = useContext(GridContainerContext);
+  const {
+    zoomLevel,
+    setZoomLevel,
+    displayedMonths,
+    setDisplayedMonths,
+    displayableDateLimit,
+    setPosition,
+    setGridOffset,
+  } = useContext(GridContainerContext);
 
   const t = useTranslations('components.zoomPanel');
 
-  function handleResetClick() {
+  function handleZoomReset() {
+    const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths, 0);
+    const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(originalGridCellWidth);
+
+    setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
     setPosition({ x: 0, y: 0 });
+    setGridOffset(0);
     setZoomLevel(1);
+  }
+
+  function handleZoomChange(zoom: 'zoomIn' | 'zoomOut') {
+    const newZoomLevel: number = calcTimelineZoom(zoom, zoomLevel);
+    const newGridCellWidth: number = originalGridCellWidth * newZoomLevel;
+    const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths, 0);
+    const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(newGridCellWidth);
+
+    setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
+    setZoomLevel(newZoomLevel);
   }
 
   return (
@@ -23,17 +49,17 @@ const ZoomPanel: React.FC = () => {
       >
         <button
           className={'rounded-t-[0.25rem] hover:bg-btnBgHov dark:hover:bg-btnBgHovD'}
-          onMouseDown={() => setZoomLevel(calcTimelineZoom('zoomIn', zoomLevel))}
+          onMouseDown={() => handleZoomChange('zoomIn')}
           title={t('zoomIn')}
         >
           +
         </button>
-        <button className={'hover:bg-btnBgHov dark:hover:bg-btnBgHovD'} onClick={handleResetClick} title={t('reset')}>
+        <button className={'hover:bg-btnBgHov dark:hover:bg-btnBgHovD'} onClick={handleZoomReset} title={t('reset')}>
           ↺
         </button>
         <button
           className={'rounded-b-[0.25rem] hover:bg-btnBgHov dark:hover:bg-btnBgHovD'}
-          onMouseDown={() => setZoomLevel(calcTimelineZoom('zoomOut', zoomLevel))}
+          onMouseDown={() => handleZoomChange('zoomOut')}
           title={t('zoomOut')}
         >
           -

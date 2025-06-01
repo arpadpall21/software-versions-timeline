@@ -59,10 +59,10 @@ export function getLang(langCode: string = ''): Lang {
     : appConfig.lang.defaultLanguage;
 }
 
-export function calcTimelineZoom(direction: 'zoomIn' | 'zoomOut', currentZoomLevel: number): number {
+export function calcTimelineZoom(zoom: 'zoomIn' | 'zoomOut', currentZoomLevel: number): number {
   const zoomSensitivity: number = currentZoomLevel / 10;
 
-  if (direction === 'zoomIn') {
+  if (zoom === 'zoomIn') {
     return Math.min(currentZoomLevel + zoomSensitivity, maxZoomLevel);
   }
   return Math.max(currentZoomLevel - zoomSensitivity, minZoomLevel);
@@ -175,7 +175,7 @@ export function calcNrOfGridCellsToRender(gridCellWidth: number): number {
   return Math.ceil(window.outerWidth / gridCellWidth) + appConfig.standByMonths.left + appConfig.standByMonths.right;
 }
 
-export function getShiftedLastMonth(displayedMonths: Months, shiftBy: number): Date {
+export function getDisplayedLastMonth(displayedMonths: Months, shiftBy: number): Date {
   const lastMonth = displayedMonths[displayedMonths.length - 1];
   const shiftedMonthIdx = Number.parseInt(lastMonth.yearMonth.slice(5)) - 1 + shiftBy;
 

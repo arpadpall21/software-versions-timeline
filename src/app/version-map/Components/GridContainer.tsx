@@ -14,7 +14,7 @@ import tailwindConfig from '../../../../tailwind.config';
 const today: Date = new Date();
 const currentYear: number = today.getFullYear();
 const extendDisplayableMonthRange = appConfig.extendDisplayableMonthRange;
-const gridCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
+const originalGridCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
 const defaultZoomLevel: number = appConfig.zoom.defaultLevel;
 
 export const GridContainerContext = createContext<{
@@ -22,6 +22,8 @@ export const GridContainerContext = createContext<{
   setPosition: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>;
   zoomLevel: number;
   setZoomLevel: React.Dispatch<React.SetStateAction<number>>;
+  gridCellWidth: number;
+  setGridCellWidth: React.Dispatch<React.SetStateAction<number>>;
   feCache: FeCache;
   fetchLoading: boolean;
   displayedSoftwares: DisplayedSoftwares;
@@ -38,6 +40,8 @@ export const GridContainerContext = createContext<{
   setPosition: () => {},
   zoomLevel: defaultZoomLevel,
   setZoomLevel: () => {},
+  gridCellWidth: originalGridCellWidth,
+  setGridCellWidth: () => {},
   feCache: {},
   fetchLoading: true,
   displayedSoftwares: [],
@@ -54,6 +58,7 @@ export const GridContainerContext = createContext<{
 const GridContainer: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
+  const [gridCellWidth, setGridCellWidth] = useState<number>(originalGridCellWidth);
   const [displayedMonths, setDisplayedMonths] = useState<Months>([]);
   const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>([]);
   const [displayedYearButtons, setDisplayedYearButtons] = useState<number[]>([]);
@@ -145,6 +150,8 @@ const GridContainer: React.FC = () => {
         setPosition,
         zoomLevel,
         setZoomLevel,
+        gridCellWidth,
+        setGridCellWidth,
         feCache,
         fetchLoading,
         displayedSoftwares,

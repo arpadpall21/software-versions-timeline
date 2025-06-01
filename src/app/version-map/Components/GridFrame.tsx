@@ -4,7 +4,7 @@ import '@/app/globals.css';
 import { useState, useContext, useEffect } from 'react';
 import {
   calcTimelineZoom,
-  getShiftedLastMonth,
+  getDisplayedLastMonth,
   calcNrOfGridCellsToRender,
   calcMonthRange,
   compareDates,
@@ -17,9 +17,6 @@ import MonthsTimeline from '@/app/version-map/Components/MonthsTimeline';
 import SideLogo from './SideLogo';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 import { Software } from '../../../../config/supportedSoftwares';
-import tailwindConfig from '../../../../tailwind.config';
-
-const gridCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
 
 /**
  * Tailwind utilities are parsed at build time so they cannot be iterpolated with values,
@@ -49,6 +46,7 @@ const GridFrame = () => {
     setPosition,
     zoomLevel,
     setZoomLevel,
+    gridCellWidth,
     displayedSoftwares,
     displayedMonths,
     setDisplayedMonths,
@@ -75,7 +73,7 @@ const GridFrame = () => {
         compareDates(displayedMonths[0].date, '>', displayableDateLimit.oldestDate) &&
         position.x - gridCellWidth - gridCellWidth * appConfig.standByMonths.right > gridOffset
       ) {
-        const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, -1);
+        const shiftedLastMonth: Date = getDisplayedLastMonth(displayedMonths, -1);
         const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(gridCellWidth);
         const visibleLatestMonth: Date = new Date(shiftedLastMonth);
         visibleLatestMonth.setMonth(visibleLatestMonth.getMonth() - appConfig.standByMonths.right);
@@ -88,7 +86,7 @@ const GridFrame = () => {
         compareDates(displayedMonths[displayedMonths.length - 1].date, '<', displayableDateLimit.newestDate) &&
         position.x - gridCellWidth * appConfig.standByMonths.right < gridOffset
       ) {
-        const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, 1);
+        const shiftedLastMonth: Date = getDisplayedLastMonth(displayedMonths, 1);
         const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(gridCellWidth);
         const visibleLatestMonth: Date = new Date(shiftedLastMonth);
         visibleLatestMonth.setMonth(visibleLatestMonth.getMonth() - appConfig.standByMonths.right);
@@ -138,7 +136,7 @@ const GridFrame = () => {
         <div className={'col-span-2 col-start-1 row-start-1 border-b border-black dark:border-white overflow-hidden'}>
           <div className={'relative float-right'} style={{ transform: `translateX(${position.x}px)` }}>
             <div
-              className={'absolute smoothTransform'}
+              className={'absolute smoothTransform origin-right'}
               style={{ transform: `scaleX(${zoomLevel})`, right: gridOffset }}
             >
               <MonthsTimeline zoomLevel={zoomLevel} />
@@ -169,12 +167,9 @@ const GridFrame = () => {
             onMouseDown={handleMouseDown}
           >
             <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
-            <div
-              className={'relative float-right'}
-              style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
-            >
+            <div className={'relative'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
               <div
-                className={'absolute smoothTransform'}
+                className={'absolute smoothTransform origin-right'}
                 style={{ transform: `scale(${zoomLevel})`, right: gridOffset }}
               >
                 <div className={'relative h-[25px]'}>
