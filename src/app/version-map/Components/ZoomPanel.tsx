@@ -10,10 +10,14 @@ const ZoomPanel: React.FC = () => {
 
   const t = useTranslations('components.zoomPanel');
 
-  function handleResetClick() {
+  function handleZoomReset() {
     setPosition({ x: 0, y: 0 });
     setGridOffset(0);
     setZoomLevel(1);
+  }
+
+  function handleZoomChange(zoom: 'zoomIn' | 'zoomOut') {
+    setZoomLevel(calcTimelineZoom(zoom, zoomLevel));
   }
 
   return (
@@ -24,17 +28,17 @@ const ZoomPanel: React.FC = () => {
       >
         <button
           className={'rounded-t-[0.25rem] hover:bg-btnBgHov dark:hover:bg-btnBgHovD'}
-          onMouseDown={() => setZoomLevel(calcTimelineZoom('zoomIn', zoomLevel))}
+          onMouseDown={() => handleZoomChange('zoomIn')}
           title={t('zoomIn')}
         >
           +
         </button>
-        <button className={'hover:bg-btnBgHov dark:hover:bg-btnBgHovD'} onClick={handleResetClick} title={t('reset')}>
+        <button className={'hover:bg-btnBgHov dark:hover:bg-btnBgHovD'} onClick={handleZoomReset} title={t('reset')}>
           ↺
         </button>
         <button
           className={'rounded-b-[0.25rem] hover:bg-btnBgHov dark:hover:bg-btnBgHovD'}
-          onMouseDown={() => setZoomLevel(calcTimelineZoom('zoomOut', zoomLevel))}
+          onMouseDown={() => handleZoomChange('zoomOut')}
           title={t('zoomOut')}
         >
           -

@@ -59,10 +59,10 @@ export function getLang(langCode: string = ''): Lang {
     : appConfig.lang.defaultLanguage;
 }
 
-export function calcTimelineZoom(direction: 'zoomIn' | 'zoomOut', currentZoomLevel: number): number {
+export function calcTimelineZoom(zoom: 'zoomIn' | 'zoomOut', currentZoomLevel: number): number {
   const zoomSensitivity: number = currentZoomLevel / 10;
 
-  if (direction === 'zoomIn') {
+  if (zoom === 'zoomIn') {
     return Math.min(currentZoomLevel + zoomSensitivity, maxZoomLevel);
   }
   return Math.max(currentZoomLevel - zoomSensitivity, minZoomLevel);
