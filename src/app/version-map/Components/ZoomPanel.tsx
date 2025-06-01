@@ -30,6 +30,7 @@ const ZoomPanel: React.FC = () => {
     setPosition({ x: 0, y: 0 });
     setGridOffset(0);
     setZoomLevel(1);
+    setGridCellWidth(originalGridCellWidth);
   }
 
   function handleZoomChange(zoom: 'zoomIn' | 'zoomOut') {
