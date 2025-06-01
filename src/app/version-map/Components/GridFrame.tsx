@@ -4,7 +4,7 @@ import '@/app/globals.css';
 import { useState, useContext, useEffect } from 'react';
 import {
   calcTimelineZoom,
-  getShiftedLastMonth,
+  getDisplayedLastMonth,
   calcNrOfGridCellsToRender,
   calcMonthRange,
   compareDates,
@@ -75,7 +75,7 @@ const GridFrame = () => {
         compareDates(displayedMonths[0].date, '>', displayableDateLimit.oldestDate) &&
         position.x - gridCellWidth - gridCellWidth * appConfig.standByMonths.right > gridOffset
       ) {
-        const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, -1);
+        const shiftedLastMonth: Date = getDisplayedLastMonth(displayedMonths, -1);
         const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(gridCellWidth);
         const visibleLatestMonth: Date = new Date(shiftedLastMonth);
         visibleLatestMonth.setMonth(visibleLatestMonth.getMonth() - appConfig.standByMonths.right);
@@ -88,7 +88,7 @@ const GridFrame = () => {
         compareDates(displayedMonths[displayedMonths.length - 1].date, '<', displayableDateLimit.newestDate) &&
         position.x - gridCellWidth * appConfig.standByMonths.right < gridOffset
       ) {
-        const shiftedLastMonth: Date = getShiftedLastMonth(displayedMonths, 1);
+        const shiftedLastMonth: Date = getDisplayedLastMonth(displayedMonths, 1);
         const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(gridCellWidth);
         const visibleLatestMonth: Date = new Date(shiftedLastMonth);
         visibleLatestMonth.setMonth(visibleLatestMonth.getMonth() - appConfig.standByMonths.right);

@@ -175,7 +175,7 @@ export function calcNrOfGridCellsToRender(gridCellWidth: number): number {
   return Math.ceil(window.outerWidth / gridCellWidth) + appConfig.standByMonths.left + appConfig.standByMonths.right;
 }
 
-export function getShiftedLastMonth(displayedMonths: Months, shiftBy: number): Date {
+export function getDisplayedLastMonth(displayedMonths: Months, shiftBy: number): Date {
   const lastMonth = displayedMonths[displayedMonths.length - 1];
   const shiftedMonthIdx = Number.parseInt(lastMonth.yearMonth.slice(5)) - 1 + shiftBy;
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useContext } from 'react';
-import { calcTimelineZoom } from '@/misc/helpers';
+import { calcTimelineZoom, calcNrOfGridCellsToRender } from '@/misc/helpers';
 import { useTranslations } from 'next-intl';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 
@@ -17,7 +17,13 @@ const ZoomPanel: React.FC = () => {
   }
 
   function handleZoomChange(zoom: 'zoomIn' | 'zoomOut') {
-    setZoomLevel(calcTimelineZoom(zoom, zoomLevel));
+    const newZoomLevel: number = calcTimelineZoom(zoom, zoomLevel);
+    
+    
+    
+    console.log(newZoomLevel)
+    
+    setZoomLevel(newZoomLevel);
   }
 
   return (
