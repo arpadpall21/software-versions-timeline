@@ -1,12 +1,23 @@
 'use client';
 
 import { useContext } from 'react';
-import { calcTimelineZoom, calcNrOfGridCellsToRender } from '@/misc/helpers';
+import { calcTimelineZoom, calcNrOfGridCellsToRender, getDisplayedLastMonth, calcMonthRange } from '@/misc/helpers';
 import { useTranslations } from 'next-intl';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
+import tailwindConfig from '../../../../tailwind.config';
+
+const originalGridCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
 
 const ZoomPanel: React.FC = () => {
-  const { zoomLevel, setZoomLevel, setPosition, setGridOffset } = useContext(GridContainerContext);
+  const {
+    zoomLevel,
+    setZoomLevel,
+    displayedMonths,
+    setDisplayedMonths,
+    displayableDateLimit,
+    setPosition,
+    setGridOffset,
+  } = useContext(GridContainerContext);
 
   const t = useTranslations('components.zoomPanel');
 
@@ -18,11 +29,11 @@ const ZoomPanel: React.FC = () => {
 
   function handleZoomChange(zoom: 'zoomIn' | 'zoomOut') {
     const newZoomLevel: number = calcTimelineZoom(zoom, zoomLevel);
-    
-    
-    
-    console.log(newZoomLevel)
-    
+    const newGridCellWidth: number = originalGridCellWidth * newZoomLevel;
+    const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths, 0);
+    const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(newGridCellWidth);
+
+    setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
     setZoomLevel(newZoomLevel);
   }
 
