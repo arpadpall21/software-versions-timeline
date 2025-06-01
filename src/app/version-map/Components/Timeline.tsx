@@ -8,11 +8,9 @@ import appConfig from '../../../../config/appConfig';
 import Skeleton from '@/Components/Skeleton';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 import { Software } from '../../../../config/supportedSoftwares';
-import tailwindConfig from '../../../../tailwind.config';
 
 const defaultZoomLevel: number = appConfig.zoom.defaultLevel;
 const height: number = 100;
-const girdCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
 
 interface Props {
   zoomLevel: number;
@@ -21,7 +19,7 @@ interface Props {
 }
 
 const Timeline: React.FC<Props> = ({ zoomLevel, software, twTimelineStyle }) => {
-  const { feCache, fetchLoading, displayedMonths } = useContext(GridContainerContext);
+  const { feCache, gridCellWidth, fetchLoading, displayedMonths } = useContext(GridContainerContext);
   const t = useTranslations('components.monthsGrid.months');
 
   const scaleTextBallon: number = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel]);
@@ -55,7 +53,7 @@ const Timeline: React.FC<Props> = ({ zoomLevel, software, twTimelineStyle }) => 
                 <div
                   className={'absolute z-10 hover:z-50'}
                   style={{
-                    left: girdCellWidth * (calcPercentOf(day, 31) / 100) - 1,
+                    left: gridCellWidth * (calcPercentOf(day, 31) / 100) - 1,
                     bottom: 32 - (100 - height),
                   }}
                   key={day}
@@ -73,7 +71,7 @@ const Timeline: React.FC<Props> = ({ zoomLevel, software, twTimelineStyle }) => 
               <div
                 className={`absolute top-[68px] ${twTimelineStyle}`}
                 style={{
-                  width: girdCellWidth * (feCache[software].data[month.yearMonth].timeline.percent / 100),
+                  width: gridCellWidth * (feCache[software].data[month.yearMonth].timeline.percent / 100),
                   height: timelineHeight,
                   left: feCache[software].data[month.yearMonth].timeline.from === 'left' ? '-1px' : undefined,
                   right: feCache[software].data[month.yearMonth].timeline.from === 'right' ? '-1px' : undefined,

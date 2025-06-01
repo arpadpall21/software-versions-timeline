@@ -17,9 +17,6 @@ import MonthsTimeline from '@/app/version-map/Components/MonthsTimeline';
 import SideLogo from './SideLogo';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 import { Software } from '../../../../config/supportedSoftwares';
-import tailwindConfig from '../../../../tailwind.config';
-
-const gridCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
 
 /**
  * Tailwind utilities are parsed at build time so they cannot be iterpolated with values,
@@ -49,6 +46,7 @@ const GridFrame = () => {
     setPosition,
     zoomLevel,
     setZoomLevel,
+    gridCellWidth,
     displayedSoftwares,
     displayedMonths,
     setDisplayedMonths,
