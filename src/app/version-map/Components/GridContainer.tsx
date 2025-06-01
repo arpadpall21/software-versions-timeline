@@ -145,8 +145,6 @@ const GridContainer: React.FC = () => {
     }
   }
 
-  console.log(displayedMonths.length)
-
   return (
     <GridContainerContext.Provider
       value={{

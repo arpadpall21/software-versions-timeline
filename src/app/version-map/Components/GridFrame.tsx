@@ -1,7 +1,7 @@
 'use client';
 
 import '@/app/globals.css';
-import { useState, useContext, useEffect, useRef, RefObject } from 'react';
+import { useState, useContext, useEffect, useRef, type RefObject } from 'react';
 import { getDisplayedLastMonth, calcNrOfGridCellsToRender, calcMonthRange, compareDates } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
