@@ -22,6 +22,10 @@ const ZoomPanel: React.FC = () => {
   const t = useTranslations('components.zoomPanel');
 
   function handleZoomReset() {
+    const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths, 0);
+    const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(originalGridCellWidth);
+
+    setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
     setPosition({ x: 0, y: 0 });
     setGridOffset(0);
     setZoomLevel(1);
