@@ -1,14 +1,18 @@
 'use client';
 
-import { useContext } from 'react';
+import { useContext, useImperativeHandle, RefObject } from 'react';
 import { calcTimelineZoom, calcNrOfGridCellsToRender, getDisplayedLastMonth, calcMonthRange } from '@/misc/helpers';
 import { useTranslations } from 'next-intl';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 import tailwindConfig from '../../../../tailwind.config';
 
+interface Props {
+  ref: RefObject<{ handleZoomChange: (zoom: 'zoomIn' | 'zoomOut' | 'reset') => void }>;
+}
+
 const originalGridCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
 
-const ZoomPanel: React.FC = () => {
+const ZoomPanel: React.FC<Props> = ({ ref }) => {
   const {
     zoomLevel,
     setZoomLevel,
@@ -21,6 +25,8 @@ const ZoomPanel: React.FC = () => {
   } = useContext(GridContainerContext);
 
   const t = useTranslations('components.zoomPanel');
+
+  useImperativeHandle(ref, () => ({ handleZoomChange }));
 
   function handleZoomChange(zoom: 'zoomIn' | 'zoomOut' | 'reset') {
     if (zoom === 'reset') {
