@@ -12,6 +12,7 @@ const ZoomPanel: React.FC = () => {
   const {
     zoomLevel,
     setZoomLevel,
+    setGridCellWidth,
     displayedMonths,
     setDisplayedMonths,
     displayableDateLimit,
@@ -39,6 +40,7 @@ const ZoomPanel: React.FC = () => {
 
     setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
     setZoomLevel(newZoomLevel);
+    setGridCellWidth(newGridCellWidth);
   }
 
   return (

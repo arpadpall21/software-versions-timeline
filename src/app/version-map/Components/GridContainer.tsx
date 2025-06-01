@@ -113,7 +113,7 @@ const GridContainer: React.FC = () => {
       setDisplayedYearButtons(getYearRange(newDisplayableDateLimit));
       setDisplayablDateLimit(newDisplayableDateLimit);
     }
-  }, [displayedSoftwares, feCache, selectedSoftwareByUser]);
+  }, [displayedSoftwares, feCache, gridCellWidth, selectedSoftwareByUser]);
 
   function handleYearButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
     if (displayableDateLimit) {
@@ -139,9 +139,10 @@ const GridContainer: React.FC = () => {
 
       setSelectedYear(selectedYear);
       setPosition({ x: 0, y: 0 });
-      setZoomLevel(1);
     }
   }
+
+  console.log(displayedMonths.length)
 
   return (
     <GridContainerContext.Provider
