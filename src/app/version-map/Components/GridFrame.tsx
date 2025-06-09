@@ -181,6 +181,11 @@ const GridFrame = () => {
                     key={i}
                   />
                 ))}
+                <div className={'relative h-[25px]'}>
+                  <div className={'absolute top-0'}>
+                    <MonthsTimeline zoomLevel={zoomLevel} height={1000} gridOnly={true} />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
