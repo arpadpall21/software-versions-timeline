@@ -33,20 +33,38 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
       const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths, 0);
       const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(originalGridCellWidth);
 
-      setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
       setPosition({ x: 0, y: 0 });
       setGridOffset(0);
       setZoomLevel(1);
       setGridCellWidth(originalGridCellWidth);
+      setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
     } else {
       const newZoomLevel: number = calcTimelineZoom(zoom, zoomLevel);
       const newGridCellWidth: number = originalGridCellWidth * newZoomLevel;
       const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths, 0);
-      const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(newGridCellWidth);
+      let nrOfMonthsToRender: number = calcNrOfGridCellsToRender(newGridCellWidth);
 
-      setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
+      if (zoom === 'zoomOut') {
+        nrOfMonthsToRender *= 2;
+      //   console.log('zoom out')
+        
+      //   setPosition({
+      //     x:
+      //       gridCellWidth - originalGridCellWidth > originalGridCellWidth
+      //         ? position.x - originalGridCellWidth
+      //         : position.x,
+      //     y: position.y,
+      }
+
+
+
+      // }
+
+      console.log(nrOfMonthsToRender)
+
       setZoomLevel(newZoomLevel);
       setGridCellWidth(newGridCellWidth);
+      setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
     }
   }
 

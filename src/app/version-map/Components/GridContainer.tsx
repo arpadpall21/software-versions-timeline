@@ -141,7 +141,7 @@ const GridContainer: React.FC = () => {
       }
 
       setSelectedYear(selectedYear);
-      setPosition({ x: 0, y: 0 });
+      setPosition({ x: 0, y: position.y });
     }
   }
 
