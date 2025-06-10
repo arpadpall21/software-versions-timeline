@@ -43,32 +43,34 @@ const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx }) => {
   }
 
   return (
-    <div className={`relative h-[100px] ${twStyle}`}>
-      <select
-        className={`absolute w-[18px] right-[2px] z-10
-          rounded-sm border border-borPri dark:border-borPriD
-          text-btnFg dark:text-btnFgD bg-btnBg dark:bg-btnBgD
-          outline-8 focus:outline-foc focus:dark:outline-focD sm:has-[:focus]:outline
-          hover:cursor-pointer hover:bg-btnBgHov dark:hover:hover:bg-btnBgHovD
-        `}
-        style={{ bottom: bottomSpaceDropdown, transform: `scaleX(${scaleDropdownX}) scaleY(${scaleDropdownY})` }}
-        value={software}
-        onChange={handleDropdown}
-      >
-        {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
-          <option value={software} key={i}>
-            {supportedSoftware.displayName}
-          </option>
-        ))}
-      </select>
-      <a
-        className={'absolute bottom-1 right-1 smoothTransform'}
-        style={{ transform: `scaleX(${scaleLogoX}) scaleY(${scaleLogoY})` }}
-        href={appConfig.supportedSoftwares[software].source}
-        target="_blank"
-      >
-        <Image src={logoPath} width={60} height={60} alt={displayName} title={displayName} />
-      </a>
+    <div className={`flex h-[100px] ${twStyle}`}>
+      <div className={'relative w-[70px] h-[70px] m-auto'}>
+        <select
+          className={`absolute w-[18px] right-[5px] z-10
+            rounded-sm border border-borPri dark:border-borPriD
+            text-btnFg dark:text-btnFgD bg-btnBg dark:bg-btnBgD
+            outline-8 focus:outline-foc focus:dark:outline-focD sm:has-[:focus]:outline
+            hover:cursor-pointer hover:bg-btnBgHov dark:hover:hover:bg-btnBgHovD
+          `}
+          style={{ bottom: bottomSpaceDropdown, transform: `scaleX(${scaleDropdownX}) scaleY(${scaleDropdownY})` }}
+          value={software}
+          onChange={handleDropdown}
+        >
+          {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
+            <option value={software} key={i}>
+              {supportedSoftware.displayName}
+            </option>
+          ))}
+        </select>
+        <a
+          className={'absolute bottom-1 right-1 smoothTransform'}
+          style={{ transform: `scaleX(${scaleLogoX}) scaleY(${scaleLogoY})` }}
+          href={appConfig.supportedSoftwares[software].source}
+          target="_blank"
+        >
+          <Image src={logoPath} width={60} height={60} alt={displayName} title={displayName} />
+        </a>
+      </div>
     </div>
   );
 };
