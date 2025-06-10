@@ -40,27 +40,13 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
       setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
     } else {
       const newZoomLevel: number = calcTimelineZoom(zoom, zoomLevel);
-      const newGridCellWidth: number = originalGridCellWidth * newZoomLevel;
-      const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths, 0);
-      let nrOfMonthsToRender: number = calcNrOfGridCellsToRender(newGridCellWidth);
-
-      if (zoom === 'zoomOut') {
-        nrOfMonthsToRender *= 2;
-      //   console.log('zoom out')
-        
-      //   setPosition({
-      //     x:
-      //       gridCellWidth - originalGridCellWidth > originalGridCellWidth
-      //         ? position.x - originalGridCellWidth
-      //         : position.x,
-      //     y: position.y,
+      if (zoomLevel === newZoomLevel) {
+        return;
       }
 
-
-
-      // }
-
-      console.log(nrOfMonthsToRender)
+      const newGridCellWidth: number = originalGridCellWidth * newZoomLevel;
+      const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths, 0);
+      const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(newGridCellWidth);
 
       setZoomLevel(newZoomLevel);
       setGridCellWidth(newGridCellWidth);

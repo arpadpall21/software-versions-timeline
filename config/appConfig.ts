@@ -39,8 +39,8 @@ const appConfig: AppConfig = {
     supportedLanguages,
   },
   zoom: {
-    minLevel: 0.5,
-    maxLevel: 10,
+    minLevel: 0.8,
+    maxLevel: 2,
     defaultLevel: 1,
     sensitivity: 0.1,
   },
@@ -49,7 +49,7 @@ const appConfig: AppConfig = {
     max: 1,
   },
   standByMonths: {
-    left: 3,
+    left: 5,
     right: 3,
   },
 };
