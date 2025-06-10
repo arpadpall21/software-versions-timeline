@@ -15,6 +15,7 @@ const originalGridCellWidth: number = Number.parseInt(tailwindConfig.theme.exten
 
 const ZoomPanel: React.FC<Props> = ({ ref }) => {
   const {
+    position,
     setVerticalScrollLock,
     zoomLevel,
     setZoomLevel,
@@ -22,7 +23,6 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
     displayedMonths,
     setDisplayedMonths,
     displayableDateLimit,
-    position,
     setPosition,
     setGridOffset,
   } = useContext(GridContainerContext);

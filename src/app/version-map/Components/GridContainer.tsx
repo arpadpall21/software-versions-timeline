@@ -40,10 +40,10 @@ export const GridContainerContext = createContext<{
 }>({
   position: { x: 0, y: 0 },
   setPosition: () => {},
-  zoomLevel: defaultZoomLevel,
-  setZoomLevel: () => {},
   verticalScrollLock: true,
   setVerticalScrollLock: () => {},
+  zoomLevel: defaultZoomLevel,
+  setZoomLevel: () => {},
   gridCellWidth: originalGridCellWidth,
   setGridCellWidth: () => {},
   feCache: {},
