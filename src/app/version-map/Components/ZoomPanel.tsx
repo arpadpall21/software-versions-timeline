@@ -21,6 +21,7 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
     displayedMonths,
     setDisplayedMonths,
     displayableDateLimit,
+    position,
     setPosition,
     setGridOffset,
   } = useContext(GridContainerContext);
@@ -32,6 +33,7 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
   function handleZoomChange(zoom: 'zoomIn' | 'zoomOut' | 'reset') {
     if (zoom === 'reset') {
       if (zoomLevel === appConfig.zoom.defaultLevel) {
+        setPosition({ x: position.x, y: 0 });
         return;
       }
 
@@ -40,7 +42,7 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
 
       setPosition({ x: 0, y: 0 });
       setGridOffset(0);
-      setZoomLevel(1);
+      setZoomLevel(appConfig.zoom.defaultLevel);
       setGridCellWidth(originalGridCellWidth);
       setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
     } else {
