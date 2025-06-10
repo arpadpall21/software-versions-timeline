@@ -38,6 +38,7 @@ const GridFrame = () => {
   const {
     position,
     setPosition,
+    verticalScrollLock,
     zoomLevel,
     gridCellWidth,
     displayedSoftwares,
@@ -63,7 +64,7 @@ const GridFrame = () => {
 
   function handleMouseMove(e: React.MouseEvent) {
     if (isDragging) {
-      setPosition({ x: e.clientX - offset.x, y: e.clientY - offset.y });
+      setPosition({ x: e.clientX - offset.x, y: verticalScrollLock ? 0 : e.clientY - offset.y });
 
       if (
         displayableDateLimit?.oldestDate &&

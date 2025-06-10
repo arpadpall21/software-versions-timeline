@@ -20,6 +20,8 @@ const defaultZoomLevel: number = appConfig.zoom.defaultLevel;
 export const GridContainerContext = createContext<{
   position: { x: number; y: number };
   setPosition: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>;
+  verticalScrollLock: boolean;
+  setVerticalScrollLock: React.Dispatch<React.SetStateAction<boolean>>;
   zoomLevel: number;
   setZoomLevel: React.Dispatch<React.SetStateAction<number>>;
   gridCellWidth: number;
@@ -38,6 +40,8 @@ export const GridContainerContext = createContext<{
 }>({
   position: { x: 0, y: 0 },
   setPosition: () => {},
+  verticalScrollLock: true,
+  setVerticalScrollLock: () => {},
   zoomLevel: defaultZoomLevel,
   setZoomLevel: () => {},
   gridCellWidth: originalGridCellWidth,
@@ -57,6 +61,7 @@ export const GridContainerContext = createContext<{
 
 const GridContainer: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [verticalScrollLock, setVerticalScrollLock] = useState<boolean>(true);
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
   const [gridCellWidth, setGridCellWidth] = useState<number>(originalGridCellWidth);
   const [displayedMonths, setDisplayedMonths] = useState<Months>([]);
@@ -150,6 +155,8 @@ const GridContainer: React.FC = () => {
       value={{
         position,
         setPosition,
+        verticalScrollLock,
+        setVerticalScrollLock,
         zoomLevel,
         setZoomLevel,
         gridCellWidth,
