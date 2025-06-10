@@ -5,6 +5,7 @@ import { calcTimelineZoom, calcNrOfGridCellsToRender, getDisplayedLastMonth, cal
 import { useTranslations } from 'next-intl';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 import tailwindConfig from '../../../../tailwind.config';
+import appConfig from '../../../../config/appConfig';
 
 interface Props {
   ref: RefObject<{ handleZoomChange: (zoom: 'zoomIn' | 'zoomOut' | 'reset') => void }>;
@@ -30,6 +31,10 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
 
   function handleZoomChange(zoom: 'zoomIn' | 'zoomOut' | 'reset') {
     if (zoom === 'reset') {
+      if (zoomLevel === appConfig.zoom.defaultLevel) {
+        return;
+      }
+
       const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths, 0);
       const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(originalGridCellWidth);
 
