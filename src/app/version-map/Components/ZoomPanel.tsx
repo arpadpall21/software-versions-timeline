@@ -35,7 +35,7 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
         return;
       }
 
-      const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths, 0);
+      const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths, -appConfig.standByMonths.right);
       const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(originalGridCellWidth);
 
       setPosition({ x: 0, y: 0 });
