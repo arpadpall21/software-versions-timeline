@@ -42,7 +42,7 @@ export const GridContainerContext = createContext<{
   setPosition: () => {},
   zoomLevel: defaultZoomLevel,
   setZoomLevel: () => {},
-  verticalZoomLock: false,
+  verticalZoomLock: true,
   setVerticalZoomLock: () => {},
   gridCellWidth: originalGridCellWidth,
   setGridCellWidth: () => {},
@@ -62,7 +62,7 @@ export const GridContainerContext = createContext<{
 const GridContainer: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
-  const [verticalZoomLock, setVerticalZoomLock] = useState<boolean>(false);
+  const [verticalZoomLock, setVerticalZoomLock] = useState<boolean>(true);
   const [gridCellWidth, setGridCellWidth] = useState<number>(originalGridCellWidth);
   const [displayedMonths, setDisplayedMonths] = useState<Months>([]);
   const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>([]);
