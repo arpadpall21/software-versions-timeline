@@ -33,10 +33,7 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
 
   function handleZoomChange(zoom: 'zoomIn' | 'zoomOut' | 'reset') {
     if (zoom === 'reset') {
-      setVerticalScrollLock(true);
-
-      if (Math.round(zoomLevel) === appConfig.zoom.defaultLevel) {
-        setPosition({ x: position.x, y: 0 });
+      if (zoomLevel === appConfig.zoom.defaultLevel) {
         return;
       }
 
@@ -48,6 +45,7 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
       setZoomLevel(appConfig.zoom.defaultLevel);
       setGridCellWidth(originalGridCellWidth);
       setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
+      setVerticalScrollLock(true);
     } else {
       const newZoomLevel: number = calcTimelineZoom(zoom, zoomLevel);
 
