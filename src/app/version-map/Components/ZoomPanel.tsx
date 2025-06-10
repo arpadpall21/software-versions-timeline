@@ -15,9 +15,9 @@ const originalGridCellWidth: number = Number.parseInt(tailwindConfig.theme.exten
 
 const ZoomPanel: React.FC<Props> = ({ ref }) => {
   const {
+    setVerticalScrollLock,
     zoomLevel,
     setZoomLevel,
-    setVerticalZoomLock,
     setGridCellWidth,
     displayedMonths,
     setDisplayedMonths,
@@ -33,7 +33,7 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
 
   function handleZoomChange(zoom: 'zoomIn' | 'zoomOut' | 'reset') {
     if (zoom === 'reset') {
-      setVerticalZoomLock(true);
+      setVerticalScrollLock(true);
 
       if (Math.round(zoomLevel) === appConfig.zoom.defaultLevel) {
         setPosition({ x: position.x, y: 0 });
@@ -52,7 +52,7 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
       const newZoomLevel: number = calcTimelineZoom(zoom, zoomLevel);
 
       if (newZoomLevel > appConfig.zoom.defaultLevel) {
-        setVerticalZoomLock(false);
+        setVerticalScrollLock(false);
       }
       if (zoomLevel === newZoomLevel) {
         return;

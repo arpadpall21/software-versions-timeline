@@ -20,10 +20,10 @@ const defaultZoomLevel: number = appConfig.zoom.defaultLevel;
 export const GridContainerContext = createContext<{
   position: { x: number; y: number };
   setPosition: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>;
+  verticalScrollLock: boolean;
+  setVerticalScrollLock: React.Dispatch<React.SetStateAction<boolean>>;
   zoomLevel: number;
   setZoomLevel: React.Dispatch<React.SetStateAction<number>>;
-  verticalZoomLock: boolean;
-  setVerticalZoomLock: React.Dispatch<React.SetStateAction<boolean>>;
   gridCellWidth: number;
   setGridCellWidth: React.Dispatch<React.SetStateAction<number>>;
   feCache: FeCache;
@@ -42,8 +42,8 @@ export const GridContainerContext = createContext<{
   setPosition: () => {},
   zoomLevel: defaultZoomLevel,
   setZoomLevel: () => {},
-  verticalZoomLock: true,
-  setVerticalZoomLock: () => {},
+  verticalScrollLock: true,
+  setVerticalScrollLock: () => {},
   gridCellWidth: originalGridCellWidth,
   setGridCellWidth: () => {},
   feCache: {},
@@ -61,8 +61,8 @@ export const GridContainerContext = createContext<{
 
 const GridContainer: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [verticalScrollLock, setVerticalScrollLock] = useState<boolean>(true);
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
-  const [verticalZoomLock, setVerticalZoomLock] = useState<boolean>(true);
   const [gridCellWidth, setGridCellWidth] = useState<number>(originalGridCellWidth);
   const [displayedMonths, setDisplayedMonths] = useState<Months>([]);
   const [displayedSoftwares, setDisplayedSoftwares] = useState<DisplayedSoftwares>([]);
@@ -155,10 +155,10 @@ const GridContainer: React.FC = () => {
       value={{
         position,
         setPosition,
+        verticalScrollLock,
+        setVerticalScrollLock,
         zoomLevel,
         setZoomLevel,
-        verticalZoomLock,
-        setVerticalZoomLock,
         gridCellWidth,
         setGridCellWidth,
         feCache,
