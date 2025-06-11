@@ -15,7 +15,6 @@ const originalGridCellWidth: number = Number.parseInt(tailwindConfig.theme.exten
 
 const ZoomPanel: React.FC<Props> = ({ ref }) => {
   const {
-    position,
     setVerticalScrollLock,
     zoomLevel,
     setZoomLevel,
@@ -25,6 +24,7 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
     displayableDateLimit,
     setPosition,
     setGridOffset,
+    setNrOfMonthToRender,
   } = useContext(GridContainerContext);
 
   const t = useTranslations('components.zoomPanel');
@@ -44,6 +44,7 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
       setGridOffset(0);
       setZoomLevel(appConfig.zoom.defaultLevel);
       setGridCellWidth(originalGridCellWidth);
+      setNrOfMonthToRender(nrOfMonthsToRender);
       setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
       setVerticalScrollLock(true);
     } else {
@@ -62,6 +63,7 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
 
       setZoomLevel(newZoomLevel);
       setGridCellWidth(newGridCellWidth);
+      setNrOfMonthToRender(nrOfMonthsToRender);
       setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
     }
   }

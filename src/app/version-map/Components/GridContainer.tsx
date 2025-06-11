@@ -37,6 +37,8 @@ export const GridContainerContext = createContext<{
   gridOffset: number;
   setGridOffset: React.Dispatch<React.SetStateAction<number>>;
   setSelectedYear: React.Dispatch<React.SetStateAction<number>>;
+  nrOfMonthsToRender: number;
+  setNrOfMonthToRender: React.Dispatch<React.SetStateAction<number>>;
 }>({
   position: { x: 0, y: 0 },
   setPosition: () => {},
@@ -57,6 +59,8 @@ export const GridContainerContext = createContext<{
   gridOffset: 0,
   setGridOffset: () => {},
   setSelectedYear: () => {},
+  nrOfMonthsToRender: 0,
+  setNrOfMonthToRender: () => {},
 });
 
 const GridContainer: React.FC = () => {
@@ -69,7 +73,8 @@ const GridContainer: React.FC = () => {
   const [displayedYearButtons, setDisplayedYearButtons] = useState<number[]>([]);
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
   const [selectedSoftwareByUser, setSelectedSoftwareByUser] = useState<Software>();
-  const [displayableDateLimit, setDisplayablDateLimit] = useState<DisplayableDateLimit>();
+  const [displayableDateLimit, setDisplayableDateLimit] = useState<DisplayableDateLimit>();
+  const [nrOfMonthsToRender, setNrOfMonthToRender] = useState<number>(0);
   const [feCache, setFeCache] = useState<FeCache>({});
   const [fetchLoading, setFetchLoading] = useState<boolean>(true);
   const [gridOffset, setGridOffset] = useState<number>(0);
@@ -84,7 +89,9 @@ const GridContainer: React.FC = () => {
         .then((res) => {
           const newFeCache: FeCache = { ...feCache, ...res };
           setFetchLoading(false);
-          setDisplayablDateLimit(calcDisplayableDateLimit(displayedSoftwares, newFeCache, extendDisplayableMonthRange));
+          setDisplayableDateLimit(
+            calcDisplayableDateLimit(displayedSoftwares, newFeCache, extendDisplayableMonthRange),
+          );
           setFeCache(newFeCache);
         })
         .catch(console.error);
@@ -95,13 +102,13 @@ const GridContainer: React.FC = () => {
   useEffect(() => {
     const newDisplayableDateLimit = calcDisplayableDateLimit(displayedSoftwares, feCache, extendDisplayableMonthRange);
     if (newDisplayableDateLimit) {
+      const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(originalGridCellWidth);
+
       if (selectedSoftwareByUser && feCache[selectedSoftwareByUser]?.newestDate) {
         const adjustedEndDate: Date = new Date(feCache[selectedSoftwareByUser].newestDate);
         adjustedEndDate.setMonth(adjustedEndDate.getMonth() + 1);
 
-        setDisplayedMonths(
-          calcMonthRange(adjustedEndDate, calcNrOfGridCellsToRender(originalGridCellWidth), newDisplayableDateLimit),
-        );
+        setDisplayedMonths(calcMonthRange(adjustedEndDate, nrOfMonthsToRender, newDisplayableDateLimit));
         setPosition({ x: 0, y: 0 });
         setGridOffset(0);
         setZoomLevel(1);
@@ -109,18 +116,14 @@ const GridContainer: React.FC = () => {
         setSelectedYear(feCache[selectedSoftwareByUser]?.newestDate.getFullYear());
       } else {
         setDisplayedMonths(
-          calcMonthRange(
-            newDisplayableDateLimit.newestDate,
-            calcNrOfGridCellsToRender(gridCellWidth),
-            newDisplayableDateLimit,
-          ),
+          calcMonthRange(newDisplayableDateLimit.newestDate, nrOfMonthsToRender, newDisplayableDateLimit),
         );
       }
 
+      setNrOfMonthToRender(nrOfMonthsToRender);
       setDisplayedYearButtons(getYearRange(newDisplayableDateLimit));
-      setDisplayablDateLimit(newDisplayableDateLimit);
+      setDisplayableDateLimit(newDisplayableDateLimit);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [displayedSoftwares, feCache, selectedSoftwareByUser]);
 
   function handleYearButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
@@ -130,15 +133,13 @@ const GridContainer: React.FC = () => {
         : currentYear;
 
       if (selectedYear === currentYear) {
-        setDisplayedMonths(
-          calcMonthRange(new Date(selectedYear, 11), calcNrOfGridCellsToRender(gridCellWidth), displayableDateLimit),
-        );
+        setDisplayedMonths(calcMonthRange(new Date(selectedYear, 11), nrOfMonthsToRender, displayableDateLimit));
         setGridOffset(0);
       } else {
         setDisplayedMonths(
           calcMonthRange(
             new Date(selectedYear, 11 + appConfig.standByMonths.right),
-            calcNrOfGridCellsToRender(gridCellWidth),
+            nrOfMonthsToRender,
             displayableDateLimit,
           ),
         );
@@ -172,6 +173,8 @@ const GridContainer: React.FC = () => {
         gridOffset,
         setGridOffset,
         setSelectedYear,
+        nrOfMonthsToRender,
+        setNrOfMonthToRender,
       }}
     >
       <div className={'h-12 mt-7 overflow-x-auto whitespace-nowrap'} style={{ direction: 'rtl' }}>
