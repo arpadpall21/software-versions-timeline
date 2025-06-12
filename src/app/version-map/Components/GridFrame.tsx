@@ -2,7 +2,7 @@
 
 import '@/app/globals.css';
 import { useState, useContext, useEffect, useRef, type RefObject } from 'react';
-import { getDisplayedLastMonth, calcNrOfGridCellsToRender, calcMonthRange, compareDates } from '@/misc/helpers';
+import { getDisplayedLastMonth, calcMonthRange, compareDates } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
@@ -48,6 +48,7 @@ const GridFrame = () => {
     gridOffset,
     setGridOffset,
     setSelectedYear,
+    nrOfMonthsToRender,
   } = useContext(GridContainerContext);
 
   const zoomPanelRef: RefObject<{ handleZoomChange: (zoom: 'zoomIn' | 'zoomOut' | 'reset') => void }> = useRef({
@@ -71,26 +72,30 @@ const GridFrame = () => {
         compareDates(displayedMonths[0].date, '>', displayableDateLimit.oldestDate) &&
         position.x - gridCellWidth - gridCellWidth * appConfig.standByMonths.right > gridOffset
       ) {
-        const shiftedLastMonth: Date = getDisplayedLastMonth(displayedMonths, -1);
-        const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(gridCellWidth);
+        const nrOfMonthsToShift: number = Math.ceil(
+          (position.x - gridCellWidth - gridCellWidth * appConfig.standByMonths.right - gridOffset) / gridCellWidth,
+        );
+        const shiftedLastMonth: Date = getDisplayedLastMonth(displayedMonths, -nrOfMonthsToShift);
         const visibleLatestMonth: Date = new Date(shiftedLastMonth);
         visibleLatestMonth.setMonth(visibleLatestMonth.getMonth() - appConfig.standByMonths.right);
 
         setDisplayedMonths(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit));
-        setGridOffset(gridOffset + gridCellWidth);
+        setGridOffset(gridOffset + gridCellWidth * nrOfMonthsToShift);
         setSelectedYear(visibleLatestMonth.getFullYear());
       } else if (
         displayableDateLimit?.newestDate &&
         compareDates(displayedMonths[displayedMonths.length - 1].date, '<', displayableDateLimit.newestDate) &&
         position.x - gridCellWidth * appConfig.standByMonths.right < gridOffset
       ) {
-        const shiftedLastMonth: Date = getDisplayedLastMonth(displayedMonths, 1);
-        const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(gridCellWidth);
+        const nrOfMonthsToShift: number = -Math.floor(
+          (position.x - gridCellWidth * appConfig.standByMonths.right - gridOffset) / gridCellWidth,
+        );
+        const shiftedLastMonth: Date = getDisplayedLastMonth(displayedMonths, nrOfMonthsToShift);
         const visibleLatestMonth: Date = new Date(shiftedLastMonth);
         visibleLatestMonth.setMonth(visibleLatestMonth.getMonth() - appConfig.standByMonths.right);
 
         setDisplayedMonths(calcMonthRange(shiftedLastMonth, nrOfMonthsToRender, displayableDateLimit));
-        setGridOffset(gridOffset - gridCellWidth);
+        setGridOffset(gridOffset - gridCellWidth * nrOfMonthsToShift);
         setSelectedYear(visibleLatestMonth.getFullYear());
       }
     }
