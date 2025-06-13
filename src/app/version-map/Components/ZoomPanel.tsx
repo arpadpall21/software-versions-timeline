@@ -66,13 +66,12 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
 
       // correction when zooming out
       if (zoom === 'zoomOut') {
-        const nrOfMonthsToShift: number = Math.round(
-          (position.x - gridCellWidth * appConfig.standByMonths.right - gridOffset) / gridCellWidth,
+        const nrOfMonthsToShift: number = Math.max(
+          0,
+          Math.round((position.x - gridCellWidth * appConfig.standByMonths.right - gridOffset) / gridCellWidth),
         );
-        if (nrOfMonthsToShift > 0) {
-          lastDisplayedMonth = getDisplayedLastMonth(displayedMonths, -nrOfMonthsToShift);
-          setGridOffset(gridOffset + gridCellWidth * nrOfMonthsToShift);
-        }
+        lastDisplayedMonth = getDisplayedLastMonth(displayedMonths, -nrOfMonthsToShift);
+        setGridOffset(gridOffset + gridCellWidth * nrOfMonthsToShift);
       }
 
       setZoomLevel(newZoomLevel);
