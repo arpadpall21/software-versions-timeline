@@ -84,6 +84,19 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
   return (
     <div className={'absolute z-10 bottom-4 right-4 w-9'}>
       <div
+        className={`flex flex-col mb-3 font-semibold text-xl text-btnFg dark:text-btnFgD bg-btnBg dark:bg-btnBgD
+          shadow-md rounded-md border-2 border-borPri dark:border-borPriD`}
+        title={'Zoom Level'}
+      >
+        <button
+          className={'text-2xl rounded-t-[0.25rem] hover:bg-btnBgHov dark:hover:bg-btnBgHovD'}
+          onMouseDown={() => handleZoomChange('zoomIn')}
+          title={t('zoomIn')}
+        >
+          ⎋
+        </button>
+      </div>
+      <div
         className={`flex flex-col font-semibold text-xl text-btnFg dark:text-btnFgD bg-btnBg dark:bg-btnBgD
           shadow-md rounded-md border-2 border-borPri dark:border-borPriD`}
       >
