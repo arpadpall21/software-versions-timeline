@@ -42,15 +42,15 @@ const ZoomPanel: React.FC<Props> = ({ ref, scrollZoomEnabled, setScrollZoomEnabl
         return;
       }
 
-      const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths, -appConfig.standByMonths.right);
+      const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths);
       const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(originalGridCellWidth);
 
       setPosition({ x: 0, y: 0 });
-      setGridOffset(0);
-      setZoomLevel(appConfig.zoom.defaultLevel);
-      setGridCellWidth(originalGridCellWidth);
-      setNrOfMonthToRender(nrOfMonthsToRender);
+      setGridOffset(-(originalGridCellWidth * appConfig.standByMonths.right));
       setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
+      setNrOfMonthToRender(nrOfMonthsToRender);
+      setGridCellWidth(originalGridCellWidth);
+      setZoomLevel(appConfig.zoom.defaultLevel);
       setVerticalScrollLock(true);
     } else {
       const newZoomLevel: number = calcTimelineZoom(zoom, zoomLevel);
