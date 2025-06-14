@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext, useImperativeHandle, RefObject } from 'react';
+import { useContext, useImperativeHandle, useEffect, RefObject } from 'react';
 import { calcTimelineZoom, calcNrOfGridCellsToRender, getDisplayedLastMonth, calcMonthRange } from '@/misc/helpers';
 import { useTranslations } from 'next-intl';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
@@ -35,6 +35,14 @@ const ZoomPanel: React.FC<Props> = ({ ref, scrollZoomEnabled, setScrollZoomEnabl
   const t = useTranslations('components.zoomPanel');
 
   useImperativeHandle(ref, () => ({ handleZoomChange }));
+
+  useEffect(() => {
+    if (scrollZoomEnabled) {
+      document.body.style.overflow = 'hidden';
+      return;
+    }
+    document.body.style.overflow = 'auto';
+  }, [scrollZoomEnabled]);
 
   function handleZoomChange(zoom: 'zoomIn' | 'zoomOut' | 'reset') {
     if (zoom === 'reset') {

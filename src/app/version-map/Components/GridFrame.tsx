@@ -1,7 +1,7 @@
 'use client';
 
 import '@/app/globals.css';
-import { useState, useContext, useEffect, useRef, type RefObject } from 'react';
+import { useState, useContext, useRef, type RefObject } from 'react';
 import { getDisplayedLastMonth, calcMonthRange, compareDates } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
@@ -53,14 +53,6 @@ const GridFrame = () => {
   const zoomPanelRef: RefObject<{ handleZoomChange: (zoom: 'zoomIn' | 'zoomOut' | 'reset') => void }> = useRef({
     handleZoomChange: () => {},
   });
-
-  useEffect(() => {
-    if (scrollZoomEnabled) {
-      document.body.style.overflow = 'hidden';
-      return;
-    }
-    document.body.style.overflow = 'auto';
-  }, [scrollZoomEnabled]);
 
   function handleMouseMove(e: React.MouseEvent) {
     if (isDragging) {
