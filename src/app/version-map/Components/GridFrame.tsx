@@ -5,7 +5,6 @@ import { useState, useContext, useEffect, useRef, type RefObject } from 'react';
 import { getDisplayedLastMonth, calcMonthRange, compareDates } from '@/misc/helpers';
 import appConfig from '../../../../config/appConfig';
 import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
-import ScrollZoomButton from '@/app/version-map/Components/ScrollZoomButton';
 import Timeline from '@/app/version-map/Components/Timeline';
 import MonthsTimeline from '@/app/version-map/Components/MonthsTimeline';
 import SideLogo from './SideLogo';
@@ -129,7 +128,7 @@ const GridFrame = () => {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
-      <ZoomPanel ref={zoomPanelRef} />
+      <ZoomPanel ref={zoomPanelRef} scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
       <div
         className={'relative grid grid-cols-[70px_auto] grid-rows-[60px_auto]'}
         // onTouchStart={mouseDownHandler}
@@ -148,7 +147,6 @@ const GridFrame = () => {
         <div className={'col-start-1 row-start-2 z-10 overflow-hidden bg-opacity-0'}>
           <div style={{ transform: `translateY(${position.y}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scaleY(${zoomLevel})` }}>
-              <div className={'h-[25px]'} />
               {displayedSoftwares &&
                 displayedSoftwares.map((software, i) => (
                   <SideLogo
@@ -168,13 +166,12 @@ const GridFrame = () => {
             style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
             onMouseDown={handleMouseDown}
           >
-            <ScrollZoomButton scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
             <div className={'relative'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
               <div
                 className={'absolute smoothTransform origin-right'}
                 style={{ transform: `scale(${zoomLevel})`, right: gridOffset }}
               >
-                <div className={'relative h-[25px]'}>
+                <div className={'relative'}>
                   <div className={'absolute bottom-0'}>
                     <MonthsTimeline zoomLevel={zoomLevel} height={1000} gridOnly={true} />
                   </div>
@@ -187,7 +184,7 @@ const GridFrame = () => {
                     key={i}
                   />
                 ))}
-                <div className={'relative h-[25px]'}>
+                <div className={'relative'}>
                   <div className={'absolute top-0'}>
                     <MonthsTimeline zoomLevel={zoomLevel} height={1000} gridOnly={true} />
                   </div>

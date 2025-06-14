@@ -9,11 +9,13 @@ import appConfig from '../../../../config/appConfig';
 
 interface Props {
   ref: RefObject<{ handleZoomChange: (zoom: 'zoomIn' | 'zoomOut' | 'reset') => void }>;
+  scrollZoomEnabled: boolean;
+  setScrollZoomEnabled: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const originalGridCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
 
-const ZoomPanel: React.FC<Props> = ({ ref }) => {
+const ZoomPanel: React.FC<Props> = ({ ref, scrollZoomEnabled, setScrollZoomEnabled }) => {
   const {
     position,
     setPosition,
@@ -83,6 +85,27 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
 
   return (
     <div className={'absolute z-10 bottom-4 right-4 w-9'}>
+      <div
+        className={`flex flex-col mb-3 font-semibold text-xl text-btnFg dark:text-btnFgD bg-btnBg dark:bg-btnBgD
+          shadow-md rounded-md border-2 border-borPri dark:border-borPriD`}
+        title={'Zoom Level'}
+      >
+        <button
+          className={`rounded-[0.25rem]
+            ${scrollZoomEnabled ? 'text-btnFgWarn dark:text-btnFgWarnD' : 'text-btnFg dark:text-btnFgD'}
+            ${scrollZoomEnabled ? 'bg-btnBgWarn dark:bg-btnBgWarnD' : 'bg-btnBg dark:bg-btnBgD'}
+            ${
+              scrollZoomEnabled
+                ? 'hover:bg-btnBgHovWarn hover:dark:bg-btnBgHovWarnD'
+                : 'hover:bg-btnBgHov dark:hover:bg-btnBgHovD'
+            }
+          `}
+          onMouseDown={() => setScrollZoomEnabled(!scrollZoomEnabled)}
+          title={scrollZoomEnabled ? t('scrollZoomEnabled') : t('scrollZoomDisabled')}
+        >
+          ⎋
+        </button>
+      </div>
       <div
         className={`flex flex-col font-semibold text-xl text-btnFg dark:text-btnFgD bg-btnBg dark:bg-btnBgD
           shadow-md rounded-md border-2 border-borPri dark:border-borPriD`}
