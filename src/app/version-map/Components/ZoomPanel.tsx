@@ -1,7 +1,13 @@
 'use client';
 
 import { useContext, useImperativeHandle, RefObject } from 'react';
-import { calcTimelineZoom, calcNrOfGridCellsToRender, getDisplayedLastMonth, calcMonthRange } from '@/misc/helpers';
+import {
+  calcTimelineZoom,
+  calcNrOfGridCellsToRender,
+  getDisplayedLastMonth,
+  calcMonthRange,
+  getMonthDifference,
+} from '@/misc/helpers';
 import { useTranslations } from 'next-intl';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 import tailwindConfig from '../../../../tailwind.config';
@@ -42,11 +48,15 @@ const ZoomPanel: React.FC<Props> = ({ ref, scrollZoomEnabled, setScrollZoomEnabl
         return;
       }
 
-      const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths);
       const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(originalGridCellWidth);
+      const lastDisplayedMonth: Date = getDisplayedLastMonth(displayedMonths);
+      const gridCellOffset: number =
+        getMonthDifference(displayableDateLimit?.newestDate, lastDisplayedMonth) === 0
+          ? 0
+          : appConfig.standByMonths.right;
 
       setPosition({ x: 0, y: 0 });
-      setGridOffset(-(originalGridCellWidth * appConfig.standByMonths.right));
+      setGridOffset(-(originalGridCellWidth * gridCellOffset));
       setDisplayedMonths(calcMonthRange(lastDisplayedMonth, nrOfMonthsToRender, displayableDateLimit));
       setNrOfMonthToRender(nrOfMonthsToRender);
       setGridCellWidth(originalGridCellWidth);

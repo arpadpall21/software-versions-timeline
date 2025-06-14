@@ -195,3 +195,15 @@ export function compareDates(date1: Date, operator: '<' | '>', date2: Date): boo
 
   return false;
 }
+
+export function getMonthDifference(date1: Date = new Date(), date2: Date): number {
+  const year1: number = date1.getFullYear();
+  const month1: number = date1.getMonth();
+  const year2: number = date2.getFullYear();
+  const month2: number = date2.getMonth();
+
+  const yearDifference = year1 - year2;
+  const monthDifference = month1 - month2;
+
+  return yearDifference * 12 + monthDifference;
+}
