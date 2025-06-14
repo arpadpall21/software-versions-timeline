@@ -32,7 +32,9 @@
     "zoomPanel": {
       "zoomIn": "Zoom In",
       "zoomOut": "Zoom Out",
-      "reset": "Reset Zoom"
+      "reset": "Reset Zoom",
+      "scrollZoomEnabled": "Scroll Zoom Enabled",
+      "scrollZoomDisabled": "Scroll Zoom Disabled"
     },
     "footer": {
       "copyright": "Copyright © 2025 {name}. All rights reserved."

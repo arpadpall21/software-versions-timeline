@@ -26,8 +26,8 @@ interface AppConfig {
 
 const supportedLanguages: { [langCode: string]: Lang } = {
   en: { langCode: 'en', lang: 'English' },
-  fr: { langCode: 'fr', lang: 'Français' },
   de: { langCode: 'de', lang: 'Deutsch' },
+  fr: { langCode: 'fr', lang: 'Français' },
   hu: { langCode: 'hu', lang: 'Magyar' },
 };
 const defaultLanguage: Lang = supportedLanguages.en;

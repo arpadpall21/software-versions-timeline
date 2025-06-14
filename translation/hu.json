@@ -32,7 +32,10 @@
     "zoomPanel": {
       "zoomIn": "Nagyítás",
       "zoomOut": "Kicsinyítés",
-      "reset": "Nagyítás Visszaállítása"
+      "reset": "Nagyítás Visszaállítása",
+      "scrollZoomEnabled": "Görgetéses Nagyítás Engedélyezve",
+      "scrollZoomDisabled": "Görgetéses Nagyítás Lealitva"
+
     },
     "footer": {
       "copyright": "Szerzői jog © 2025 {name}. Minden jog fenntartva."
