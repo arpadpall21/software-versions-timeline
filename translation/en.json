@@ -27,7 +27,8 @@
       }
     },
     "supportedSoftwares": {
-      "supportedSoftwares": "Supported Softwares"
+      "supportedSoftwares": "Supported Softwares",
+      "removeTimeline": "REMOVE TIMELINE"
     },
     "zoomPanel": {
       "zoomIn": "Zoom In",

@@ -8,6 +8,7 @@ import { type DisplayedSoftwares } from '@/misc/types';
 import store from '@/misc/store';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 import { Software } from '../../../../config/supportedSoftwares';
+import { useTranslations } from 'next-intl';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
@@ -22,6 +23,8 @@ const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx }) => {
   const { logoPath, displayName } = appConfig.supportedSoftwares[software];
   const { displayedSoftwares, setDisplayedSoftwares, setSelectedSoftwareByUser } = useContext(GridContainerContext);
 
+  const t = useTranslations('components.supportedSoftwares');
+
   const { scaleLogoX, scaleLogoY, scaleDropdownX, scaleDropdownY, bottomSpaceDropdown } = useMemo(() => {
     return {
       scaleLogoX: zoomLevel < defaultZoomLevel ? zoomLevel : defaultZoomLevel,
@@ -33,8 +36,12 @@ const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx }) => {
   }, [zoomLevel]);
 
   function handleDropdown(e: React.ChangeEvent<HTMLSelectElement>) {
-    const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
+    if (e.target.value === 'removeTimeline') {
+      console.log('remove timeline selected ------')
+      return;
+    }
     const selectedSoftware: Software = e.target.value as Software;
+    const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
     displayedSoftwaresClone[idx] = selectedSoftware;
 
     store.setDisplayedSoftwares(displayedSoftwaresClone);
@@ -56,6 +63,7 @@ const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx }) => {
           value={software}
           onChange={handleDropdown}
         >
+          <option value={'removeTimeline'}>{`[${t('removeTimeline')}]`}</option>
           {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
             <option value={software} key={i}>
               {supportedSoftware.displayName}

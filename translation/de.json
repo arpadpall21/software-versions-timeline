@@ -27,7 +27,8 @@
       }
     },
     "supportedSoftwares": {
-      "supportedSoftwares": "Unterstützte Software"
+      "supportedSoftwares": "Unterstützte Software",
+      "removeTimeline": "ZEITLEISTE ENTFERNEN"
     },
     "zoomPanel": {
       "zoomIn": "Vergrößern",

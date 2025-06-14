@@ -27,7 +27,8 @@
       }
     },
     "supportedSoftwares": {
-      "supportedSoftwares": "Logiciels Supportés"
+      "supportedSoftwares": "Logiciels Supportés",
+      "removeTimeline": "SUPPRIMER LA FRISE CHRONOLOGIQUE"
     },
     "zoomPanel": {
       "zoomIn": "Agrandir",

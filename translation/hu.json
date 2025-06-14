@@ -27,7 +27,8 @@
       }
     },
     "supportedSoftwares": {
-      "supportedSoftwares": "Támogatott Szoftverek"
+      "supportedSoftwares": "Támogatott Szoftverek",
+      "removeTimeline": "IDŐVONAL ELTÁVOLÍTÁSA"
     },
     "zoomPanel": {
       "zoomIn": "Nagyítás",
