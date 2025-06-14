@@ -91,7 +91,15 @@ const ZoomPanel: React.FC<Props> = ({ ref, scrollZoomEnabled, setScrollZoomEnabl
         title={'Zoom Level'}
       >
         <button
-          className={'rounded-t-[0.25rem] hover:bg-btnBgHov dark:hover:bg-btnBgHovD'}
+          className={`rounded-[0.25rem]
+            ${scrollZoomEnabled ? 'text-btnFgWarn dark:text-btnFgWarnD' : 'text-btnFg dark:text-btnFgD'}
+            ${scrollZoomEnabled ? 'bg-btnBgWarn dark:bg-btnBgWarnD' : 'bg-btnBg dark:bg-btnBgD'}
+            ${
+              scrollZoomEnabled
+                ? 'hover:bg-btnBgHovWarn hover:dark:bg-btnBgHovWarnD'
+                : 'hover:bg-btnBgHov dark:hover:bg-btnBgHovD'
+            }
+          `}
           onMouseDown={() => setScrollZoomEnabled(!scrollZoomEnabled)}
           title={scrollZoomEnabled ? t('scrollZoomEnabled') : t('scrollZoomDisabled')}
         >

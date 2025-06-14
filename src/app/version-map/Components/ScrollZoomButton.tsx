@@ -7,7 +7,6 @@ const ScrollZoomButton: React.FC<Props> = ({ scrollZoomEnabled, setScrollZoomEna
   return (
     <button
       className={`absolute z-10 left-[50%] shadow-md px-2 font-semibold w-[180px] h-[28px]
-        text-btnFg dark:text-btnFgD
         border-b-2 border-x-2 border-borPri dark:border-borPriD rounded-b-md
         ${scrollZoomEnabled ? 'text-btnFgWarn dark:text-btnFgWarnD' : 'text-btnFg dark:text-btnFgD'}
         ${scrollZoomEnabled ? 'bg-btnBgWarn dark:bg-btnBgWarnD' : 'bg-btnBg dark:bg-btnBgD'}
