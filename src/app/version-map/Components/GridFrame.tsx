@@ -162,8 +162,8 @@ const GridFrame = () => {
         </div>
         <div className={'absolute col-start-1 row-start-2 z-0 w-full'}>
           <div
-            className={'relative overflow-hidden h-[550px]'}
-            style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+            className={'relative overflow-hidden '}
+            style={{ cursor: isDragging ? 'grabbing' : 'grab', height: displayedSoftwares.length * 100 }}
             onMouseDown={handleMouseDown}
           >
             <div className={'relative'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
