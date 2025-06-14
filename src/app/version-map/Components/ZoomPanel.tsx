@@ -9,11 +9,13 @@ import appConfig from '../../../../config/appConfig';
 
 interface Props {
   ref: RefObject<{ handleZoomChange: (zoom: 'zoomIn' | 'zoomOut' | 'reset') => void }>;
+  scrollZoomEnabled: boolean;
+  setScrollZoomEnabled: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const originalGridCellWidth: number = Number.parseInt(tailwindConfig.theme.extend.spacing.gridCellW);
 
-const ZoomPanel: React.FC<Props> = ({ ref }) => {
+const ZoomPanel: React.FC<Props> = ({ ref, scrollZoomEnabled, setScrollZoomEnabled }) => {
   const {
     position,
     setPosition,
@@ -89,9 +91,9 @@ const ZoomPanel: React.FC<Props> = ({ ref }) => {
         title={'Zoom Level'}
       >
         <button
-          className={'text-2xl rounded-t-[0.25rem] hover:bg-btnBgHov dark:hover:bg-btnBgHovD'}
-          onMouseDown={() => handleZoomChange('zoomIn')}
-          title={t('zoomIn')}
+          className={'rounded-t-[0.25rem] hover:bg-btnBgHov dark:hover:bg-btnBgHovD'}
+          onMouseDown={() => setScrollZoomEnabled(!scrollZoomEnabled)}
+          title={t('zoomIn')}   // TODO
         >
           ⎋
         </button>

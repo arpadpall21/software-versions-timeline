@@ -129,7 +129,7 @@ const GridFrame = () => {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
-      <ZoomPanel ref={zoomPanelRef} />
+      <ZoomPanel ref={zoomPanelRef} scrollZoomEnabled={scrollZoomEnabled} setScrollZoomEnabled={setScrollZoomEnabled} />
       <div
         className={'relative grid grid-cols-[70px_auto] grid-rows-[60px_auto]'}
         // onTouchStart={mouseDownHandler}
