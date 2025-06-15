@@ -36,17 +36,18 @@ const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx }) => {
   }, [zoomLevel]);
 
   function handleDropdown(e: React.ChangeEvent<HTMLSelectElement>) {
-    if (e.target.value === 'removeTimeline') {
-      console.log('remove timeline selected ------')
-      return;
-    }
-    const selectedSoftware: Software = e.target.value as Software;
     const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
-    displayedSoftwaresClone[idx] = selectedSoftware;
 
-    store.setDisplayedSoftwares(displayedSoftwaresClone);
+    if (e.target.value === 'removeTimeline') {
+      displayedSoftwaresClone.splice(idx, 1);
+    } else {
+      const selectedSoftware: Software = e.target.value as Software;
+      displayedSoftwaresClone[idx] = selectedSoftware;
+      setSelectedSoftwareByUser(selectedSoftware);
+    }
+
     setDisplayedSoftwares(displayedSoftwaresClone);
-    setSelectedSoftwareByUser(selectedSoftware);
+    store.setDisplayedSoftwares(displayedSoftwaresClone);
   }
 
   return (
