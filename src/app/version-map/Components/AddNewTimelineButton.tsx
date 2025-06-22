@@ -2,6 +2,9 @@ import { useContext, useMemo } from 'react';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 import appConfig from '../../../../config/appConfig';
 import { calcPercentOf } from '@/misc/helpers';
+import { Software } from '../../../../config/supportedSoftwares';
+import { type DisplayedSoftwares } from '@/misc/types';
+import store from '@/misc/store';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
@@ -10,17 +13,21 @@ interface Props {
 }
 
 const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
-  const { zoomLevel } = useContext(GridContainerContext);
+  const { zoomLevel, displayedSoftwares, setDisplayedSoftwares } = useContext(GridContainerContext);
 
   const scaleDropdownY = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel]);
 
+  function handleDropdown(e: React.ChangeEvent<HTMLSelectElement>) {
+    if (e.target.value === '+') {
+      return;
+    }
 
+    const selectedSoftware: Software = e.target.value as Software;
+    const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
+    displayedSoftwaresClone.push(selectedSoftware);
 
-
-
-  function handleDropdown() {
-    
-    
+    setDisplayedSoftwares(displayedSoftwaresClone);
+    store.setDisplayedSoftwares(displayedSoftwaresClone);
   }
 
   if (zoomLevel > defaultZoomLevel) {
