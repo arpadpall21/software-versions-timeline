@@ -10,7 +10,13 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
   const {  } = useContext(GridContainerContext);
 
   return (
-    <div className={'bg-red-300'} style={{ height }}>
+    <div
+      className={`flex w-full text-2xl font-semibold text-btnFg dark:text-btnFgD bg-btnBg dark:bg-btnBgD
+        border-2 border-borPri dark:border-borPriD
+        hover:cursor-pointer  hover:bg-btnBgHov dark:hover:bg-btnBgHovD`}
+      style={{ height }}
+    >
+      <span className={'m-auto'}>+</span>
       <select className={'hidden'}>
         {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
           <option value={software} key={i}>
