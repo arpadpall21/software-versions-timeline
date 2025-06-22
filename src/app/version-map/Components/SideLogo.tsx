@@ -23,7 +23,7 @@ const Logo: React.FC<Props> = ({ twStyle, software, idx }) => {
   const { zoomLevel, displayedSoftwares, setDisplayedSoftwares, setSelectedSoftwareByUser } =
     useContext(GridContainerContext);
 
-  const t = useTranslations('components.supportedSoftwares');
+  const t = useTranslations('components.sideLogo');
 
   const { scaleLogoX, scaleLogoY, scaleDropdownY, bottomSpaceDropdown } = useMemo(() => {
     return {

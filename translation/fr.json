@@ -27,8 +27,13 @@
       }
     },
     "supportedSoftwares": {
-      "supportedSoftwares": "Logiciels Supportés",
+      "supportedSoftwares": "Logiciels Supportés"
+    },
+    "sideLogo": {
       "removeTimeline": "SUPPRIMER LA FRISE CHRONOLOGIQUE"
+    },
+    "addnewTimelineButton": {
+      "addTimeline": "Ajouter une Frise Chronologie"
     },
     "zoomPanel": {
       "zoomIn": "Agrandir",

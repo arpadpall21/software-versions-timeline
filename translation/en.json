@@ -27,8 +27,13 @@
       }
     },
     "supportedSoftwares": {
-      "supportedSoftwares": "Supported Softwares",
+      "supportedSoftwares": "Supported Softwares"
+    },
+    "sideLogo": {
       "removeTimeline": "REMOVE TIMELINE"
+    },
+    "addnewTimelineButton": {
+      "addTimeline": "Add Timeline"
     },
     "zoomPanel": {
       "zoomIn": "Zoom In",

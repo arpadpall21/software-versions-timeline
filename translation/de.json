@@ -27,8 +27,13 @@
       }
     },
     "supportedSoftwares": {
-      "supportedSoftwares": "Unterstützte Software",
+      "supportedSoftwares": "Unterstützte Software"
+    },
+    "sideLogo": {
       "removeTimeline": "ZEITLEISTE ENTFERNEN"
+    },
+    "addnewTimelineButton": {
+      "addTimeline": "Zeitachse Hinzufügen"
     },
     "zoomPanel": {
       "zoomIn": "Vergrößern",

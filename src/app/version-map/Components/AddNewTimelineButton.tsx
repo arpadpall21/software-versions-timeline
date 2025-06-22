@@ -5,6 +5,7 @@ import { calcPercentOf } from '@/misc/helpers';
 import { Software } from '../../../../config/supportedSoftwares';
 import { type DisplayedSoftwares } from '@/misc/types';
 import store from '@/misc/store';
+import { useTranslations } from 'next-intl';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
@@ -13,7 +14,10 @@ interface Props {
 }
 
 const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
-  const { zoomLevel, displayedSoftwares, setDisplayedSoftwares } = useContext(GridContainerContext);
+  const { zoomLevel, displayedSoftwares, setDisplayedSoftwares, setSelectedSoftwareByUser } =
+    useContext(GridContainerContext);
+
+  const t = useTranslations('components.addnewTimelineButton');
 
   const scaleDropdownY = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel]);
 
@@ -26,6 +30,7 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
     const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
     displayedSoftwaresClone.push(selectedSoftware);
 
+    setSelectedSoftwareByUser(selectedSoftware);
     setDisplayedSoftwares(displayedSoftwaresClone);
     store.setDisplayedSoftwares(displayedSoftwaresClone);
   }
@@ -42,6 +47,7 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
         hover:cursor-pointer hover:bg-btnBgHov dark:hover:bg-btnBgHovD`}
       style={{ height, transform: `scaleY(${scaleDropdownY})`, marginTop: 0 }}
       value={'+'}
+      title={t('addTimeline')}
       onChange={handleDropdown}
     >
       <option value={'+'}>+</option>
