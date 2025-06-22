@@ -13,23 +13,22 @@ import { useTranslations } from 'next-intl';
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
 interface Props {
-  zoomLevel: number;
   twStyle: string;
   software: Software;
   idx: number;
 }
 
-const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx }) => {
+const Logo: React.FC<Props> = ({ twStyle, software, idx }) => {
   const { logoPath, displayName } = appConfig.supportedSoftwares[software];
-  const { displayedSoftwares, setDisplayedSoftwares, setSelectedSoftwareByUser } = useContext(GridContainerContext);
+  const { zoomLevel, displayedSoftwares, setDisplayedSoftwares, setSelectedSoftwareByUser } =
+    useContext(GridContainerContext);
 
   const t = useTranslations('components.supportedSoftwares');
 
-  const { scaleLogoX, scaleLogoY, scaleDropdownX, scaleDropdownY, bottomSpaceDropdown } = useMemo(() => {
+  const { scaleLogoX, scaleLogoY, scaleDropdownY, bottomSpaceDropdown } = useMemo(() => {
     return {
       scaleLogoX: zoomLevel < defaultZoomLevel ? zoomLevel : defaultZoomLevel,
       scaleLogoY: zoomLevel <= defaultZoomLevel ? defaultZoomLevel : calcPercentOf(defaultZoomLevel, zoomLevel) / 100,
-      scaleDropdownX: 1,
       scaleDropdownY: calcPercentOf(defaultZoomLevel, zoomLevel) / 100,
       bottomSpaceDropdown: zoomLevel >= defaultZoomLevel ? 2 * zoomLevel : 6 / zoomLevel,
     };
@@ -60,7 +59,7 @@ const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx }) => {
             outline-8 focus:outline-foc focus:dark:outline-focD sm:has-[:focus]:outline
             hover:cursor-pointer hover:bg-btnBgHov dark:hover:hover:bg-btnBgHovD
           `}
-          style={{ bottom: bottomSpaceDropdown, transform: `scaleX(${scaleDropdownX}) scaleY(${scaleDropdownY})` }}
+          style={{ bottom: bottomSpaceDropdown, transform: `scaleY(${scaleDropdownY})` }}
           value={software}
           onChange={handleDropdown}
         >

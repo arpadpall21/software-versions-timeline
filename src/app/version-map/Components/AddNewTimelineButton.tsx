@@ -1,36 +1,39 @@
-import { useContext, useRef, type RefObject } from 'react';
+import { useContext, useMemo } from 'react';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 import appConfig from '../../../../config/appConfig';
+import { calcPercentOf } from '@/misc/helpers';
+
+const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
 interface Props {
   height: number;
 }
 
 const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
-  const {  } = useContext(GridContainerContext);
+  const { zoomLevel } = useContext(GridContainerContext);
 
-  const dropdownRef: RefObject<null> = useRef(null);
+  const scaleDropdownY = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel]);
+
+
+
+
 
   function handleDropdown() {
-    const dropdownElement: HTMLSelectElement | null = dropdownRef.current;
-    if (dropdownElement) {
-      dropdownRef.current.click();
-      console.log(dropdownElement)
-      
-      // setDropdownVisible(true);
-      
-      // dropdownElement.dispatchEvent(new Event('change'))
-    }
     
     
   }
 
+  if (zoomLevel > defaultZoomLevel) {
+    return <div style={{ height }} />;
+  }
+
   return (
     <select
-      className={`flex w-full text-center font-semibold text-btnFg dark:text-btnFgD bg-btnBg dark:bg-btnBgD
+      className={`top-0
+        w-full text-center font-semibold text-btnFg dark:text-btnFgD bg-btnBg dark:bg-btnBgD
         border-2 border-borPri dark:border-borPriD
-        hover:cursor-pointer  hover:bg-btnBgHov dark:hover:bg-btnBgHovD`}
-      style={{ height }}
+        hover:cursor-pointer hover:bg-btnBgHov dark:hover:bg-btnBgHovD`}
+      style={{ height, transform: `scaleY(${scaleDropdownY})`, marginTop: 0 }}
       value={'+'}
       onChange={handleDropdown}
     >

@@ -151,13 +151,7 @@ const GridFrame = () => {
             <div className={'smoothTransform'} style={{ transform: `scaleY(${zoomLevel})` }}>
               {displayedSoftwares &&
                 displayedSoftwares.map((software, i) => (
-                  <SideLogo
-                    zoomLevel={zoomLevel}
-                    twStyle={twTimelineStyle[software]}
-                    software={software}
-                    idx={i}
-                    key={i}
-                  />
+                  <SideLogo twStyle={twTimelineStyle[software]} software={software} idx={i} key={i} />
                 ))}
               <AddNewTimelineButton height={addNewTimelineButtonHeight} />
             </div>
