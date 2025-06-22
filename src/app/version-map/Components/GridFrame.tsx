@@ -30,7 +30,7 @@ const twTimelineStyle: { [software in Software]: string } = {
   [Software.NODE]: 'bg-[#529e43] dark:bg-[#2c5424] text-white dark:text-[#bdbdbd]',
   [Software.PYTHON]: 'bg-[#e3ab1e] dark:bg-[#856411] text-[#2e2e2e] dark:text-[#1c1c1c]',
 };
-const addNewTimelineButtonHeight: number = 35;
+const addNewTimelineButtonHeight: number = 30;
 
 const GridFrame = () => {
   const [isDragging, setIsDragging] = useState(false);
