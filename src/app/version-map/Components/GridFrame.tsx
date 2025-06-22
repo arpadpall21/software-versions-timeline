@@ -8,6 +8,7 @@ import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import Timeline from '@/app/version-map/Components/Timeline';
 import MonthsTimeline from '@/app/version-map/Components/MonthsTimeline';
 import SideLogo from './SideLogo';
+import AddNewTimelineButton from './AddNewTimelineButton';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 import { Software } from '../../../../config/supportedSoftwares';
 
@@ -158,7 +159,7 @@ const GridFrame = () => {
                     key={i}
                   />
                 ))}
-              <div className={'bg-red-300'} style={{ height: addNewTimelineButtonHeight }} />
+              <AddNewTimelineButton height={addNewTimelineButtonHeight} />
             </div>
           </div>
         </div>
