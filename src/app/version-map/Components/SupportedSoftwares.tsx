@@ -10,15 +10,16 @@ const SupportedSoftwares: React.FC = async () => {
     <div className={'flex flex-wrap items-center text-fgSec dark:text-fgSecD'}>
       {t('supportedSoftwares')} :
       {Object.keys(appConfig.supportedSoftwares).map((software, i) => (
-        <Image
-          className={'ml-1'}
-          src={appConfig.supportedSoftwares[software as Software].logoPath}
-          width={60}
-          height={60}
-          alt={appConfig.supportedSoftwares[software as Software].displayName}
-          title={appConfig.supportedSoftwares[software as Software].displayName}
-          key={i}
-        />
+        <a href={appConfig.supportedSoftwares[software as Software].source} target={'_blank'} key={i}>
+          <Image
+            className={'ml-1'}
+            src={appConfig.supportedSoftwares[software as Software].logoPath}
+            width={60}
+            height={60}
+            alt={appConfig.supportedSoftwares[software as Software].displayName}
+            title={appConfig.supportedSoftwares[software as Software].displayName}
+          />
+        </a>
       ))}
     </div>
   );
