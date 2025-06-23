@@ -39,6 +39,7 @@
       "zoomIn": "Zoom In",
       "zoomOut": "Zoom Out",
       "reset": "Reset Zoom",
+      "zoomLevel": "Zoom Level",
       "scrollZoomEnabled": "Scroll Zoom Enabled",
       "scrollZoomDisabled": "Scroll Zoom Disabled"
     },

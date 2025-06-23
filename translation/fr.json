@@ -39,6 +39,7 @@
       "zoomIn": "Agrandir",
       "zoomOut": "Réduire",
       "reset": "Réinitialiser le Zoom",
+      "zoomLevel": "Niveau de Zoom",
       "scrollZoomEnabled": "Zoom par Défilement Activé",
       "scrollZoomDisabled": "Zoom par Défilement Désactivé"
     },

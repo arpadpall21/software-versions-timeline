@@ -136,7 +136,7 @@ const ZoomPanel: React.FC<Props> = ({ ref, scrollZoomEnabled, setScrollZoomEnabl
         className={`mt-3 text-fgPri dark:text-fgPriD animate-fast-pop text-center
           border-2 border-borPri dark:border-borPriD rounded-md bg-bgSec dark:bg-bgSecD shadow-md`}
         key={zoomLevel.toFixed(1)}
-        title={'Zoom Level'}    // TODO: translate this
+        title={t('zoomLevel')}
       >
         {zoomLevel.toFixed(1)}
       </div>
