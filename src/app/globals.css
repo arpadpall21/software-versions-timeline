@@ -11,23 +11,25 @@
 }
 
 @layer components {
-  .btn {
+  .btn-base {
     @apply shadow-md;
     @apply rounded-md;
+    border-width: 2px;
+  }
+
+  .btn {
+    @apply btn-base;
     color: theme(colors.btnFg);
     background-color: theme(colors.btnBg);
-    border-width: 2px;
     border-color: theme(colors.borPri);
   }
   .btn:hover {
     background-color: theme(colors.btnBgHov);
   }
   .btnD {
-    @apply shadow-md;
-    @apply rounded-md;
+    @apply btn-base;
     color: theme(colors.btnFgD);
     background-color: theme(colors.btnBgD);
-    border-width: 2px;
     border-color: theme(colors.borPriD);
   }
   .btnD:hover {
@@ -35,24 +37,20 @@
   }
 
   .btnPop {
-    @apply shadow-md;
-    @apply rounded-md;
+    @apply btn-base;
     color: theme(colors.btnFgPop);
     font-weight: bold;
     background-color: theme(colors.btnBgPop);
-    border-width: 2px;
     border-color: theme(colors.borPri);
   }
   .btnPop:hover {
     background-color: theme(colors.btnBgHovPop);
   }
   .btnPopD {
-    @apply shadow-md;
-    @apply rounded-md;
+    @apply btn-base;
     color: theme(colors.btnFgPopD);
     font-weight: bold;
     background-color: theme(colors.btnBgPopD);
-    border-width: 2px;
     border-color: theme(colors.borPriD);
   }
   .btnPopD:hover {
