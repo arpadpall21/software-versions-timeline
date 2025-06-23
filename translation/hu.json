@@ -29,6 +29,12 @@
     "supportedSoftwares": {
       "supportedSoftwares": "Támogatott Szoftverek"
     },
+    "sideLogo": {
+      "removeTimeline": "IDŐVONAL ELTÁVOLÍTÁSA"
+    },
+    "addnewTimelineButton": {
+      "addTimeline": "Idővonal hozzáadása"
+    },
     "zoomPanel": {
       "zoomIn": "Nagyítás",
       "zoomOut": "Kicsinyítés",

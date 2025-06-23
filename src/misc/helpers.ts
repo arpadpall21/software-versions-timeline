@@ -25,10 +25,6 @@ export function parseAppTheme(theme: string): AppTheme {
 export function parseDisplayedSofwares(displayedSoftwares: string): DisplayedSoftwares {
   const softwareList: string[] = displayedSoftwares.split(',');
 
-  if (softwareList.length !== defaultDisplayedSoftwares.length) {
-    return defaultDisplayedSoftwares;
-  }
-
   const supportedSoftwares: string[] = Object.values(Software);
   for (const software of softwareList) {
     if (!supportedSoftwares.includes(software)) {

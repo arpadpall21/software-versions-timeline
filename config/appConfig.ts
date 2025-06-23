@@ -22,6 +22,10 @@ interface AppConfig {
     left: number;
     right: number;
   };
+  timelineDisplayLimit: {
+    min: number;
+    max: number;
+  };
 }
 
 const supportedLanguages: { [langCode: string]: Lang } = {
@@ -51,6 +55,10 @@ const appConfig: AppConfig = {
   standByMonths: {
     left: 3,
     right: 3,
+  },
+  timelineDisplayLimit: {
+    min: 2,
+    max: 10,
   },
 };
 

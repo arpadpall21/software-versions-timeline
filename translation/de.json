@@ -29,6 +29,12 @@
     "supportedSoftwares": {
       "supportedSoftwares": "Unterstützte Software"
     },
+    "sideLogo": {
+      "removeTimeline": "ZEITLEISTE ENTFERNEN"
+    },
+    "addnewTimelineButton": {
+      "addTimeline": "Zeitachse Hinzufügen"
+    },
     "zoomPanel": {
       "zoomIn": "Vergrößern",
       "zoomOut": "Verkleinern",

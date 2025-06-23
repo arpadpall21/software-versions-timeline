@@ -8,38 +8,48 @@ import { type DisplayedSoftwares } from '@/misc/types';
 import store from '@/misc/store';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 import { Software } from '../../../../config/supportedSoftwares';
+import { useTranslations } from 'next-intl';
 
 const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
 interface Props {
-  zoomLevel: number;
   twStyle: string;
   software: Software;
   idx: number;
 }
 
-const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx }) => {
+const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
   const { logoPath, displayName } = appConfig.supportedSoftwares[software];
-  const { displayedSoftwares, setDisplayedSoftwares, setSelectedSoftwareByUser } = useContext(GridContainerContext);
+  const { zoomLevel, displayedSoftwares, setDisplayedSoftwares, setSelectedSoftwareByUser } =
+    useContext(GridContainerContext);
 
-  const { scaleLogoX, scaleLogoY, scaleDropdownX, scaleDropdownY, bottomSpaceDropdown } = useMemo(() => {
+  const t = useTranslations('components.sideLogo');
+
+  const { scaleLogoX, scaleLogoY, scaleDropdownY, bottomSpaceDropdown } = useMemo(() => {
     return {
       scaleLogoX: zoomLevel < defaultZoomLevel ? zoomLevel : defaultZoomLevel,
       scaleLogoY: zoomLevel <= defaultZoomLevel ? defaultZoomLevel : calcPercentOf(defaultZoomLevel, zoomLevel) / 100,
-      scaleDropdownX: 1,
       scaleDropdownY: calcPercentOf(defaultZoomLevel, zoomLevel) / 100,
       bottomSpaceDropdown: zoomLevel >= defaultZoomLevel ? 2 * zoomLevel : 6 / zoomLevel,
     };
   }, [zoomLevel]);
 
   function handleDropdown(e: React.ChangeEvent<HTMLSelectElement>) {
-    const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
-    const selectedSoftware: Software = e.target.value as Software;
-    displayedSoftwaresClone[idx] = selectedSoftware;
+    if (displayedSoftwares.length <= appConfig.timelineDisplayLimit.min) {
+      return;
+    }
 
-    store.setDisplayedSoftwares(displayedSoftwaresClone);
+    const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
+    if (e.target.value === 'removeTimeline') {
+      displayedSoftwaresClone.splice(idx, 1);
+    } else {
+      const selectedSoftware: Software = e.target.value as Software;
+      displayedSoftwaresClone[idx] = selectedSoftware;
+      setSelectedSoftwareByUser(selectedSoftware);
+    }
+
     setDisplayedSoftwares(displayedSoftwaresClone);
-    setSelectedSoftwareByUser(selectedSoftware);
+    store.setDisplayedSoftwares(displayedSoftwaresClone);
   }
 
   return (
@@ -52,10 +62,11 @@ const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx }) => {
             outline-8 focus:outline-foc focus:dark:outline-focD sm:has-[:focus]:outline
             hover:cursor-pointer hover:bg-btnBgHov dark:hover:hover:bg-btnBgHovD
           `}
-          style={{ bottom: bottomSpaceDropdown, transform: `scaleX(${scaleDropdownX}) scaleY(${scaleDropdownY})` }}
+          style={{ bottom: bottomSpaceDropdown, transform: `scaleY(${scaleDropdownY})` }}
           value={software}
           onChange={handleDropdown}
         >
+          <option value={'removeTimeline'}>{`[${t('removeTimeline')}]`}</option>
           {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
             <option value={software} key={i}>
               {supportedSoftware.displayName}
@@ -75,4 +86,4 @@ const Logo: React.FC<Props> = ({ zoomLevel, twStyle, software, idx }) => {
   );
 };
 
-export default Logo;
+export default SideLogo;

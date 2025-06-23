@@ -8,6 +8,7 @@ import ZoomPanel from '@/app/version-map/Components/ZoomPanel';
 import Timeline from '@/app/version-map/Components/Timeline';
 import MonthsTimeline from '@/app/version-map/Components/MonthsTimeline';
 import SideLogo from './SideLogo';
+import AddNewTimelineButton from './AddNewTimelineButton';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 import { Software } from '../../../../config/supportedSoftwares';
 
@@ -29,6 +30,7 @@ const twTimelineStyle: { [software in Software]: string } = {
   [Software.NODE]: 'bg-[#529e43] dark:bg-[#2c5424] text-white dark:text-[#bdbdbd]',
   [Software.PYTHON]: 'bg-[#e3ab1e] dark:bg-[#856411] text-[#2e2e2e] dark:text-[#1c1c1c]',
 };
+const addNewTimelineButtonHeight: number = 30;
 
 const GridFrame = () => {
   const [isDragging, setIsDragging] = useState(false);
@@ -149,21 +151,19 @@ const GridFrame = () => {
             <div className={'smoothTransform'} style={{ transform: `scaleY(${zoomLevel})` }}>
               {displayedSoftwares &&
                 displayedSoftwares.map((software, i) => (
-                  <SideLogo
-                    zoomLevel={zoomLevel}
-                    twStyle={twTimelineStyle[software]}
-                    software={software}
-                    idx={i}
-                    key={i}
-                  />
+                  <SideLogo twStyle={twTimelineStyle[software]} software={software} idx={i} key={i} />
                 ))}
+              <AddNewTimelineButton height={addNewTimelineButtonHeight} />
             </div>
           </div>
         </div>
         <div className={'absolute col-start-1 row-start-2 z-0 w-full'}>
           <div
-            className={'relative overflow-hidden h-[550px]'}
-            style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+            className={'relative overflow-hidden '}
+            style={{
+              cursor: isDragging ? 'grabbing' : 'grab',
+              height: displayedSoftwares.length * 100 + addNewTimelineButtonHeight,
+            }}
             onMouseDown={handleMouseDown}
           >
             <div className={'relative'} style={{ transform: `translate(${position.x}px, ${position.y}px)` }}>
