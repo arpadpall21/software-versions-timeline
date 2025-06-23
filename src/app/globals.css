@@ -9,3 +9,53 @@
     transition-timing-function: ease;
   }
 }
+
+@layer components {
+  .btn {
+    @apply shadow-md;
+    @apply rounded-md;
+    color: theme(colors.btnFg);
+    background-color: theme(colors.btnBg);
+    border-width: 2px;
+    border-color: theme(colors.borPri);
+  }
+  .btn:hover {
+    background-color: theme(colors.btnBgHov);
+  }
+  .btnD {
+    @apply shadow-md;
+    @apply rounded-md;
+    color: theme(colors.btnFgD);
+    background-color: theme(colors.btnBgD);
+    border-width: 2px;
+    border-color: theme(colors.borPriD);
+  }
+  .btnD:hover {
+    background-color: theme(colors.btnBgHovD);
+  }
+
+  .btnPop {
+    @apply shadow-md;
+    @apply rounded-md;
+    color: theme(colors.btnFgPop);
+    font-weight: bold;
+    background-color: theme(colors.btnBgPop);
+    border-width: 2px;
+    border-color: theme(colors.borPri);
+  }
+  .btnPop:hover {
+    background-color: theme(colors.btnBgHovPop);
+  }
+  .btnPopD {
+    @apply shadow-md;
+    @apply rounded-md;
+    color: theme(colors.btnFgPopD);
+    font-weight: bold;
+    background-color: theme(colors.btnBgPopD);
+    border-width: 2px;
+    border-color: theme(colors.borPriD);
+  }
+  .btnPopD:hover {
+    background-color: theme(colors.btnBgHovPopD);
+  }
+}
