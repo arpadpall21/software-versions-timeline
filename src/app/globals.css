@@ -56,4 +56,23 @@
   .btnPopD:hover {
     background-color: theme(colors.btnBgHovPopD);
   }
+
+  .btnWarn {
+    @apply btn-base;
+    color: theme(colors.btnFgWarn);
+    background-color: theme(colors.btnBgWarn);
+    border-color: theme(colors.borPri);
+  }
+  .btnWarn:hover {
+    background-color: theme(colors.btnBgHovWarn);
+  }
+  .btnWarnD {
+    @apply btn-base;
+    color: theme(colors.btnFgWarnD);
+    background-color: theme(colors.btnBgWarnD);
+    border-color: theme(colors.borPriD);
+  }
+  .btnWarnD:hover {
+    background-color: theme(colors.btnBgHovWarnD);
+  }
 }
