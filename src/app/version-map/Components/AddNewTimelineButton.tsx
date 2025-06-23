@@ -25,9 +25,12 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
     if (e.target.value === '+') {
       return;
     }
+    if (displayedSoftwares.length >= appConfig.timelineDisplayLimit.max) {
+      return;
+    }
 
-    const selectedSoftware: Software = e.target.value as Software;
     const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
+    const selectedSoftware: Software = e.target.value as Software;
     displayedSoftwaresClone.push(selectedSoftware);
 
     setSelectedSoftwareByUser(selectedSoftware);

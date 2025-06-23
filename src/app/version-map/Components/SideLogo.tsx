@@ -18,7 +18,7 @@ interface Props {
   idx: number;
 }
 
-const Logo: React.FC<Props> = ({ twStyle, software, idx }) => {
+const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
   const { logoPath, displayName } = appConfig.supportedSoftwares[software];
   const { zoomLevel, displayedSoftwares, setDisplayedSoftwares, setSelectedSoftwareByUser } =
     useContext(GridContainerContext);
@@ -35,8 +35,11 @@ const Logo: React.FC<Props> = ({ twStyle, software, idx }) => {
   }, [zoomLevel]);
 
   function handleDropdown(e: React.ChangeEvent<HTMLSelectElement>) {
-    const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
+    if (displayedSoftwares.length <= appConfig.timelineDisplayLimit.min) {
+      return;
+    }
 
+    const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
     if (e.target.value === 'removeTimeline') {
       displayedSoftwaresClone.splice(idx, 1);
     } else {
@@ -83,4 +86,4 @@ const Logo: React.FC<Props> = ({ twStyle, software, idx }) => {
   );
 };
 
-export default Logo;
+export default SideLogo;
