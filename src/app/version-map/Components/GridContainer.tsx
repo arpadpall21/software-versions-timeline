@@ -3,6 +3,7 @@
 import { useState, useEffect, createContext } from 'react';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
+import HorizontalScroll from '@/Components/HorizontalScroll';
 import { calcMonthRange, getYearRange, calcDisplayableDateLimit, calcNrOfGridCellsToRender } from '@/misc/helpers';
 import { type Months, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit } from '@/misc/types';
 import { getVersionHistory } from '@/app/version-map/action';
@@ -177,7 +178,7 @@ const GridContainer: React.FC = () => {
         setNrOfMonthToRender,
       }}
     >
-      <div className={'h-12 mt-7 overflow-visible whitespace-nowrap'} style={{ direction: 'rtl' }}>
+      {/* <div className={'h-12 mt-5 overflow-visible whitespace-nowrap'} style={{ direction: 'rtl' }}>
         {displayedYearButtons.map((year) => (
           <Button
             text={year.toString()}
@@ -187,6 +188,9 @@ const GridContainer: React.FC = () => {
             key={year}
           />
         ))}
+      </div> */}
+      <div className={'mt-5 h-12'}>
+        <HorizontalScroll />
       </div>
       <GridFrame />
     </GridContainerContext.Provider>
