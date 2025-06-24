@@ -39,6 +39,7 @@
       "zoomIn": "Vergrößern",
       "zoomOut": "Verkleinern",
       "reset": "Zoom Zurücksetzen",
+      "zoomLevel": "Zoomstufe",
       "scrollZoomEnabled": "Scroll Zoom Aktiviert",
       "scrollZoomDisabled": "Scroll Zoom Deaktiviert"
     },

@@ -96,20 +96,10 @@ const ZoomPanel: React.FC<Props> = ({ ref, scrollZoomEnabled, setScrollZoomEnabl
   return (
     <div className={'absolute z-10 bottom-4 right-4 w-9'}>
       <div
-        className={`flex flex-col mb-3 font-semibold text-xl text-btnFg dark:text-btnFgD bg-btnBg dark:bg-btnBgD
-          shadow-md rounded-md border-2 border-borPri dark:border-borPriD`}
-        title={'Zoom Level'}
+        className={`${scrollZoomEnabled ? 'btnWarn dark:btnWarnD' : 'btn dark:btnD'}
+          flex flex-col mb-3 font-semibold text-xl`}
       >
         <button
-          className={`rounded-[0.25rem]
-            ${scrollZoomEnabled ? 'text-btnFgWarn dark:text-btnFgWarnD' : 'text-btnFg dark:text-btnFgD'}
-            ${scrollZoomEnabled ? 'bg-btnBgWarn dark:bg-btnBgWarnD' : 'bg-btnBg dark:bg-btnBgD'}
-            ${
-              scrollZoomEnabled
-                ? 'hover:bg-btnBgHovWarn hover:dark:bg-btnBgHovWarnD'
-                : 'hover:bg-btnBgHov dark:hover:bg-btnBgHovD'
-            }
-          `}
           onMouseDown={() => setScrollZoomEnabled(!scrollZoomEnabled)}
           title={scrollZoomEnabled ? t('scrollZoomEnabled') : t('scrollZoomDisabled')}
         >
@@ -146,7 +136,7 @@ const ZoomPanel: React.FC<Props> = ({ ref, scrollZoomEnabled, setScrollZoomEnabl
         className={`mt-3 text-fgPri dark:text-fgPriD animate-fast-pop text-center
           border-2 border-borPri dark:border-borPriD rounded-md bg-bgSec dark:bg-bgSecD shadow-md`}
         key={zoomLevel.toFixed(1)}
-        title={'Zoom Level'}
+        title={t('zoomLevel')}
       >
         {zoomLevel.toFixed(1)}
       </div>

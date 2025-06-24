@@ -9,3 +9,70 @@
     transition-timing-function: ease;
   }
 }
+
+@layer components {
+  .btn-base {
+    @apply shadow-md;
+    @apply rounded-md;
+    border-width: 2px;
+  }
+
+  .btn {
+    @apply btn-base;
+    color: theme(colors.btnFg);
+    background-color: theme(colors.btnBg);
+    border-color: theme(colors.borPri);
+  }
+  .btn:hover {
+    background-color: theme(colors.btnBgHov);
+  }
+  .btnD {
+    @apply btn-base;
+    color: theme(colors.btnFgD);
+    background-color: theme(colors.btnBgD);
+    border-color: theme(colors.borPriD);
+  }
+  .btnD:hover {
+    background-color: theme(colors.btnBgHovD);
+  }
+
+  .btnPop {
+    @apply btn-base;
+    color: theme(colors.btnFgPop);
+    font-weight: bold;
+    background-color: theme(colors.btnBgPop);
+    border-color: theme(colors.borPri);
+  }
+  .btnPop:hover {
+    background-color: theme(colors.btnBgHovPop);
+  }
+  .btnPopD {
+    @apply btn-base;
+    color: theme(colors.btnFgPopD);
+    font-weight: bold;
+    background-color: theme(colors.btnBgPopD);
+    border-color: theme(colors.borPriD);
+  }
+  .btnPopD:hover {
+    background-color: theme(colors.btnBgHovPopD);
+  }
+
+  .btnWarn {
+    @apply btn-base;
+    color: theme(colors.btnFgWarn);
+    background-color: theme(colors.btnBgWarn);
+    border-color: theme(colors.borPri);
+  }
+  .btnWarn:hover {
+    background-color: theme(colors.btnBgHovWarn);
+  }
+  .btnWarnD {
+    @apply btn-base;
+    color: theme(colors.btnFgWarnD);
+    background-color: theme(colors.btnBgWarnD);
+    border-color: theme(colors.borPriD);
+  }
+  .btnWarnD:hover {
+    background-color: theme(colors.btnBgHovWarnD);
+  }
+}
