@@ -20,6 +20,3 @@ const Button: React.FC<Props> = ({ text, width, pop, handleClick }) => {
 };
 
 export default Button;
-
-
-// outline-2 outline-foc dark:outline-focD sm:has-[:focus]:outline`
