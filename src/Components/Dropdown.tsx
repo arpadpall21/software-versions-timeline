@@ -13,8 +13,7 @@ const Dropdown: React.FC<Props> = ({ selectedItem, optionItems, handleDropdown, 
   return (
     <div
       className={`w-36 border rounded-sm border-borPri dark:border-borPriD
-        bg-bgSec dark:bg-bgSecD
-        outline-2 outline-foc dark:outline-focD sm:has-[:focus]:outline`}
+        bg-bgSec dark:bg-bgSecD`}
     >
       {title && <p className={'text-center text-fgSec dark:text-fgSecD bg-bgSec dark:bg-bgSecD'}>{title}</p>}
       <select

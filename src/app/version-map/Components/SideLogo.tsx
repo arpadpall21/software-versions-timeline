@@ -57,7 +57,6 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
       <div className={'relative w-[70px] h-[70px] m-auto'}>
         <select
           className={`btn dark:btnD absolute w-[19px] right-[5px] z-10
-            outline-8 focus:outline-foc focus:dark:outline-focD sm:has-[:focus]:outline
             hover:cursor-pointer
           `}
           style={{ bottom: bottomSpaceDropdown, transform: `scaleY(${scaleDropdownY})` }}

@@ -177,7 +177,7 @@ const GridContainer: React.FC = () => {
         setNrOfMonthToRender,
       }}
     >
-      <div className={'h-12 mt-7 overflow-x-auto whitespace-nowrap'} style={{ direction: 'rtl' }}>
+      <div className={'h-12 mt-7 overflow-visible whitespace-nowrap'} style={{ direction: 'rtl' }}>
         {displayedYearButtons.map((year) => (
           <Button
             text={year.toString()}

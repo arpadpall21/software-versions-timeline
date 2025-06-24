@@ -2,11 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .smoothTransform {
-    transition-property: transform;
-    transition-duration: 200ms;
-    transition-timing-function: ease;
+@layer base {
+  *:focus {
+    @apply outline-none;
+    @apply ring-2;
+    @apply ring-foc;
+  }
+  .dark *:focus{
+    @apply outline-none;
+    @apply ring-2;
+    @apply ring-focD;
   }
 }
 
@@ -74,5 +79,13 @@
   }
   .btnWarnD:hover {
     background-color: theme(colors.btnBgHovWarnD);
+  }
+}
+
+@layer utilities {
+  .smoothTransform {
+    transition-property: transform;
+    transition-duration: 200ms;
+    transition-timing-function: ease;
   }
 }

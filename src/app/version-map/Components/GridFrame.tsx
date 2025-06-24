@@ -146,7 +146,7 @@ const GridFrame = () => {
             </div>
           </div>
         </div>
-        <div className={'col-start-1 row-start-2 z-10 overflow-hidden bg-opacity-0'}>
+        <div className={'col-start-1 row-start-2 z-10 overflow-visible bg-opacity-0'}>
           <div style={{ transform: `translateY(${position.y}px)` }}>
             <div className={'smoothTransform'} style={{ transform: `scaleY(${zoomLevel})` }}>
               {displayedSoftwares &&
