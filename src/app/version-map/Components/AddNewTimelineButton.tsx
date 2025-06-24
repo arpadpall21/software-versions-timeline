@@ -44,10 +44,8 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
 
   return (
     <select
-      className={`top-0
-        w-full text-center font-semibold text-btnFg dark:text-btnFgD bg-btnBg dark:bg-btnBgD
-        border-2 border-borPri dark:border-borPriD
-        hover:cursor-pointer hover:bg-btnBgHov dark:hover:bg-btnBgHovD`}
+      className={`btn dark:btnD top-0 w-full text-center font-bold
+        hover:cursor-pointer rounded-none dark:rounded-none border-[1px] dark:border-[1px]`}
       style={{ height, transform: `scaleY(${scaleDropdownY})`, marginTop: 0 }}
       value={'+'}
       title={t('addTimeline')}
