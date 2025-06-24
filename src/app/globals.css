@@ -2,19 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  *:focus {
-    @apply outline-none;
-    @apply ring-2;
-    @apply ring-foc;
-  }
-  .dark *:focus{
-    @apply outline-none;
-    @apply ring-2;
-    @apply ring-focD;
-  }
-}
-
 @layer components {
   .btn-base {
     @apply shadow-md;
