@@ -127,7 +127,7 @@ const GridContainer: React.FC = () => {
     }
   }, [displayedSoftwares, feCache, selectedSoftwareByUser]);
 
-  function handleYearButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
+  function handleYearButtonClick(e: React.MouseEvent) {
     if (displayableDateLimit) {
       const selectedYear: number = e.currentTarget.textContent
         ? Number.parseInt(e.currentTarget.textContent)
@@ -178,19 +178,19 @@ const GridContainer: React.FC = () => {
         setNrOfMonthToRender,
       }}
     >
-      {/* <div className={'h-12 mt-5 overflow-visible whitespace-nowrap'} style={{ direction: 'rtl' }}>
-        {displayedYearButtons.map((year) => (
-          <Button
-            text={year.toString()}
-            width={70}
-            pop={year === selectedYear}
-            handleClick={handleYearButtonClick}
-            key={year}
-          />
-        ))}
-      </div> */}
       <div className={'mt-5 h-12'}>
-        <HorizontalScroll />
+        <HorizontalScroll
+          members={displayedYearButtons.map((year) => (
+            <Button
+              text={year.toString()}
+              width={70}
+              pop={year === selectedYear}
+              handleClick={handleYearButtonClick}
+              key={year}
+            />
+          ))}
+          direction={'rtl'}
+        />
       </div>
       <GridFrame />
     </GridContainerContext.Provider>
