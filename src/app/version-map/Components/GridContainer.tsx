@@ -180,6 +180,7 @@ const GridContainer: React.FC = () => {
     >
       <div className={'mt-5 h-[500px]'}>
         <HorizontalScroll
+          height={35}
           members={displayedYearButtons.map((year) => (
             <Button
               twStyle={'w-[70px] ml-[3px]'}
@@ -191,8 +192,8 @@ const GridContainer: React.FC = () => {
           ))}
           scrollLeftButton={<Button text={'<'} twStyle={'px-3'}/>}
           scrollRightButton={<Button text={'>'} twStyle={'px-3'}/>}
+          scrollSensitivity={150}
           direction={'ltr'}
-          twStyle={'h-12'}
         />
       </div>
       <GridFrame />

@@ -3,45 +3,47 @@
 import { RefObject, useRef } from 'react';
 
 interface Props {
-  twStyle?: string;
+  height: number;
   members: React.ReactNode[];
   scrollLeftButton: React.ReactNode;
   scrollRightButton: React.ReactNode;
+  scrollSensitivity?: number;
   direction?: 'ltr' | 'rtl';
 }
 
-const height: number = 200;
-
 const HorizontalScroll: React.FC<Props> = ({
-  twStyle,
+  height,
   members,
   scrollLeftButton,
   scrollRightButton,
+  scrollSensitivity = 100,
   direction = 'ltr',    // TODO: this prop sets the left/right start thingy
 }) => {
-  const parentRef: RefObject<null | HTMLDivElement> = useRef(null);
   const sliderRef: RefObject<null | HTMLDivElement> = useRef(null);
 
-  function handleScrollRight() {
-    if (parentRef.current) {
-      console.log('<<>>')
-      // parentRef.current.scrollBy(10, 10)
-      parentRef.current.scrollBy({ left: 100, behavior: 'smooth' });
-      
-      // console.log(sliderRef.current.scrollWidth)
-      
+  function handleScrollLeft() {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({ left: -scrollSensitivity, behavior: 'smooth' });
     }
-    // console.log(sliderRef.current)
-    
+  }
+
+  function handleScrollRight() {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({ left: scrollSensitivity, behavior: 'smooth' });
+    }
   }
 
   return (
     <>
-      {/* <div onClick={handleScrollRight}>{scrollLeftButton}</div> */}
+      <div onClick={handleScrollLeft}>{scrollLeftButton}</div>
       <div onClick={handleScrollRight}>{scrollRightButton}</div>
 
-      <div className={`w-full overflow-hidden border-2 border-blue-500`} style={{ height }}>
-        <div className={`border-2 border-red-500 overflow-x-scroll overflow-y-hidden whitespace-nowrap h-full ${twStyle}`} style={{ paddingBottom: height + 50 }} ref={parentRef}>
+      <div className={`w-full overflow-hidden`} style={{ height }}>
+        <div
+          className={'overflow-x-scroll overflow-y-hidden whitespace-nowrap h-full'}
+          style={{ paddingBottom: height + 50 }}
+          ref={sliderRef}
+        >
           {members}
         </div>
       </div>
