@@ -1,6 +1,6 @@
 'use client';
 
-import { RefObject, useRef } from 'react';
+import { useRef, useMemo, RefObject } from 'react';
 
 interface Props {
   height: number;
@@ -8,7 +8,7 @@ interface Props {
   scrollLeftButton: React.ReactNode;
   scrollRightButton: React.ReactNode;
   scrollSensitivity?: number;
-  direction?: 'ltr' | 'rtl';
+  start?: 'left' | 'right';
 }
 
 const HorizontalScroll: React.FC<Props> = ({
@@ -17,9 +17,13 @@ const HorizontalScroll: React.FC<Props> = ({
   scrollLeftButton,
   scrollRightButton,
   scrollSensitivity = 100,
-  direction = 'ltr',    // TODO: this prop sets the left/right start thingy
+  start = 'left',
 }) => {
   const sliderRef: RefObject<null | HTMLDivElement> = useRef(null);
+
+  const renderedMembers: React.ReactNode[] = useMemo(() => {
+    return start === 'left' ? members : [...members].reverse();
+  }, [members, start]);
 
   function handleScrollLeft() {
     if (sliderRef.current) {
@@ -35,16 +39,16 @@ const HorizontalScroll: React.FC<Props> = ({
 
   return (
     <>
-      <div onClick={handleScrollLeft}>{scrollLeftButton}</div>
-      <div onClick={handleScrollRight}>{scrollRightButton}</div>
+      <div onMouseDown={handleScrollLeft}>{scrollLeftButton}</div>
+      <div onMouseDown={handleScrollRight}>{scrollRightButton}</div>
 
-      <div className={`w-full overflow-hidden`} style={{ height }}>
+      <div className={`w-full overflow-hidden`} style={{ height, direction: start === 'left' ? 'ltr' : 'rtl' }}>
         <div
           className={'overflow-x-scroll overflow-y-hidden whitespace-nowrap h-full'}
           style={{ paddingBottom: height + 50 }}
           ref={sliderRef}
         >
-          {members}
+          {renderedMembers}
         </div>
       </div>
     </>
