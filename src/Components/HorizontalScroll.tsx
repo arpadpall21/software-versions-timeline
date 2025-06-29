@@ -43,8 +43,11 @@ const HorizontalScroll: React.FC<Props> = ({
           </div>
           <div className={'float-left w-[20px] h-full bg-grl dark:bg-grlD'} />
         </div>
-        <div className={'absolute right-0'} onMouseDown={() => handleScroll('right')}>
-          {scrollRightButton}
+        <div className={'absolute right-0 h-full'}>
+          <div className={'float-right h-full bg-bgPri dark:bg-bgPriD'} onMouseDown={() => handleScroll('right')}>
+            {scrollRightButton}
+          </div>
+          <div className={'float-right w-[20px] h-full bg-grr dark:bg-grrD'} />
         </div>
         <div>
           <div
