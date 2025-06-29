@@ -192,7 +192,7 @@ const GridContainer: React.FC = () => {
           ))}
           scrollLeftButton={<Button text={'<'} twStyle={'px-3'}/>}
           scrollRightButton={<Button text={'>'} twStyle={'px-3'}/>}
-          scrollSensitivity={150}
+          scrollSensitivity={250}
           start={'right'}
         />
       </div>
