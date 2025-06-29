@@ -178,7 +178,7 @@ const GridContainer: React.FC = () => {
         setNrOfMonthToRender,
       }}
     >
-      <div className={'mt-5 h-[500px]'}>
+      <div className={'mt-5 mb-4'}>
         <HorizontalScroll
           height={35}
           members={displayedYearButtons.map((year) => (

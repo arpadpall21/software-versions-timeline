@@ -74,6 +74,10 @@ export default {
           to: { left: '100%' },
         },
       },
+      backgroundImage: ({ theme }) => ({
+        grl: `linear-gradient(to right, ${theme('colors.bgPri')} 20%, rgba(0,0,0,0))`,
+        grlD: `linear-gradient(to right, ${theme('colors.bgPriD')} 20%, rgba(0,0,0,0))`,
+      }),
     },
   },
   plugins: [],

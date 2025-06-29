@@ -37,8 +37,11 @@ const HorizontalScroll: React.FC<Props> = ({
   return (
     <>
       <div className={`relative w-full overflow-hidden`} style={{ height }}>
-        <div className={'absolute left-0'} onMouseDown={() => handleScroll('left')}>
-          {scrollLeftButton}
+        <div className={'absolute left-0 h-full'}>
+          <div className={'float-left h-full bg-bgPri dark:bg-bgPriD'} onMouseDown={() => handleScroll('left')}>
+            {scrollLeftButton}
+          </div>
+          <div className={'float-left w-[20px] h-full bg-grl dark:bg-grlD'} />
         </div>
         <div className={'absolute right-0'} onMouseDown={() => handleScroll('right')}>
           {scrollRightButton}
