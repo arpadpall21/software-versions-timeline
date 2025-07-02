@@ -35,12 +35,12 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
   }, [zoomLevel]);
 
   function handleDropdown(e: React.ChangeEvent<HTMLSelectElement>) {
-    if (displayedSoftwares.length <= appConfig.timelineDisplayLimit.min) {
-      return;
-    }
-
     const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
-    if (e.target.value === 'removeTimeline') {
+
+    if (e.target.value === 'removeTimeline' && displayedSoftwares.length <= appConfig.timelineDisplayLimit.min) {
+      // TODO: handle popup here
+      return;
+    } else if (e.target.value === 'removeTimeline') {
       displayedSoftwaresClone.splice(idx, 1);
     } else {
       const selectedSoftware: Software = e.target.value as Software;
