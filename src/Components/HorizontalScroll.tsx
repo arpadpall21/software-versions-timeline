@@ -20,8 +20,8 @@ const HorizontalScroll: React.FC<Props> = ({
   start = 'left',
 }) => {
   const [sliderPosition, setSliderPosition] = useState<number>(0);
-  const [leftScrollButtonVisible, setLeftScrollButtonVisible] = useState<boolean>(true);
-  const [rightScrollButtonVisible, setRightScrollButtonVisible] = useState<boolean>(true);
+  const [leftScrollButtonVisible, setLeftScrollButtonVisible] = useState<boolean>(false);
+  const [rightScrollButtonVisible, setRightScrollButtonVisible] = useState<boolean>(false);
 
   const sliderRef: RefObject<null | HTMLDivElement> = useRef(null);
   const sliderChildRef: RefObject<null | HTMLDivElement> = useRef(null);
@@ -52,11 +52,35 @@ const HorizontalScroll: React.FC<Props> = ({
           direction === 'left'
             ? Math.max(0, sliderPosition - scrollSensitivity)
             : Math.min(maxScrollableDistance, sliderPosition + scrollSensitivity);
+
+        if (scrollBy <= 0) {
+          setTimeout(() => setLeftScrollButtonVisible(false), 500);
+        } else {
+          setLeftScrollButtonVisible(true);
+        }
+
+        if (scrollBy >= maxScrollableDistance) {
+          setTimeout(() => setRightScrollButtonVisible(false), 500);
+        } else {
+          setRightScrollButtonVisible(true);
+        }
       } else {
         scrollBy =
           direction === 'left'
             ? Math.max(-maxScrollableDistance, sliderPosition - scrollSensitivity)
             : Math.min(0, sliderPosition + scrollSensitivity);
+
+        if (scrollBy >= 0) {
+          setTimeout(() => setRightScrollButtonVisible(false), 500);
+        } else {
+          setRightScrollButtonVisible(true);
+        }
+
+        if (scrollBy <= -maxScrollableDistance) {
+          setTimeout(() => setLeftScrollButtonVisible(false), 500);
+        } else {
+          setLeftScrollButtonVisible(true);
+        }
       }
 
       sliderRef.current.scrollTo({
