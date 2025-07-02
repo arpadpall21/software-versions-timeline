@@ -153,7 +153,6 @@ export function getYearRange(displayableDateLimit: DisplayableDateLimit): number
     oldestDateClone.setFullYear(year + 1);
   }
 
-  result.reverse();
   return result;
 }
 

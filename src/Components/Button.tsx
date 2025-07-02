@@ -2,18 +2,14 @@
 
 interface Props {
   text: string;
-  width?: number;
+  twStyle?: string;
   pop?: boolean;
   handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button: React.FC<Props> = ({ text, width, pop, handleClick }) => {
+const Button: React.FC<Props> = ({ text, twStyle, pop, handleClick }) => {
   return (
-    <button
-      className={`${pop ? 'btnPop dark:btnPopD' : 'btn dark:btnD'} px-3 ml-1`}
-      style={{ width }}
-      onClick={handleClick}
-    >
+    <button className={`${pop ? 'btnPop dark:btnPopD' : 'btn dark:btnD'} ${twStyle}`} onClick={handleClick}>
       {text}
     </button>
   );

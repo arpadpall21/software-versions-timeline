@@ -3,6 +3,7 @@
 import { useState, useEffect, createContext } from 'react';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
+import HorizontalScroll from '@/Components/HorizontalScroll';
 import { calcMonthRange, getYearRange, calcDisplayableDateLimit, calcNrOfGridCellsToRender } from '@/misc/helpers';
 import { type Months, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit } from '@/misc/types';
 import { getVersionHistory } from '@/app/version-map/action';
@@ -126,7 +127,7 @@ const GridContainer: React.FC = () => {
     }
   }, [displayedSoftwares, feCache, selectedSoftwareByUser]);
 
-  function handleYearButtonClick(e: React.MouseEvent<HTMLButtonElement>) {
+  function handleYearButtonClick(e: React.MouseEvent) {
     if (displayableDateLimit) {
       const selectedYear: number = e.currentTarget.textContent
         ? Number.parseInt(e.currentTarget.textContent)
@@ -177,16 +178,23 @@ const GridContainer: React.FC = () => {
         setNrOfMonthToRender,
       }}
     >
-      <div className={'h-12 mt-7 overflow-visible whitespace-nowrap'} style={{ direction: 'rtl' }}>
-        {displayedYearButtons.map((year) => (
-          <Button
-            text={year.toString()}
-            width={70}
-            pop={year === selectedYear}
-            handleClick={handleYearButtonClick}
-            key={year}
-          />
-        ))}
+      <div className={'mt-5 mb-4'}>
+        <HorizontalScroll
+          height={35}
+          members={displayedYearButtons.map((year) => (
+            <Button
+              twStyle={'w-[70px] ml-[3px]'}
+              text={year.toString()}
+              pop={year === selectedYear}
+              handleClick={handleYearButtonClick}
+              key={year}
+            />
+          ))}
+          scrollLeftButton={<Button text={'<'} twStyle={'px-3'} />}
+          scrollRightButton={<Button text={'>'} twStyle={'px-3'} />}
+          scrollSensitivity={250}
+          start={'left'}
+        />
       </div>
       <GridFrame />
     </GridContainerContext.Provider>
