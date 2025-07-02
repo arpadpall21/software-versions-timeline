@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useMemo, type RefObject } from 'react';
+import { useState, useRef, useMemo, useLayoutEffect, type RefObject } from 'react';
 
 interface Props {
   height: number;
@@ -26,6 +26,18 @@ const HorizontalScroll: React.FC<Props> = ({
   const sliderRef: RefObject<null | HTMLDivElement> = useRef(null);
   const sliderChildRef: RefObject<null | HTMLDivElement> = useRef(null);
 
+  useLayoutEffect(() => {
+    if (sliderRef.current && sliderChildRef.current) {
+      if (sliderChildRef.current.offsetWidth - sliderRef.current.offsetWidth > 0) {
+        if (start === 'left') {
+          setRightScrollButtonVisible(true);
+          return;
+        }
+        setLeftScrollButtonVisible(true);
+      }
+    }
+  }, [members.length, start]);
+
   const renderedMembers: React.ReactNode[] = useMemo(() => {
     return start === 'left' ? members : [...members].reverse();
   }, [members, start]);
@@ -34,6 +46,9 @@ const HorizontalScroll: React.FC<Props> = ({
     if (sliderRef.current && sliderChildRef.current) {
       const scrollableDistance: number = sliderChildRef.current.offsetWidth - sliderRef.current.offsetWidth;
       
+      console.log(2)
+      console.log(sliderRef.current.offsetWidth - sliderChildRef.current.offsetWidth)
+
       
       const scrollBy: number =
         direction === 'left' ? sliderPosition + scrollSensitivity : sliderPosition - scrollSensitivity;
@@ -41,8 +56,8 @@ const HorizontalScroll: React.FC<Props> = ({
       
       
       
-      console.log(scrollBy)
-      console.log(scrollableDistance)
+      // console.log(scrollBy)
+      // console.log(scrollableDistance)
       
       
       sliderRef.current.scrollTo({
@@ -59,6 +74,8 @@ const HorizontalScroll: React.FC<Props> = ({
       // });
     }
   }
+
+
 
   return (
     <>
