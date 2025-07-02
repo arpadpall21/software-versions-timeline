@@ -20,8 +20,8 @@ const HorizontalScroll: React.FC<Props> = ({
   start = 'left',
 }) => {
   const [sliderPosition, setSliderPosition] = useState<number>(0);
-  const [leftScrollButtonVisible, setLeftScrollButtonVisible] = useState<boolean>(false);
-  const [rightScrollButtonVisible, setRightScrollButtonVisible] = useState<boolean>(false);
+  const [leftScrollButtonVisible, setLeftScrollButtonVisible] = useState<boolean>(true);
+  const [rightScrollButtonVisible, setRightScrollButtonVisible] = useState<boolean>(true);
 
   const sliderRef: RefObject<null | HTMLDivElement> = useRef(null);
   const sliderChildRef: RefObject<null | HTMLDivElement> = useRef(null);
@@ -44,38 +44,28 @@ const HorizontalScroll: React.FC<Props> = ({
 
   function handleScroll(direction: 'left' | 'right') {
     if (sliderRef.current && sliderChildRef.current) {
-      const scrollableDistance: number = sliderChildRef.current.offsetWidth - sliderRef.current.offsetWidth;
-      
-      console.log(2)
-      console.log(sliderRef.current.offsetWidth - sliderChildRef.current.offsetWidth)
+      const maxScrollableDistance: number = sliderChildRef.current.offsetWidth - sliderRef.current.offsetWidth;
+      let scrollBy: number = 0;
 
-      
-      const scrollBy: number =
-        direction === 'left' ? sliderPosition + scrollSensitivity : sliderPosition - scrollSensitivity;
-      
-      
-      
-      
-      // console.log(scrollBy)
-      // console.log(scrollableDistance)
-      
-      
+      if (start === 'left') {
+        scrollBy =
+          direction === 'left'
+            ? Math.max(0, sliderPosition - scrollSensitivity)
+            : Math.min(maxScrollableDistance, sliderPosition + scrollSensitivity);
+      } else {
+        scrollBy =
+          direction === 'left'
+            ? Math.max(-maxScrollableDistance, sliderPosition - scrollSensitivity)
+            : Math.min(0, sliderPosition + scrollSensitivity);
+      }
+
       sliderRef.current.scrollTo({
         left: scrollBy,
         behavior: 'smooth',
       });
-      
       setSliderPosition(scrollBy);
-      
-      
-      // sliderRef.current.scrollBy({
-      //   left: direction === 'left' ? -scrollSensitivity : scrollSensitivity,
-      //   behavior: 'smooth',
-      // });
     }
   }
-
-
 
   return (
     <>
