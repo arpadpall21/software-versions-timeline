@@ -26,6 +26,7 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
       return;
     }
     if (displayedSoftwares.length >= appConfig.timelineDisplayLimit.max) {
+      // TODO: handle popup here
       return;
     }
 
