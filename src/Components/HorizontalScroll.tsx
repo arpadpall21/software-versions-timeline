@@ -60,9 +60,9 @@ const HorizontalScroll: React.FC<Props> = ({
           <div className={'h-full bg-bgPri dark:bg-bgPriD'} onMouseDown={() => handleScroll('left')}>
             {scrollLeftButton}
           </div>
-          <div className={'w-[15px] h-full bg-grl dark:bg-grlD'} />
+          <div className={'w-[10px] h-full bg-grl dark:bg-grlD'} />
         </div>
-        <div className={'overflow-hidden mx-[-10px]'}>
+        <div className={'overflow-hidden mx-[-5px]'}>
           <div
             className={'overflow-x-scroll whitespace-nowrap h-full'}
             style={{ paddingBottom: height + 50, direction: start === 'left' ? 'ltr' : 'rtl' }}
@@ -76,7 +76,7 @@ const HorizontalScroll: React.FC<Props> = ({
           </div>
         </div>
         <div className={'flex h-full z-10'}>
-          <div className={'w-[15px] h-full bg-grr dark:bg-grrD'} />
+          <div className={'w-[10px] h-full bg-grr dark:bg-grrD'} />
           <div className={'h-full bg-bgPri dark:bg-bgPriD'} onMouseDown={() => handleScroll('right')}>
             {scrollRightButton}
           </div>
