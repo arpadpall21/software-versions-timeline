@@ -64,7 +64,7 @@ const HorizontalScroll: React.FC<Props> = ({
         </div>
         <div className={'overflow-hidden mx-[-5px]'}>
           <div
-            className={'overflow-x-scroll whitespace-nowrap h-full'}
+            className={'overflow-hidden whitespace-nowrap h-full'}
             style={{ paddingBottom: height + 50, direction: start === 'left' ? 'ltr' : 'rtl' }}
             ref={sliderRef}
           >
