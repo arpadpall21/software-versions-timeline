@@ -7,9 +7,9 @@ interface Props {
 const PopUpBox: React.FC<Props> = ({ message, timeout, dialog = false }) => {
   return (
     <div
-      className={`fixed top-4 left-[50%] translate-x-[-50%] max-w-[640px]
-        py-[20px] px-[30px] z-50 shadow-2xl
-        bg-bgPri dark:bg-bgPriD border-2 border-borPri dark:border-borPriD`}
+      className={`fixed top-5 left-[50%] translate-x-[-50%] max-w-[640px]
+        text-justify py-[25px] px-[35px] z-50 shadow-2xl rounded-md
+        bg-bgPri dark:bg-bgPriD border-2 border-borPopUp dark:border-PopUpD`}
     >
       <p>{message}</p>
     </div>
