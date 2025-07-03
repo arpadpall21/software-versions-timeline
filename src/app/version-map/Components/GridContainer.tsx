@@ -11,6 +11,7 @@ import store from '@/misc/store';
 import appConfig from '../../../../config/appConfig';
 import { Software } from '../../../../config/supportedSoftwares';
 import tailwindConfig from '../../../../tailwind.config';
+import PopUpBox from '@/Components/PopUpBox';
 
 const today: Date = new Date();
 const currentYear: number = today.getFullYear();
@@ -196,6 +197,11 @@ const GridContainer: React.FC = () => {
           start={'right'}
         />
       </div>
+      
+      <PopUpBox message={'Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message.Some pop-up message.Some pop-up message.Some pop-up message.  '}/>
+      
+      
+      
       <GridFrame />
     </GridContainerContext.Provider>
   );
