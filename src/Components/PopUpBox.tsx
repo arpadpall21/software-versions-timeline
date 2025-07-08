@@ -2,20 +2,22 @@ import { useState, useEffect } from 'react';
 
 interface Props {
   message: string;
-  timeout: number;
+  timeout?: number;
   dialog?: boolean;
 }
 
 const PopUpBox: React.FC<Props> = ({ message, timeout, dialog = false }) => {
   const [active, setActive] = useState(true);
 
-  // useEffect(() => {
-  //   setTimeout(() => setActive(!active), 3000);
-  // }, [active])
+  useEffect(() => {
+    if (timeout && timeout > 0) {
+      setTimeout(() => setActive(false), 3000);
+    }
+  }, [timeout]);
 
-  const handleClick = () => {
-    setActive(!active);
-  };
+  // const handleClick = () => {
+  //   setActive(!active);
+  // };
 
   return (
     <div
@@ -27,7 +29,7 @@ const PopUpBox: React.FC<Props> = ({ message, timeout, dialog = false }) => {
         visibility: active ? 'visible' : 'hidden',
         transition: 'top 0.5s ease-in, visibility 0.5s ease-in',
       }}
-      onClick={handleClick}
+      // onClick={handleClick}
     >
       <p>{message}</p>
     </div>
