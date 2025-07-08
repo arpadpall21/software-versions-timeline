@@ -11,7 +11,7 @@ const PopUpBox: React.FC<Props> = ({ message, timeout, dialog = false }) => {
 
   useEffect(() => {
     if (timeout && timeout > 0) {
-      setTimeout(() => setActive(false), 3000);
+      setTimeout(() => setActive(false), timeout);
     }
   }, [timeout]);
 
@@ -33,7 +33,7 @@ const PopUpBox: React.FC<Props> = ({ message, timeout, dialog = false }) => {
     >
       <p>{message}</p>
     </div>
-  )
-}
+  );
+};
 
 export default PopUpBox;
