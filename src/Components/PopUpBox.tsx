@@ -30,6 +30,7 @@ const PopUpBox: React.FC<Props> = ({ message, timeout, dialog }) => {
         transition: 'top 0.5s ease-in, visibility 0.5s ease-in',
       }}
     >
+      <span className={'font-bold text-borPri text-xl'}>✖</span>
       <p>{message}</p>
       {dialog && (
         <div className={'flex flex-row-reverse mt-[25px]'}>
