@@ -197,11 +197,6 @@ const GridContainer: React.FC = () => {
           start={'right'}
         />
       </div>
-      
-      <PopUpBox message={'Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message. Some pop-up message.Some pop-up message.Some pop-up message.Some pop-up message.  '}/>
-      
-      
-      
       <GridFrame />
     </GridContainerContext.Provider>
   );
