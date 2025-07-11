@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
+import Button from './Button';
 
 interface Props {
   message: string;
   timeout?: number;
-  dialog?: boolean;
+  dialog?: {
+    handleYesButtonClick: (e: React.MouseEvent) => void;
+    handleNoButtonClick: (e: React.MouseEvent) => void;
+  };
 }
 
-const PopUpBox: React.FC<Props> = ({ message, timeout, dialog = false }) => {
+const PopUpBox: React.FC<Props> = ({ message, timeout, dialog }) => {
   const [active, setActive] = useState(true);
 
   useEffect(() => {
@@ -14,10 +18,6 @@ const PopUpBox: React.FC<Props> = ({ message, timeout, dialog = false }) => {
       setTimeout(() => setActive(false), timeout);
     }
   }, [timeout]);
-
-  // const handleClick = () => {
-  //   setActive(!active);
-  // };
 
   return (
     <div
@@ -29,9 +29,16 @@ const PopUpBox: React.FC<Props> = ({ message, timeout, dialog = false }) => {
         visibility: active ? 'visible' : 'hidden',
         transition: 'top 0.5s ease-in, visibility 0.5s ease-in',
       }}
-      // onClick={handleClick}
     >
       <p>{message}</p>
+      {dialog && (
+        <div className={'flex flex-row-reverse mt-[25px]'}>
+          <div>
+            <Button twStyle={'px-4 py-1 mr-1'} text={'Yes'} handleClick={dialog.handleYesButtonClick} />
+            <Button twStyle={'px-4 py-1 ml-1'} text={'No'} handleClick={dialog.handleNoButtonClick} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
