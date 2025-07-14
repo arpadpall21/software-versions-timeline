@@ -7,6 +7,7 @@
         "no": "Nein"
       },
       "messages": {
+        "cookieConsent": "Wir verwenden Cookies nur, um Ihre Spracheinstellung zu speichern. Ist das in Ordnung für Sie?",
         "timelineDisplayMaxLimit": "Es können nicht mehr als {maxTimelineDisplayLimit} Software-Zeitachsen angezeigt werden",
         "timelineDisplayMinLimit": "Es können nicht weniger als {minTimelineDisplayLimit} Software-Zeitachsen angezeigt werden"
       }

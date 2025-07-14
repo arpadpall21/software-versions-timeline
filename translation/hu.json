@@ -7,6 +7,7 @@
         "no": "Nem"
       },
       "messages": {
+        "cookieConsent": "Csak azért használunk sütiket, hogy megjegyezzük az Ön nyelvi beállításait. Ez rendben van Önnek?",
         "timelineDisplayMaxLimit": "Nem lehet több mint {maxTimelineDisplayLimit} szoftveridővonalat megjeleníteni",
         "timelineDisplayMinLimit": "Nem lehet kevesebb mint {minTimelineDisplayLimit} szoftveridővonalat megjeleníteni"
       }
