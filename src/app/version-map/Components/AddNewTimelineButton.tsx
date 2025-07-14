@@ -14,10 +14,11 @@ interface Props {
 }
 
 const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
-  const { zoomLevel, displayedSoftwares, setDisplayedSoftwares, setSelectedSoftwareByUser } =
+  const { showPopUpBox, zoomLevel, displayedSoftwares, setDisplayedSoftwares, setSelectedSoftwareByUser } =
     useContext(GridContainerContext);
 
-  const t = useTranslations('components.addnewTimelineButton');
+  const tButton = useTranslations('components.addnewTimelineButton');
+  const tPopUpBox = useTranslations('components.popUpBox.messages');
 
   const scaleDropdownY = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel]);
 
@@ -26,7 +27,9 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
       return;
     }
     if (displayedSoftwares.length >= appConfig.timelineDisplayLimit.max) {
-      // TODO: handle popup here
+      showPopUpBox(
+        tPopUpBox('timelineDisplayMaxLimit', { maxTimelineDisplayLimit: appConfig.timelineDisplayLimit.max }),
+      );
       return;
     }
 
@@ -49,7 +52,7 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
         hover:cursor-pointer rounded-none dark:rounded-none border-[1px] dark:border-[1px]`}
       style={{ height, transform: `scaleY(${scaleDropdownY})`, marginTop: 0 }}
       value={'+'}
-      title={t('addTimeline')}
+      title={tButton('addTimeline')}
       onChange={handleDropdown}
     >
       <option value={'+'}>+</option>
