@@ -18,6 +18,7 @@ import PopUpBox from '@/Components/PopUpBox';
 import appConfig from '../../../../config/appConfig';
 import { Software } from '../../../../config/supportedSoftwares';
 import tailwindConfig from '../../../../tailwind.config';
+import { useTranslations } from 'next-intl';
 
 const today: Date = new Date();
 const currentYear: number = today.getFullYear();
@@ -74,11 +75,7 @@ export const GridContainerContext = createContext<{
 });
 
 const GridContainer: React.FC = () => {
-  const [popUpBoxState, setPopUpBoxState] = useState<{
-    active: boolean;
-    message: string;
-    dialog?: PopUpBoxDialog;
-  }>({
+  const [popUpBoxState, setPopUpBoxState] = useState<{ active: boolean; message: string; dialog?: PopUpBoxDialog }>({
     active: false,
     message: '',
   });
@@ -97,10 +94,30 @@ const GridContainer: React.FC = () => {
   const [fetchLoading, setFetchLoading] = useState<boolean>(true);
   const [gridOffset, setGridOffset] = useState<number>(0);
 
+  const tPopUpBox = useTranslations('components.popUpBox.messages');
+
   useEffect(() => {
     if (store.getCookiesAllowed() === null) {
-      // showPopUpBox('HELLO', 0)     // TODO: ...
+      const message = tPopUpBox('cookieConsent');
+
+      showPopUpBox(message, 0, {
+        handleYesButtonClick: () => {
+          setPopUpBoxState({
+            active: false,
+            message: message,
+            dialog: { handleYesButtonClick: () => {}, handleNoButtonClick: () => {} },
+          });
+        },
+        handleNoButtonClick: () => {
+          setPopUpBoxState({
+            active: false,
+            message: message,
+            dialog: { handleYesButtonClick: () => {}, handleNoButtonClick: () => {} },
+          });
+        }
+      });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
@@ -151,7 +168,7 @@ const GridContainer: React.FC = () => {
   }, [displayedSoftwares, feCache, selectedSoftwareByUser]);
 
   function showPopUpBox(message: string, timeout: number, dialog?: PopUpBoxDialog) {
-    setPopUpBoxState({ active: true, message });
+    setPopUpBoxState({ active: true, message, dialog });
     if (timeout > 0) {
       setTimeout(() => setPopUpBoxState({ active: false, message }), timeout);
     }
@@ -159,14 +176,6 @@ const GridContainer: React.FC = () => {
 
   function handlePopUpBoxCloseButtonClick() {
     setPopUpBoxState({ active: false, message: popUpBoxState.message });
-  }
-
-  function handlePopUpBoxYesButtonClick() {
-  
-  }
-
-  function handlePopUpBoxNoButtonClick() {
-  
   }
 
   function handleYearButtonClick(e: React.MouseEvent) {
@@ -225,6 +234,7 @@ const GridContainer: React.FC = () => {
         active={popUpBoxState.active}
         message={popUpBoxState.message}
         handleCloseButtonClick={handlePopUpBoxCloseButtonClick}
+        dialog={popUpBoxState.dialog}
       />
       <div className={'mt-5 mb-4'}>
         <HorizontalScroll
