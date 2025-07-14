@@ -38,11 +38,7 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
     const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
 
     if (e.target.value === 'removeTimeline' && displayedSoftwares.length <= appConfig.timelineDisplayLimit.min) {
-      showPopUpBox();
-      
-      
-      
-      
+      showPopUpBox(`Cannot display less than ${appConfig.timelineDisplayLimit.min} softwares`);
       return;
     } else if (e.target.value === 'removeTimeline') {
       displayedSoftwaresClone.splice(idx, 1);

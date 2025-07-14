@@ -1,10 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import Button from '@/Components/Button';
-import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 
 interface Props {
+  active: boolean;
   message: string;
   dialog?: {
     handleYesButtonClick: (e: React.MouseEvent) => void;
@@ -12,21 +11,11 @@ interface Props {
   };
 }
 
-const PopUpBox: React.FC<Props> = ({ message, dialog }) => {
-  console.log('!!!')
-  const [active, setActive] = useState<boolean>(true);
-  // TODO: timeout
-
-
-
-  function handleCloseButtonClick() {
-    setActive(false);
-  }
-
+const PopUpBox: React.FC<Props> = ({ active, message, dialog }) => {
   return (
     <div
       className={`fixed left-[50%] translate-x-[-50%] max-w-[640px]
-        text-justify pt-[40px] pb-[25px] px-[35px] z-50 shadow-2xl rounded-md
+        text-justify p-[25px] z-50 shadow-2xl rounded-md
         bg-bgPri dark:bg-bgPriD border-2 border-borPopUp dark:border-PopUpD`}
       style={{
         top: active ? 30 : -500,
@@ -36,8 +25,8 @@ const PopUpBox: React.FC<Props> = ({ message, dialog }) => {
     >
       {!dialog && (
         <span
-          className={`absolute right-4 top-3 font-bold text-xl text-borPri dark:text-borPriD cursor-pointer`}
-          onClick={handleCloseButtonClick}
+          className={`absolute right-2 top-1 font-bold text-xl text-borPri dark:text-borPriD cursor-pointer`}
+          // onClick={handleCloseButtonClick}
         >
           ✖
         </span>

@@ -20,7 +20,7 @@ const originalGridCellWidth: number = Number.parseInt(tailwindConfig.theme.exten
 const defaultZoomLevel: number = appConfig.zoom.defaultLevel;
 
 export const GridContainerContext = createContext<{
-  showPopUpBox: () => void;
+  showPopUpBox: (message: string, timeout?: number) => void;
   position: { x: number; y: number };
   setPosition: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>;
   verticalScrollLock: boolean;
@@ -68,7 +68,10 @@ export const GridContainerContext = createContext<{
 });
 
 const GridContainer: React.FC = () => {
-  const [popUpBoxActive, setPopUpBoxActive] = useState<boolean>(false);
+  const [popUpBoxState, setPopUpBoxState] = useState<{ active: boolean; message: string }>({
+    active: false,
+    message: '',
+  });
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [verticalScrollLock, setVerticalScrollLock] = useState<boolean>(true);
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
@@ -131,11 +134,11 @@ const GridContainer: React.FC = () => {
     }
   }, [displayedSoftwares, feCache, selectedSoftwareByUser]);
 
-  function showPopUpBox() {
-    console.log('-- pop up --')
-    
-    
-    setPopUpBoxActive(true);
+  function showPopUpBox(message: string, timeout: number = 5000) {
+    setPopUpBoxState({ active: true, message });
+    if (timeout > 0) {
+      setTimeout(() => setPopUpBoxState({ active: false, message: '' }), timeout);
+    }
   }
 
   function handleYearButtonClick(e: React.MouseEvent) {
@@ -190,7 +193,7 @@ const GridContainer: React.FC = () => {
         setNrOfMonthToRender,
       }}
     >
-      {popUpBoxActive && <PopUpBox message={'test message'} />}
+      <PopUpBox active={popUpBoxState.active} message={popUpBoxState.message} />
       <div className={'mt-5 mb-4'}>
         <HorizontalScroll
           height={35}
