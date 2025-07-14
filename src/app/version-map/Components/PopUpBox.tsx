@@ -1,40 +1,26 @@
-import { useState, useEffect } from 'react';
-import Button from './Button';
+'use client';
+
+import { useState } from 'react';
+import Button from '@/Components/Button';
+import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 
 interface Props {
   message: string;
-  timeout?: number;
   dialog?: {
     handleYesButtonClick: (e: React.MouseEvent) => void;
     handleNoButtonClick: (e: React.MouseEvent) => void;
   };
 }
 
-const PopUpBox: React.FC<Props> = ({ message, timeout, dialog }) => {
-  const [active, setActive] = useState(true);
+const PopUpBox: React.FC<Props> = ({ message, dialog }) => {
+  console.log('!!!')
+  const [active, setActive] = useState<boolean>(true);
+  // TODO: timeout
 
-  useEffect(() => {
-    if (timeout && timeout > 0) {
-      setTimeout(() => setActive(false), timeout);
-    }
-  }, [timeout]);
+
 
   function handleCloseButtonClick() {
     setActive(false);
-  }
-
-  function handleYesButtonClick(e: React.MouseEvent) {
-    setActive(false);
-    if (dialog) {
-      dialog.handleYesButtonClick(e);
-    }
-  }
-
-  function handleNoButtonClick(e: React.MouseEvent) {
-    setActive(false);
-    if (dialog) {
-      dialog.handleNoButtonClick(e);
-    }
   }
 
   return (
@@ -60,8 +46,8 @@ const PopUpBox: React.FC<Props> = ({ message, timeout, dialog }) => {
       {dialog && (
         <div className={'flex flex-row-reverse mt-[25px]'}>
           <div>
-            <Button twStyle={'px-4 py-1 mr-1'} text={'Yes'} handleClick={handleYesButtonClick} />
-            <Button twStyle={'px-4 py-1 ml-1'} text={'No'} handleClick={handleNoButtonClick} />
+            <Button twStyle={'px-4 py-1 mr-1'} text={'Yes'} handleClick={dialog.handleYesButtonClick} />
+            <Button twStyle={'px-4 py-1 ml-1'} text={'No'} handleClick={dialog.handleNoButtonClick} />
           </div>
         </div>
       )}

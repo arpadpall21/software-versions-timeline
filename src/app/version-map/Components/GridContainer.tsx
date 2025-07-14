@@ -11,6 +11,7 @@ import store from '@/misc/store';
 import appConfig from '../../../../config/appConfig';
 import { Software } from '../../../../config/supportedSoftwares';
 import tailwindConfig from '../../../../tailwind.config';
+import PopUpBox from './PopUpBox';
 
 const today: Date = new Date();
 const currentYear: number = today.getFullYear();
@@ -19,6 +20,7 @@ const originalGridCellWidth: number = Number.parseInt(tailwindConfig.theme.exten
 const defaultZoomLevel: number = appConfig.zoom.defaultLevel;
 
 export const GridContainerContext = createContext<{
+  showPopUpBox: () => void;
   position: { x: number; y: number };
   setPosition: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>;
   verticalScrollLock: boolean;
@@ -41,6 +43,7 @@ export const GridContainerContext = createContext<{
   nrOfMonthsToRender: number;
   setNrOfMonthToRender: React.Dispatch<React.SetStateAction<number>>;
 }>({
+  showPopUpBox: () => {},
   position: { x: 0, y: 0 },
   setPosition: () => {},
   verticalScrollLock: true,
@@ -65,6 +68,7 @@ export const GridContainerContext = createContext<{
 });
 
 const GridContainer: React.FC = () => {
+  const [popUpBoxActive, setPopUpBoxActive] = useState<boolean>(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [verticalScrollLock, setVerticalScrollLock] = useState<boolean>(true);
   const [zoomLevel, setZoomLevel] = useState<number>(defaultZoomLevel);
@@ -127,6 +131,13 @@ const GridContainer: React.FC = () => {
     }
   }, [displayedSoftwares, feCache, selectedSoftwareByUser]);
 
+  function showPopUpBox() {
+    console.log('-- pop up --')
+    
+    
+    setPopUpBoxActive(true);
+  }
+
   function handleYearButtonClick(e: React.MouseEvent) {
     if (displayableDateLimit) {
       const selectedYear: number = e.currentTarget.textContent
@@ -155,6 +166,7 @@ const GridContainer: React.FC = () => {
   return (
     <GridContainerContext.Provider
       value={{
+        showPopUpBox,
         position,
         setPosition,
         verticalScrollLock,
@@ -178,6 +190,7 @@ const GridContainer: React.FC = () => {
         setNrOfMonthToRender,
       }}
     >
+      {popUpBoxActive && <PopUpBox message={'test message'} />}
       <div className={'mt-5 mb-4'}>
         <HorizontalScroll
           height={35}

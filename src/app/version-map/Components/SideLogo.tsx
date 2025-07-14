@@ -20,7 +20,7 @@ interface Props {
 
 const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
   const { logoPath, displayName } = appConfig.supportedSoftwares[software];
-  const { zoomLevel, displayedSoftwares, setDisplayedSoftwares, setSelectedSoftwareByUser } =
+  const { showPopUpBox, zoomLevel, displayedSoftwares, setDisplayedSoftwares, setSelectedSoftwareByUser } =
     useContext(GridContainerContext);
 
   const t = useTranslations('components.sideLogo');
@@ -38,7 +38,11 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
     const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
 
     if (e.target.value === 'removeTimeline' && displayedSoftwares.length <= appConfig.timelineDisplayLimit.min) {
-      // TODO: handle popup here
+      showPopUpBox();
+      
+      
+      
+      
       return;
     } else if (e.target.value === 'removeTimeline') {
       displayedSoftwaresClone.splice(idx, 1);
