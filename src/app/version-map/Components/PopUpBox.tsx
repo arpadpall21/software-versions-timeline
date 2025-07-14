@@ -5,13 +5,14 @@ import Button from '@/Components/Button';
 interface Props {
   active: boolean;
   message: string;
+  handleCloseButtonClick: () => void;
   dialog?: {
     handleYesButtonClick: (e: React.MouseEvent) => void;
     handleNoButtonClick: (e: React.MouseEvent) => void;
   };
 }
 
-const PopUpBox: React.FC<Props> = ({ active, message, dialog }) => {
+const PopUpBox: React.FC<Props> = ({ active, message, handleCloseButtonClick, dialog }) => {
   return (
     <div
       className={`fixed left-[50%] translate-x-[-50%] max-w-[640px]
@@ -20,13 +21,13 @@ const PopUpBox: React.FC<Props> = ({ active, message, dialog }) => {
       style={{
         top: active ? 30 : -500,
         visibility: active ? 'visible' : 'hidden',
-        transition: 'top 0.3s ease-in, visibility 0.5s ease-in',
+        transition: 'top 0.3s ease-in, visibility 0.3s ease-in',
       }}
     >
       {!dialog && (
         <span
           className={`absolute right-2 top-1 font-bold text-xl text-borPri dark:text-borPriD cursor-pointer`}
-          // onClick={handleCloseButtonClick}
+          onClick={handleCloseButtonClick}
         >
           ✖
         </span>

@@ -137,8 +137,12 @@ const GridContainer: React.FC = () => {
   function showPopUpBox(message: string, timeout: number = 5000) {
     setPopUpBoxState({ active: true, message });
     if (timeout > 0) {
-      setTimeout(() => setPopUpBoxState({ active: false, message: '' }), timeout);
+      setTimeout(() => setPopUpBoxState({ active: false, message }), timeout);
     }
+  }
+
+  function handlePopUpBoxCloseButtonClick() {
+    setPopUpBoxState({ active: false, message: popUpBoxState.message });
   }
 
   function handleYearButtonClick(e: React.MouseEvent) {
@@ -193,7 +197,11 @@ const GridContainer: React.FC = () => {
         setNrOfMonthToRender,
       }}
     >
-      <PopUpBox active={popUpBoxState.active} message={popUpBoxState.message} />
+      <PopUpBox
+        active={popUpBoxState.active}
+        message={popUpBoxState.message}
+        handleCloseButtonClick={handlePopUpBoxCloseButtonClick}
+      />
       <div className={'mt-5 mb-4'}>
         <HorizontalScroll
           height={35}
