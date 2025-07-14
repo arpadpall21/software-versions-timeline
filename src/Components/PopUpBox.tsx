@@ -1,15 +1,13 @@
 'use client';
 
 import Button from '@/Components/Button';
+import { type PopUpBoxDialog } from '@/misc/types';
 
 interface Props {
   active: boolean;
   message: string;
   handleCloseButtonClick: () => void;
-  dialog?: {
-    handleYesButtonClick: (e: React.MouseEvent) => void;
-    handleNoButtonClick: (e: React.MouseEvent) => void;
-  };
+  dialog?: PopUpBoxDialog;
 }
 
 const PopUpBox: React.FC<Props> = ({ active, message, handleCloseButtonClick, dialog }) => {

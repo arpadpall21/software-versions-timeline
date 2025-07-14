@@ -5,7 +5,13 @@ import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
 import HorizontalScroll from '@/Components/HorizontalScroll';
 import { calcMonthRange, getYearRange, calcDisplayableDateLimit, calcNrOfGridCellsToRender } from '@/misc/helpers';
-import { type Months, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit } from '@/misc/types';
+import {
+  type PopUpBoxDialog,
+  type Months,
+  type FeCache,
+  type DisplayedSoftwares,
+  type DisplayableDateLimit,
+} from '@/misc/types';
 import { getVersionHistory } from '@/app/version-map/action';
 import store from '@/misc/store';
 import PopUpBox from '@/Components/PopUpBox';
@@ -20,7 +26,7 @@ const originalGridCellWidth: number = Number.parseInt(tailwindConfig.theme.exten
 const defaultZoomLevel: number = appConfig.zoom.defaultLevel;
 
 export const GridContainerContext = createContext<{
-  showPopUpBox: (message: string, timeout?: number) => void;
+  showPopUpBox: (message: string, timeout: number) => void;
   position: { x: number; y: number };
   setPosition: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>;
   verticalScrollLock: boolean;
@@ -68,7 +74,11 @@ export const GridContainerContext = createContext<{
 });
 
 const GridContainer: React.FC = () => {
-  const [popUpBoxState, setPopUpBoxState] = useState<{ active: boolean; message: string }>({
+  const [popUpBoxState, setPopUpBoxState] = useState<{
+    active: boolean;
+    message: string;
+    dialog?: PopUpBoxDialog;
+  }>({
     active: false,
     message: '',
   });
@@ -86,6 +96,12 @@ const GridContainer: React.FC = () => {
   const [feCache, setFeCache] = useState<FeCache>({});
   const [fetchLoading, setFetchLoading] = useState<boolean>(true);
   const [gridOffset, setGridOffset] = useState<number>(0);
+
+  useEffect(() => {
+    if (store.getCookiesAllowed() === null) {
+      // showPopUpBox('HELLO', 0)     // TODO: ...
+    }
+  }, []);
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
@@ -134,7 +150,7 @@ const GridContainer: React.FC = () => {
     }
   }, [displayedSoftwares, feCache, selectedSoftwareByUser]);
 
-  function showPopUpBox(message: string, timeout: number = 5000) {
+  function showPopUpBox(message: string, timeout: number, dialog?: PopUpBoxDialog) {
     setPopUpBoxState({ active: true, message });
     if (timeout > 0) {
       setTimeout(() => setPopUpBoxState({ active: false, message }), timeout);
@@ -143,6 +159,14 @@ const GridContainer: React.FC = () => {
 
   function handlePopUpBoxCloseButtonClick() {
     setPopUpBoxState({ active: false, message: popUpBoxState.message });
+  }
+
+  function handlePopUpBoxYesButtonClick() {
+  
+  }
+
+  function handlePopUpBoxNoButtonClick() {
+  
   }
 
   function handleYearButtonClick(e: React.MouseEvent) {
