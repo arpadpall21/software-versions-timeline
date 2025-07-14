@@ -2,7 +2,7 @@
  * Waning!
  *
  * The <window> object is not available on module import (apparently because of dynamic module loading)
- * so store functions are only available client component hooks (useState, useEffect, etc...)
+ * so store functions are only available in client component hooks (useState, useEffect, etc...)
  */
 
 import { type AppTheme, type DisplayedSoftwares } from './types';
@@ -13,6 +13,8 @@ interface Store {
   setTheme(theme: AppTheme): AppTheme;
   getDisplayedSoftwares(): DisplayedSoftwares;
   setDisplayedSoftwares(DisplayedSoftwares: DisplayedSoftwares): DisplayedSoftwares;
+  getCookiesAllowed(): string | null;
+  setCookiesAllowed(allowCookies: boolean): boolean;
 }
 
 const store: Store = {
@@ -29,6 +31,13 @@ const store: Store = {
   setDisplayedSoftwares(displayedSoftwares) {
     window.localStorage.setItem('displayedSoftwares', displayedSoftwares.join(','));
     return displayedSoftwares;
+  },
+  getCookiesAllowed() {
+    return window.localStorage.getItem('cookiesAllowed');
+  },
+  setCookiesAllowed(allowCookies) {
+    window.localStorage.setItem('cookiesAllowed', allowCookies ? 'yes' : 'no');
+    return allowCookies;
   },
 };
 
