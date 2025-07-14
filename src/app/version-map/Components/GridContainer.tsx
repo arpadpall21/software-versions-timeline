@@ -100,21 +100,17 @@ const GridContainer: React.FC = () => {
     if (store.getCookiesAllowed() === null) {
       const message = tPopUpBox('cookieConsent');
 
+      function closePopUpBox() {
+        setPopUpBoxState({
+          active: false,
+          message: message,
+          dialog: { handleYesButtonClick: () => {}, handleNoButtonClick: () => {} },
+        });
+      }
+
       showPopUpBox(message, 0, {
-        handleYesButtonClick: () => {
-          setPopUpBoxState({
-            active: false,
-            message: message,
-            dialog: { handleYesButtonClick: () => {}, handleNoButtonClick: () => {} },
-          });
-        },
-        handleNoButtonClick: () => {
-          setPopUpBoxState({
-            active: false,
-            message: message,
-            dialog: { handleYesButtonClick: () => {}, handleNoButtonClick: () => {} },
-          });
-        }
+        handleYesButtonClick: () => closePopUpBox(),
+        handleNoButtonClick: () => closePopUpBox(),
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

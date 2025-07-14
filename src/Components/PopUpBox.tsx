@@ -16,7 +16,7 @@ const PopUpBox: React.FC<Props> = ({ active, message, handleCloseButtonClick, di
 
   return (
     <div
-      className={`fixed left-[50%] translate-x-[-50%] max-w-[640px]
+      className={`fixed left-[50%] translate-x-[-50%]
         text-justify p-[25px] z-50 shadow-2xl rounded-md
         bg-bgPri dark:bg-bgPriD border-2 border-borPopUp dark:border-PopUpD`}
       style={{
