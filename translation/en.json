@@ -7,7 +7,7 @@
         "no": "No"
       },
       "messages": {
-        "cookieConsent": "We’re using cookies only to remember your language choice. Is that fine with you?",
+        "cookieConsent": "We use cookies only to remember your language setting. If you don’t allow them only English will be available. Do you agree to use cookies?",
         "timelineDisplayMaxLimit": "Cannot display more than {maxTimelineDisplayLimit} software timelines",
         "timelineDisplayMinLimit": "Cannot display less than {minTimelineDisplayLimit} software timelines"
       }
