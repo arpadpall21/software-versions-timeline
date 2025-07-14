@@ -8,10 +8,10 @@ import { calcMonthRange, getYearRange, calcDisplayableDateLimit, calcNrOfGridCel
 import { type Months, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit } from '@/misc/types';
 import { getVersionHistory } from '@/app/version-map/action';
 import store from '@/misc/store';
+import PopUpBox from '@/Components/PopUpBox';
 import appConfig from '../../../../config/appConfig';
 import { Software } from '../../../../config/supportedSoftwares';
 import tailwindConfig from '../../../../tailwind.config';
-import PopUpBox from './PopUpBox';
 
 const today: Date = new Date();
 const currentYear: number = today.getFullYear();
