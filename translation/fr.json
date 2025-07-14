@@ -1,6 +1,16 @@
 {
   "mainTitle": "Chronologie des Versions du Logiciels",
   "components": {
+    "popUpBox": {
+      "buttons": {
+        "yes": "Oui",
+        "no": "Non"
+      },
+      "messages": {
+        "timelineDisplayMaxLimit": "Impossible d'afficher plus de {maxTimelineDisplayLimit} chronologies logicielles",
+        "timelineDisplayMinLimit": "Impossible d'afficher moins de {minTimelineDisplayLimit} chronologies logicielles"
+      }
+    },
     "languageSelector": {
       "language": "Langue"
     },

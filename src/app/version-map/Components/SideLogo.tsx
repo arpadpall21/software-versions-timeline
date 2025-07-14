@@ -20,10 +20,11 @@ interface Props {
 
 const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
   const { logoPath, displayName } = appConfig.supportedSoftwares[software];
-  const { zoomLevel, displayedSoftwares, setDisplayedSoftwares, setSelectedSoftwareByUser } =
+  const { showPopUpBox, zoomLevel, displayedSoftwares, setDisplayedSoftwares, setSelectedSoftwareByUser } =
     useContext(GridContainerContext);
 
-  const t = useTranslations('components.sideLogo');
+  const tSideLogo = useTranslations('components.sideLogo');
+  const tPopUpBox = useTranslations('components.popUpBox.messages');
 
   const { scaleLogoX, scaleLogoY, scaleDropdownY, bottomSpaceDropdown } = useMemo(() => {
     return {
@@ -38,7 +39,9 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
     const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
 
     if (e.target.value === 'removeTimeline' && displayedSoftwares.length <= appConfig.timelineDisplayLimit.min) {
-      // TODO: handle popup here
+      showPopUpBox(
+        tPopUpBox('timelineDisplayMinLimit', { minTimelineDisplayLimit: appConfig.timelineDisplayLimit.min }),
+      );
       return;
     } else if (e.target.value === 'removeTimeline') {
       displayedSoftwaresClone.splice(idx, 1);
@@ -63,7 +66,7 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
           value={software}
           onChange={handleDropdown}
         >
-          <option value={'removeTimeline'}>{`[${t('removeTimeline')}]`}</option>
+          <option value={'removeTimeline'}>{`[${tSideLogo('removeTimeline')}]`}</option>
           {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
             <option value={software} key={i}>
               {supportedSoftware.displayName}

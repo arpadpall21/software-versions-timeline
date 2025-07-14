@@ -1,6 +1,16 @@
 {
   "mainTitle": "Software Versions Timeline",
   "components": {
+    "popUpBox": {
+      "buttons": {
+        "yes": "Yes",
+        "no": "No"
+      },
+      "messages": {
+        "timelineDisplayMaxLimit": "Cannot display more than {maxTimelineDisplayLimit} software timelines",
+        "timelineDisplayMinLimit": "Cannot display less than {minTimelineDisplayLimit} software timelines"
+      }
+    },
     "languageSelector": {
       "language": "Language"
     },
