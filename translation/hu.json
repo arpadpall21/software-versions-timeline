@@ -1,6 +1,16 @@
 {
   "mainTitle": "Szoftververziók Idővonala",
   "components": {
+    "popUpBox": {
+      "buttons": {
+        "yes": "Igen",
+        "no": "Nem"
+      },
+      "messages": {
+        "timelineDisplayMaxLimit": "Nem lehet több mint {maxTimelineDisplayLimit} szoftveridővonalat megjeleníteni",
+        "timelineDisplayMinLimit": "Nem lehet kevesebb mint {minTimelineDisplayLimit} szoftveridővonalat megjeleníteni"
+      }
+    },
     "languageSelector": {
       "language": "Nyelv"
     },

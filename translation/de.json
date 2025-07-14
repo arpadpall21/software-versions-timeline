@@ -1,6 +1,16 @@
 {
   "mainTitle": "Zeitleiste der Softwareversionen",
   "components": {
+    "popUpBox": {
+      "buttons": {
+        "yes": "Ja",
+        "no": "Nein"
+      },
+      "messages": {
+        "timelineDisplayMaxLimit": "Es können nicht mehr als {maxTimelineDisplayLimit} Software-Zeitachsen angezeigt werden",
+        "timelineDisplayMinLimit": "Es können nicht weniger als {minTimelineDisplayLimit} Software-Zeitachsen angezeigt werden"
+      }
+    },
     "languageSelector": {
       "language": "Sprache"
     },
