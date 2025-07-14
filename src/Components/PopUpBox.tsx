@@ -2,6 +2,7 @@
 
 import Button from '@/Components/Button';
 import { type PopUpBoxDialog } from '@/misc/types';
+import { useTranslations } from 'next-intl';
 
 interface Props {
   active: boolean;
@@ -11,6 +12,8 @@ interface Props {
 }
 
 const PopUpBox: React.FC<Props> = ({ active, message, handleCloseButtonClick, dialog }) => {
+  const t = useTranslations('components.popUpBox.buttons');
+
   return (
     <div
       className={`fixed left-[50%] translate-x-[-50%] max-w-[640px]
@@ -34,8 +37,8 @@ const PopUpBox: React.FC<Props> = ({ active, message, handleCloseButtonClick, di
       {dialog && (
         <div className={'flex flex-row-reverse mt-[25px]'}>
           <div>
-            <Button twStyle={'px-4 py-1 mr-1'} text={'Yes'} handleClick={dialog.handleYesButtonClick} />
-            <Button twStyle={'px-4 py-1 ml-1'} text={'No'} handleClick={dialog.handleNoButtonClick} />
+            <Button twStyle={'px-4 py-1 mr-1'} text={t('yes')} handleClick={dialog.handleYesButtonClick} />
+            <Button twStyle={'px-4 py-1 ml-1'} text={t('no')} handleClick={dialog.handleNoButtonClick} />
           </div>
         </div>
       )}
