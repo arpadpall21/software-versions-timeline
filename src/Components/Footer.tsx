@@ -1,22 +1,10 @@
-'use client';
-
-import { useState, useEffect } from 'react';
 import '@/app/globals.css';
 import ThemeSelector from './ThemeSelector';
 import LangSelector from './LangSelector';
-import { useTranslations } from 'next-intl';
-import store from '@/misc/store';
+import { getTranslations } from 'next-intl/server';
 
-const Footer: React.FC = () => {
-  const [showLangSelector, setShowLangSelector] = useState<boolean>(false);
-
-  const t = useTranslations('components.footer');
-
-  useEffect(() => {
-    if (store.getCookiesAllowed() === 'yes') {
-      setShowLangSelector(true);
-    }
-  }, []);
+const Footer: React.FC = async () => {
+  const t = await getTranslations('components.footer');
 
   return (
     <footer
@@ -31,11 +19,9 @@ const Footer: React.FC = () => {
         <div className={'inline-block mr-4 mb-2'}>
           <ThemeSelector />
         </div>
-        {showLangSelector && (
-          <div className={'inline-block'}>
-            <LangSelector />
-          </div>
-        )}
+        <div className={'inline-block'}>
+          <LangSelector />
+        </div>
       </div>
     </footer>
   );
