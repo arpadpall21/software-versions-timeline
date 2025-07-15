@@ -74,14 +74,12 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
             </option>
           ))}
         </select>
-        <a
+        <div
           className={'absolute bottom-1 right-1 smoothTransform'}
           style={{ transform: `scaleX(${scaleLogoX}) scaleY(${scaleLogoY})` }}
-          href={appConfig.supportedSoftwares[software].source}
-          target="_blank"
         >
           <Image src={logoPath} width={60} height={60} alt={displayName} title={displayName} />
-        </a>
+        </div>
       </div>
     </div>
   );
