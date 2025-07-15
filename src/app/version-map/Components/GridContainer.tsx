@@ -109,8 +109,14 @@ const GridContainer: React.FC = () => {
       }
 
       showPopUpBox(message, 0, {
-        handleYesButtonClick: () => closePopUpBox(),
-        handleNoButtonClick: () => closePopUpBox(),
+        handleYesButtonClick: () => {
+          store.setCookiesAllowed(true);
+          closePopUpBox();
+        },
+        handleNoButtonClick: () => {
+          store.setCookiesAllowed(false);
+          closePopUpBox();
+        },
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
