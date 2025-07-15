@@ -7,6 +7,7 @@
         "no": "Nein"
       },
       "messages": {
+        "cookieConsent": "Wir verwenden Cookies nur, um Ihre Spracheinstellung zu speichern. Wenn Sie diese nicht zulassen, wird nur Englisch verfügbar sein. Stimmen Sie der Verwendung von Cookies zu?",
         "timelineDisplayMaxLimit": "Es können nicht mehr als {maxTimelineDisplayLimit} Software-Zeitachsen angezeigt werden",
         "timelineDisplayMinLimit": "Es können nicht weniger als {minTimelineDisplayLimit} Software-Zeitachsen angezeigt werden"
       }

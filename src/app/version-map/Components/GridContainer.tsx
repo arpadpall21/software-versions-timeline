@@ -5,13 +5,20 @@ import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
 import HorizontalScroll from '@/Components/HorizontalScroll';
 import { calcMonthRange, getYearRange, calcDisplayableDateLimit, calcNrOfGridCellsToRender } from '@/misc/helpers';
-import { type Months, type FeCache, type DisplayedSoftwares, type DisplayableDateLimit } from '@/misc/types';
+import {
+  type PopUpBoxDialog,
+  type Months,
+  type FeCache,
+  type DisplayedSoftwares,
+  type DisplayableDateLimit,
+} from '@/misc/types';
 import { getVersionHistory } from '@/app/version-map/action';
 import store from '@/misc/store';
 import PopUpBox from '@/Components/PopUpBox';
 import appConfig from '../../../../config/appConfig';
 import { Software } from '../../../../config/supportedSoftwares';
 import tailwindConfig from '../../../../tailwind.config';
+import { useTranslations } from 'next-intl';
 
 const today: Date = new Date();
 const currentYear: number = today.getFullYear();
@@ -20,7 +27,7 @@ const originalGridCellWidth: number = Number.parseInt(tailwindConfig.theme.exten
 const defaultZoomLevel: number = appConfig.zoom.defaultLevel;
 
 export const GridContainerContext = createContext<{
-  showPopUpBox: (message: string, timeout?: number) => void;
+  showPopUpBox: (message: string, timeout: number) => void;
   position: { x: number; y: number };
   setPosition: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>;
   verticalScrollLock: boolean;
@@ -68,7 +75,7 @@ export const GridContainerContext = createContext<{
 });
 
 const GridContainer: React.FC = () => {
-  const [popUpBoxState, setPopUpBoxState] = useState<{ active: boolean; message: string }>({
+  const [popUpBoxState, setPopUpBoxState] = useState<{ active: boolean; message: string; dialog?: PopUpBoxDialog }>({
     active: false,
     message: '',
   });
@@ -86,6 +93,34 @@ const GridContainer: React.FC = () => {
   const [feCache, setFeCache] = useState<FeCache>({});
   const [fetchLoading, setFetchLoading] = useState<boolean>(true);
   const [gridOffset, setGridOffset] = useState<number>(0);
+
+  const tPopUpBox = useTranslations('components.popUpBox.messages');
+
+  useEffect(() => {
+    if (store.getCookiesAllowed() === null) {
+      const message = tPopUpBox('cookieConsent');
+
+      function closePopUpBox() {
+        setPopUpBoxState({
+          active: false,
+          message: message,
+          dialog: { handleYesButtonClick: () => {}, handleNoButtonClick: () => {} },
+        });
+      }
+
+      showPopUpBox(message, 0, {
+        handleYesButtonClick: () => {
+          store.setCookiesAllowed(true);
+          closePopUpBox();
+        },
+        handleNoButtonClick: () => {
+          store.setCookiesAllowed(false);
+          closePopUpBox();
+        },
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => setDisplayedSoftwares(store.getDisplayedSoftwares()), []);
 
@@ -134,8 +169,8 @@ const GridContainer: React.FC = () => {
     }
   }, [displayedSoftwares, feCache, selectedSoftwareByUser]);
 
-  function showPopUpBox(message: string, timeout: number = 5000) {
-    setPopUpBoxState({ active: true, message });
+  function showPopUpBox(message: string, timeout: number, dialog?: PopUpBoxDialog) {
+    setPopUpBoxState({ active: true, message, dialog });
     if (timeout > 0) {
       setTimeout(() => setPopUpBoxState({ active: false, message }), timeout);
     }
@@ -201,6 +236,7 @@ const GridContainer: React.FC = () => {
         active={popUpBoxState.active}
         message={popUpBoxState.message}
         handleCloseButtonClick={handlePopUpBoxCloseButtonClick}
+        dialog={popUpBoxState.dialog}
       />
       <div className={'mt-5 mb-4'}>
         <HorizontalScroll

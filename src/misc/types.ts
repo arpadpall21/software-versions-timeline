@@ -7,6 +7,11 @@ interface SupportedSoftware {
   source?: string;
 }
 
+export interface PopUpBoxDialog {
+  handleYesButtonClick: (e: React.MouseEvent) => void;
+  handleNoButtonClick: (e: React.MouseEvent) => void;
+}
+
 export type SupportedSoftwares = { [software in Software]: SupportedSoftware };
 
 export interface Lang {

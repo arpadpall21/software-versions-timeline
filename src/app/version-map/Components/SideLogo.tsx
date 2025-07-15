@@ -41,6 +41,7 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
     if (e.target.value === 'removeTimeline' && displayedSoftwares.length <= appConfig.timelineDisplayLimit.min) {
       showPopUpBox(
         tPopUpBox('timelineDisplayMinLimit', { minTimelineDisplayLimit: appConfig.timelineDisplayLimit.min }),
+        5000,
       );
       return;
     } else if (e.target.value === 'removeTimeline') {

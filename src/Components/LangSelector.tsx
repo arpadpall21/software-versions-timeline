@@ -8,12 +8,16 @@ import { type Lang } from '@/misc/types';
 import appConfig from '../../config/appConfig';
 import { useTranslations } from 'next-intl';
 import Dropdown from '@/Components/Dropdown';
+import store from '@/misc/store';
 
-const supportedLanguages: { [langCode: string]: Lang } = appConfig.lang.supportedLanguages;
 const defaultLanguage: Lang = appConfig.lang.defaultLanguage;
 
 const LangSelector: React.FC = () => {
   const [langState, setLangState] = useState<string>(defaultLanguage.langCode);
+  const [supportedLanguages, setSupportedLanguages] = useState<{ [langCode: string]: Lang }>(
+    appConfig.lang.supportedLanguages,
+  );
+
   const router = useRouter();
   const t = useTranslations('components.languageSelector');
 
@@ -28,16 +32,24 @@ const LangSelector: React.FC = () => {
     router.refresh();
   }
 
+  function handleParentClick() {
+    if (store.getCookiesAllowed() === 'no') {
+      setSupportedLanguages({ defaultLanguage });
+    }
+  }
+
   return (
-    <Dropdown
-      selectedItem={langState}
-      optionItems={Object.keys(supportedLanguages).map((lang) => [
-        supportedLanguages[lang].langCode,
-        supportedLanguages[lang].lang,
-      ])}
-      handleDropdown={handleDropdown}
-      title={t('language')}
-    />
+    <div onClick={handleParentClick}>
+      <Dropdown
+        selectedItem={langState}
+        optionItems={Object.keys(supportedLanguages).map((lang) => [
+          supportedLanguages[lang].langCode,
+          supportedLanguages[lang].lang,
+        ])}
+        handleDropdown={handleDropdown}
+        title={t('language')}
+      />
+    </div>
   );
 };
 

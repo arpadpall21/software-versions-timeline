@@ -1,7 +1,7 @@
 import '@/app/globals.css';
-import { getTranslations } from 'next-intl/server';
 import ThemeSelector from './ThemeSelector';
 import LangSelector from './LangSelector';
+import { getTranslations } from 'next-intl/server';
 
 const Footer: React.FC = async () => {
   const t = await getTranslations('components.footer');

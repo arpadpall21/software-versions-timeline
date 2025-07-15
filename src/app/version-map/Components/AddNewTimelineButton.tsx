@@ -29,6 +29,7 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
     if (displayedSoftwares.length >= appConfig.timelineDisplayLimit.max) {
       showPopUpBox(
         tPopUpBox('timelineDisplayMaxLimit', { maxTimelineDisplayLimit: appConfig.timelineDisplayLimit.max }),
+        5000,
       );
       return;
     }
