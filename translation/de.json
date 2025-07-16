@@ -1,5 +1,6 @@
 {
   "mainTitle": "Zeitleiste der Softwareversionen",
+  "introText": "Der Zweck dieses Tools ist es, einen umfassenden Überblick über wesentliche Softwareversionen zu bieten, sodass Benutzer die verschiedenen Versionen im Laufe der Zeit leicht vergleichen können. Um die Dinge einfach zu halten, sind nur wichtige Versionen enthalten (für offizielle Versionsdetails klicken Sie auf das Software-Logo im Abschnitt 'Unterstützte Software' oben). Die Idee entstand, als ich die MDN-Dokumentation für JavaScript-Funktionen nutzte, die in verschiedenen Browserversionen unterstützt werden. Ein Tool, das die verschiedenen Versionen im Laufe der Zeit zeigt, wäre hilfreich (also hier ist es).",
   "components": {
     "popUpBox": {
       "buttons": {
