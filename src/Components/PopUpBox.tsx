@@ -18,11 +18,11 @@ const PopUpBox: React.FC<Props> = ({ active, message, handleCloseButtonClick, di
     <>
       {active && dialog && <div className={'fixed w-full h-full z-50'} />}
       <div
-        className={`fixed left-[50%] translate-x-[-50%]
+        className={`fixed left-[50%] translate-x-[-50%] max-md:w-[96%] md:w-auto
           text-justify p-[25px] z-50 shadow-2xl rounded-md
-          bg-bgPri dark:bg-bgPriD border-2 border-borPopUp dark:border-PopUpD`}
+          bg-bgPri dark:bg-bgPriD border-2 border-borPopUp dark:border-PopUpD
+          ${active ? 'max-md:top-[10px] md:top-[30px]' : 'top-[-500px]'}`}
         style={{
-          top: active ? 30 : -500,
           visibility: active ? 'visible' : 'hidden',
           transition: 'top 0.3s ease-in, visibility 0.3s ease-in',
         }}
