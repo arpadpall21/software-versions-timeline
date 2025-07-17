@@ -8,11 +8,11 @@ const SupportedSoftwares: React.FC = async () => {
 
   return (
     <div className={'flex flex-wrap items-center text-fgSec dark:text-fgSecD'}>
-      {t('supportedSoftwares')} :
+      <span className={'mr-1 max-md:hidden'}>{t('supportedSoftwares')}:</span>
       {Object.keys(appConfig.supportedSoftwares).map((software, i) => (
         <a href={appConfig.supportedSoftwares[software as Software].source} target={'_blank'} key={i}>
           <Image
-            className={'ml-1'}
+            className={'mr-1'}
             src={appConfig.supportedSoftwares[software as Software].logoPath}
             width={60}
             height={60}

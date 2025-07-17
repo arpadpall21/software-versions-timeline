@@ -9,10 +9,10 @@ const VersionMapPage = async () => {
   return (
     <>
       <GridContainer />
-      <div className={'max-sm:hidden md:block my-7'}>
+      <div className={'my-7'}>
         <SupportedSoftwares />
       </div>
-      <p className={'text-justify max-sm:hidden my-7'}> {t('introText')} </p>
+      <p className={'text-justify my-7'}> {t('introText')} </p>
     </>
   );
 };
