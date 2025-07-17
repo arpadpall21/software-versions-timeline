@@ -62,7 +62,7 @@ const HorizontalScroll: React.FC<Props> = ({
           </div>
           <div className={'w-[10px] h-full bg-grl dark:bg-grlD'} />
         </div>
-        <div className={'w-full overflow-hidden mx-[-5px]'}>
+        <div className={'w-full overflow-hidden mx-[-10px]'}>
           <div
             className={'overflow-hidden whitespace-nowrap h-full'}
             style={{ paddingBottom: height + 50, direction: start === 'left' ? 'ltr' : 'rtl' }}
