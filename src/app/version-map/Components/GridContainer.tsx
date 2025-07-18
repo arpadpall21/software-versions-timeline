@@ -238,6 +238,9 @@ const GridContainer: React.FC = () => {
         handleCloseButtonClick={handlePopUpBoxCloseButtonClick}
         dialog={popUpBoxState.dialog}
       />
+      <div className={'block md:hidden'}>
+        <GridFrame />
+      </div>
       <div className={'mt-5 mb-4'}>
         <HorizontalScroll
           height={35}
@@ -256,7 +259,9 @@ const GridContainer: React.FC = () => {
           start={'right'}
         />
       </div>
-      <GridFrame />
+      <div className={'hidden md:block'}>
+        <GridFrame />
+      </div>
     </GridContainerContext.Provider>
   );
 };
