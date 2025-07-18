@@ -238,10 +238,7 @@ const GridContainer: React.FC = () => {
         handleCloseButtonClick={handlePopUpBoxCloseButtonClick}
         dialog={popUpBoxState.dialog}
       />
-      <div className={'block md:hidden'}>
-        <GridFrame />
-      </div>
-      <div className={'mt-5 mb-4'}>
+      <div className={'hidden md:block mt-5 mb-4'}>
         <HorizontalScroll
           height={35}
           members={displayedYearButtons.map((year) => (
@@ -259,8 +256,28 @@ const GridContainer: React.FC = () => {
           start={'right'}
         />
       </div>
-      <div className={'hidden md:block'}>
-        <GridFrame />
+      <GridFrame />
+      <div className={'block md:hidden mt-5 mb-4'}>
+        <div className={'flex justify-between'}>
+          <Button twStyle={'text-6xl font-thin px-2'} text={'<'} />
+          <Button twStyle={'text-6xl font-thin px-2'} text={'>'} />
+        </div>
+        <HorizontalScroll
+          height={35}
+          members={displayedYearButtons.map((year) => (
+            <Button
+              twStyle={'w-[70px] ml-[3px]'}
+              text={year.toString()}
+              pop={year === selectedYear}
+              handleClick={handleYearButtonClick}
+              key={year}
+            />
+          ))}
+          scrollLeftButton={<Button text={'<'} twStyle={'px-3'} />}
+          scrollRightButton={<Button text={'>'} twStyle={'px-3'} />}
+          scrollSensitivity={250}
+          start={'right'}
+        />
       </div>
     </GridContainerContext.Provider>
   );
