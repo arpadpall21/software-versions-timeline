@@ -2,7 +2,6 @@
 
 import { readFile } from 'node:fs/promises';
 import {
-  Software,
   type ParsedVersionHistoryData,
   type RawHistoryData,
   type ParsedHistoryData,
@@ -10,6 +9,7 @@ import {
 } from '@/misc/types';
 import { calcPercentOf } from '@/misc/helpers';
 import appConfig from '../../../config/appConfig';
+import { Software } from '../../../config/supportedSoftwares';
 
 export async function getVersionHistory(softwares: Software[]): Promise<GetVersionHistoryActionResponse> {
   const response: GetVersionHistoryActionResponse = {};
