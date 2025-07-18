@@ -4,7 +4,13 @@ import { useState, useEffect, createContext } from 'react';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
 import HorizontalScroll from '@/Components/HorizontalScroll';
-import { calcMonthRange, getYearRange, calcDisplayableDateLimit, calcNrOfGridCellsToRender } from '@/misc/helpers';
+import {
+  calcMonthRange,
+  getYearRange,
+  calcDisplayableDateLimit,
+  calcNrOfGridCellsToRender,
+  getDisplayedLastMonth,
+} from '@/misc/helpers';
 import {
   type PopUpBoxDialog,
   type Months,
@@ -206,6 +212,20 @@ const GridContainer: React.FC = () => {
     }
   }
 
+  function handleMonthNavigation(direction: 'prev' | 'next') {
+    const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(originalGridCellWidth);
+    const displayedLastMonth: Date = getDisplayedLastMonth(displayedMonths);
+
+    if (direction === 'prev') {
+      displayedLastMonth.setMonth(displayedLastMonth.getMonth() - 1);
+    } else {
+      displayedLastMonth.setMonth(displayedLastMonth.getMonth() + 1);
+    }
+
+    setSelectedYear(displayedLastMonth.getFullYear());
+    setDisplayedMonths(calcMonthRange(displayedLastMonth, nrOfMonthsToRender, displayableDateLimit));
+  }
+
   return (
     <GridContainerContext.Provider
       value={{
@@ -260,9 +280,19 @@ const GridContainer: React.FC = () => {
       <GridFrame />
       <div className={'block md:hidden mt-[-14px] mb-4'}>
         <div className={'flex justify-between items-center mb-3'}>
-          <Button twStyle={'text-6xl sm:text-4xl font-thin px-2'} text={'<'} title={tNav('prevMonth')} />
+          <Button
+            twStyle={'text-6xl sm:text-4xl font-thin px-2'}
+            text={'<'}
+            title={tNav('prevMonth')}
+            handleClick={() => handleMonthNavigation('prev')}
+          />
           <p> &lt;- {tNav('monthNavigation')} -&gt; </p>
-          <Button twStyle={'text-6xl sm:text-4xl font-thin px-2'} text={'>'} title={tNav('nextMonth')} />
+          <Button
+            twStyle={'text-6xl sm:text-4xl font-thin px-2'}
+            text={'>'}
+            title={tNav('nextMonth')}
+            handleClick={() => handleMonthNavigation('next')}
+          />
         </div>
         <HorizontalScroll
           height={35}
