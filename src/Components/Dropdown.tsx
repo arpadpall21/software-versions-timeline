@@ -20,6 +20,7 @@ const Dropdown: React.FC<Props> = ({ selectedItem, optionItems, handleDropdown, 
         className={`btn dark:btnD text-center w-full focus:outline-none rounded-none dark:rounded-none
           hover:cursor-pointer border-[1px] dark:border-[1px]`}
         value={selectedItem}
+        title={title}
         onChange={handleDropdown}
       >
         {optionItems.map(([attrValue, value]) => {
