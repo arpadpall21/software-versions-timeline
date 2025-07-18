@@ -4,7 +4,9 @@
   "components": {
     "gridContainer": {
       "navigation": {
-        "monthNavigation": "Hónap Navigáció"
+        "monthNavigation": "Hónap Navigáció",
+        "prevMonth": "Előző Hónap",
+        "nextMonth": "Következő Hónap"
       }
     },
     "popUpBox": {

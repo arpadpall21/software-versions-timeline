@@ -4,7 +4,9 @@
   "components": {
     "gridContainer": {
       "navigation": {
-        "monthNavigation": "Navigation Mensuelle"
+        "monthNavigation": "Navigation Mensuelle",
+        "prevMonth": "Mois Précédent",
+        "nextMonth": "Mois Suivant"
       }
     },
     "popUpBox": {
