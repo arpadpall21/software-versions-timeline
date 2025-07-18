@@ -15,8 +15,10 @@
 #### Build & Run Prod Server
   - Run `npm run build` to build the app for production
   - Run `npm start` to start the production server
-#### Configurations
+
+## Configurations
   - App can be configured through the `config/appConfig.ts` file
+  - Software version data sources are located in `data/<software>.json` file(s)
 #### How to Add a New Software
 - provide a json file with version history data in `data` directory (see other files for the format)
 - provide the software logo in `public/softwareLogos` directory (size: 256x256 - 512x512, extenstion: .png or .webp) 
