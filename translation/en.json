@@ -2,6 +2,11 @@
   "mainTitle": "Software Versions Timeline",
   "introText": "The purpose of this tool is to offer a broad overview of essential software release versions, making it easy for users to compare different versions in time. To keep things straightforward, only important version releases are included (for official release details, click on the software logo in the 'Supported Softwares' section above). The idea came while using MDN documentation for JavaScript features supported in different browser versions, a tool showing different releases over time would be helpful (so here it is).",
   "components": {
+    "gridContainer": {
+      "navigation": {
+        "monthNavigation": "Month Navigation"
+      }
+    },
     "popUpBox": {
       "buttons": {
         "yes": "Yes",
@@ -44,7 +49,7 @@
     "sideLogo": {
       "removeTimeline": "REMOVE TIMELINE"
     },
-    "addnewTimelineButton": {
+    "addNewTimelineButton": {
       "addTimeline": "Add Timeline"
     },
     "zoomPanel": {

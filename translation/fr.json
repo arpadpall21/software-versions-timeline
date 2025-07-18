@@ -2,6 +2,11 @@
   "mainTitle": "Chronologie des Versions du Logiciels",
   "introText": "Le but de cet outil est de fournir un aperçu général des versions essentielles de logiciels, permettant aux utilisateurs de comparer facilement les différentes versions au fil du temps. Pour simplifier les choses, seules les versions importantes sont incluses (pour les détails officiels des versions, cliquez sur le logo du logiciel dans la section 'Logiciels Supportés' ci-dessus). L'idée est venue en utilisant la documentation MDN pour les fonctionnalités JavaScript prises en charge dans différentes versions de navigateurs, un outil montrant les différentes versions au fil du temps serait utile (le voici donc).",
   "components": {
+    "gridContainer": {
+      "navigation": {
+        "monthNavigation": "Navigation Mensuelle"
+      }
+    },
     "popUpBox": {
       "buttons": {
         "yes": "Oui",
@@ -44,7 +49,7 @@
     "sideLogo": {
       "removeTimeline": "SUPPRIMER LA FRISE CHRONOLOGIQUE"
     },
-    "addnewTimelineButton": {
+    "addNewTimelineButton": {
       "addTimeline": "Ajouter une Frise Chronologie"
     },
     "zoomPanel": {

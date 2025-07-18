@@ -94,6 +94,7 @@ const GridContainer: React.FC = () => {
   const [fetchLoading, setFetchLoading] = useState<boolean>(true);
   const [gridOffset, setGridOffset] = useState<number>(0);
 
+  const tNav = useTranslations('components.gridContainer.navigation');
   const tPopUpBox = useTranslations('components.popUpBox.messages');
 
   useEffect(() => {
@@ -258,8 +259,9 @@ const GridContainer: React.FC = () => {
       </div>
       <GridFrame />
       <div className={'block md:hidden mt-[-14px] mb-4'}>
-        <div className={'flex justify-between mb-3'}>
+        <div className={'flex justify-between items-center mb-3'}>
           <Button twStyle={'text-6xl sm:text-4xl font-thin px-2'} text={'<'} />
+          <p> &lt;- {tNav('monthNavigation')} -&gt; </p>
           <Button twStyle={'text-6xl sm:text-4xl font-thin px-2'} text={'>'} />
         </div>
         <HorizontalScroll

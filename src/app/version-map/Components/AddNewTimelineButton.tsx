@@ -17,7 +17,7 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
   const { showPopUpBox, zoomLevel, displayedSoftwares, setDisplayedSoftwares, setSelectedSoftwareByUser } =
     useContext(GridContainerContext);
 
-  const tButton = useTranslations('components.addnewTimelineButton');
+  const tButton = useTranslations('components.addNewTimelineButton');
   const tPopUpBox = useTranslations('components.popUpBox.messages');
 
   const scaleDropdownY = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel]);
