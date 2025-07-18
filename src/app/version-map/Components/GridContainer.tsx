@@ -260,9 +260,9 @@ const GridContainer: React.FC = () => {
       <GridFrame />
       <div className={'block md:hidden mt-[-14px] mb-4'}>
         <div className={'flex justify-between items-center mb-3'}>
-          <Button twStyle={'text-6xl sm:text-4xl font-thin px-2'} text={'<'} />
+          <Button twStyle={'text-6xl sm:text-4xl font-thin px-2'} text={'<'} title={tNav('prevMonth')} />
           <p> &lt;- {tNav('monthNavigation')} -&gt; </p>
-          <Button twStyle={'text-6xl sm:text-4xl font-thin px-2'} text={'>'} />
+          <Button twStyle={'text-6xl sm:text-4xl font-thin px-2'} text={'>'} title={tNav('nextMonth')} />
         </div>
         <HorizontalScroll
           height={35}
