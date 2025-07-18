@@ -94,7 +94,7 @@ const ZoomPanel: React.FC<Props> = ({ ref, scrollZoomEnabled, setScrollZoomEnabl
   }
 
   return (
-    <div className={'absolute z-10 bottom-4 right-4 w-9'}>
+    <div className={'invisible md:visible absolute z-10 bottom-4 right-4 w-9'}>
       <div
         className={`${scrollZoomEnabled ? 'btnWarn dark:btnWarnD' : 'btn dark:btnD'}
           flex flex-col mb-3 font-semibold text-xl`}
