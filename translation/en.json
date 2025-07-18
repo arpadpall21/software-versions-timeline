@@ -49,7 +49,8 @@
       "supportedSoftwares": "Supported Softwares"
     },
     "sideLogo": {
-      "removeTimeline": "REMOVE TIMELINE"
+      "removeTimeline": "REMOVE TIMELINE",
+      "dropDownTooltip": "Select Software"
     },
     "addNewTimelineButton": {
       "addTimeline": "Add Timeline"
@@ -64,6 +65,10 @@
     },
     "footer": {
       "copyright": "Copyright © 2025 {name}. All rights reserved."
+    },
+    "horizontalScroll": {
+      "scrollLeft": "Scroll Left",
+      "scrollRight": "Scroll Right"
     }
   },
   "pages": {

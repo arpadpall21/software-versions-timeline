@@ -49,7 +49,8 @@
       "supportedSoftwares": "Logiciels Supportés"
     },
     "sideLogo": {
-      "removeTimeline": "SUPPRIMER LA FRISE CHRONOLOGIQUE"
+      "removeTimeline": "SUPPRIMER LA FRISE CHRONOLOGIQUE",
+      "dropDownTooltip": "Sélectionner le Logiciel"
     },
     "addNewTimelineButton": {
       "addTimeline": "Ajouter une Frise Chronologie"
@@ -64,6 +65,10 @@
     },
     "footer": {
       "copyright": "Droits d'auteur © 2025 {name}. Tous droits réservés."
+    },
+    "horizontalScroll": {
+      "scrollLeft": "Faire Défiler à Gauche",
+      "scrollRight": "Faire Défiler à Droite"
     }
   },
   "pages": {
