@@ -1,7 +1,7 @@
 # Software Versions Timeline
 
 ## Description
-- this UI tool is to offers a broad overview of essential software release versions, making it easy for users to compare different versions in time
+- UI tool offering a broad overview of essential software release versions, making it easy for users to compare different versions in time
 
 ## Requirements
  - Node.js v18.19.0+
@@ -17,7 +17,7 @@
   - Run `npm start` to start the production server
 #### Configurations
   - App can be configured through the `config/appConfig.ts` file
-#### How to add new software
+#### How to Add a New Software
 - provide a json file with version history data in `data` directory (see other files for the format)
 - provide the software logo in `public/softwareLogos` directory (size: 256x256 - 512x512, extenstion: .png or .webp) 
 - add the new software as enum member and configure it in `config/supportedSoftwares.ts` file
