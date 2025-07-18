@@ -50,7 +50,7 @@
     },
     "sideLogo": {
       "removeTimeline": "ZEITLEISTE ENTFERNEN",
-      "dropDownToolpit": "Software Auswählen"
+      "dropDownTooltip": "Software Auswählen"
     },
     "addNewTimelineButton": {
       "addTimeline": "Zeitachse Hinzufügen"

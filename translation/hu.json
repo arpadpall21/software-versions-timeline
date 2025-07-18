@@ -50,7 +50,7 @@
     },
     "sideLogo": {
       "removeTimeline": "IDŐVONAL ELTÁVOLÍTÁSA",
-      "dropDownToolpit": "Szoftvert Kiválasztása"
+      "dropDownTooltip": "Szoftvert Kiválasztása"
     },
     "addNewTimelineButton": {
       "addTimeline": "Idővonal hozzáadása"

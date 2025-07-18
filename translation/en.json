@@ -50,7 +50,7 @@
     },
     "sideLogo": {
       "removeTimeline": "REMOVE TIMELINE",
-      "dropDownToolpit": "Select Software"
+      "dropDownTooltip": "Select Software"
     },
     "addNewTimelineButton": {
       "addTimeline": "Add Timeline"

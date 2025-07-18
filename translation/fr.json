@@ -50,7 +50,7 @@
     },
     "sideLogo": {
       "removeTimeline": "SUPPRIMER LA FRISE CHRONOLOGIQUE",
-      "dropDownToolpit": "Sélectionner le Logiciel"
+      "dropDownTooltip": "Sélectionner le Logiciel"
     },
     "addNewTimelineButton": {
       "addTimeline": "Ajouter une Frise Chronologie"
