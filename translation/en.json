@@ -49,7 +49,8 @@
       "supportedSoftwares": "Supported Softwares"
     },
     "sideLogo": {
-      "removeTimeline": "REMOVE TIMELINE"
+      "removeTimeline": "REMOVE TIMELINE",
+      "dropDownToolpit": "Select Software"
     },
     "addNewTimelineButton": {
       "addTimeline": "Add Timeline"

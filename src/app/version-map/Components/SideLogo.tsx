@@ -64,6 +64,7 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
             hover:cursor-pointer`}
           style={{ bottom: bottomSpaceDropdown, transform: `scaleY(${scaleDropdownY})` }}
           value={software}
+          title={tSideLogo('dropDownToolpit')}
           onChange={handleDropdown}
         >
           <option value={'removeTimeline'}>{`[${tSideLogo('removeTimeline')}]`}</option>
