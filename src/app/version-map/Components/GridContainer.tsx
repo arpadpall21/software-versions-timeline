@@ -4,7 +4,13 @@ import { useState, useEffect, createContext } from 'react';
 import GridFrame from '@/app/version-map/Components/GridFrame';
 import Button from '@/Components/Button';
 import HorizontalScroll from '@/Components/HorizontalScroll';
-import { calcMonthRange, getYearRange, calcDisplayableDateLimit, calcNrOfGridCellsToRender } from '@/misc/helpers';
+import {
+  calcMonthRange,
+  getYearRange,
+  calcDisplayableDateLimit,
+  calcNrOfGridCellsToRender,
+  getDisplayedLastMonth,
+} from '@/misc/helpers';
 import {
   type PopUpBoxDialog,
   type Months,
@@ -94,6 +100,7 @@ const GridContainer: React.FC = () => {
   const [fetchLoading, setFetchLoading] = useState<boolean>(true);
   const [gridOffset, setGridOffset] = useState<number>(0);
 
+  const tNav = useTranslations('components.gridContainer.navigation');
   const tPopUpBox = useTranslations('components.popUpBox.messages');
 
   useEffect(() => {
@@ -205,6 +212,20 @@ const GridContainer: React.FC = () => {
     }
   }
 
+  function handleMonthNavigation(direction: 'prev' | 'next') {
+    const nrOfMonthsToRender: number = calcNrOfGridCellsToRender(originalGridCellWidth);
+    const displayedLastMonth: Date = getDisplayedLastMonth(displayedMonths);
+
+    if (direction === 'prev') {
+      displayedLastMonth.setMonth(displayedLastMonth.getMonth() - 1);
+    } else {
+      displayedLastMonth.setMonth(displayedLastMonth.getMonth() + 1);
+    }
+
+    setSelectedYear(displayedLastMonth.getFullYear());
+    setDisplayedMonths(calcMonthRange(displayedLastMonth, nrOfMonthsToRender, displayableDateLimit));
+  }
+
   return (
     <GridContainerContext.Provider
       value={{
@@ -238,7 +259,7 @@ const GridContainer: React.FC = () => {
         handleCloseButtonClick={handlePopUpBoxCloseButtonClick}
         dialog={popUpBoxState.dialog}
       />
-      <div className={'mt-5 mb-4'}>
+      <div className={'hidden md:block mt-5 mb-4'}>
         <HorizontalScroll
           height={35}
           members={displayedYearButtons.map((year) => (
@@ -257,6 +278,39 @@ const GridContainer: React.FC = () => {
         />
       </div>
       <GridFrame />
+      <div className={'block md:hidden mt-[-14px] mb-4'}>
+        <div className={'flex justify-between items-center mb-3'}>
+          <Button
+            twStyle={'text-6xl sm:text-4xl font-thin px-2'}
+            text={'<'}
+            title={tNav('prevMonth')}
+            handleClick={() => handleMonthNavigation('prev')}
+          />
+          <p> &lt;- {tNav('monthNavigation')} -&gt; </p>
+          <Button
+            twStyle={'text-6xl sm:text-4xl font-thin px-2'}
+            text={'>'}
+            title={tNav('nextMonth')}
+            handleClick={() => handleMonthNavigation('next')}
+          />
+        </div>
+        <HorizontalScroll
+          height={35}
+          members={displayedYearButtons.map((year) => (
+            <Button
+              twStyle={'w-[70px] ml-[3px] text-xl sm:text-lg'}
+              text={year.toString()}
+              pop={year === selectedYear}
+              handleClick={handleYearButtonClick}
+              key={year}
+            />
+          ))}
+          scrollLeftButton={<Button text={'<'} twStyle={'px-3 text-xl sm:text-lg'} />}
+          scrollRightButton={<Button text={'>'} twStyle={'px-3 text-xl sm:text-lg'} />}
+          scrollSensitivity={250}
+          start={'right'}
+        />
+      </div>
     </GridContainerContext.Provider>
   );
 };

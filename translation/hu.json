@@ -2,6 +2,13 @@
   "mainTitle": "Szoftververziók Idővonala",
   "introText": "Ennek az eszköznek az a célja, hogy átfogó áttekintést nyújtson a fontos szoftverkiadási verziókról, megkönnyítve a felhasználók számára az egyes verziók időbeli összehasonlítását. Az átláthatóság érdekében csak a fontos verziókiadások szerepelnek (a hivatalos kiadási részletekért kattintson a szoftver logójára a fent található 'Támogatott Szoftverek' szakaszban). Az ötlet akkor született, amikor az MDN dokumentációt nézve különböző JavaScript funkciók különböző böngésző verziókban érhetők el, egy eszköz, amely időben mutatja a különböző böngésző verziókat, hasznos lenne (így itt van).",
   "components": {
+    "gridContainer": {
+      "navigation": {
+        "monthNavigation": "Hónap Navigáció",
+        "prevMonth": "Előző Hónap",
+        "nextMonth": "Következő Hónap"
+      }
+    },
     "popUpBox": {
       "buttons": {
         "yes": "Igen",
@@ -44,7 +51,7 @@
     "sideLogo": {
       "removeTimeline": "IDŐVONAL ELTÁVOLÍTÁSA"
     },
-    "addnewTimelineButton": {
+    "addNewTimelineButton": {
       "addTimeline": "Idővonal hozzáadása"
     },
     "zoomPanel": {
