@@ -257,24 +257,24 @@ const GridContainer: React.FC = () => {
         />
       </div>
       <GridFrame />
-      <div className={'block md:hidden mt-[-18px] mb-4'}>
-        <div className={'flex justify-between mb-2'}>
-          <Button twStyle={'text-6xl font-thin px-2'} text={'<'} />
-          <Button twStyle={'text-6xl font-thin px-2'} text={'>'} />
+      <div className={'block md:hidden mt-[-14px] mb-4'}>
+        <div className={'flex justify-between mb-3'}>
+          <Button twStyle={'text-6xl sm:text-4xl font-thin px-2'} text={'<'} />
+          <Button twStyle={'text-6xl sm:text-4xl font-thin px-2'} text={'>'} />
         </div>
         <HorizontalScroll
           height={35}
           members={displayedYearButtons.map((year) => (
             <Button
-              twStyle={'w-[70px] ml-[3px] text-xl'}
+              twStyle={'w-[70px] ml-[3px] text-xl sm:text-lg'}
               text={year.toString()}
               pop={year === selectedYear}
               handleClick={handleYearButtonClick}
               key={year}
             />
           ))}
-          scrollLeftButton={<Button text={'<'} twStyle={'px-3 text-xl'} />}
-          scrollRightButton={<Button text={'>'} twStyle={'px-3 text-xl'} />}
+          scrollLeftButton={<Button text={'<'} twStyle={'px-3 text-xl sm:text-lg'} />}
+          scrollRightButton={<Button text={'>'} twStyle={'px-3 text-xl sm:text-lg'} />}
           scrollSensitivity={250}
           start={'right'}
         />
