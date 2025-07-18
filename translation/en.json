@@ -64,6 +64,10 @@
     },
     "footer": {
       "copyright": "Copyright © 2025 {name}. All rights reserved."
+    },
+    "horizontalScroll": {
+      "scrollLeft": "Scroll Left",
+      "scrollRight": "Scroll Right"
     }
   },
   "pages": {

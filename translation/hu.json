@@ -65,6 +65,10 @@
     },
     "footer": {
       "copyright": "Szerzői jog © 2025 {name}. Minden jog fenntartva."
+    },
+    "horizontalScroll": {
+      "scrollLeft": "Görgetés Balra",
+      "scrollRight": "Görgetés Jobbra"
     }
   },
   "pages": {

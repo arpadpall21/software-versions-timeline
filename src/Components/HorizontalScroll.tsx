@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useMemo, type RefObject } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface Props {
   height: number;
@@ -20,6 +21,8 @@ const HorizontalScroll: React.FC<Props> = ({
   start = 'left',
 }) => {
   const [sliderPosition, setSliderPosition] = useState<number>(0);
+
+  const t = useTranslations('components.horizontalScroll');
 
   const sliderRef: RefObject<null | HTMLDivElement> = useRef(null);
   const sliderChildRef: RefObject<null | HTMLDivElement> = useRef(null);
@@ -57,7 +60,11 @@ const HorizontalScroll: React.FC<Props> = ({
     <>
       <div className={`flex w-full`} style={{ height }}>
         <div className={'flex h-full z-10'}>
-          <div className={'h-full bg-bgPri dark:bg-bgPriD'} onMouseDown={() => handleScroll('left')}>
+          <div
+            className={'h-full bg-bgPri dark:bg-bgPriD'}
+            onMouseDown={() => handleScroll('left')}
+            title={t('scrollLeft')}
+          >
             {scrollLeftButton}
           </div>
           <div className={'w-[10px] h-full bg-grl dark:bg-grlD'} />
@@ -77,7 +84,11 @@ const HorizontalScroll: React.FC<Props> = ({
         </div>
         <div className={'flex h-full z-10'}>
           <div className={'w-[10px] h-full bg-grr dark:bg-grrD'} />
-          <div className={'h-full bg-bgPri dark:bg-bgPriD'} onMouseDown={() => handleScroll('right')}>
+          <div
+            className={'h-full bg-bgPri dark:bg-bgPriD'}
+            onMouseDown={() => handleScroll('right')}
+            title={t('scrollRight')}
+          >
             {scrollRightButton}
           </div>
         </div>
