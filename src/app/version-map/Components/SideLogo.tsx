@@ -55,7 +55,7 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
   }
 
   return (
-    <div className={'relative'}>
+    <div className={'group relative'}>
       <div className={`flex h-[100px] ${twStyle}`}>
         <div className={'relative w-[70px] h-[70px] m-auto'}>
           <div
@@ -68,6 +68,14 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
       </div>
       {zoomLevel === defaultZoomLevel && (
         <>
+          <p
+            className={`group-hover:visible md:invisible
+              absolute top-1 right-1 py-[1px] rounded-sm text-center 
+              bg-btnBg dark:bg-btnBgD bg-opacity-50 dark:bg-opacity-70
+              hover:cursor-pointer hover:bg-btnBgHov dark:hover:bg-btnBgHovD`}
+          >
+            🗑
+          </p>
           <select
             className={`btn dark:btnD absolute right-1 bottom-1 w-[19px] h-[30px] 
               hover:cursor-pointer`}
@@ -82,13 +90,6 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
               </option>
             ))}
           </select>
-          <p
-            className={`absolute top-1 right-1 py-[1px] rounded-sm text-center 
-              bg-btnBg dark:bg-btnBgD bg-opacity-50 dark:bg-opacity-70
-              hover:cursor-pointer hover:bg-btnBgHov dark:hover:bg-btnBgHovD`}
-          >
-            🗑
-          </p>
         </>
       )}
     </div>
