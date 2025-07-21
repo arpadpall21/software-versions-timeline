@@ -55,11 +55,21 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
   }
 
   return (
-    <div className={`flex h-[100px] ${twStyle}`}>
-      <div className={'relative w-[70px] h-[70px] m-auto'}>
-        {zoomLevel === defaultZoomLevel && (
+    <div className={'relative'}>
+      <div className={`flex h-[100px] ${twStyle}`}>
+        <div className={'relative w-[70px] h-[70px] m-auto'}>
+          <div
+            className={'absolute bottom-1 right-1 smoothTransform'}
+            style={{ transform: `scaleX(${scaleLogoX}) scaleY(${scaleLogoY})` }}
+          >
+            <Image src={logoPath} width={60} height={60} alt={displayName} title={displayName} />
+          </div>
+        </div>
+      </div>
+      {zoomLevel === defaultZoomLevel && (
+        <>
           <select
-            className={`btn dark:btnD absolute w-[19px] h-[30px] right-[5px] top-0 z-10
+            className={`btn dark:btnD absolute right-1 bottom-1 w-[19px] h-[30px] 
               hover:cursor-pointer`}
             value={software}
             title={tSideLogo('dropDownTooltip')}
@@ -72,14 +82,15 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
               </option>
             ))}
           </select>
-        )}
-        <div
-          className={'absolute bottom-1 right-1 smoothTransform'}
-          style={{ transform: `scaleX(${scaleLogoX}) scaleY(${scaleLogoY})` }}
-        >
-          <Image src={logoPath} width={60} height={60} alt={displayName} title={displayName} />
-        </div>
-      </div>
+          <p
+            className={`absolute top-1 right-1 py-[1px] rounded-sm text-center 
+              bg-btnBg dark:bg-btnBgD bg-opacity-50 dark:bg-opacity-70
+              hover:cursor-pointer hover:bg-btnBgHov dark:hover:bg-btnBgHovD`}
+          >
+            🗑
+          </p>
+        </>
+      )}
     </div>
   );
 };
