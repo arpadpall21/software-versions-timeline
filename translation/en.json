@@ -18,7 +18,7 @@
         "cookieConsent": "We use cookies only to remember your language setting. If you don’t allow them only English will be available. Do you agree to use cookies?",
         "timelineDisplayMaxLimit": "Cannot display more than {maxTimelineDisplayLimit} software timelines",
         "timelineDisplayMinLimit": "Cannot display less than {minTimelineDisplayLimit} software timelines",
-        "removeTimelineWarn": "Are you sure you want to remove the timeline for {timeline}"
+        "removeTimelineWarn": "Are you sure you want to remove the timeline for {timeline}?"
       }
     },
     "languageSelector": {
