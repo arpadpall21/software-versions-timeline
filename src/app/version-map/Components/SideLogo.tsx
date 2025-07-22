@@ -67,13 +67,8 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
   return (
     <div className={'group relative'}>
       <div className={`flex h-[100px] ${twStyle}`}>
-        <div className={'relative w-[70px] h-[70px] m-auto'}>
-          <div
-            className={'absolute bottom-1 right-1 smoothTransform'}
-            style={{ transform: `scaleX(${scaleLogoX}) scaleY(${scaleLogoY})` }}
-          >
-            <Image src={logoPath} width={60} height={60} alt={displayName} title={displayName} />
-          </div>
+        <div className={'smoothTransform m-auto'} style={{ transform: `scaleX(${scaleLogoX}) scaleY(${scaleLogoY})` }}>
+          <Image src={logoPath} width={60} height={60} alt={displayName} title={displayName} />
         </div>
       </div>
       {zoomLevel === defaultZoomLevel && (
