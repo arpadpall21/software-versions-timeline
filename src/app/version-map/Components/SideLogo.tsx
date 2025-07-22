@@ -52,11 +52,16 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
       return;
     }
 
-    const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
+    showPopUpBox(tPopUpBox('removeTimelineWarn', { timeline: appConfig.supportedSoftwares[software].displayName }), 0, {
+      handleYesButtonClick() {
+        const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
 
-    displayedSoftwaresClone.splice(idx, 1);
-    setDisplayedSoftwares(displayedSoftwaresClone);
-    store.setDisplayedSoftwares(displayedSoftwaresClone);
+        displayedSoftwaresClone.splice(idx, 1);
+        setDisplayedSoftwares(displayedSoftwaresClone);
+        store.setDisplayedSoftwares(displayedSoftwaresClone);
+      },
+      handleNoButtonClick() {},
+    });
   }
 
   return (

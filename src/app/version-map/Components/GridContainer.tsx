@@ -33,7 +33,7 @@ const originalGridCellWidth: number = Number.parseInt(tailwindConfig.theme.exten
 const defaultZoomLevel: number = appConfig.zoom.defaultLevel;
 
 export const GridContainerContext = createContext<{
-  showPopUpBox: (message: string, timeout: number) => void;
+  showPopUpBox: (message: string, timeout: number, dialog?: PopUpBoxDialog) => void;
   position: { x: number; y: number };
   setPosition: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>;
   verticalScrollLock: boolean;
