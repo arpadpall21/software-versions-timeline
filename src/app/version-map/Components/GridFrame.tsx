@@ -149,7 +149,11 @@ const GridFrame = () => {
                 displayedSoftwares.map((software, i) => (
                   <SideLogo twStyle={twTimelineStyle[software]} software={software} idx={i} key={i} />
                 ))}
-              <AddNewTimelineButton height={addNewTimelineButtonHeight} />
+              {zoomLevel === appConfig.zoom.defaultLevel ? (
+                <AddNewTimelineButton height={addNewTimelineButtonHeight} />
+              ) : (
+                <div style={{ height: addNewTimelineButtonHeight }} />
+              )}
             </div>
           </div>
         </div>

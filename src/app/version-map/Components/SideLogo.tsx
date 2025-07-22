@@ -26,61 +26,82 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
   const tSideLogo = useTranslations('components.sideLogo');
   const tPopUpBox = useTranslations('components.popUpBox.messages');
 
-  const { scaleLogoX, scaleLogoY, scaleDropdownY, bottomSpaceDropdown } = useMemo(() => {
+  const { scaleLogoX, scaleLogoY } = useMemo(() => {
     return {
       scaleLogoX: zoomLevel < defaultZoomLevel ? zoomLevel : defaultZoomLevel,
       scaleLogoY: zoomLevel <= defaultZoomLevel ? defaultZoomLevel : calcPercentOf(defaultZoomLevel, zoomLevel) / 100,
-      scaleDropdownY: calcPercentOf(defaultZoomLevel, zoomLevel) / 100,
-      bottomSpaceDropdown: zoomLevel >= defaultZoomLevel ? 2 * zoomLevel : 6 / zoomLevel,
     };
   }, [zoomLevel]);
 
   function handleDropdown(e: React.ChangeEvent<HTMLSelectElement>) {
     const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
+    const selectedSoftware: Software = e.target.value as Software;
+    displayedSoftwaresClone[idx] = selectedSoftware;
 
-    if (e.target.value === 'removeTimeline' && displayedSoftwares.length <= appConfig.timelineDisplayLimit.min) {
+    setSelectedSoftwareByUser(selectedSoftware);
+    setDisplayedSoftwares(displayedSoftwaresClone);
+    store.setDisplayedSoftwares(displayedSoftwaresClone);
+  }
+
+  function handleBinIconClick() {
+    if (displayedSoftwares.length <= appConfig.timelineDisplayLimit.min) {
       showPopUpBox(
         tPopUpBox('timelineDisplayMinLimit', { minTimelineDisplayLimit: appConfig.timelineDisplayLimit.min }),
         5000,
       );
       return;
-    } else if (e.target.value === 'removeTimeline') {
-      displayedSoftwaresClone.splice(idx, 1);
-    } else {
-      const selectedSoftware: Software = e.target.value as Software;
-      displayedSoftwaresClone[idx] = selectedSoftware;
-      setSelectedSoftwareByUser(selectedSoftware);
     }
 
-    setDisplayedSoftwares(displayedSoftwaresClone);
-    store.setDisplayedSoftwares(displayedSoftwaresClone);
+    showPopUpBox(tPopUpBox('removeTimelineWarn', { timeline: appConfig.supportedSoftwares[software].displayName }), 0, {
+      handleYesButtonClick() {
+        const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
+
+        displayedSoftwaresClone.splice(idx, 1);
+        setDisplayedSoftwares(displayedSoftwaresClone);
+        store.setDisplayedSoftwares(displayedSoftwaresClone);
+      },
+      handleNoButtonClick() {},
+    });
   }
 
   return (
-    <div className={`flex h-[100px] ${twStyle}`}>
-      <div className={'relative w-[70px] h-[70px] m-auto'}>
-        <select
-          className={`btn dark:btnD absolute w-[19px] right-[5px] z-10
-            hover:cursor-pointer`}
-          style={{ bottom: bottomSpaceDropdown, transform: `scaleY(${scaleDropdownY})` }}
-          value={software}
-          title={tSideLogo('dropDownTooltip')}
-          onChange={handleDropdown}
-        >
-          <option value={'removeTimeline'}>{`[${tSideLogo('removeTimeline')}]`}</option>
-          {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
-            <option value={software} key={i}>
-              {supportedSoftware.displayName}
-            </option>
-          ))}
-        </select>
-        <div
-          className={'absolute bottom-1 right-1 smoothTransform'}
-          style={{ transform: `scaleX(${scaleLogoX}) scaleY(${scaleLogoY})` }}
-        >
-          <Image src={logoPath} width={60} height={60} alt={displayName} title={displayName} />
+    <div className={'group relative'}>
+      <div className={`flex h-[100px] ${twStyle}`}>
+        <div className={'relative w-[70px] h-[70px] m-auto'}>
+          <div
+            className={'absolute bottom-1 right-1 smoothTransform'}
+            style={{ transform: `scaleX(${scaleLogoX}) scaleY(${scaleLogoY})` }}
+          >
+            <Image src={logoPath} width={60} height={60} alt={displayName} title={displayName} />
+          </div>
         </div>
       </div>
+      {zoomLevel === defaultZoomLevel && (
+        <>
+          <p
+            className={`group-hover:visible md:invisible
+              absolute top-1 right-1 py-[1px] rounded-sm text-center 
+              bg-btnBg dark:bg-btnBgD bg-opacity-50 dark:bg-opacity-70
+              hover:cursor-pointer hover:bg-btnBgHov dark:hover:bg-btnBgHovD`}
+            onClick={handleBinIconClick}
+          >
+            🗑
+          </p>
+          <select
+            className={`btn dark:btnD absolute right-1 bottom-1 w-[19px] h-[30px] 
+              hover:cursor-pointer`}
+            value={software}
+            title={tSideLogo('dropDownTooltip')}
+            onChange={handleDropdown}
+          >
+            {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
+              <option value={software} key={i}>
+                {supportedSoftware.displayName}
+              </option>
+            ))}
+          </select>
+        </>
+      )}
     </div>
   );
 };
