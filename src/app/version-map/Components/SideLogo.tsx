@@ -35,21 +35,26 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
 
   function handleDropdown(e: React.ChangeEvent<HTMLSelectElement>) {
     const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
+    const selectedSoftware: Software = e.target.value as Software;
+    displayedSoftwaresClone[idx] = selectedSoftware;
 
-    if (e.target.value === 'removeTimeline' && displayedSoftwares.length <= appConfig.timelineDisplayLimit.min) {
+    setSelectedSoftwareByUser(selectedSoftware);
+    setDisplayedSoftwares(displayedSoftwaresClone);
+    store.setDisplayedSoftwares(displayedSoftwaresClone);
+  }
+
+  function handleBinIconClick() {
+    if (displayedSoftwares.length <= appConfig.timelineDisplayLimit.min) {
       showPopUpBox(
         tPopUpBox('timelineDisplayMinLimit', { minTimelineDisplayLimit: appConfig.timelineDisplayLimit.min }),
         5000,
       );
       return;
-    } else if (e.target.value === 'removeTimeline') {
-      displayedSoftwaresClone.splice(idx, 1);
-    } else {
-      const selectedSoftware: Software = e.target.value as Software;
-      displayedSoftwaresClone[idx] = selectedSoftware;
-      setSelectedSoftwareByUser(selectedSoftware);
     }
 
+    const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
+
+    displayedSoftwaresClone.splice(idx, 1);
     setDisplayedSoftwares(displayedSoftwaresClone);
     store.setDisplayedSoftwares(displayedSoftwaresClone);
   }
@@ -73,6 +78,7 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
               absolute top-1 right-1 py-[1px] rounded-sm text-center 
               bg-btnBg dark:bg-btnBgD bg-opacity-50 dark:bg-opacity-70
               hover:cursor-pointer hover:bg-btnBgHov dark:hover:bg-btnBgHovD`}
+            onClick={handleBinIconClick}
           >
             🗑
           </p>
@@ -83,7 +89,6 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
             title={tSideLogo('dropDownTooltip')}
             onChange={handleDropdown}
           >
-            <option value={'removeTimeline'}>{`[${tSideLogo('removeTimeline')}]`}</option>
             {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
               <option value={software} key={i}>
                 {supportedSoftware.displayName}
