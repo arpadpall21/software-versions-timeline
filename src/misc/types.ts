@@ -8,8 +8,8 @@ interface SupportedSoftware {
 }
 
 export interface PopUpBoxDialog {
-  handleYesButtonClick: (e: React.MouseEvent) => void;
-  handleNoButtonClick: (e: React.MouseEvent) => void;
+  handleYesButtonClick: (e?: React.MouseEvent) => void;
+  handleNoButtonClick: (e?: React.MouseEvent) => void;
 }
 
 export type SupportedSoftwares = { [software in Software]: SupportedSoftware };

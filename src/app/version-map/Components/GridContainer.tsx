@@ -33,7 +33,7 @@ const originalGridCellWidth: number = Number.parseInt(tailwindConfig.theme.exten
 const defaultZoomLevel: number = appConfig.zoom.defaultLevel;
 
 export const GridContainerContext = createContext<{
-  showPopUpBox: (message: string, timeout: number) => void;
+  showPopUpBox: (message: string, timeout: number, dialog?: PopUpBoxDialog) => void;
   position: { x: number; y: number };
   setPosition: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>;
   verticalScrollLock: boolean;
@@ -105,25 +105,9 @@ const GridContainer: React.FC = () => {
 
   useEffect(() => {
     if (store.getCookiesAllowed() === null) {
-      const message = tPopUpBox('cookieConsent');
-
-      function closePopUpBox() {
-        setPopUpBoxState({
-          active: false,
-          message: message,
-          dialog: { handleYesButtonClick: () => {}, handleNoButtonClick: () => {} },
-        });
-      }
-
-      showPopUpBox(message, 0, {
-        handleYesButtonClick: () => {
-          store.setCookiesAllowed(true);
-          closePopUpBox();
-        },
-        handleNoButtonClick: () => {
-          store.setCookiesAllowed(false);
-          closePopUpBox();
-        },
+      showPopUpBox(tPopUpBox('cookieConsent'), 0, {
+        handleYesButtonClick: () => store.setCookiesAllowed(true),
+        handleNoButtonClick: () => store.setCookiesAllowed(false),
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -176,8 +160,34 @@ const GridContainer: React.FC = () => {
     }
   }, [displayedSoftwares, feCache, selectedSoftwareByUser]);
 
-  function showPopUpBox(message: string, timeout: number, dialog?: PopUpBoxDialog) {
-    setPopUpBoxState({ active: true, message, dialog });
+  function showPopUpBox(message: string, timeout: number, dialogBox?: PopUpBoxDialog) {
+    if (dialogBox) {
+      function closePopUpBoxDialog(message: string) {
+        setPopUpBoxState({
+          active: false,
+          message,
+          dialog: { handleYesButtonClick: () => {}, handleNoButtonClick: () => {} },
+        });
+      }
+
+      setPopUpBoxState({
+        active: true,
+        message,
+        dialog: {
+          handleYesButtonClick() {
+            dialogBox.handleYesButtonClick();
+            closePopUpBoxDialog(message);
+          },
+          handleNoButtonClick() {
+            dialogBox.handleNoButtonClick();
+            closePopUpBoxDialog(message);
+          },
+        },
+      });
+    } else {
+      setPopUpBoxState({ active: true, message });
+    }
+
     if (timeout > 0) {
       setTimeout(() => setPopUpBoxState({ active: false, message }), timeout);
     }

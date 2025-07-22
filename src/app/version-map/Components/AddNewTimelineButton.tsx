@@ -43,10 +43,6 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
     store.setDisplayedSoftwares(displayedSoftwaresClone);
   }
 
-  if (zoomLevel > defaultZoomLevel) {
-    return <div style={{ height }} />;
-  }
-
   return (
     <select
       className={`btn dark:btnD top-0 w-full text-center font-bold

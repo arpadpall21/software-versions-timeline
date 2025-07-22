@@ -17,7 +17,8 @@
       "messages": {
         "cookieConsent": "Csak azért használunk sütiket, hogy megjegyezzük az Ön nyelvi beállításait. Ha nem engedélyezi őket, csak az angol nyelv lesz elérhető. Elfogadja a sütik használatát?",
         "timelineDisplayMaxLimit": "Nem lehet több mint {maxTimelineDisplayLimit} szoftveridővonalat megjeleníteni",
-        "timelineDisplayMinLimit": "Nem lehet kevesebb mint {minTimelineDisplayLimit} szoftveridővonalat megjeleníteni"
+        "timelineDisplayMinLimit": "Nem lehet kevesebb mint {minTimelineDisplayLimit} szoftveridővonalat megjeleníteni",
+        "removeTimelineWarn": "Biztosan el akarja távolítani az idővonalat a(z) {timeline} számára?"
       }
     },
     "languageSelector": {
