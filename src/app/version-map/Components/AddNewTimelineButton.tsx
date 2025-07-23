@@ -40,6 +40,7 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
       <div
         className={`absolute flex btn dark:btnD w-full text-center font-bold rounded-none dark:rounded-none`}
         style={{ height }}
+        tabIndex={0}
       >
         <span className={'m-auto'}> + </span>
       </div>
@@ -47,6 +48,7 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
         className={`absolute opacity-0 hover:cursor-pointer`}
         style={{ height }}
         title={tButton('addTimeline')}
+        tabIndex={-1}
         onChange={handleDropdown}
       >
         {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
