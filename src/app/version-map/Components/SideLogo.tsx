@@ -75,7 +75,7 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
         <>
           <p
             className={`group-hover:visible md:invisible
-              absolute top-1 right-1 py-[1px] rounded-sm text-center 
+              absolute top-1 right-2 py-[1px] rounded-sm text-center 
               bg-btnBg dark:bg-btnBgD bg-opacity-50 dark:bg-opacity-70
               hover:cursor-pointer hover:bg-btnBgHov dark:hover:bg-btnBgHovD`}
             onClick={handleBinIconClick}
@@ -83,7 +83,7 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
             🗑
           </p>
           <select
-            className={`btn dark:btnD absolute right-1 bottom-1 w-[19px] h-[30px] 
+            className={`btn dark:btnD absolute right-2 bottom-2 w-[19px] h-[30px] 
               hover:cursor-pointer`}
             value={software}
             title={tSideLogo('dropDownTooltip')}

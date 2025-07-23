@@ -24,7 +24,7 @@ const PopUpBox: React.FC<Props> = ({ active, message, handleCloseButtonClick, di
           ${active ? 'max-md:bottom-[10px] md:top-[30px]' : 'max-md:bottom-[-500px] md:top-[-500px]'}`}
         style={{
           visibility: active ? 'visible' : 'hidden',
-          transition: 'top 0.4s ease-in, bottom 0.4s ease-in, visibility 0.3s ease-in',
+          transition: 'top 0.3s ease-in, bottom 0.3s ease-in, visibility 0.3s ease-in',
         }}
       >
         {!dialog && (
