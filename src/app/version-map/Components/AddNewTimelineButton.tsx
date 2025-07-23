@@ -1,26 +1,21 @@
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
 import { GridContainerContext } from '@/app/version-map/Components/GridContainer';
 import appConfig from '../../../../config/appConfig';
-import { calcPercentOf } from '@/misc/helpers';
 import { Software } from '../../../../config/supportedSoftwares';
 import { type DisplayedSoftwares } from '@/misc/types';
 import store from '@/misc/store';
 import { useTranslations } from 'next-intl';
-
-const defaultZoomLevel = appConfig.zoom.defaultLevel;
 
 interface Props {
   height: number;
 }
 
 const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
-  const { showPopUpBox, zoomLevel, displayedSoftwares, setDisplayedSoftwares, setSelectedSoftwareByUser } =
+  const { showPopUpBox, displayedSoftwares, setDisplayedSoftwares, setSelectedSoftwareByUser } =
     useContext(GridContainerContext);
 
   const tButton = useTranslations('components.addNewTimelineButton');
   const tPopUpBox = useTranslations('components.popUpBox.messages');
-
-  const scaleDropdownY = useMemo(() => calcPercentOf(defaultZoomLevel, zoomLevel) / 100, [zoomLevel]);
 
   function handleDropdown(e: React.ChangeEvent<HTMLSelectElement>) {
     if (e.target.value === '+') {
@@ -44,21 +39,28 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
   }
 
   return (
-    <select
-      className={`btn dark:btnD top-0 w-full text-center font-bold
-        hover:cursor-pointer rounded-none dark:rounded-none border-[1px] dark:border-[1px]`}
-      style={{ height, transform: `scaleY(${scaleDropdownY})`, marginTop: 0 }}
-      value={'+'}
-      title={tButton('addTimeline')}
-      onChange={handleDropdown}
-    >
-      <option value={'+'}>+</option>
-      {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
-        <option value={software} key={i}>
-          {supportedSoftware.displayName}
-        </option>
-      ))}
-    </select>
+    <div className={'relative w-[70px]'} style={{ height }}>
+      <div
+        className={`absolute flex btn dark:btnD w-full text-center font-bold rounded-none dark:rounded-none`}
+        style={{ height }}
+      >
+        <span className={'m-auto'}> + </span>
+      </div>
+      <select
+        className={`absolute opacity-0 hover:cursor-pointer`}
+        style={{ height }}
+        value={'+'}
+        title={tButton('addTimeline')}
+        onChange={handleDropdown}
+      >
+        <option value={'+'}>+</option>
+        {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
+          <option value={software} key={i}>
+            {supportedSoftware.displayName}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 };
 
