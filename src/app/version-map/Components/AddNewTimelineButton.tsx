@@ -18,9 +18,6 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
   const tPopUpBox = useTranslations('components.popUpBox.messages');
 
   function handleDropdown(e: React.ChangeEvent<HTMLSelectElement>) {
-    if (e.target.value === '+') {
-      return;
-    }
     if (displayedSoftwares.length >= appConfig.timelineDisplayLimit.max) {
       showPopUpBox(
         tPopUpBox('timelineDisplayMaxLimit', { maxTimelineDisplayLimit: appConfig.timelineDisplayLimit.max }),
@@ -49,11 +46,9 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
       <select
         className={`absolute opacity-0 hover:cursor-pointer`}
         style={{ height }}
-        value={'+'}
         title={tButton('addTimeline')}
         onChange={handleDropdown}
       >
-        <option value={'+'}>+</option>
         {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
           <option value={software} key={i}>
             {supportedSoftware.displayName}
