@@ -36,16 +36,9 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
   }
 
   return (
-    <div className={'relative w-[70px]'} style={{ height }}>
-      <div
-        className={`absolute flex btn dark:btnD w-full text-center font-bold rounded-none dark:rounded-none`}
-        style={{ height }}
-        tabIndex={0}
-      >
-        <span className={'m-auto'}> + </span>
-      </div>
+    <div className={'relative w-full'} style={{ height }}>
       <select
-        className={`absolute opacity-0 hover:cursor-pointer`}
+        className={`absolute peer opacity-0 z-10 hover:cursor-pointer`}
         style={{ height }}
         title={tButton('addTimeline')}
         tabIndex={-1}
@@ -57,6 +50,14 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
           </option>
         ))}
       </select>
+      <div
+        className={`absolute flex btn dark:btnD w-full text-center font-bold rounded-none dark:rounded-none
+          peer-hover:bg-btnBgHov peer-hover:dark:bg-btnBgHovD`}
+        style={{ height }}
+        tabIndex={0}
+      >
+        <span className={'m-auto'}> + </span>
+      </div>
     </div>
   );
 };
