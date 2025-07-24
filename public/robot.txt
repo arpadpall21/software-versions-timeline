@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /version-map
+Sitemap: https://www.MYSITE.COM/sitemap.xml
