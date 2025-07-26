@@ -4,7 +4,7 @@
 - UI tool offering a broad overview of essential software release versions, making it easy for users to compare different versions in time
 
 ## Requirements
- - Node.js v18.19.0+
+ - Node.js v22.3.0+
 
 ## Setup
   - Run `npm install`
