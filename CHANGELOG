@@ -1,6 +1,18 @@
 ----------------------------
 v1.0.0
 
-Initial Release
+- Initial Release
+
+----------------------------
+v1.1.0
+
+- Add Remove Timeline Icon
+- Fix Side Logo Horizontal Center on Mobile View
+- Pop Up Box Displayed on Bottom in Mobile View
+- Enhance Add New Timeline Button
+- SE Crawler Files Added (robot.txt & sitemap.xml)
+- Timeline Update: Mozilla Firefox
+- License
+- Refactored Data Files to JS Objects
 
 ----------------------------
