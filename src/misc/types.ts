@@ -3,7 +3,7 @@ import { Software } from '../../config/supportedSoftwares';
 interface SupportedSoftware {
   displayName: string;
   logoPath: string;
-  dataPath: string;
+  dataFile: string;
   source?: string;
 }
 

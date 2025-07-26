@@ -1,4 +1,6 @@
-const data = {
+import { type RawHistoryData } from '@/misc/types';
+
+const data: RawHistoryData = {
   '2008-12': {
     versions: [
       {

@@ -1,6 +1,5 @@
 'use server';
 
-import { readFile } from 'node:fs/promises';
 import {
   type ParsedVersionHistoryData,
   type RawHistoryData,
@@ -27,8 +26,8 @@ export async function getVersionHistory(softwares: Software[]): Promise<GetVersi
 
 export async function parseHistoryData(software: Software): Promise<ParsedVersionHistoryData> {
   try {
-    const data = await readFile(appConfig.supportedSoftwares[software].dataPath);
-    const historyData: RawHistoryData = JSON.parse(data.toString());
+    const dataImport = await import(`../../../data/${appConfig.supportedSoftwares[software].dataFile}`);
+    const historyData: RawHistoryData = dataImport.default;
 
     const dates: Date[] = [];
     for (const yearMonth in historyData) {
