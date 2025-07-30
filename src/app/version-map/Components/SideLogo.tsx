@@ -101,7 +101,7 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
                   peer-hover:bg-btnBgHov peer-hover:dark:bg-btnBgHovD`}
                 tabIndex={0}
               >
-                <span className={'m-auto'}> &#709; </span>
+                <span className={'m-auto text-xs'}> V </span>
               </div>
             </div>
           </div>
