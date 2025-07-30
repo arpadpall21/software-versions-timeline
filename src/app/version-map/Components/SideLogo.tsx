@@ -82,19 +82,31 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
           >
             🗑
           </p>
-          <select
-            className={`btn dark:btnD absolute right-2 bottom-2 w-[19px] h-[30px] 
-              hover:cursor-pointer`}
-            value={software}
-            title={tSideLogo('dropDownTooltip')}
-            onChange={handleDropdown}
+          <div
+            className={`absolute btn dark:btnD h-[27px] w-[18px] z-10 right-2 bottom-2`}
           >
-            {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
-              <option value={software} key={i}>
-                {supportedSoftware.displayName}
-              </option>
-            ))}
-          </select>
+            <div className={`relative w-full h-full`}>
+              <select
+                className={`absolute w-full h-full peer opacity-0 z-10 hover:cursor-pointer`}
+                title={tSideLogo('dropDownTooltip')}
+                tabIndex={-1}
+                onChange={handleDropdown}
+              >
+                {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
+                  <option value={software} key={i}>
+                    {supportedSoftware.displayName}
+                  </option>
+                ))}
+              </select>
+              <div
+                className={`absolute flex w-full h-full text-center text-xs
+                  peer-hover:bg-btnBgHov peer-hover:dark:bg-btnBgHovD`}
+                tabIndex={0}
+              >
+                <span className={'m-auto'}> ▼ </span>
+              </div>
+            </div>
+          </div>
         </>
       )}
     </div>
