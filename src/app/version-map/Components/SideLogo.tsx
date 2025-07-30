@@ -75,7 +75,7 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
         <>
           <div
             className={`flex group-hover:visible md:invisible
-              absolute top-2 right-2 py-[1px] rounded-sm text-center w-[20px] h-[28px]
+              absolute top-2 right-2 w-[20px] h-[28px] py-[1px] rounded-sm text-center
               bg-btnBg dark:bg-btnBgD bg-opacity-50 dark:bg-opacity-70
               hover:cursor-pointer hover:bg-btnBgHov dark:hover:bg-btnBgHovD`}
             onClick={handleBinIconClick}
@@ -97,11 +97,11 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
                 ))}
               </select>
               <div
-                className={`absolute flex w-full h-full text-center text-xs rounded-md
+                className={`absolute flex w-full h-full text-center rounded-md
                   peer-hover:bg-btnBgHov peer-hover:dark:bg-btnBgHovD`}
                 tabIndex={0}
               >
-                <span className={'m-auto'}> ▼ </span>
+                <span className={'m-auto'}> &#709; </span>
               </div>
             </div>
           </div>
