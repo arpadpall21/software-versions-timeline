@@ -73,28 +73,38 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
       </div>
       {zoomLevel === defaultZoomLevel && (
         <>
-          <p
-            className={`group-hover:visible md:invisible
-              absolute top-2 right-2 py-[1px] rounded-sm text-center 
+          <div
+            className={`flex group-hover:visible md:invisible
+              absolute top-2 right-2 w-[20px] h-[28px] py-[1px] rounded-sm text-center
               bg-btnBg dark:bg-btnBgD bg-opacity-50 dark:bg-opacity-70
               hover:cursor-pointer hover:bg-btnBgHov dark:hover:bg-btnBgHovD`}
             onClick={handleBinIconClick}
           >
-            🗑
-          </p>
-          <select
-            className={`btn dark:btnD absolute right-2 bottom-2 w-[19px] h-[30px] 
-              hover:cursor-pointer`}
-            value={software}
-            title={tSideLogo('dropDownTooltip')}
-            onChange={handleDropdown}
-          >
-            {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
-              <option value={software} key={i}>
-                {supportedSoftware.displayName}
-              </option>
-            ))}
-          </select>
+            <p className={'m-auto'}> 🗑 </p>
+          </div>
+          <div className={`absolute btn dark:btnD h-[28px] w-[20px] z-10 right-2 bottom-2`}>
+            <div className={`relative w-full h-full`}>
+              <select
+                className={`absolute w-full h-full peer opacity-0 z-10 hover:cursor-pointer`}
+                title={tSideLogo('dropDownTooltip')}
+                tabIndex={-1}
+                onChange={handleDropdown}
+              >
+                {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
+                  <option value={software} key={i}>
+                    {supportedSoftware.displayName}
+                  </option>
+                ))}
+              </select>
+              <div
+                className={`absolute flex w-full h-full text-center rounded-md
+                  peer-hover:bg-btnBgHov peer-hover:dark:bg-btnBgHovD`}
+                tabIndex={0}
+              >
+                <span className={'m-auto'}> &#709; </span>
+              </div>
+            </div>
+          </div>
         </>
       )}
     </div>
