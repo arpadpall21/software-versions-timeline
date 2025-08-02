@@ -78,6 +78,7 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
               absolute top-2 right-2 w-[20px] h-[28px] py-[1px] rounded-sm text-center
               bg-btnBg dark:bg-btnBgD bg-opacity-50 dark:bg-opacity-70
               hover:cursor-pointer hover:bg-btnBgHov dark:hover:bg-btnBgHovD`}
+            title={tSideLogo('removeTimeline')}
             onClick={handleBinIconClick}
           >
             <p className={'m-auto'}> 🗑 </p>

@@ -50,7 +50,7 @@
       "supportedSoftwares": "Supported Softwares"
     },
     "sideLogo": {
-      "removeTimeline": "REMOVE TIMELINE",
+      "removeTimeline": "Remove Timeline",
       "dropDownTooltip": "Select Software"
     },
     "addNewTimelineButton": {
