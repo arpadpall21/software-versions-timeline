@@ -128,23 +128,15 @@ const ZoomPanel: React.FC<Props> = ({ ref, scrollZoomEnabled, setScrollZoomEnabl
           +
         </button>
         <button
-          className={'fill-btnFg dark:fill-btnFgD hover:bg-btnBgHov dark:hover:bg-btnBgHovD p-[8px]'}
+          className={'fill-btnFg dark:fill-btnFgD hover:bg-btnBgHov dark:hover:bg-btnBgHovD p-[6px]'}
           onClick={() => handleZoomChange('reset')}
           title={t('reset')}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="16px"
-            width="16px"
-            viewBox="0 -960 960 960"
-            stroke={'#4444bc'}
-            strokeWidth="10"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" height="20px" width="20px" viewBox="0 -960 960 960">
             <path
-              d={`M480-80q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-440h80q0 117 81.5 198.5T480
-                -160q117 0 198.5-81.5T760-440q0-117-81.5-198.5T480-720h-6l62 62-56 58-160-160 160-160 56 58
-                -62 62h6q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-440q0 75-28.5 140.5t-77 114q-48.5 48.5
-                -114 77T480-80Z`}
+              d={`M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q
+                -32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t
+                -196 67Z`}
             />
           </svg>
         </button>
