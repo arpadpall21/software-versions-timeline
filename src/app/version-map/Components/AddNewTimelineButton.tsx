@@ -44,11 +44,13 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
         tabIndex={-1}
         onChange={handleDropdown}
       >
-        {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
-          <option value={software} key={i}>
-            {supportedSoftware.displayName}
-          </option>
-        ))}
+        {Object.entries(appConfig.supportedSoftwares)
+          .sort()
+          .map(([software, supportedSoftware], i) => (
+            <option value={software} key={i}>
+              {supportedSoftware.displayName}
+            </option>
+          ))}
       </select>
       <div
         className={`absolute flex btn dark:btnD w-full text-center font-bold rounded-none dark:rounded-none
