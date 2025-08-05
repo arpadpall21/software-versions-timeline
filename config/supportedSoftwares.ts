@@ -10,6 +10,7 @@ export enum Software {
   REACT = 'REACT',
   NODE = 'NODE',
   PYTHON = 'PYTHON',
+  MYSQL = 'MYSQL',
 }
 
 export const defaultDisplayedSoftwares: DisplayedSoftwares = [
@@ -74,6 +75,12 @@ const supportedSoftwares: SupportedSoftwares = {
     logoPath: '/softwareLogos/python.webp',
     dataFile: 'python.ts',
     source: 'https://www.python.org/downloads/source/',
+  },
+  [Software.MYSQL]: {
+    displayName: 'MySQL',
+    logoPath: '/softwareLogos/mysql.webp',
+    dataFile: 'mySql.ts',
+    source: 'https://dev.mysql.com/doc/relnotes/mysql/8.0/en/',
   },
 };
 
