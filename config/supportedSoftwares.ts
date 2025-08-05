@@ -79,7 +79,7 @@ const supportedSoftwares: SupportedSoftwares = {
   },
   [Software.FASTAPI]: {
     displayName: 'FastAPI',
-    logoPath: '/softwareLogos/...',
+    logoPath: '/softwareLogos/FastAPI.png',
     dataFile: 'fastApi.ts',
     source: 'https://fastapi.tiangolo.com/release-notes/',
   },
