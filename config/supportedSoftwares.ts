@@ -10,6 +10,7 @@ export enum Software {
   REACT = 'REACT',
   NODE = 'NODE',
   PYTHON = 'PYTHON',
+  FASTAPI = 'FASTAPI',
   MYSQL = 'MYSQL',
 }
 
@@ -75,6 +76,12 @@ const supportedSoftwares: SupportedSoftwares = {
     logoPath: '/softwareLogos/python.webp',
     dataFile: 'python.ts',
     source: 'https://www.python.org/downloads/source/',
+  },
+  [Software.FASTAPI]: {
+    displayName: 'FastAPI',
+    logoPath: '/softwareLogos/...',
+    dataFile: 'fastApi.ts',
+    source: 'https://fastapi.tiangolo.com/release-notes/',
   },
   [Software.MYSQL]: {
     displayName: 'MySQL',
