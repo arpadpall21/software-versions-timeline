@@ -99,11 +99,13 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
                 tabIndex={-1}
                 onChange={handleDropdown}
               >
-                {Object.entries(appConfig.supportedSoftwares).map(([software, supportedSoftware], i) => (
-                  <option value={software} key={i}>
-                    {supportedSoftware.displayName}
-                  </option>
-                ))}
+                {Object.entries(appConfig.supportedSoftwares)
+                  .sort()
+                  .map(([software, supportedSoftware], i) => (
+                    <option value={software} key={i}>
+                      {supportedSoftware.displayName}
+                    </option>
+                  ))}
               </select>
               <div
                 className={`absolute flex w-full h-full text-center rounded-md
