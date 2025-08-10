@@ -12,6 +12,7 @@ export enum Software {
   PYTHON = 'PYTHON',
   FASTAPI = 'FASTAPI',
   MYSQL = 'MYSQL',
+  POSTGRESQL = 'POSTGRESQL',
 }
 
 export const defaultDisplayedSoftwares: DisplayedSoftwares = [
@@ -88,6 +89,12 @@ const supportedSoftwares: SupportedSoftwares = {
     logoPath: '/softwareLogos/mysql.webp',
     dataFile: 'mySql.ts',
     source: 'https://dev.mysql.com/doc/relnotes/mysql/8.0/en/',
+  },
+  [Software.POSTGRESQL]: {
+    displayName: 'PostgreSQL',
+    logoPath: '/softwareLogos/postgreSql.png',
+    dataFile: 'postgreSql.ts',
+    source: 'https://www.postgresql.org/docs/release/',
   },
 };
 

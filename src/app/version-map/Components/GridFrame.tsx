@@ -31,6 +31,7 @@ const twTimelineStyle: { [software in Software]: string } = {
   [Software.PYTHON]: 'bg-[#e3ab1e] dark:bg-[#856411] text-[#2e2e2e] dark:text-[#1c1c1c]',
   [Software.FASTAPI]: 'bg-[#00d9ca] dark:bg-[#00524c] text-[#2e2e2e] dark:text-[#ededed]',
   [Software.MYSQL]: 'bg-[#169ac9] dark:bg-[#1e4857] text-white dark:text-[#bdbdbd]',
+  [Software.POSTGRESQL]: 'bg-[#169ac9] dark:bg-[#1e4857] text-white dark:text-[#bdbdbd]',
 };
 const addNewTimelineButtonHeight: number = 30;
 
