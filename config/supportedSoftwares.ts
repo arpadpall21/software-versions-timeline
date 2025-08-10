@@ -13,6 +13,7 @@ export enum Software {
   FASTAPI = 'FASTAPI',
   MYSQL = 'MYSQL',
   POSTGRESQL = 'POSTGRESQL',
+  MONGODB = 'MONGODB',
 }
 
 export const defaultDisplayedSoftwares: DisplayedSoftwares = [
@@ -95,6 +96,12 @@ const supportedSoftwares: SupportedSoftwares = {
     logoPath: '/softwareLogos/postgreSql.png',
     dataFile: 'postgreSql.ts',
     source: 'https://www.postgresql.org/docs/release/',
+  },
+  [Software.MONGODB]: {
+    displayName: 'MongoDB',
+    logoPath: '/softwareLogos/mongoDb.png',
+    dataFile: 'mongoDb.ts',
+    source: 'https://www.mongodb.com/docs/manual/release-notes/',
   },
 };
 

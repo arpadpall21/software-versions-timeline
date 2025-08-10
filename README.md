@@ -25,3 +25,6 @@
 - add the new software as enum member and configure it in `config/supportedSoftwares.ts` file
 - configure timeline colors on `twTimelineStyle` in `src/app/version-map/Components/GridFrame.tsx` Component
 - update sitemap.xml file's `<lastmod>YYYY-MM-DD</lastmod>` field
+
+## Links
+- https://endoflife.date
