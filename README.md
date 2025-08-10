@@ -28,3 +28,4 @@
 
 ## Links
 - https://endoflife.date
+- https://techicons.dev/
