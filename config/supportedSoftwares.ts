@@ -86,7 +86,7 @@ const supportedSoftwares: SupportedSoftwares = {
     displayName: 'FastAPI',
     logoPath: '/softwareLogos/FastApi.png',
     dataFile: 'fastApi.ts',
-    source: 'https://fastapi.tiangolo.com/release-notes/',
+    source: 'https://github.com/fastapi/fastapi/tags',
   },
   [Software.MYSQL]: {
     displayName: 'MySQL',
@@ -119,7 +119,7 @@ const supportedSoftwares: SupportedSoftwares = {
     source: 'https://nginx.org/en/CHANGES',
   },
   [Software.TAILWINDCSS]: {
-    displayName: 'Tailwind CSS',
+    displayName: 'TailwindCSS',
     logoPath: '/softwareLogos/tailwindCss.png',
     dataFile: 'tailwindCss.ts',
     source: 'https://github.com/tailwindlabs/tailwindcss/tags',
