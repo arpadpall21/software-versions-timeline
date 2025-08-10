@@ -15,6 +15,7 @@ export enum Software {
   POSTGRESQL = 'POSTGRESQL',
   MONGODB = 'MONGODB',
   REDIS = 'REDIS',
+  NGINX = 'NGINX',
 }
 
 export const defaultDisplayedSoftwares: DisplayedSoftwares = [
@@ -109,6 +110,12 @@ const supportedSoftwares: SupportedSoftwares = {
     logoPath: '/softwareLogos/redis.png',
     dataFile: 'redis.ts',
     source: 'https://redis.io/docs/latest/operate/rs/release-notes/',
+  },
+  [Software.NGINX]: {
+    displayName: 'NGINX',
+    logoPath: '/softwareLogos/nginx.png',
+    dataFile: 'nginx.ts',
+    source: 'https://nginx.org/en/CHANGES',
   },
 };
 
