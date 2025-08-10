@@ -14,6 +14,7 @@ export enum Software {
   MYSQL = 'MYSQL',
   POSTGRESQL = 'POSTGRESQL',
   MONGODB = 'MONGODB',
+  REDIS = 'REDIS',
 }
 
 export const defaultDisplayedSoftwares: DisplayedSoftwares = [
@@ -102,6 +103,12 @@ const supportedSoftwares: SupportedSoftwares = {
     logoPath: '/softwareLogos/mongoDb.png',
     dataFile: 'mongoDb.ts',
     source: 'https://www.mongodb.com/docs/manual/release-notes/',
+  },
+  [Software.REDIS]: {
+    displayName: 'Redis',
+    logoPath: '/softwareLogos/redis.png',
+    dataFile: 'redis.ts',
+    source: 'https://redis.io/docs/latest/operate/rs/release-notes/',
   },
 };
 
