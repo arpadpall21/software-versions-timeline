@@ -16,6 +16,7 @@ export enum Software {
   MONGODB = 'MONGODB',
   REDIS = 'REDIS',
   NGINX = 'NGINX',
+  TAILWINDCSS = 'TAILWINDCSS',
 }
 
 export const defaultDisplayedSoftwares: DisplayedSoftwares = [
@@ -116,6 +117,12 @@ const supportedSoftwares: SupportedSoftwares = {
     logoPath: '/softwareLogos/nginx.png',
     dataFile: 'nginx.ts',
     source: 'https://nginx.org/en/CHANGES',
+  },
+  [Software.TAILWINDCSS]: {
+    displayName: 'Tailwind CSS',
+    logoPath: '/softwareLogos/tailwindCss.png',
+    dataFile: 'tailwindCss.ts',
+    source: 'https://github.com/tailwindlabs/tailwindcss/tags',
   },
 };
 
