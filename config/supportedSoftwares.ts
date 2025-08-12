@@ -84,7 +84,7 @@ const supportedSoftwares: SupportedSoftwares = {
   },
   [Software.FASTAPI]: {
     displayName: 'FastAPI',
-    logoPath: '/softwareLogos/FastApi.png',
+    logoPath: '/softwareLogos/fastApi.png',
     dataFile: 'fastApi.ts',
     source: 'https://github.com/fastapi/fastapi/tags',
   },
