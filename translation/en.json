@@ -54,7 +54,8 @@
       "dropDownTooltip": "Select Software"
     },
     "addNewTimelineButton": {
-      "addTimeline": "Add Timeline"
+      "addTimeline": "Add Timeline",
+      "notSelectedEntry": "Not Selected"
     },
     "zoomPanel": {
       "zoomIn": "Zoom In",

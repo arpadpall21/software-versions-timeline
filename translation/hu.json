@@ -54,7 +54,8 @@
       "dropDownTooltip": "Szoftvert Kiválasztása"
     },
     "addNewTimelineButton": {
-      "addTimeline": "Idővonal hozzáadása"
+      "addTimeline": "Idővonal hozzáadása",
+      "notSelectedEntry": "Nincs Kiválasztva"
     },
     "zoomPanel": {
       "zoomIn": "Nagyítás",

@@ -26,6 +26,10 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
       return;
     }
 
+    if (e.target.value === 'notSelected') {
+      return;
+    }
+
     const displayedSoftwaresClone: DisplayedSoftwares = [...displayedSoftwares];
     const selectedSoftware: Software = e.target.value as Software;
     displayedSoftwaresClone.push(selectedSoftware);
@@ -39,11 +43,13 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
     <div className={'relative w-full'} style={{ height }}>
       <select
         className={`absolute peer opacity-0 z-10 hover:cursor-pointer`}
+        value={'notSelected'}
         style={{ height }}
         title={tButton('addTimeline')}
         tabIndex={-1}
         onChange={handleDropdown}
       >
+        <option value={'notSelected'}>[{tButton('notSelectedEntry')}]</option>
         {Object.entries(appConfig.supportedSoftwares)
           .sort()
           .map(([software, supportedSoftware], i) => (

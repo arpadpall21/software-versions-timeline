@@ -95,6 +95,7 @@ const SideLogo: React.FC<Props> = ({ twStyle, software, idx }) => {
             <div className={`relative w-full h-full`}>
               <select
                 className={`absolute w-full h-full peer opacity-0 z-10 hover:cursor-pointer`}
+                value={software}
                 title={tSideLogo('dropDownTooltip')}
                 tabIndex={-1}
                 onChange={handleDropdown}
