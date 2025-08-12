@@ -54,7 +54,8 @@
       "dropDownTooltip": "Software Auswählen"
     },
     "addNewTimelineButton": {
-      "addTimeline": "Zeitachse Hinzufügen"
+      "addTimeline": "Zeitachse Hinzufügen",
+      "notSelectedEntry": "Nicht Ausgewählt"
     },
     "zoomPanel": {
       "zoomIn": "Vergrößern",

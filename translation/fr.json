@@ -54,7 +54,8 @@
       "dropDownTooltip": "Sélectionner le Logiciel"
     },
     "addNewTimelineButton": {
-      "addTimeline": "Ajouter une Frise Chronologie"
+      "addTimeline": "Ajouter une Frise Chronologie",
+      "notSelectedEntry": "Non Sélectionné"
     },
     "zoomPanel": {
       "zoomIn": "Agrandir",

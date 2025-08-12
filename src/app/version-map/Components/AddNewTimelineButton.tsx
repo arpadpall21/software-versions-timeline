@@ -49,7 +49,7 @@ const AddNewTimelineButton: React.FC<Props> = ({ height }) => {
         tabIndex={-1}
         onChange={handleDropdown}
       >
-        <option value={'notSelected'}>[Not Selected]</option>
+        <option value={'notSelected'}>[{tButton('notSelectedEntry')}]</option>
         {Object.entries(appConfig.supportedSoftwares)
           .sort()
           .map(([software, supportedSoftware], i) => (
