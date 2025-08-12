@@ -1,4 +1,17 @@
 ----------------------------
+v1.2.0
+
+- Fix Side Logo & Add New Timeline Button Dropdown Select Bug
+- Timeline Update: TailwindCSS
+- Timeline Update: NGINX
+- Timeline Update: Redis
+- Timeline Update: MongoDB
+- Timeline Update: PostgreSQL
+- Timeline Update: FastAPI
+- Sort Listed Softwares in Alphabetical Order
+- Timeline Update: MySQL
+
+----------------------------
 v1.1.2
 
 - Change Side Logo Dropdown Character
