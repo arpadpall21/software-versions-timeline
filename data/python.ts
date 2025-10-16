@@ -177,6 +177,14 @@ const data: RawHistoryData = {
       },
     ],
   },
+  '2025-10': {
+    versions: [
+      {
+        day: 7,
+        version: '3.14',
+      },
+    ],
+  },
 };
 
 export default data;

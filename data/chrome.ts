@@ -1087,6 +1087,10 @@ const data: RawHistoryData = {
         day: 2,
         version: '140',
       },
+      {
+        day: 30,
+        version: '141',
+      },
     ],
   },
 };

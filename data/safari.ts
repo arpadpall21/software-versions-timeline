@@ -385,11 +385,11 @@ const data: RawHistoryData = {
       },
     ],
   },
-  '2025-08': {
+  '2025-09': {
     versions: [
       {
-        day: 11,
-        version: '26 (beta)',
+        day: 15,
+        version: '26',
       },
     ],
   },
