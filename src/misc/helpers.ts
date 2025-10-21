@@ -38,7 +38,7 @@ export function parseDisplayedSofwares(displayedSoftwares: string): DisplayedSof
 /**
  * usable in client component hook
  */
-export function getCurrentBrowserTheme(): 'light' | 'dark' {
+export function autoDetectBrowserTheme(): 'light' | 'dark' {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
