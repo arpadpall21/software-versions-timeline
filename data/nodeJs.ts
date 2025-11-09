@@ -181,7 +181,7 @@ const data: RawHistoryData = {
     versions: [
       {
         day: 15,
-        version: '24',
+        version: '25',
       },
     ],
   },

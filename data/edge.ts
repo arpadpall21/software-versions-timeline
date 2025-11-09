@@ -535,6 +535,10 @@ const data: RawHistoryData = {
         day: 9,
         version: '141',
       },
+      {
+        day: 31,
+        version: '142',
+      },
     ],
   },
 };
