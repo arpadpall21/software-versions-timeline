@@ -427,6 +427,34 @@ const data: RawHistoryData = {
         day: 3,
         version: '0.121',
       },
+      {
+        day: 24,
+        version: '0.122',
+      },
+      {
+        day: 30,
+        version: '0.123',
+      },
+    ],
+  },
+  '2025-12': {
+    versions: [
+      {
+        day: 6,
+        version: '0.124',
+      },
+      {
+        day: 17,
+        version: '0.125',
+      },
+      {
+        day: 20,
+        version: '0.126',
+      },
+      {
+        day: 21,
+        version: '0.127',
+      },
     ],
   },
 };

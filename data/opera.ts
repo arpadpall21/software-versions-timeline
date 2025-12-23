@@ -888,7 +888,7 @@ const data: RawHistoryData = {
   '2025-04': {
     versions: [
       {
-        day: 14,
+        day: 15,
         version: '118',
       },
     ],
@@ -896,7 +896,7 @@ const data: RawHistoryData = {
   '2025-05': {
     versions: [
       {
-        day: 12,
+        day: 13,
         version: '119',
       },
     ],
@@ -912,8 +912,40 @@ const data: RawHistoryData = {
   '2025-08': {
     versions: [
       {
-        day: 29,
+        day: 27,
         version: '121',
+      },
+    ],
+  },
+  '2025-09': {
+    versions: [
+      {
+        day: 11,
+        version: '122',
+      },
+    ],
+  },
+  '2025-10': {
+    versions: [
+      {
+        day: 28,
+        version: '123',
+      },
+    ],
+  },
+  '2025-11': {
+    versions: [
+      {
+        day: 12,
+        version: '124',
+      },
+    ],
+  },
+  '2025-12': {
+    versions: [
+      {
+        day: 4,
+        version: '125',
       },
     ],
   },

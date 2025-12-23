@@ -141,7 +141,7 @@ const data: RawHistoryData = {
     versions: [
       {
         day: 1,
-        version: '9.0',
+        version: '9.0 (innovation)',
       },
     ],
   },
@@ -149,7 +149,7 @@ const data: RawHistoryData = {
     versions: [
       {
         day: 15,
-        version: '9.1',
+        version: '9.1 (innovation)',
       },
     ],
   },
@@ -157,7 +157,7 @@ const data: RawHistoryData = {
     versions: [
       {
         day: 21,
-        version: '9.2',
+        version: '9.2 (innovation)',
       },
     ],
   },
@@ -165,7 +165,7 @@ const data: RawHistoryData = {
     versions: [
       {
         day: 15,
-        version: '9.3',
+        version: '9.3 (innovation)',
       },
     ],
   },
@@ -173,15 +173,15 @@ const data: RawHistoryData = {
     versions: [
       {
         day: 22,
-        version: '9.4',
+        version: '9.4 (innovation)',
       },
     ],
   },
-  '2025-11': {
+  '2025-10': {
     versions: [
       {
-        day: 5,
-        version: '9.5',
+        day: 21,
+        version: '9.5 (innovation)',
       },
     ],
   },
