@@ -1,7 +1,8 @@
 # Software Versions Timeline
 
 ## Description
-- UI tool offering a broad overview of essential software release versions, making it easy for users to compare different versions in time
+- UI tool offering a broad overview of essential software release versions, making it easy for users to compare different versions in time.
+- This tool was purposefully developed excluding libraries to demonstrate my capability in designing and implementing UI components manually
 
 ## Requirements
  - Node.js v22.3.0+
