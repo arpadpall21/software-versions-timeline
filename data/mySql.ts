@@ -193,6 +193,14 @@ const data: RawHistoryData = {
       },
     ],
   },
+  '2026-03': {
+    versions: [
+      {
+        day: 31,
+        version: '9.78 (Early Access)',
+      },
+    ],
+  },
 };
 
 export default data;
