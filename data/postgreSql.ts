@@ -149,7 +149,6 @@ const data: RawHistoryData = {
       },
     ],
   },
-
 };
 
 export default data;
