@@ -16,6 +16,8 @@
 #### Build & Run Prod Server
   - Run `npm run build` to build the app for production
   - Run `npm start` to start the production server
+#### Run Lint
+  - Run `npm run lint` to check for linting errors
 
 ## Configurations
   - App can be configured through the `config/appConfig.ts` file
