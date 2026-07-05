@@ -423,9 +423,21 @@ const data: RawHistoryData = {
         day: 24,
         version: '26.4',
       },
+    ],
+  },
+  '2026-05': {
+    versions: [
       {
-        day: 30,
-        version: '26.5 (Beta)',
+        day: 11,
+        version: '26.5',
+      },
+    ],
+  },
+  '2026-06': {
+    versions: [
+      {
+        day: 8,
+        version: '27 (beta)',
       },
     ],
   },

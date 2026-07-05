@@ -259,13 +259,37 @@ const data: RawHistoryData = {
         day: 10,
         version: '1.29.6',
       },
+      {
+        day: 24,
+        version: '1.29.7',
+      },
     ],
   },
   '2026-04': {
     versions: [
       {
         day: 7,
-        version: '1.29.7',
+        version: '1.29.8',
+      },
+    ],
+  },
+  '2026-05': {
+    versions: [
+      {
+        day: 13,
+        version: '1.31.0',
+      },
+      {
+        day: 22,
+        version: '1.31.1',
+      },
+    ],
+  },
+  '2026-06': {
+    versions: [
+      {
+        day: 17,
+        version: '1.31.2',
       },
     ],
   },

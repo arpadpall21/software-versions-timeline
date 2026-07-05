@@ -44,7 +44,7 @@ const supportedSoftwares: SupportedSoftwares = {
     displayName: 'Opera',
     logoPath: '/softwareLogos/opera.png',
     dataFile: 'opera.ts',
-    source: 'https://en.wikipedia.org/wiki/History_of_the_Opera_web_browser',
+    source: 'https://blogs.opera.com/desktop/',
   },
   [Software.EDGE]: {
     displayName: 'Microsoft Edge',

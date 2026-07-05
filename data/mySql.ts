@@ -141,7 +141,7 @@ const data: RawHistoryData = {
     versions: [
       {
         day: 1,
-        version: '9.0 (innovation)',
+        version: '9.0',
       },
     ],
   },
@@ -149,7 +149,7 @@ const data: RawHistoryData = {
     versions: [
       {
         day: 15,
-        version: '9.1 (innovation)',
+        version: '9.1',
       },
     ],
   },
@@ -157,7 +157,7 @@ const data: RawHistoryData = {
     versions: [
       {
         day: 21,
-        version: '9.2 (innovation)',
+        version: '9.2',
       },
     ],
   },
@@ -165,7 +165,7 @@ const data: RawHistoryData = {
     versions: [
       {
         day: 15,
-        version: '9.3 (innovation)',
+        version: '9.3',
       },
     ],
   },
@@ -173,7 +173,7 @@ const data: RawHistoryData = {
     versions: [
       {
         day: 22,
-        version: '9.4 (innovation)',
+        version: '9.4',
       },
     ],
   },
@@ -181,7 +181,7 @@ const data: RawHistoryData = {
     versions: [
       {
         day: 21,
-        version: '9.5 (innovation)',
+        version: '9.5',
       },
     ],
   },
@@ -189,15 +189,15 @@ const data: RawHistoryData = {
     versions: [
       {
         day: 20,
-        version: '9.6 (innovation)',
+        version: '9.6',
       },
     ],
   },
-  '2026-03': {
+  '2026-04': {
     versions: [
       {
-        day: 31,
-        version: '9.78 (Early Access)',
+        day: 21,
+        version: '9.7',
       },
     ],
   },
