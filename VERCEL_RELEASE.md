@@ -1,0 +1,5 @@
+- make changes on main (follow commit message convention) (update CHANGELOG.md, package.json, package-lock.json, sitemap.xml, etc.)
+- Go to vercel.com -> Projects -> Settings (bottom left) -> Build and Deployment -> Ignored Build Step -> Automatic
+- merge 'main' into 'release' (this triggers the release process on vercel)
+- After the release is done, go to vercel.com -> Projects -> Settings (bottom left) -> Build and Deployment -> Ignored Build Step -> Don't build anything (to disable the pipeline)
+- Go to Deployments -> click on the unused deployment and delete it (top right corner 3 dots)
