@@ -1,7 +1,13 @@
 ----------------------------
+v1.2.10
+
+- Lint Fix
+
+----------------------------
 v1.2.9
 
 - Timeline Update
+- Add Vercel Release Steps in VERCEL_RELEASE.md
 
 ----------------------------
 v1.2.8
