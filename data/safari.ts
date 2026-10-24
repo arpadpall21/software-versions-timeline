@@ -433,11 +433,19 @@ const data: RawHistoryData = {
       },
     ],
   },
-  '2026-06': {
+  '2026-07': {
     versions: [
       {
-        day: 8,
-        version: '27 (beta)',
+        day: 27,
+        version: '26.6',
+      },
+    ],
+  },
+  '2026-09': {
+    versions: [
+      {
+        day: 14,
+        version: '27',
       },
     ],
   },

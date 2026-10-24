@@ -1149,6 +1149,46 @@ const data: RawHistoryData = {
       },
     ],
   },
+  '2026-07': {
+    versions: [
+      {
+        day: 21,
+        version: '153',
+      },
+    ],
+  },
+  '2026-08': {
+    versions: [
+      {
+        day: 18,
+        version: '154',
+      },
+    ],
+  },
+  '2026-09': {
+    versions: [
+      {
+        day: 1,
+        version: '155',
+      },
+      {
+        day: 15,
+        version: '156',
+      },
+      {
+        day: 29,
+        version: '157',
+      },
+    ],
+  },
+  '2026-10': {
+    versions: [
+      {
+        day: 13,
+        version: '158',
+      },
+    ],
+  },
 };
 
 export default data;
